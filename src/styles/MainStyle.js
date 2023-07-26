@@ -14,8 +14,7 @@ const Header = styled.div`
     display: flex;
     align-items: center;
     justify-content: end;
-    padding-top: 15px;
-    padding-right: 30px;
+    padding: 15px 100px 0 0;
     .school-logo {
       width: 30px;
       height: 30px;
@@ -27,7 +26,7 @@ const Header = styled.div`
       margin-right: 10px;
     }
     span {
-      font-size: 16px;
+      font-size: 20px;
       color: #fff;
       :not(:last-of-type) {
         margin-right: 10px;

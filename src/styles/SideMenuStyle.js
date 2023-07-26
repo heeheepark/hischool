@@ -30,6 +30,7 @@ const SideMenuWrap = styled.div`
       overflow: hidden;
       width: 160px;
       height: 160px;
+      cursor: pointer;
       span {
         display: block;
         width: 100%;
@@ -50,6 +51,12 @@ const SideMenuWrap = styled.div`
       }
       ins {
         cursor: pointer;
+        letter-spacing: 1.5px;
+        .user-name {
+        }
+        .user-email {
+          letter-spacing: 1.5px;
+        }
       }
     }
     button {
@@ -69,37 +76,59 @@ const SideMenuWrap = styled.div`
     .gnb {
       padding: 20px;
       ul {
-        li {
-          position: relative;
-          height: 45px;
-          background: 0;
-          font-size: 20px;
-          text-align: start;
-          line-height: 45px;
-          color: #fff;
-          padding-left: 20px;
-          cursor: pointer;
-          :not(:last-of-type) {
-            margin-bottom: 10px;
-          }
-          .icon {
-            margin-right: 20px;
-          }
-          > span {
+        .nav-link {
+          li {
+            position: relative;
+            height: 45px;
+            background: 0;
+            font-size: 20px;
+            text-align: start;
+            line-height: 45px;
             color: #fff;
-            /* display: block; */
+            padding-left: 20px;
+            margin-bottom: 10px;
+            .icon {
+              margin-right: 20px;
+            }
+            > span {
+            }
+            .arrow {
+              position: absolute;
+              right: 20px;
+              top: calc(50% - 9px);
+              font-size: 15px;
+            }
           }
-          .arrow {
-            position: absolute;
-            right: 20px;
-            top: calc(50% - 9px);
-            font-size: 15px;
+          :last-of-type {
+            cursor: default;
           }
         }
-        li.active {
-          background: #fff;
-          color: rgb(23, 107, 150);
-          border-radius: 5px;
+        .nav-link-active {
+          li {
+            position: relative;
+            height: 45px;
+            background: 0;
+            font-size: 20px;
+            text-align: start;
+            line-height: 45px;
+            background: #fff;
+            color: rgb(23, 107, 150);
+            border-radius: 5px;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            .icon {
+              margin-right: 20px;
+            }
+            > span {
+            }
+            .arrow {
+              position: absolute;
+              right: 20px;
+              top: calc(50% - 9px);
+              font-size: 15px;
+            }
+          }
         }
       }
     }
@@ -108,7 +137,7 @@ const SideMenuWrap = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      div {
+      .btn-logout {
         font-size: 18px;
         display: inline-block;
         border: 0;
