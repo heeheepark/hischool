@@ -1,0 +1,46 @@
+import styled from "@emotion/styled";
+import schoolLogo from "../assets/hamji.png";
+
+const Header = styled.div`
+  width: calc(100vw - 300px);
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 28, 48, 1) 0%,
+    rgba(23, 107, 135, 1) 530%
+  );
+  text-align: end;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-top: 15px;
+    padding-right: 30px;
+    .school-logo {
+      width: 30px;
+      height: 30px;
+      font-size: 0;
+      background: url(${schoolLogo}) no-repeat center;
+      background-size: 24px;
+      background-color: #fff;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    span {
+      font-size: 16px;
+      color: #fff;
+      :not(:last-of-type) {
+        margin-right: 10px;
+      }
+    }
+  }
+`;
+
+const Aside = styled.div`
+  width: 300px;
+  height: 100vh;
+`;
+
+const Content = styled.div``;
+
+export { Header, Aside, Content };

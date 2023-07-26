@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router";
+import "./App.css";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/login/SignUp";
+import Main from "./pages/Main";
+import Mypage from "./pages/Mypage";
+import StudentHome from "./pages/student/StudentHome";
+import SchoolRecord from "./pages/student/SchoolRecord";
+import MockRecord from "./pages/student/MockRecord";
+import FoodMenu from "./pages/student/FoodMenu";
+import TeacherHome from "./pages/teacher/TeacherHome";
+import StudentList from "./pages/teacher/StudentList";
+import SignList from "./pages/teacher/SignList";
+import StudentRecord from "./pages/teacher/StudentRecord";
+import InputSchoolRecord from "./pages/teacher/InputSchoolRecord";
+import InputSubject from "./pages/teacher/InputSubject";
+import InputMockRecord from "./pages/teacher/InputMockRecord";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup/*" element={<SignUp />} />
+        <Route element={<Main />}>
+          <Route path="/mypage" element={<Mypage />} />
+
+          <Route path="/student" element={<StudentHome />} />
+          <Route path="/student/schoolrecord" element={<SchoolRecord />} />
+          <Route path="/student/mockrecord" element={<MockRecord />} />
+          <Route path="/student/foodmenu" element={<FoodMenu />} />
+
+          <Route path="/teacher" element={<TeacherHome />} />
+          <Route path="/teacher/studentlist" element={<StudentList />} />
+          <Route path="/teacher/signlist" element={<SignList />} />
+          <Route path="/teacher/record" element={<StudentRecord />} />
+          <Route
+            path="/teacher/inputschoolrecord"
+            element={<InputSchoolRecord />}
+          />
+          <Route path="/teacher/inputsubject" element={<InputSubject />} />
+          <Route
+            path="/teacher/inputmockrecord"
+            element={<InputMockRecord />}
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
