@@ -40,6 +40,15 @@ const Aside = styled.div`
   height: 100vh;
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  padding: 20px;
+  height: calc(100% - 60px);
+  .content-wrap {
+    background: #f7f7f7;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+`;
 
 export { Header, Aside, Content };

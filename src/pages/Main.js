@@ -20,7 +20,9 @@ const Main = () => {
             </div>
           </Header>
           <Content>
-            <Outlet />
+            <div className="content-wrap">
+              <Outlet />
+            </div>
           </Content>
         </div>
       </div>
