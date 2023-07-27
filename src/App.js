@@ -23,14 +23,15 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup/*" element={<SignUp />} />
         <Route element={<Main />}>
-          <Route path="/mypage" element={<Mypage />} />
-
-          <Route path="/student" element={<StudentHome />} />
+          {/* 학생 */}
+          <Route path="/student/home" element={<StudentHome />} />
+          <Route path="/student/mypage" element={<Mypage />} />
           <Route path="/student/schoolrecord" element={<SchoolRecord />} />
           <Route path="/student/mockrecord" element={<MockRecord />} />
           <Route path="/student/foodmenu" element={<FoodMenu />} />
-
-          <Route path="/teacher" element={<TeacherHome />} />
+          {/* 선생님 */}
+          <Route path="/teacher/home" element={<TeacherHome />} />
+          <Route path="/teacher/mypage" element={<Mypage />} />
           <Route path="/teacher/studentlist" element={<StudentList />} />
           <Route path="/teacher/signlist" element={<SignList />} />
           <Route path="/teacher/record" element={<StudentRecord />} />

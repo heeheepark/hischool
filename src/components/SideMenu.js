@@ -12,17 +12,25 @@ import {
   faUser,
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 const SideMenu = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.pathname.split("/")[1];
   return (
     <SideMenuWrap>
       <div className="user-info-wrap">
-        <div className="main-logo" onClick={() => navigate("/student/")}>
+        <div className="main-logo" onClick={() => navigate(`/${user}/home`)}>
           Hi! School
         </div>
-        <div className="user-img" onClick={() => navigate("/mypage")}>
+        <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>
           <span>사용자 사진</span>
         </div>
         <p>
@@ -30,12 +38,12 @@ const SideMenu = () => {
             <FontAwesomeIcon icon={faUser} />
             {/* <FontAwesomeIcon icon={faUserTie} /> */}
           </span>
-          <ins onClick={() => navigate("/mypage")}>
+          <ins onClick={() => navigate(`/${user}/mypage`)}>
             <span className="user-name">강동원</span>
           </ins>
           <span>님</span>
           <br />
-          <ins onClick={() => navigate("/mypage")}>
+          <ins onClick={() => navigate(`/${user}/mypage`)}>
             <span className="user-email">(dongwon@gmail.com)</span>
           </ins>
           <br />
@@ -45,61 +53,111 @@ const SideMenu = () => {
       <div className="gnb-wrap">
         <div className="gnb">
           <ul>
-            <NavLink
-              to="/student/"
-              className={({ isActive }) =>
-                "nav-link" + (isActive ? "-active" : "")
-              }
-            >
-              <li>
-                <FontAwesomeIcon icon={faHouseChimney} className="icon" />
-                <span>홈</span>
-                <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-              </li>
-            </NavLink>
-            <NavLink
-              to="/student/schoolrecord"
-              className={({ isActive }) =>
-                "nav-link" + (isActive ? "-active" : "")
-              }
-            >
-              <li>
-                <FontAwesomeIcon icon={faFileInvoice} className="icon" />
-                <span>내신 점수</span>
-                <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-              </li>
-            </NavLink>
-            <NavLink
-              to="/student/mockrecord"
-              className={({ isActive }) =>
-                "nav-link" + (isActive ? "-active" : "")
-              }
-            >
-              <li>
-                <FontAwesomeIcon icon={faFileInvoice} className="icon" />
-                <span>모의고사 점수</span>
-                <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-              </li>
-            </NavLink>
-            <NavLink
-              to="/student/foodmenu"
-              className={({ isActive }) =>
-                "nav-link" + (isActive ? "-active" : "")
-              }
-            >
-              <li>
-                <FontAwesomeIcon icon={faCalendarDays} className="icon" />
-                <span>급식표</span>
-                <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-              </li>
-            </NavLink>
-            <Link className="nav-link">
-              <li>
-                <FontAwesomeIcon icon={faCommentDots} className="icon" />
-                <span>커뮤니티</span>
-                <FontAwesomeIcon icon={faLock} className="arrow" />
-              </li>
-            </Link>
+            {user === "student" ? (
+              <>
+                <NavLink
+                  to={`/${user}/home`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <span>홈</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/schoolrecord`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <span>내신 점수</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/mockrecord`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <span>모의고사 점수</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/foodmenu`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faCalendarDays} className="icon" />
+                    <span>급식표</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink className="nav-link">
+                  <li>
+                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
+                    <span>커뮤니티</span>
+                    <FontAwesomeIcon icon={faLock} className="arrow" />
+                  </li>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to={`/${user}/home`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <span>홈</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/studentlist`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <span>학생 관리</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/record`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <span>성적 관리</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink className="nav-link">
+                  <li>
+                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
+                    <span>커뮤니티</span>
+                    <FontAwesomeIcon icon={faLock} className="arrow" />
+                  </li>
+                </NavLink>
+              </>
+            )}
           </ul>
         </div>
         <div className="footer">
