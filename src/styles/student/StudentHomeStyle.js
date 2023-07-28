@@ -4,8 +4,9 @@ const StudentHomeDiv = styled.div`
   width: 100%;
   padding: 20px;
   h3 {
-    font-size: 30px;
-    font-family: "yg-jalnan";
+    font-size: 25px;
+    /* font-family: "yg-jalnan"; */
+    font-weight: 900;
     margin-bottom: 10px;
     color: #333;
   }
@@ -69,8 +70,9 @@ const SchoolRecordDiv = styled.div`
         margin-right: 10px;
       }
       .exam-title {
-        font-family: "yg-jalnan";
+        /* font-family: "yg-jalnan"; */
         font-size: 27px;
+        font-weight: 900;
         color: #176b87;
         margin: 3px;
       }
@@ -98,7 +100,7 @@ const SchoolRecordDiv = styled.div`
           color: #001c30;
         }
         > span.grade-num {
-          font-family: "yg-jalnan";
+          /* font-family: "yg-jalnan"; */
           font-size: 33px;
           font-weight: 900;
           margin-right: 3px;
@@ -111,7 +113,7 @@ const SchoolRecordDiv = styled.div`
 `;
 
 const TimeTableDiv = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -147,7 +149,9 @@ const TimeTableDiv = styled.div`
           :first-of-type {
             background: #176b87;
             color: #fff;
-            /* border-bottom: 1px solid #ccc; */
+          }
+          :not(:first-of-type) {
+            font-size: 15px;
           }
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
@@ -166,7 +170,7 @@ const TimeTableDiv = styled.div`
 `;
 
 const WeekFoodMenuDiv = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -176,7 +180,7 @@ const WeekFoodMenuDiv = styled.div`
   > ul {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 42px 336px;
+    grid-template-rows: 42px 168px 168px;
     > li {
       :first-of-type {
         background: #176b87;
@@ -201,7 +205,7 @@ const WeekFoodMenuDiv = styled.div`
           justify-content: center;
           align-items: center;
           span.menu-type {
-            font-size: 15px;
+            font-size: 12px;
             display: block;
             background: #64ccc5;
             color: #fff;
@@ -211,9 +215,10 @@ const WeekFoodMenuDiv = styled.div`
           }
           > p {
             display: block;
-            font-size: 18px;
+            font-size: 15px;
             > span {
               display: block;
+              line-height: 1.5;
             }
           }
           :not(:last-of-type) {

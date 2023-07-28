@@ -1,5 +1,5 @@
 import React from "react";
-import { TimeTableDiv } from "../styles/student/StudentHomeStyle";
+import { TimeTableDiv } from "../../styles/student/StudentHomeStyle";
 
 const TimeTable = () => {
   return (
