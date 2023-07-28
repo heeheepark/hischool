@@ -16,7 +16,7 @@ const WeekFoodMenu = () => {
             <li className="day">토</li>
           </ul>
         </li>
-        <li className="menu-list">
+        <li className="lunch-menu-list">
           <ul>
             <li className="menu">
               <span className="menu-type">중식</span>
@@ -86,6 +86,87 @@ const WeekFoodMenu = () => {
             </li>
             <li className="menu">
               <span className="menu-type">중식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+          </ul>
+        </li>
+        <li className="dinner-menu-list">
+          <ul>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
+              <p>
+                <span>잡곡밥</span>
+                <span>근대국</span>
+                <span>순살간장찜닭</span>
+                <span>숙주나물무침</span>
+                <span>야채비빔만두</span>
+                <span>포기김치</span>
+              </p>
+            </li>
+            <li className="menu">
+              <span className="menu-type">석식</span>
               <p>
                 <span>잡곡밥</span>
                 <span>근대국</span>

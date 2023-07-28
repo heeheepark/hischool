@@ -2,7 +2,7 @@ import React from "react";
 import RecapSchoolRecord from "../../components/student/RecapSchoolRecord";
 import RecapMockRecord from "../../components/student/RecapMockRecord";
 import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
-import TimeTable from "../../components/TimeTable";
+import TimeTable from "../../components/student/TimeTable";
 import WeekFoodMenu from "../../components/student/WeekFoodMenu";
 
 const StudentHome = () => {
