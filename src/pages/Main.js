@@ -1,16 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router";
-import { Aside, Content, Header } from "../styles/MainStyle";
+import { Aside, Content, Header, MainDiv } from "../styles/MainStyle";
 import SideMenu from "../components/SideMenu";
 
 const Main = () => {
   return (
-    <div>
-      <div className="wrap" style={{ display: "flex" }}>
+    <MainDiv>
+      <div className="wrap">
         <Aside>
           <SideMenu />
         </Aside>
-        <div>
+        <div className="main-right">
           <Header>
             <div>
               <div className="school-logo">교표</div>
@@ -26,7 +26,7 @@ const Main = () => {
           </Content>
         </div>
       </div>
-    </div>
+    </MainDiv>
   );
 };
 

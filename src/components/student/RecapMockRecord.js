@@ -6,7 +6,6 @@ const RecapSchoolRecord = () => {
   const data = [
     {
       id: "한국사",
-      color: "hsl(231, 100%, 59%)",
       data: [
         {
           x: `2023년 3월`,
@@ -36,7 +35,6 @@ const RecapSchoolRecord = () => {
     },
     {
       id: "영어",
-      color: "hsl(213, 70%, 50%)",
       data: [
         {
           x: `2023년 3월`,
@@ -66,7 +64,6 @@ const RecapSchoolRecord = () => {
     },
     {
       id: "수학",
-      color: "hsl(342, 70%, 50%)",
       data: [
         {
           x: `2023년 3월`,
@@ -96,72 +93,37 @@ const RecapSchoolRecord = () => {
     },
     {
       id: "국어",
-      color: "hsl(45, 70%, 50%)",
       data: [
         {
           x: `2023년 3월`,
-          y: 1,
-        },
-        {
-          x: "2023년 4월",
-          y: 2,
-        },
-        {
-          x: "2023년 6월",
           y: 3,
         },
         {
-          x: "2023년 9월",
+          x: "2023년 4월",
+          y: 1,
+        },
+        {
+          x: "2023년 6월",
           y: 2,
         },
         {
+          x: "2023년 9월",
+          y: 4,
+        },
+        {
           x: "2023년 10월",
-          y: 1,
+          y: 3,
         },
         {
           x: "2023년 11월",
-          y: 1,
+          y: 3,
         },
-        // {
-        //   x: "2022-2 중간",
-        //   y: 3,
-        // },
-        // {
-        //   x: "2022-2 기말",
-        //   y: 1,
-        // },
-        // {
-        //   x: "2023-1 중간",
-        //   y: 1,
-        // },
-        // {
-        //   x: "2023-1 기말",
-        //   y: 1,
-        // },
-        // {
-        //   x: "2023-2 중간",
-        //   y: 3,
-        // },
-        // {
-        //   x: "2023-2 기말",
-        //   y: 1,
-        // },
       ],
     },
   ];
   return (
     <SchoolRecordDiv>
-      <div
-        className="chart"
-        style={{
-          width: "100%",
-          height: "350px",
-          background: "#fff",
-          marginBottom: "20px",
-          borderRadius: "5px",
-          boxShadow: "0px 0.5px 5px 0px rgba(0, 0, 0, 0.2)",
-        }}
-      >
+      <div className="chart">
         <ResponsiveLine
           data={data}
           margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
@@ -175,14 +137,16 @@ const RecapSchoolRecord = () => {
           }}
           // yFormat=" >-.2f"
           // axisTop={null}
-          axisRight={null}
-          colors={{ scheme: "nivo" }}
+          // axisRight={null}
+          axisLeft={{ tickValues: [1, 2, 3, 4, 5] }}
+          gridYValues={[1, 2, 3, 4, 5]}
+          colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
           pointSize={3}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
           // pointLabelYOffset={-12}
-          // useMesh={true}
+          useMesh={true}
           legends={[
             {
               anchor: "bottom",
@@ -212,10 +176,9 @@ const RecapSchoolRecord = () => {
         />
       </div>
       <div className="record-text">
-        {/* <h4>최근 내신 성적</h4> */}
         <div className="exam-title-wrap">
-          <span>최근에 응시한</span>
-          <span className="exam-title">2023학년도 2학기 중간고사의</span>
+          <span className="exam-title">2023년 10월 모의고사</span>
+          <span>의</span>
           <span>주요 과목 등급</span>
         </div>
         <div className="subject-grade">
