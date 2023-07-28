@@ -10,13 +10,18 @@ import { Link } from "react-router-dom";
 import TSubJect from "../../components/teacher/TSubJect";
 
 const InputSchoolRecord = () => {
-  const [dropSemester, setDropSemester] = useState("");
-  const [dropTest, setDropTest] = useState("");
+  const [dropSemester, setDropSemester] = useState(""); // 학기
+  const [dropTest, setDropTest] = useState(""); // 고사
   const [isSemesterAndTestSelected, setIsSemesterAndTestSelected] =
-    useState(false);
-  const [studentsData, setStudentsData] = useState([]);
+    useState(false); // 학기와 고사가 선택되었는지 여부
+  const [studentsData, setStudentsData] = useState([]); // 학생 데이터 배열
+  const [lastSavedData, setLastSavedData] = useState(null);
+
+  // 새로운 데이터를 전달하는 함수
+  const updateLastSavedData = newData => {
+    setLastSavedData(newData);
+  };
   const subjectData = [
-    // 과목 데이터
     {
       mainsubject: "인문과학",
       data: [
@@ -42,7 +47,6 @@ const InputSchoolRecord = () => {
   ];
 
   const schoolClassData = [
-    // 학급 데이터
     {
       class: "2-5",
       data: [
@@ -61,38 +65,49 @@ const InputSchoolRecord = () => {
     },
   ];
 
+  // 학기 항목이 선택되었을 때 처리하는 함수
   const handleSemester = event => {
     setDropSemester(event.target.value);
   };
 
+  // 고사 항목이 선택되었을 때 처리하는 함수
   const handleDropTest = event => {
     setDropTest(event.target.value);
   };
 
-  const handleSaveData = studentData => {
-    // TSubJect 컴포넌트에서 저장 버튼을 누를 때 호출되는 함수
-    // 입력된 값을 저장하는 로직을 추가하세요.
-    // 예를 들어, 학생 데이터를 배열로 저장하는 경우:
-    setStudentsData(prevStudentsData => [...prevStudentsData, studentData]);
+  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
+  const handleSaveButtonClick = () => {
+    if (lastSavedData) {
+      console.log("저장된 학생 데이터:");
+      console.log(lastSavedData);
+    } else {
+      console.log("저장된 학생 데이터가 없습니다.");
+    }
+    // 저장 로직을 추가하세요 (데이터베이스에 저장하거나 다른 처리를 수행할 수 있습니다).
   };
 
+  // "과목 정보 입력" 버튼을 클릭할 때 처리하는 함수
   const handleSubjectInfoBtnClick = () => {
+    // 학기와 고사가 선택되었는지 확인하고, 선택되었을 경우 isSemesterAndTestSelected를 true로 설정합니다.
     if (dropSemester !== "" && dropTest !== "") {
       setIsSemesterAndTestSelected(true);
     } else {
       setIsSemesterAndTestSelected(false);
     }
   };
-
   return (
     <div>
       <ISRHeader>
         <h1>2023 내신 고사 성적 입력표</h1>
+
+        {/* 드롭다운 메뉴 1 */}
         <select value={dropSemester} onChange={handleSemester}>
           <option value="">-- 선택 --</option>
           <option value="1학기">1학기</option>
           <option value="2학기">2학기</option>
         </select>
+
+        {/* 드롭다운 메뉴 2 */}
         <select value={dropTest} onChange={handleDropTest}>
           <option value="">-- 선택 --</option>
           <option value="중간고사">중간고사</option>
@@ -100,7 +115,11 @@ const InputSchoolRecord = () => {
         </select>
       </ISRHeader>
       <ISRButton>
-        <button onClick={() => setIsSemesterAndTestSelected(true)}>
+        {/* "과목 정보 입력" 버튼 */}
+        <Link to={`/teacher/inputsubject`}>
+          <button>과목 정보 입력</button>
+        </Link>
+        <button onClick={handleSaveButtonClick}>
           저장
           <FontAwesomeIcon icon={faFloppyDisk} />
         </button>
@@ -118,28 +137,17 @@ const InputSchoolRecord = () => {
         <strong>전교 석차</strong>
         <strong>수정/삭제</strong>
       </ISRTitle>
-      {isSemesterAndTestSelected && (
-        <div>
-          <TSubJect
-            subjectData={subjectData}
-            schoolClassData={schoolClassData}
-            dropSemester={dropSemester}
-            dropTest={dropTest}
-            studentsData={studentsData} // 학생 데이터를 TSubJect 컴포넌트에 전달합니다.
-            setStudentsData={setStudentsData} // 학생 데이터를 업데이트하는 함수를 TSubJect 컴포넌트에 전달합니다.
-            handleSaveData={handleSaveData} // TSubJect 컴포넌트에서 저장 버튼을 누를 때 호출되는 함수를 전달합니다.
-          />
-        </div>
-      )}
       <div>
-        {/* 선택한 드롭다운 메뉴에 따라 화면에 렌더링할 내용 */}
-        {dropSemester && dropTest && (
-          <div>
-            <h2>선택 결과:</h2>
-            <p>드롭다운1 선택: {dropSemester}</p>
-            <p>드롭다운2 선택: {dropTest}</p>
-          </div>
-        )}
+        <TSubJect
+          subjectData={subjectData}
+          schoolClassData={schoolClassData}
+          isSemesterAndTestSelected={isSemesterAndTestSelected}
+          dropSemester={dropSemester}
+          dropTest={dropTest}
+          studentsData={studentsData}
+          setStudentsData={setStudentsData}
+          updateLastSavedData={updateLastSavedData}
+        />
       </div>
     </div>
   );
