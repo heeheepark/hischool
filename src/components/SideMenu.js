@@ -12,13 +12,7 @@ import {
   faUser,
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const SideMenu = () => {
   const navigate = useNavigate();
@@ -47,7 +41,7 @@ const SideMenu = () => {
             <span className="user-email">(dongwon@gmail.com)</span>
           </ins>
           <br />
-          <span>반갑습니다.</span>
+          <span>반갑습니다!</span>
         </p>
       </div>
       <div className="gnb-wrap">
