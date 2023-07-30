@@ -1,58 +1,71 @@
 import styled from "@emotion/styled";
 
 const StudentHomeDiv = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
   width: 100%;
-  padding: 20px;
+  height: 100%;
   h3 {
-    font-size: 25px;
+    font-size: 21px;
     /* font-family: "yg-jalnan"; */
-    font-weight: 900;
+    font-weight: 700;
     margin-bottom: 10px;
     color: #333;
   }
   .record {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    .record-wrap {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background: #f7f7f7;
+    padding: 15px;
+    box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    > div {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-      > div {
-        width: 100%;
-        margin-right: 20px;
-        :nth-of-type(2) {
-          margin: 0;
-        }
+      .icon-arrow {
+        font-size: 18px;
+        margin-left: 5px;
       }
     }
   }
   .student-home-bottom {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+    display: flex;
+    gap: 15px;
     .time-table {
       width: 100%;
-      > div {
-        margin-right: 10px;
-      }
+      height: 100%;
+      background: #f7f7f7;
+      padding: 15px;
+      box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
     }
     .food-menu {
       width: 100%;
-      > h3 {
-        margin-left: 10px;
-      }
-      > div {
-        margin-left: 10px;
+      height: 100%;
+      background: #f7f7f7;
+      padding: 15px;
+      box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+      .food-menu-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .icon-arrow {
+          font-size: 18px;
+          margin-left: 5px;
+        }
       }
     }
   }
 `;
 
-const SchoolRecordDiv = styled.div`
+const RecordDiv = styled.div`
+  height: 100%;
   .chart {
     width: 100%;
-    height: 330px;
+    height: 30vh;
     background: #fff;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -69,12 +82,14 @@ const SchoolRecordDiv = styled.div`
       > span {
         margin-right: 10px;
       }
+      span:last-of-type {
+        font-size: 22px;
+      }
       .exam-title {
         /* font-family: "yg-jalnan"; */
         font-size: 27px;
         font-weight: 900;
         color: #176b87;
-        margin: 3px;
       }
     }
     .subject-grade {
@@ -86,26 +101,21 @@ const SchoolRecordDiv = styled.div`
         }
         > span.subject-title {
           margin-right: 10px;
-        }
-        .korean {
-          color: #001c30;
-        }
-        .math {
-          color: #001c30;
-        }
-        .english {
-          color: #001c30;
-        }
-        .k-history {
-          color: #001c30;
+          font-weight: 800;
+          color: #64ccc5;
         }
         > span.grade-num {
           /* font-family: "yg-jalnan"; */
+          display: inline-block;
+          margin-bottom: 5px;
           font-size: 33px;
           font-weight: 900;
           margin-right: 3px;
           color: #64ccc5;
-          text-decoration: underline;
+          vertical-align: middle;
+        }
+        span:last-of-type {
+          font-size: 18px;
         }
       }
     }
@@ -113,6 +123,8 @@ const SchoolRecordDiv = styled.div`
 `;
 
 const TimeTableDiv = styled.div`
+  width: 100%;
+  height: 100%;
   font-size: 16px;
   text-align: center;
   border: 1px solid #ccc;
@@ -121,9 +133,10 @@ const TimeTableDiv = styled.div`
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   > ul {
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(8, 42px);
+    grid-template-rows: repeat(9, 3.75vh);
     > li:nth-of-type(6) {
       background: #eee;
       > ul {
@@ -134,7 +147,7 @@ const TimeTableDiv = styled.div`
       }
     }
     > li {
-      line-height: 42px;
+      line-height: 4vh;
       :first-of-type {
         background: #176b87;
         color: #fff;
@@ -151,7 +164,7 @@ const TimeTableDiv = styled.div`
             color: #fff;
           }
           :not(:first-of-type) {
-            font-size: 15px;
+            font-size: 16px;
           }
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
@@ -170,6 +183,8 @@ const TimeTableDiv = styled.div`
 `;
 
 const WeekFoodMenuDiv = styled.div`
+  width: 100%;
+  height: 100%;
   font-size: 16px;
   text-align: center;
   border: 1px solid #ccc;
@@ -178,14 +193,15 @@ const WeekFoodMenuDiv = styled.div`
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   > ul {
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 42px 168px 168px;
+    grid-template-rows: 3.75vh 15vh 15vh;
     > li {
       :first-of-type {
         background: #176b87;
         color: #fff;
-        line-height: 42px;
+        line-height: 4vh;
       }
       :not(:last-of-type) {
         border-bottom: 1px solid #ccc;
@@ -205,7 +221,7 @@ const WeekFoodMenuDiv = styled.div`
           justify-content: center;
           align-items: center;
           span.menu-type {
-            font-size: 12px;
+            font-size: 11px;
             display: block;
             background: #64ccc5;
             color: #fff;
@@ -215,10 +231,9 @@ const WeekFoodMenuDiv = styled.div`
           }
           > p {
             display: block;
-            font-size: 15px;
+            font-size: 13px;
             > span {
               display: block;
-              line-height: 1.5;
             }
           }
           :not(:last-of-type) {
@@ -230,4 +245,4 @@ const WeekFoodMenuDiv = styled.div`
   }
 `;
 
-export { StudentHomeDiv, SchoolRecordDiv, TimeTableDiv, WeekFoodMenuDiv };
+export { StudentHomeDiv, RecordDiv, TimeTableDiv, WeekFoodMenuDiv };

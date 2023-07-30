@@ -4,16 +4,33 @@ import RecapMockRecord from "../../components/student/RecapMockRecord";
 import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
 import TimeTable from "../../components/student/TimeTable";
 import WeekFoodMenu from "../../components/student/WeekFoodMenu";
+import { getWeekFood } from "../../axios/studentAxios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const StudentHome = () => {
   return (
     <StudentHomeDiv>
       <div className="record">
-        <h3>성적 현황</h3>
-        <div className="record-wrap">
+        <div>
+          <Link to="/student/schoolrecord">
+            <h3>
+              내신 성적 현황
+              <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
+            </h3>
+          </Link>
           <div className="school-record">
             <RecapSchoolRecord />
           </div>
+        </div>
+        <div>
+          <Link to="/student/mockrecord">
+            <h3>
+              모의고사 성적 현황
+              <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
+            </h3>
+          </Link>
           <div className="mock-record">
             <RecapMockRecord />
           </div>
@@ -27,7 +44,12 @@ const StudentHome = () => {
           </div>
         </div>
         <div className="food-menu">
-          <h3>이번주 급식표</h3>
+          <Link to="/student/foodmenu" className="food-menu-title">
+            <h3>
+              주간 급식표
+              <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
+            </h3>
+          </Link>
           <div>
             <WeekFoodMenu />
           </div>

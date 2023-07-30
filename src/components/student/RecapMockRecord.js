@@ -1,5 +1,5 @@
 import React from "react";
-import { SchoolRecordDiv } from "../../styles/student/StudentHomeStyle";
+import { RecordDiv } from "../../styles/student/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
 
 const RecapSchoolRecord = () => {
@@ -122,7 +122,7 @@ const RecapSchoolRecord = () => {
     },
   ];
   return (
-    <SchoolRecordDiv>
+    <RecordDiv>
       <div className="chart">
         <ResponsiveLine
           data={data}
@@ -135,17 +135,14 @@ const RecapSchoolRecord = () => {
             stacked: false,
             reverse: true,
           }}
-          // yFormat=" >-.2f"
-          // axisTop={null}
-          // axisRight={null}
           axisLeft={{ tickValues: [1, 2, 3, 4, 5] }}
           gridYValues={[1, 2, 3, 4, 5]}
           colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
-          pointSize={3}
+          lineWidth={3}
+          pointSize={5}
           pointColor={{ theme: "background" }}
-          pointBorderWidth={2}
+          pointBorderWidth={3}
           pointBorderColor={{ from: "serieColor" }}
-          // pointLabelYOffset={-12}
           useMesh={true}
           legends={[
             {
@@ -154,23 +151,12 @@ const RecapSchoolRecord = () => {
               justify: false,
               translateX: 0,
               translateY: 55,
-              // itemsSpacing: 0,
               itemDirection: "left-to-right",
               itemWidth: 70,
               itemHeight: 20,
-              itemOpacity: 0.75,
+              itemOpacity: 1,
               symbolSize: 12,
               symbolShape: "circle",
-              // symbolBorderColor: "rgba(0, 0, 0, 1.0)",
-              // effects: [
-              //   {
-              //     on: "hover",
-              //     style: {
-              //       itemBackground: "rgba(0, 0, 0, .03)",
-              //       itemOpacity: 1,
-              //     },
-              //   },
-              // ],
             },
           ]}
         />
@@ -178,7 +164,6 @@ const RecapSchoolRecord = () => {
       <div className="record-text">
         <div className="exam-title-wrap">
           <span className="exam-title">2023년 10월 모의고사</span>
-          <span>의</span>
           <span>주요 과목 등급</span>
         </div>
         <div className="subject-grade">
@@ -204,7 +189,7 @@ const RecapSchoolRecord = () => {
           </p>
         </div>
       </div>
-    </SchoolRecordDiv>
+    </RecordDiv>
   );
 };
 
