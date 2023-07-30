@@ -51,11 +51,9 @@ const SideMenuWrap = styled.div`
       }
       ins {
         cursor: pointer;
-        /* letter-spacing: 1.5px; */
         .user-name {
         }
         .user-email {
-          /* letter-spacing: 1.5px; */
         }
       }
     }

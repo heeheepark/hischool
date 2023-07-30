@@ -36,7 +36,7 @@ const Header = styled.div`
       margin-right: 10px;
     }
     span {
-      font-size: 20px;
+      font-size: 18px;
       color: #fff;
       :not(:last-of-type) {
         margin-right: 10px;
@@ -52,10 +52,10 @@ const Aside = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   height: calc(100vh - 60px);
   .content-wrap {
-    background: #f7f7f7;
+    /* background: #f7f7f7; */
     width: 100%;
     height: 100%;
     border-radius: 5px;
