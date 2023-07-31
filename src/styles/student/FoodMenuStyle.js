@@ -17,6 +17,9 @@ const FoodMenuDiv = styled.div`
     color: #333;
     box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    /* .fc-toolbar-title {
+      text-align: center;
+    } */
     .fc-col-header {
       background: #176b87;
       height: 3vh;

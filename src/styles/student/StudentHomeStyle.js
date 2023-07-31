@@ -7,7 +7,6 @@ const StudentHomeDiv = styled.div`
   height: 100%;
   h3 {
     font-size: 21px;
-    /* font-family: "yg-jalnan"; */
     font-weight: 700;
     margin-bottom: 10px;
     color: #333;
