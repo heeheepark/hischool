@@ -124,19 +124,6 @@ const RecordTableWrap = styled.div`
       font-size: 24px;
       font-weight: 600;
     }
-    .filter-wrap {
-      text-align: end;
-      select {
-        border: 1px solid #bbb;
-        border-radius: 3px;
-        width: 75px;
-        height: 24px;
-        text-align: center;
-        :not(:last-of-type) {
-          margin-right: 5px;
-        }
-      }
-    }
   }
   .record-table {
     height: 40vh;

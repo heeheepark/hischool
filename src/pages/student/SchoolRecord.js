@@ -6,6 +6,7 @@ import {
 } from "../../styles/student/SchoolRecordStyle";
 import { ResponsiveLine } from "@nivo/line";
 import SchoolRecordTable from "../../components/student/SchoolRecordTable";
+import { SchoolRecordFilter } from "../../components/student/Filter";
 
 const SchoolRecord = () => {
   const data = [
@@ -283,24 +284,7 @@ const SchoolRecord = () => {
       <RecordTableWrap>
         <div className="title">
           <h4>내신 성적 목록</h4>
-          <div className="filter-wrap">
-            <select name="year" id="year">
-              <option value="all">전체 연도</option>
-              <option value="2023">2023년</option>
-              <option value="2022">2022년</option>
-              <option value="2021">2021년</option>
-            </select>
-            <select name="semester" id="semester">
-              <option value="all">전체 학기</option>
-              <option value="semester1">1학기</option>
-              <option value="semester2">2학기</option>
-            </select>
-            <select name="test-category" id="test-category">
-              <option value="all">전체 시험</option>
-              <option value="middle">중간</option>
-              <option value="final">기말</option>
-            </select>
-          </div>
+          <SchoolRecordFilter />
         </div>
         <div className="record-table">
           <SchoolRecordTable />

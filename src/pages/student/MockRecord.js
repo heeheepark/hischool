@@ -6,6 +6,7 @@ import {
 import { ResponsiveLine } from "@nivo/line";
 import { MockRecordDiv } from "../../styles/student/MockRecordStyle";
 import MockRecordTable from "../../components/student/MockRecordTable";
+import { MockRecordFilter } from "../../components/student/Filter";
 
 const MockRecord = () => {
   const data = [
@@ -231,20 +232,7 @@ const MockRecord = () => {
       <RecordTableWrap>
         <div className="title">
           <h4>모의고사 성적 목록</h4>
-          <div className="filter-wrap">
-            <select name="year" id="year">
-              <option value="all">전체 연도</option>
-              <option value="2023">2023년</option>
-              <option value="2022">2022년</option>
-              <option value="2021">2021년</option>
-            </select>
-            <select name="semester" id="semester">
-              <option value="all">전체 월</option>
-              <option value="semester1">3월</option>
-              <option value="semester2">6월</option>
-              <option value="semester2">9월</option>
-            </select>
-          </div>
+          <MockRecordFilter />
         </div>
         <div className="record-table">
           <MockRecordTable />

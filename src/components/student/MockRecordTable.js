@@ -4,6 +4,9 @@ const MockRecordTable = () => {
   return (
     <MockRecordTableDiv>
       <ul className="category">
+        <li className="category-th">
+          <input type="checkbox" />
+        </li>
         <li className="category-th">연도</li>
         <li className="category-th">월</li>
         <li className="category-th">과목 계열</li>

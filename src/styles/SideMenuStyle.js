@@ -76,6 +76,10 @@ const SideMenuWrap = styled.div`
       ul {
         .nav-link {
           li {
+            :hover {
+              background: #4682a9;
+              border-radius: 5px;
+            }
             position: relative;
             height: 45px;
             background: 0;
@@ -125,6 +129,13 @@ const SideMenuWrap = styled.div`
               right: 20px;
               top: calc(50% - 9px);
               font-size: 15px;
+            }
+          }
+        }
+        .disabled {
+          li {
+            :hover {
+              background: none;
             }
           }
         }

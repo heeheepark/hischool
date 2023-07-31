@@ -97,7 +97,7 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>
-                <NavLink className="nav-link">
+                <NavLink className="nav-link disabled">
                   <li>
                     <FontAwesomeIcon icon={faCommentDots} className="icon" />
                     <span>커뮤니티</span>
@@ -143,7 +143,7 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>
-                <NavLink className="nav-link">
+                <NavLink className="nav-link disabled">
                   <li>
                     <FontAwesomeIcon icon={faCommentDots} className="icon" />
                     <span>커뮤니티</span>
