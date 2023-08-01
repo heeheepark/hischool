@@ -78,7 +78,7 @@ const FoodMenu = () => {
   ];
   return (
     <FoodMenuDiv>
-      <h3>{`${2023}년 ${7}월 급식표`}</h3>
+      <h3>{`${2023}년 ${8}월 급식표`}</h3>
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"

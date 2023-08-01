@@ -6,100 +6,151 @@ import {
 import TimeTable from "../../components/student/TimeTable";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { Link } from "react-router-dom";
+import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
+import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
+import ClassMockRecord from "../../components/teacher/ClassMockRecord";
 
 const TeacherHome = () => {
   const eventData = [
+    // {
+    //   idTitle: 1,
+    //   title: "2학기 수업 계획",
+    //   start: "2023-07-31",
+    //   end: "2023-08-03",
+    // },
     {
       idTitle: 1,
-      color: "gray",
-      textColor: "#fff",
-      end: "2023-07-05",
-      start: "2023-07-03",
-      title: "방학식 준비",
-    },
-    {
-      idTitle: 1,
-      color: "gray",
-      textColor: "#fff",
-      end: "2023-07-07",
-      start: "2023-07-07",
-      title: "방학식",
-    },
-    {
-      idTitle: 1,
-      color: "gray",
-      textColor: "#fff",
-      end: "2023-07-14",
-      start: "2023-07-11",
-      title: "1학기 성적 마감",
-    },
-    {
-      idTitle: 1,
-      color: "gray",
-      textColor: "#fff",
-      end: "2023-07-22",
-      start: "2023-07-17",
-      title: "1학기 수업 보고",
-    },
-    {
-      idTitle: 1,
-      color: "gray",
-      textColor: "#fff",
-      end: "2023-08-03",
-      start: "2023-07-31",
       title: "2학기 수업 계획",
-      allDay: true,
+      start: "2023-07-31",
+      end: "2023-08-03",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-07-31",
+      end: "2023-08-03",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-08",
+      end: "2023-08-11",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-10",
+      end: "2023-08-13",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-13",
+      end: "2023-08-16",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-15",
+      end: "2023-08-18",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-21",
+      end: "2023-08-24",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-23",
+      end: "2023-08-26",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-28",
+      end: "2023-08-30",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-08-29",
+      end: "2023-08-31",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-09-04",
+      end: "2023-09-06",
+    },
+    {
+      idTitle: 1,
+      title: "2학기 수업 계획",
+      start: "2023-09-04",
+      end: "2023-09-08",
     },
   ];
 
   return (
     <TeacherHomeDiv>
-      <div className="teacher-home-left">
-        <div className="student-count">
-          <h3>학급 현황</h3>
-          <div className="class-status">
-            <span>총 인원:</span>
+      <div className="student-count">
+        <h3>학급 현황</h3>
+        <div className="class-status">
+          <span>총 인원:</span>
+          <Link to="/teacher/studentlist">
             <span className="student-num">25</span>
-            <span>명</span>
-            <span>(가입 대기 인원:</span>
+          </Link>
+          <span>명</span>
+          <span>(가입 대기 인원:</span>
+          <Link to="/teacher/signlist">
             <span className="student-num">10</span>
-            <span>명)</span>
-          </div>
-          <div className="sign-wait"></div>
+          </Link>
+          <span>명)</span>
         </div>
-        <div className="class-school-record"></div>
-        {/* <div className="time-table">
-          <h3>학급 시간표</h3>
-          <div>
-            <TimeTable />
-          </div>
-        </div> */}
       </div>
-      <div className="teacher-home-right">
-        <div className="class-mock-record"></div>
-        <div className="calendar">
-          {/* <h3>학사 일정</h3> */}
-          <FullCalendarDiv>
-            <FullCalendar
-              height="56.6vh"
-              plugins={[dayGridPlugin]}
-              initialView="dayGridMonth"
-              locale="ko"
-              dayCellContent={day => day.dayNumberText.replace("일", "")}
-              events={eventData}
-              nextDayThreshold={"09:00:00"}
-              headerToolbar={{
-                start: "prev",
-                center: "title",
-                end: "next today",
-              }}
-            />
-          </FullCalendarDiv>
+      <div style={{ display: "flex", gap: "15px" }}>
+        <div className="teacher-home-left">
+          <div className="class-school-record">
+            <h3>학급 내신 현황</h3>
+            <ClassSchoolRecord />
+          </div>
+          <div className="class-mock-record">
+            <h3>학급 모의고사 현황</h3>
+            <ClassMockRecord />
+          </div>
         </div>
-        <div className="time-table">
-          <h3>학급 시간표</h3>
-          <div>
-            <TimeTable />
+        <div className="teacher-home-right">
+          <div className="time-table">
+            <h3>학급 시간표</h3>
+            <div>
+              <TeacherTimeTable />
+            </div>
+          </div>
+          <div className="calendar">
+            <FullCalendarDiv>
+              <FullCalendar
+                height="46.4vh"
+                plugins={[dayGridPlugin]}
+                initialView="dayGridMonth"
+                locale="ko"
+                dayCellContent={day => day.dayNumberText.replace("일", "")}
+                events={eventData}
+                eventColor="#aaa"
+                eventTextColor="#fff"
+                dayMaxEvents={true}
+                moreLinkContent={args => {
+                  return <span>{"+" + args.num}</span>;
+                }}
+                headerToolbar={{
+                  start: "prev",
+                  center: "title",
+                  end: "next today",
+                }}
+                event
+              />
+            </FullCalendarDiv>
           </div>
         </div>
       </div>
