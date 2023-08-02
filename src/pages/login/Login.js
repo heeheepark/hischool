@@ -39,7 +39,7 @@ const Login = () => {
         <LoginContain>
           <ul>
             <li>
-              <span>Login</span>
+              <h3>Login</h3>
             </li>
             <li>
               <input

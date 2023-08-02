@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
-export const StudentListWrap = styled.div`
+const StudentListWrap = styled.div`
   font-size: 20px;
 `;
-export const StudentListTitle = styled.div`
+const StudentListTitle = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
@@ -11,28 +11,22 @@ export const StudentListTitle = styled.div`
     font-size: 30px;
     padding-left: 20px;
   }
-  .list-buttons {
+  .ListButtons {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     button {
-      width: 120px;
-      height: 27px;
-      font-size: 17px;
+      width: 70px;
+      height: 25px;
+      font-size: 18px;
       cursor: pointer;
       border: none;
       border-radius: 5px;
       background: #176b87;
       color: #fff;
     }
-    input {
-      width: 250px;
-      height: 27px;
-      font-size: 17px;
-    }
   }
 `;
-
-export const TimeTableDiv = styled.div`
+const TimeTableDiv = styled.div`
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -63,7 +57,7 @@ export const TimeTableDiv = styled.div`
       }
       > ul {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         > li {
           :first-of-type {
             background: #176b87;
@@ -85,3 +79,5 @@ export const TimeTableDiv = styled.div`
     }
   }
 `;
+
+export { StudentListWrap, StudentListTitle, TimeTableDiv };

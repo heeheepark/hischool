@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const SignUpWrap = styled.div`
-  font-size: 27px;
+  font-size: 23px;
 `;
 
 export const SignUpInner = styled.div`
@@ -20,7 +20,7 @@ export const SignUpInner = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    span {
+    h3 {
       font-family: "yg-jalnan";
       font-size: 40px;
       margin-right: 5%;
@@ -30,10 +30,10 @@ export const SignUpInner = styled.div`
         width: 20px;
         height: 20px;
         margin-right: 8px;
-        vertical-align: -2px;
+        vertical-align: -3px;
       }
       label {
-        font-size: 27px;
+        font-size: 20px;
         margin-right: 10px;
       }
     }
@@ -46,10 +46,7 @@ export const SignUpInner = styled.div`
     button {
       width: 80px;
       height: 30px;
-      font-family: "HakgyoansimWoojuR";
-      /* font-family: "yg-jalnan"; */
-      font-weight: 600;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
       border: none;
       border-radius: 5px;
@@ -82,11 +79,11 @@ export const SignUpUl = styled.ul`
     input {
       display: block;
       width: 300px;
-      height: 40px;
+      height: 35px;
       padding-left: 20px;
       padding-right: 20px;
       border-radius: 20px;
-      font-size: 20px;
+      font-size: 18px;
     }
   }
   .small-input {
@@ -97,9 +94,9 @@ export const SignUpUl = styled.ul`
       flex-direction: column;
       input {
         display: block;
-        font-size: 20px;
+        font-size: 18px;
         width: 135px;
-        height: 40px;
+        height: 35px;
         padding-left: 15px;
         padding-right: 15px;
         border-radius: 20px;
