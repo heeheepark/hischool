@@ -32,9 +32,8 @@ export const LoginContain = styled.div`
         margin-right: 5px;
         vertical-align: -3.5px;
       }
-      > span {
-        font-family: "yg-jalnan";
-        font-size: 40px;
+      h3 {
+        font-size: 45px;
       }
     }
   }
@@ -51,12 +50,10 @@ export const LoginContain = styled.div`
     }
   }
   .login-email {
-    font-family: "HakgyoansimWoojuR";
     font-weight: 600;
     font-size: 20px;
   }
   .login-password {
-    font-family: "HakgyoansimWoojuR";
     font-weight: 600;
     font-size: 20px;
   }
@@ -66,9 +63,6 @@ export const LoginForm = styled.form`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  span {
-    font-size: 45px;
-  }
   .login-button {
     margin-top: 9.5%;
     padding-right: 10%;

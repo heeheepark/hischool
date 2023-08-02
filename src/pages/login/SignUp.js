@@ -36,7 +36,7 @@ const SignUp = () => {
     navigate("/");
   };
 
-  const handleCancel = e => {
+  const handleCancel = () => {
     navigate("/");
   };
 
@@ -48,7 +48,7 @@ const SignUp = () => {
       <SignUpInner>
         <div className="signup-box">
           <div className="signup-radio">
-            <span>Sign Up</span>
+            <h3>Sign Up</h3>
             <form>
               <input
                 type="radio"
