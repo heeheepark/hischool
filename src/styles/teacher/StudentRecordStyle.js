@@ -1,100 +1,115 @@
 import styled from "@emotion/styled";
 
 const StudentRecordDiv = styled.div`
+  width: 100%;
+  height: 100%;
   background: #f7f7f7;
   padding: 15px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-flow: column;
   h3 {
     font-size: 27px;
     margin-bottom: 20px;
   }
-  .student-list-wrap {
-    margin-bottom: 30px;
-    form {
-      margin-bottom: 5px;
-      > input {
-        border: 1px solid #bbb;
-        border-radius: 3px;
-        width: 150px;
-        height: 24px;
-        padding-left: 5px;
-        margin-right: 5px;
-      }
-      button {
-        width: 45px;
-        height: 24px;
-        background: #fff;
-        border: 1px solid #bbb;
-        border-radius: 3px;
-        cursor: pointer;
-      }
-    }
-  }
-  .school-record-wrap {
-    margin-bottom: 30px;
-    .school-record-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      .header-left {
-        display: flex;
-        align-items: center;
-        h4 {
-          font-size: 22px;
-          margin-right: 10px;
-        }
-      }
-      .btns {
-        button {
-          width: 45px;
+  .record-wrap {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    .student-list-wrap {
+      height: 100%;
+      margin-bottom: 30px;
+      form {
+        margin-bottom: 5px;
+        > input {
+          border: 1px solid #bbb;
+          border-radius: 3px;
+          width: 10vw;
           height: 24px;
+          padding-left: 5px;
+          margin-right: 5px;
+        }
+        button {
+          width: 2vw;
+          height: 24px;
+          line-height: 1;
           background: #fff;
           border: 1px solid #bbb;
           border-radius: 3px;
-          margin-right: 5px;
           cursor: pointer;
-          &.add-school-record {
-            width: 110px;
-            margin-right: 0;
-            background: #64ccc5;
-            color: #fff;
-            border: #64cbb2;
+        }
+      }
+    }
+    .school-record-wrap {
+      height: 100%;
+      margin-bottom: 35px;
+      .school-record-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        .header-left {
+          display: flex;
+          align-items: center;
+          h4 {
+            font-size: 22px;
+            margin-right: 10px;
+          }
+        }
+        .btns {
+          button {
+            width: 45px;
+            height: 24px;
+            background: #fff;
+            border: 1px solid #bbb;
+            border-radius: 3px;
+            margin-right: 5px;
+            line-height: 1;
+            cursor: pointer;
+            &.add-school-record {
+              width: 110px;
+              margin-right: 0;
+              background: #64ccc5;
+              color: #fff;
+              border: #64cbb2;
+            }
           }
         }
       }
     }
-  }
-  .mock-record-wrap {
-    margin-bottom: 8px;
-    .mock-record-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      .header-left {
+    .mock-record-wrap {
+      height: 100%;
+      margin-bottom: 8px;
+      .mock-record-header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        h4 {
-          font-size: 22px;
-          margin-right: 10px;
+        margin-bottom: 10px;
+        .header-left {
+          display: flex;
+          align-items: center;
+          h4 {
+            font-size: 22px;
+            margin-right: 10px;
+          }
         }
-      }
-      .btns {
-        button {
-          width: 45px;
-          height: 24px;
-          background: #fff;
-          border: 1px solid #bbb;
-          border-radius: 3px;
-          margin-right: 5px;
-          cursor: pointer;
-          &.add-mock-record {
-            width: 110px;
-            margin-right: 0;
-            background: #64ccc5;
-            color: #fff;
-            border: #64cbb2;
+        .btns {
+          button {
+            width: 45px;
+            height: 24px;
+            background: #fff;
+            border: 1px solid #bbb;
+            border-radius: 3px;
+            margin-right: 5px;
+            line-height: 1;
+            cursor: pointer;
+            &.add-mock-record {
+              width: 8vw;
+              margin-right: 0;
+              background: #64ccc5;
+              color: #fff;
+              border: #64cbb2;
+            }
           }
         }
       }
@@ -105,7 +120,7 @@ const StudentRecordDiv = styled.div`
 const StudentListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 10vh;
+  height: 12vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -162,7 +177,7 @@ const StudentListDiv = styled.div`
 const SchoolRecordListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 26.7vh;
+  height: 27vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -215,7 +230,7 @@ const SchoolRecordListDiv = styled.div`
 const MockRecordListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 26.7vh;
+  height: 27vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;

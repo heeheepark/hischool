@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 
 const TeacherHomeDiv = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
-  height: 100%;
   gap: 15px;
   h3 {
     font-size: 21px;
@@ -13,7 +14,7 @@ const TeacherHomeDiv = styled.div`
   }
   .student-count {
     display: flex;
-    height: 45px;
+    height: 50px;
     background: #f7f7f7;
     box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
     padding: 8px 15px;
@@ -46,35 +47,42 @@ const TeacherHomeDiv = styled.div`
       }
     }
   }
-  .teacher-home-left {
+  .teacher-home-bottom {
     display: flex;
-    flex-flow: column nowrap;
-    width: 100%;
-    box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
-    background: #f7f7f7;
-    padding: 15px;
-    border-radius: 5px;
-    .class-mock-record {
-      height: 100%;
-    }
-    .class-school-record {
-      height: 100%;
-    }
-  }
-  .teacher-home-right {
-    width: 100%;
-    display: flex;
-    flex-flow: column;
     gap: 15px;
-    .time-table {
+    height: 120%;
+    .teacher-home-left {
+      display: flex;
+      flex-flow: column nowrap;
+      width: 100%;
       height: 100%;
-      background: #f7f7f7;
       box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+      background: #f7f7f7;
       padding: 15px;
       border-radius: 5px;
+      .class-mock-record {
+        height: 100%;
+      }
+      .class-school-record {
+        height: 100%;
+      }
     }
-    .calendar {
-      height: 65%;
+    .teacher-home-right {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      gap: 15px;
+      .time-table {
+        height: 100%;
+        background: #f7f7f7;
+        box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .calendar {
+        height: 65%;
+      }
     }
   }
 `;

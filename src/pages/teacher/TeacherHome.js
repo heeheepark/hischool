@@ -110,7 +110,7 @@ const TeacherHome = () => {
           <span>명)</span>
         </div>
       </div>
-      <div style={{ display: "flex", gap: "15px" }}>
+      <div className="teacher-home-bottom">
         <div className="teacher-home-left">
           <div className="class-school-record">
             <h3>학급 내신 현황</h3>

@@ -24,11 +24,19 @@ const ISRTitle = styled.div`
   width: 94%;
   height: 40px;
   display: flex;
+  color: #fff;
   justify-content: space-between;
   align-items: center;
-  background: #d4d4d4;
+  background: #176B87;
   border: 1px solid #afafaf;
   border-radius: 15px;
+  > p {
+    width: 120px;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    font-weight: 600;
+  }
   > strong {
     width: 77px;
     font-size: 20px;
@@ -50,13 +58,13 @@ const ISRinput = styled.div`
     width: 120px;
     display: block;
     height: 20px;
-    margin: 0 10px;
+    margin: auto;
   }
   > input {
     display: block;
     width: 77px;
     height: 20px;
-    margin: 0 30px;
+    margin: auto;
   }
 `;
 const ISRdetail = styled.div`

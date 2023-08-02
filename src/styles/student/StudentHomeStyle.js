@@ -6,7 +6,7 @@ const StudentHomeDiv = styled.div`
   width: 100%;
   height: 100%;
   h3 {
-    font-size: 21px;
+    font-size: 24px;
     /* font-family: "yg-jalnan"; */
     font-weight: 700;
     margin-bottom: 10px;
@@ -22,10 +22,11 @@ const StudentHomeDiv = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    /* line-height: ; */
     > div {
       width: 100%;
       .icon-arrow {
-        font-size: 18px;
+        font-size: 22px;
         margin-left: 5px;
       }
     }
@@ -53,7 +54,7 @@ const StudentHomeDiv = styled.div`
         justify-content: space-between;
         align-items: center;
         .icon-arrow {
-          font-size: 18px;
+          font-size: 22px;
           margin-left: 5px;
         }
       }
@@ -136,7 +137,7 @@ const TimeTableDiv = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(9, 3.75vh);
+    grid-template-rows: repeat(9, 1fr);
     > li:nth-of-type(6) {
       background: #eee;
       > ul {
@@ -196,7 +197,7 @@ const WeekFoodMenuDiv = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3.75vh 15vh 15vh;
+    grid-template-rows: 1fr 4fr 4fr;
     > li {
       :first-of-type {
         background: #176b87;
@@ -211,6 +212,7 @@ const WeekFoodMenuDiv = styled.div`
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         li {
+          width: 100%;
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
           }
@@ -231,7 +233,7 @@ const WeekFoodMenuDiv = styled.div`
           }
           > p {
             display: block;
-            font-size: 13px;
+            font-size: 0.7em;
             > span {
               display: block;
             }
