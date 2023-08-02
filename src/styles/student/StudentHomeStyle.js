@@ -212,6 +212,7 @@ const WeekFoodMenuDiv = styled.div`
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         li {
+          width: 100%;
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
           }
@@ -232,7 +233,7 @@ const WeekFoodMenuDiv = styled.div`
           }
           > p {
             display: block;
-            font-size: 13px;
+            font-size: 0.7em;
             > span {
               display: block;
             }

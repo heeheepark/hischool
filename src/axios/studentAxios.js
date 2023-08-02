@@ -1,10 +1,13 @@
-import axios from "axios";
+import { async } from "q";
 import axiosInstance from "./commonAxios";
+import axios from "axios";
 
 // Student Home
 const getWeekFood = async setWeekMenuData => {
   try {
-    const res = await axios.get(`/api/meal/main?sdSchulCode=${7240273}`);
+    const res = await axiosInstance.get(
+      `/api/meal/main?sdSchulCode=${7240273}`,
+    );
     const result = res.data;
     const promises = result.list.map(item => item);
     const MenuArray = await Promise.all(promises.map(item => item));
@@ -13,5 +16,14 @@ const getWeekFood = async setWeekMenuData => {
     console.log(err);
   }
 };
+
+// FoodMenuList
+// const getMonthFood = async () => {
+//   try {
+//     const res = await axios.get();
+//   } catch (error) {
+//     console.log(err);
+//   }
+// };
 
 export { getWeekFood };

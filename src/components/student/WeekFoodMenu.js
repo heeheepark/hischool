@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { WeekFoodMenuDiv } from "../../styles/student/StudentHomeStyle";
-import { getWeekFood } from "../../axios/studentAxios";
+import { getWeekFood, test } from "../../axios/studentAxios";
 
 const WeekFoodMenu = () => {
   const [weekMenuData, setWeekMenuData] = useState(null);
+  const dayList = ["일", "월", "화", "수", "목", "금", "토"];
   const defaultArray = [{}, {}, {}, {}, {}, {}, {}];
 
   // 요일 구하기
@@ -22,9 +23,9 @@ const WeekFoodMenu = () => {
             item = dayMenu;
           }
           // if (dayMenu.menuOftheDay) {
-          //   const menuList = dayMenu.menuOftheDay.split(",");
-          //   console.log(menuList);
-          //   // dayMenu.menuOftheDay = [];
+          //   const menuList = dayMenu.menuOftheDay.replaceAll(",", "<br />");
+          //   dayMenu.menuOftheDay = menuList;
+          //   console.log(dayMenu.menuOftheDay);
           // }
         });
     return item;
@@ -39,63 +40,29 @@ const WeekFoodMenu = () => {
       <ul>
         <li className="day-list">
           <ul>
-            <li className="day">일</li>
-            <li className="day">월</li>
-            <li className="day">화</li>
-            <li className="day">수</li>
-            <li className="day">목</li>
-            <li className="day">금</li>
-            <li className="day">토</li>
+            {dayList.map((item, index) => (
+              <li className="day" key={index}>
+                {item}
+              </li>
+            ))}
           </ul>
         </li>
         <li className="lunch-menu-list">
           <ul>
-            <li className="menu">
-              <span className="menu-type">{newMenu[0].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[0].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[1].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[1].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[2].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[2].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[3].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[3].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[4].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[4].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[5].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[5].menuOftheDay}</span>
-              </p>
-            </li>
-            <li className="menu">
-              <span className="menu-type">{newMenu[6].lunchOrDinner}</span>
-              <p>
-                <span>{newMenu[6].menuOftheDay}</span>
-              </p>
-            </li>
+            {newMenu.map((item, index) => {
+              return (
+                <li className="menu" key={index}>
+                  <span className="menu-type">{item.lunchOrDinner}</span>
+                  <p>
+                    <span>{item.menuOftheDay}</span>
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </li>
         <li className="dinner-menu-list">
-          <ul>
+          {/* <ul>
             <li className="menu">
               <span className="menu-type">석식</span>
               <p>
@@ -173,7 +140,7 @@ const WeekFoodMenu = () => {
                 <span>포기김치</span>
               </p>
             </li>
-          </ul>
+          </ul> */}
         </li>
       </ul>
     </WeekFoodMenuDiv>
