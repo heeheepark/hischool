@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
 const MockRecordDiv = styled.div`
+  width: 100%;
+  height: 100%;
   background: #f7f7f7;
   padding: 30px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -42,10 +44,10 @@ const MockRecordTableDiv = styled.div`
     }
   }
   .record-data {
-    height: 80%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-rows: repeat(13, 1fr);
     > li {
       border-bottom: 1px solid #ccc;
       > ul {

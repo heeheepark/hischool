@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
 const SchoolRecordDiv = styled.div`
+  width: 100%;
+  height: 100%;
   background: #f7f7f7;
   padding: 30px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -126,7 +128,7 @@ const RecordTableWrap = styled.div`
     }
   }
   .record-table {
-    height: 40vh;
+    height: 100%;
   }
 `;
 
@@ -146,6 +148,7 @@ const SchoolRecordTableDiv = styled.div`
     position: sticky;
     top: 0;
     width: 100%;
+    /* height: 100%; */
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr;
@@ -158,10 +161,10 @@ const SchoolRecordTableDiv = styled.div`
     }
   }
   .record-data {
-    height: 80%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-rows: repeat(13, 1fr);
     > li {
       border-bottom: 1px solid #ccc;
       > ul {
