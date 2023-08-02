@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ISRButton,
   ISRHeader,
   ISRTitle,
 } from "../../styles/teacher/InputSchoolRecord";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFloppyDisk, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFloppyDisk,
+  faPlusCircle,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import TSubJect from "../../components/teacher/TSubJect";
 
@@ -15,11 +19,26 @@ const InputSchoolRecord = () => {
   const [isSemesterAndTestSelected, setIsSemesterAndTestSelected] =
     useState(false); // 학기와 고사가 선택되었는지 여부
   const [studentsData, setStudentsData] = useState([]); // 학생 데이터 배열
-  const [lastSavedData, setLastSavedData] = useState(null);
+  const [lastSavedData, setLastSavedData] = useState([]);
+  // 최초 학생의 데이터를 셋팅하여야 함.
+  useEffect(() => {
+    const 임시데이터 = [{}, {}, {}, {}, {}, {}, {}, {}];
+    //{subject: '인문과학', semester: '', test: ''}
+    setStudentsData(임시데이터);
+    setLastSavedData(임시데이터);
+  }, []);
 
   // 새로운 데이터를 전달하는 함수
-  const updateLastSavedData = newData => {
-    setLastSavedData(newData);
+  const updateLastSavedData = (_id, newData) => {
+    const updateData = lastSavedData.map((item, idx) => {
+      // 변경된 데이터 순서 번호와 같다면 데이터를 업데이트 한다.
+      if (idx === _id) {
+        item = newData;
+      }
+      return item;
+    });
+
+    setLastSavedData(updateData);
   };
   const subjectData = [
     {
@@ -85,16 +104,18 @@ const InputSchoolRecord = () => {
     }
     // 저장 로직을 추가하세요 (데이터베이스에 저장하거나 다른 처리를 수행할 수 있습니다).
   };
-
-  // "과목 정보 입력" 버튼을 클릭할 때 처리하는 함수
-  const handleSubjectInfoBtnClick = () => {
-    // 학기와 고사가 선택되었는지 확인하고, 선택되었을 경우 isSemesterAndTestSelected를 true로 설정합니다.
-    if (dropSemester !== "" && dropTest !== "") {
-      setIsSemesterAndTestSelected(true);
-    } else {
-      setIsSemesterAndTestSelected(false);
-    }
+  // 항목 추가 버튼을 누를 때 호출되는 함수
+  const handleAddButtonClick = () => {
+    // 새로운 빈 객체를 추가하여 학생 데이터 배열을 업데이트
+    console.log(studentsData);
+    const newArr = [...studentsData];
+    const newArr2 = [...lastSavedData];
+    newArr.push({});
+    console.log(newArr);
+    setStudentsData(newArr);
+    setLastSavedData(newArr2);
   };
+  
   return (
     <div>
       <ISRHeader>
@@ -129,25 +150,34 @@ const InputSchoolRecord = () => {
         </button>
       </ISRButton>
       <ISRTitle>
-        <strong>과목 계열</strong>
-        <strong>세부 과목</strong>
+        <p>과목 계열</p>
+        <p>세부 과목</p>
         <strong>점수</strong>
         <strong>등급</strong>
         <strong>반 석차</strong>
         <strong>전교 석차</strong>
-        <strong>수정/삭제</strong>
       </ISRTitle>
       <div>
-        <TSubJect
-          subjectData={subjectData}
-          schoolClassData={schoolClassData}
-          isSemesterAndTestSelected={isSemesterAndTestSelected}
-          dropSemester={dropSemester}
-          dropTest={dropTest}
-          studentsData={studentsData}
-          setStudentsData={setStudentsData}
-          updateLastSavedData={updateLastSavedData}
-        />
+        {studentsData.map((item, index) => (
+          <TSubJect
+            key={index}
+            id={index}
+            subjectData={subjectData}
+            schoolClassData={schoolClassData}
+            isSemesterAndTestSelected={isSemesterAndTestSelected}
+            dropSemester={dropSemester}
+            dropTest={dropTest}
+            studentsData={studentsData}
+            setStudentsData={setStudentsData}
+            updateLastSavedData={updateLastSavedData}
+          />
+        ))}
+      </div>
+      <div>
+        <button onClick={handleAddButtonClick}>
+          항목추가
+          <FontAwesomeIcon icon={faPlusCircle} />
+        </button>
       </div>
     </div>
   );

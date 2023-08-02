@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  ISRinput,
-  ISRinputR,
-} from "../../styles/teacher/InputSchoolRecord";
+import { ISRinput } from "../../styles/teacher/InputSchoolRecord";
 
 const TSubJect = ({
+  id,
   subjectData,
   dropSemester,
   dropTest,
@@ -52,7 +50,7 @@ const TSubJect = ({
     };
 
     // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
-    updateLastSavedData(updatedData);
+    updateLastSavedData(id, updatedData);
   };
 
   return (
@@ -92,36 +90,35 @@ const TSubJect = ({
                   </option>
                 ))}
           </select>
-          <ISRinputR>
-            <input
-              type="number"
-              name="score"
-              value={studentData?.score || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
-              onChange={handleInputChange}
-              placeholder="점수"
-            />
-            <input
-              type="number"
-              name="grade"
-              value={studentData?.grade || ""}
-              onChange={handleInputChange}
-              placeholder="등급"
-            />
-            <input
-              type="number"
-              name="classRank"
-              value={studentData?.classRank || ""}
-              onChange={handleInputChange}
-              placeholder="반 석차"
-            />
-            <input
-              type="number"
-              name="schoolRank"
-              value={studentData?.schoolRank || ""}
-              onChange={handleInputChange}
-              placeholder="전교 석차"
-            />
-          </ISRinputR>
+
+          <input
+            type="number"
+            name="score"
+            value={studentData?.score || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            onChange={handleInputChange}
+            placeholder="점수"
+          />
+          <input
+            type="number"
+            name="grade"
+            value={studentData?.grade || ""}
+            onChange={handleInputChange}
+            placeholder="등급"
+          />
+          <input
+            type="number"
+            name="classRank"
+            value={studentData?.classRank || ""}
+            onChange={handleInputChange}
+            placeholder="반 석차"
+          />
+          <input
+            type="number"
+            name="schoolRank"
+            value={studentData?.schoolRank || ""}
+            onChange={handleInputChange}
+            placeholder="전교 석차"
+          />
         </ISRinput>
       </div>
     </>
