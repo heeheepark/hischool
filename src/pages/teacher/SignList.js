@@ -1,42 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StudentListTitle,
   StudentListWrap,
   TimeTableDiv,
 } from "../../styles/teacher/SignListStyle";
 import { useNavigate } from "react-router";
+import { getSignListData } from "../../axios/teacherAxios";
 
 const SignList = () => {
   const [studentListData, setStudentListData] = useState([]);
   const navigate = useNavigate();
 
-  const data = [
-    {
-      unm: "김수한무",
-      birth: "1997-09-01",
-      phone: "010-1997-2233",
-      email: "asdf@naver.com",
-    },
-    {
-      unm: "김수리수리",
-      birth: "1997-09-01",
-      phone: "010-1997-2233",
-      email: "asdf@naver.com",
-    },
-  ];
-
-  // useEffect(() => {
-  // const getStudentData = async () => {
-  // try {
-  // const res = await axios.get(`api/teacher/signed?${}`);
-  // const result = res.data
-  // setStudentListData(result);
-  // } catch (err) {
-  //  console.error(err);
-  // }
-  // };
-  // getStudentData();
-  // }, []);
+  useEffect(() => {
+    getSignListData(setStudentListData);
+  }, []);
 
   const handleCancel = () => {
     navigate("/teacher/studentlist");
@@ -72,7 +49,7 @@ const SignList = () => {
             <li className="class" key={index}>
               <ul>
                 <li>{index + 1}</li>
-                <li>{item.unm}</li>
+                <li>{item.snm}</li>
                 <li>{item.birth}</li>
                 <li>{item.phone}</li>
                 <li>{item.email}</li>
