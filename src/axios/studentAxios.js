@@ -9,8 +9,11 @@ const getWeekFood = async setWeekMenuData => {
       `/api/meal/main?sdSchulCode=${7240273}`,
     );
     const result = res.data.list;
-    // console.log(result);
-    setWeekMenuData(result);
+    const menuList = result.map(item => {
+      item.menuOftheDay = item.menuOftheDay.split(",");
+      return item;
+    });
+    setWeekMenuData(menuList);
   } catch (err) {
     console.log(err);
   }

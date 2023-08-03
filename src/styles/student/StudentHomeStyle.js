@@ -209,7 +209,7 @@ const WeekFoodMenuDiv = styled.div`
       > ul {
         height: 100%;
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(7, 6vw);
         li {
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
@@ -220,6 +220,7 @@ const WeekFoodMenuDiv = styled.div`
           flex-flow: column nowrap;
           justify-content: center;
           align-items: center;
+          padding: 0 5px;
           span.menu-type {
             font-size: 11px;
             display: block;
@@ -230,10 +231,15 @@ const WeekFoodMenuDiv = styled.div`
             margin-bottom: 5px;
           }
           > p {
+            width: 100%;
             display: block;
             font-size: 13px;
             > span {
               display: block;
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
           }
           :not(:last-of-type) {

@@ -28,7 +28,6 @@ const FoodMenu = () => {
         eventBorderColor="transparent"
         eventDidMount={item => {
           const title = item.event.title;
-          console.log(title);
           const menuType = item.event._def.extendedProps.menuType;
           const titleWithLineBreaks = title.replaceAll(",", "<br />");
           const newHTML = `

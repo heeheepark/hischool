@@ -3,50 +3,93 @@ import { TimeTableDiv } from "../../styles/student/StudentHomeStyle";
 import { getSchedule } from "../../axios/studentAxios";
 
 const TimeTable = () => {
-  const [timeTable, setTimeTable] = useState([]);
-  useEffect(() => {
-    getSchedule(setTimeTable);
-  }, []);
+  const [timeTable, setTimeTable] = useState(null);
+  // useEffect(() => {
+  //   getSchedule(setTimeTable);
+  // }, []);
 
-  //   console.log(timeTable);
-  //   const class1 = timeTable.filter(item => {
-  //     if (item.period === "1") {
-  //       return item;
-  //     }
-  //   })
-  //   const class2 = timeTable.filter(item => {
-  //     if (item.period === "2") {
-  //       return item;
-  //     }
-  //   });
-  //   const class3 = timeTable.filter(item => {
-  //     if (item.period === "3") {
-  //       return item;
-  //     }
-  //   });
-  //   const class4 = timeTable.filter(item => {
-  //     if (item.period === "4") {
-  //       return item;
-  //     }
-  //   });
-  //   const class5 = timeTable.filter(item => {
-  //     if (item.period === "5") {
-  //       return item;
-  //     }
-  //   });
-  //   const class6 = timeTable.filter(item => {
-  //     if (item.period === "6") {
-  //       return item;
-  //     }
-  //   });
-  //   const class7 = timeTable.filter(item => {
-  //     if (item.period === "7") {
-  //       return item;
-  //     }
-  //   });
-  // }
+  // console.log(timeTable);
 
-  //   console.log(class1, class2, class3, class4, class5, class6, class7);
+  // const testArray = [
+  //   { day: "월" },
+  //   { day: "화" },
+  //   { day: "수" },
+  //   { day: "목" },
+  //   { day: "금" },
+  // ];
+
+  // console.log({ ...testArray[0], test: "test" });
+
+  const test = timeTable
+    ? timeTable.map((item, index) => {
+        const testArray = [
+          { day: "1교시", list: [] },
+          { day: "2교시", list: [] },
+          { day: "3교시", list: [] },
+          { day: "4교시", list: [] },
+          { day: "5교시", list: [] },
+          { day: "6교시", list: [] },
+          { day: "7교시", list: [] },
+        ];
+        if (item.period === "1") {
+          testArray[0] = { ...testArray[0], list: [item] };
+        }
+        return testArray;
+      })
+    : null;
+
+  // console.log(test);
+  const class1 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "1") {
+          return item;
+        }
+      })
+    : null;
+  const class2 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "2") {
+          return item;
+        }
+      })
+    : null;
+  const class3 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "3") {
+          return item;
+        }
+      })
+    : null;
+  const class4 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "4") {
+          return item;
+        }
+      })
+    : null;
+  const class5 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "5") {
+          return item;
+        }
+      })
+    : null;
+  const class6 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "6") {
+          return item;
+        }
+      })
+    : null;
+  const class7 = timeTable
+    ? timeTable.filter(item => {
+        if (item.period === "7") {
+          return item;
+        }
+      })
+    : null;
+
+  // console.log(class1, class2, class3, class4, class5, class6, class7);
 
   //   console.log(class1[0].dayMonToSun);
   //   console.log(class1[0].dayMonToSun === 0);
@@ -74,65 +117,25 @@ const TimeTable = () => {
             <li className="time-table-th">금</li>
           </ul>
         </li>
-        <li className="class">
-          {/* <ul>
-            <li>1교시</li>
-            <li>
-              {class1[0].dayMonToSun === 0 && class1[0].period === "1"
-                ? class1[0].class_contents
-                : ""}
-            </li>
-            <li>
-              {class1[1].dayMonToSun === 1 && class1[1].period === "1"
-                ? class1[1].class_contents
-                : ""}
-            </li>
-            <li>
-              {class1[2].dayMonToSun === 2 && class1[2].period === "1"
-                ? class1[2].class_contents
-                : ""}
-            </li>
-            <li>
-              {class1[3].dayMonToSun === 3 && class1[3].period === "1"
-                ? class1[3].class_contents
-                : ""}
-            </li>
-            <li>
-              {class1[4].dayMonToSun === 4 && class1[4].period === "1"
-                ? class1[4].class_contents
-                : ""}
-            </li>
-          </ul>
-        </li>
+        {/* {class1
+          ? class1.map((item, index) => (
+              <li className="class" key={index}>
+                <ul>
+                  <li>{index + 1}교시</li>
+                  <li>
+                    {item.dayMonToSun === index && item.period === "1"
+                      ? item.class_contents
+                      : ""}
+                  </li>
+                </ul>
+              </li>
+            ))
+          : ""} */}
+
         <li className="class">
           <ul>
             <li>2교시</li>
-            <li>
-              {class2[0].dayMonToSun === 0 && class2[0].period === "2"
-                ? class2[0].class_contents
-                : ""}
-            </li>
-            <li>
-              {class2[1].dayMonToSun === 1 && class2[1].period === "2"
-                ? class2[1].class_contents
-                : ""}
-            </li>
-            <li>
-              {class2[2].dayMonToSun === 2 && class2[2].period === "2"
-                ? class2[2].class_contents
-                : ""}
-            </li>
-            <li>
-              {class2[3].dayMonToSun === 3 && class2[3].period === "2"
-                ? class2[3].class_contents
-                : ""}
-            </li>
-            <li>
-              {class2[4].dayMonToSun === 4 && class2[4].period === "2"
-                ? class2[4].class_contents
-                : ""}
-            </li>
-          </ul> */}
+          </ul>
         </li>
         <li className="class3">
           <ul>

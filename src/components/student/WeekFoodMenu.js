@@ -17,21 +17,15 @@ const WeekFoodMenu = () => {
   const newMenuList = defaultArray.map((item, index) => {
     weekMenuData
       ? weekMenuData.forEach(dayMenu => {
-          // console.log(dayMenu);
           if (getDayOfWeek(dayMenu.date) === index) {
             item = dayMenu;
-          }
-          if (dayMenu.menuOftheDay) {
-            const menuList = dayMenu.menuOftheDay.replaceAll(",", "<br />");
-            dayMenu.menuOftheDay = menuList;
-            console.log(dayMenu.menuOftheDay);
           }
         })
       : "";
     return item;
   });
 
-  console.log(newMenuList);
+  // console.log(newMenuList);
   useEffect(() => {
     getWeekFood(setWeekMenuData);
   }, []);
@@ -51,18 +45,28 @@ const WeekFoodMenu = () => {
         <li className="lunch-menu-list">
           <ul>
             {newMenuList.map((item, index) => {
-              return (
-                <li className="menu" key={index}>
-                  <span className="menu-type">{item.lunchOrDinner}</span>
-                  <p>
-                    <span>
-                      {/* {item.menuOftheDay
-                        ? item.menuOftheDay.replaceAll(",", "<br />")
-                        : ""} */}
-                    </span>
-                  </p>
-                </li>
-              );
+              if (item.menuOftheDay) {
+                return (
+                  <li className="menu" key={index}>
+                    <span className="menu-type">{item.lunchOrDinner}</span>
+                    <p>
+                      {item.menuOftheDay
+                        ? item.menuOftheDay.map((item, index) => (
+                            <span key={index}>{item}</span>
+                          ))
+                        : ""}
+                    </p>
+                  </li>
+                );
+              } else {
+                return (
+                  <li className="menu" key={index}>
+                    <p>
+                      <span>-</span>
+                    </p>
+                  </li>
+                );
+              }
             })}
           </ul>
         </li>
@@ -87,9 +91,7 @@ const WeekFoodMenu = () => {
                 return (
                   <li className="menu" key={item.date}>
                     <p>
-                      <span>석식이</span>
-                      <span>없는</span>
-                      <span>날입니다.</span>
+                      <span>-</span>
                     </p>
                   </li>
                 );

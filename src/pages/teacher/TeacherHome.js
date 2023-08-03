@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FullCalendarDiv,
   TeacherHomeDiv,
@@ -10,8 +10,11 @@ import { Link } from "react-router-dom";
 import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
 import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/ClassMockRecord";
+import { getStudentCount, getUnSignCount } from "../../axios/teacherAxios";
 
 const TeacherHome = () => {
+  const [studentCount, setStudentCount] = useState(null);
+  const [unSignCount, setUnSignCount] = useState(null);
   const eventData = [
     // {
     //   idTitle: 1,
@@ -93,6 +96,11 @@ const TeacherHome = () => {
     },
   ];
 
+  useEffect(() => {
+    getStudentCount(setStudentCount);
+    getUnSignCount(setUnSignCount);
+  }, []);
+
   return (
     <TeacherHomeDiv>
       <div className="student-count">
@@ -100,12 +108,12 @@ const TeacherHome = () => {
         <div className="class-status">
           <span>총 인원:</span>
           <Link to="/teacher/studentlist">
-            <span className="student-num">25</span>
+            <span className="student-num">{studentCount}</span>
           </Link>
           <span>명</span>
           <span>(가입 대기 인원:</span>
           <Link to="/teacher/signlist">
-            <span className="student-num">10</span>
+            <span className="student-num">{unSignCount}</span>
           </Link>
           <span>명)</span>
         </div>
