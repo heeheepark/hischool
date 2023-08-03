@@ -18,24 +18,8 @@ export const LoginContain = styled.div`
   font-size: 20px;
   margin-top: 8%;
   margin-right: 35px;
-  ul {
-    font-size: 35px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 0 15px;
-    li {
-      font-size: 20px;
-      input[type="radio"] {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-        vertical-align: -3.5px;
-      }
-      h3 {
-        font-size: 45px;
-      }
-    }
+  h3 {
+    font-size: 45px;
   }
   div {
     width: 400px;

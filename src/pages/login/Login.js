@@ -6,79 +6,58 @@ import {
   LoginWrap,
 } from "../../styles/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
+import { fetchLogin } from "../../api/client";
 
 const Login = () => {
   const [selectedLogin, setSelectedLogin] = useState("student");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLoginChange = e => {
+  const handleRadioChange = e => {
     setSelectedLogin(e.target.value);
   };
 
-  const handleLogin = () => {
-    switch (selectedLogin) {
-      case "admin":
-        navigate("/");
-        break;
-      case "teacher":
-        navigate("/teacher/home");
-        break;
-      case "student":
-        navigate("/student/home");
-        break;
-      default:
-        navigate("/");
-    }
+  const handleLogin = async () => {
+    fetchLogin(email, password);
+    // switch (selectedLogin) {
+    //   case "admin":
+    //     navigate("/");
+    //     break;
+    //   case "teacher":
+    //     navigate("/teacher/home");
+    //     break;
+    //   case "student":
+    //     navigate("/student/home");
+    //     break;
+    //   default:
+    //     navigate("/");
+    // }
   };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
+
   return (
     <LoginWrap>
       <IntroImage>
         <img src="../images/intro.png" />
       </IntroImage>
-      <LoginForm>
+      <LoginForm onSubmit={handleSubmit}>
         <LoginContain>
-          <ul>
-            <li>
-              <h3>Login</h3>
-            </li>
-            <li>
-              <input
-                type="radio"
-                id="관리자"
-                value="admin"
-                checked={selectedLogin === "admin"}
-                onChange={handleLoginChange}
-                name="이건역할이머지?"
-              />
-              <label htmlFor="관리자">관리자</label>
-            </li>
-            <li>
-              <input
-                type="radio"
-                id="선생님"
-                value="teacher"
-                checked={selectedLogin === "teacher"}
-                onChange={handleLoginChange}
-                name="이건역할이머지?"
-              />
-              <label htmlFor="선생님">선생님</label>
-            </li>
-            <li>
-              <input
-                type="radio"
-                id="학생"
-                value="student"
-                checked={selectedLogin === "student"}
-                onChange={handleLoginChange}
-                name="이건역할이머지?"
-              />
-              <label htmlFor="학생">학생</label>
-            </li>
-          </ul>
+          <h3>Login</h3>
           <div>
-            <input className="login-email" type="email" placeholder="Email" />
+            <input
+              className="login-email"
+              onChange={e => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
             <input
               className="login-password"
+              onChange={e => setPassword(e.target.value)}
               type="password"
               placeholder="PassWord"
             />
@@ -92,6 +71,7 @@ const Login = () => {
           <button type="submit" onClick={handleLogin}>
             Login
           </button>
+          {error && <p>{error}</p>}
         </div>
       </LoginForm>
     </LoginWrap>
