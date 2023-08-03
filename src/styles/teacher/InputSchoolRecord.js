@@ -27,9 +27,10 @@ const ISRTitle = styled.div`
   color: #fff;
   justify-content: space-between;
   align-items: center;
-  background: #176B87;
-  border: 1px solid #afafaf;
+  background: #176b87;
+  border: 1px solid #bbb;
   border-radius: 15px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   > p {
     width: 120px;
     font-size: 20px;
@@ -51,9 +52,10 @@ const ISRinput = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #d4d4d4;
-  border: 1px solid #afafaf;
+  background: #fff;
+  border: 1px solid #bbb;
   border-radius: 15px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   > select {
     width: 120px;
     display: block;
@@ -95,6 +97,14 @@ const ISRinputR = styled.div`
   display: flex;
   align-items: center;
 `;
+const ISRButtonWrapper = styled.footer`
+  margin: 0 3%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
 
 export {
   ISRHeader,
@@ -104,4 +114,5 @@ export {
   ISRdetail,
   ISRdetailButton,
   ISRinputR,
+  ISRButtonWrapper,
 };

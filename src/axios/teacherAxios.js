@@ -23,5 +23,25 @@ const getSignListData = async setStudentListData => {
     console.log(err);
   }
 };
+// 모의 고사 과목 계열, 모의고사 세부과목
+const getMockMainSubData = async () => {
+  try {
+    const res = await axios.get("/api/teacher/subject/mockbiglist");
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
 
-export { getStudentData, getSignListData };
+const getMockSubData = async () => {
+  try {
+    const res = await axios.get("/api/teacher/subject/mocksmalllist");
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+export { getStudentData, getSignListData, getMockMainSubData, getMockSubData };
