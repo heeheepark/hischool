@@ -29,8 +29,10 @@ const getStudentData = async setStudentListData => {
   try {
     const res = await axiosInstance.get(`/api/teacher/signed?classId=2`);
     const result = res.data;
-    setStudentListData(result);
-    console.log(result);
+    const listSortData = result.sort((a, b) =>
+      a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
+    );
+    setStudentListData(listSortData);
   } catch (err) {
     console.error(err);
   }
@@ -41,12 +43,15 @@ const getSignListData = async setStudentListData => {
   try {
     const res = await axiosInstance.get(`/api/teacher/unsigned?classId=2`);
     const result = res.data;
-    console.log(result);
-    setStudentListData(result);
+    const signListSortData = result.sort((a, b) =>
+      a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
+    );
+    setStudentListData(signListSortData);
   } catch (err) {
     console.log(err);
   }
 };
+
 // 모의 고사 과목 계열 가져오기
 const getMockMainSubData = async () => {
   try {

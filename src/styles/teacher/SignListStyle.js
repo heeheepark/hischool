@@ -60,7 +60,7 @@ const TimeTableDiv = styled.div`
       > ul {
         height: 100%;
         display: grid;
-        grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.2fr 0.2fr;
+        grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.2fr;
         > li {
           line-height: 2;
           :not(:last-of-type) {

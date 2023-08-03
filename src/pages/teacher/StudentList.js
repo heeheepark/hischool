@@ -39,6 +39,7 @@ const StudentList = () => {
               <li className="time-table-th">생년월일</li>
               <li className="time-table-th">연락처</li>
               <li className="time-table-th">이메일</li>
+              <li className="time-table-th">승인취소</li>
             </ul>
           </li>
           {studentListData.map((item, index) => (
@@ -49,6 +50,9 @@ const StudentList = () => {
                 <li>{item.birth}</li>
                 <li>{item.phone}</li>
                 <li>{item.email}</li>
+                <li>
+                  <button>취소</button>
+                </li>
               </ul>
             </li>
           ))}

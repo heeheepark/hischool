@@ -57,11 +57,21 @@ export const TimeTableDiv = styled.div`
       > ul {
         height: 100%;
         display: grid;
-        grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr;
+        grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
         > li {
           line-height: 2;
           :not(:last-of-type) {
             border-right: 1px solid #ccc;
+          }
+          > button {
+            width: 60px;
+            height: 30px;
+            font-size: 17px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #176b87;
+            color: #fff;
           }
         }
       }

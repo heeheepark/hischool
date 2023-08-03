@@ -1,6 +1,5 @@
-import { async } from "q";
 import axiosInstance from "./commonAxios";
-import axios from "axios";
+
 
 // Student Home
 const getWeekFood = async setWeekMenuData => {

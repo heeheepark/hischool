@@ -27,7 +27,7 @@ const SignList = () => {
         </div>
         <div className="ListButtons">
           <button type="submit" onClick={handleCancel}>
-            저장
+            승인
           </button>
           <button onClick={handleCancel}>취소</button>
         </div>
@@ -41,8 +41,9 @@ const SignList = () => {
               <li className="time-table-th">생년월일</li>
               <li className="time-table-th">연락처</li>
               <li className="time-table-th">이메일</li>
-              <li className="time-table-th">승인</li>
-              <li className="time-table-th">거부</li>
+              <li className="time-table-th">
+                <input type="checkbox" />
+              </li>
             </ul>
           </li>
           {studentListData.map((item, index) => (
@@ -53,9 +54,6 @@ const SignList = () => {
                 <li>{item.birth}</li>
                 <li>{item.phone}</li>
                 <li>{item.email}</li>
-                <li>
-                  <input type="checkbox" />
-                </li>
                 <li>
                   <input type="checkbox" />
                 </li>
