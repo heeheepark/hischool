@@ -12,11 +12,13 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
+import { getMockMainSubData, getMockSubData } from "../../axios/teacherAxios";
 
 const InputMockRecord = () => {
   const [dropMonth, setDropMonth] = useState(""); // 학기
   const [studentsData, setStudentsData] = useState([]); // 학생 데이터 배열
   const [lastSavedData, setLastSavedData] = useState([]);
+  const [subjectData, setSubjectData] = useState([]);
   // 최초 학생의 데이터를 셋팅하여야 함.
   useEffect(() => {
     const interimData = [{}];
@@ -67,30 +69,37 @@ const InputMockRecord = () => {
     // lastSavedData에도 빈 객체를 추가하여 배열 길이를 유지
     setLastSavedData(data => [...data, newStudent]);
   };
-  const subjectData = [
-    {
-      mainsubject: "국어",
-      data: [
-        {
-          subsubject: "언어와 매체",
-        },
-        {
-          subsubject: "영어",
-        },
-      ],
-    },
-    {
-      mainsubject: "수학",
-      data: [
-        {
-          subsubject: "수학",
-        },
-        {
-          subsubject: "물리학",
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // 주요과목 데이터 가져오기
+        const mainSubData = await getMockMainSubData();
+
+        // 하위과목 데이터 가져오기
+        // 주요과목 데이터를 기반으로 하위과목 데이터를 가져오도록 수정
+        const newSubjectData = await Promise.all(
+          mainSubData.map(async mainSubject => {
+            const subData = await getMockSubData(mainSubject.categoryid);
+            return {
+              mainsubject: mainSubject.nm,
+              data: subData.map(subSubject => ({
+                subsubject: subSubject.nm,
+              })),
+            };
+          }),
+        );
+
+        // subjectData 상태 업데이트
+        setSubjectData(newSubjectData);
+      } catch (err) {
+        console.log(err);
+        setSubjectData([]);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <ISRHeader>

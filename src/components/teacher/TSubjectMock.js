@@ -4,6 +4,7 @@ import { ISRinput } from "../../styles/teacher/InputSchoolRecord";
 const TSubJectMock = ({
   id,
   subjectData,
+
   dropMonth,
   studentsData,
   updateLastSavedData,
