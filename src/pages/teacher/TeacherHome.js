@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
 import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/ClassMockRecord";
-import { getStudentCount, getUnSignCount } from "../../axios/teacherAxios";
+import { getStudentCount, getUnSignCount } from "../../api/teacherAxios";
 
 const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);

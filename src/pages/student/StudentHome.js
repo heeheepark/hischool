@@ -4,7 +4,7 @@ import RecapMockRecord from "../../components/student/RecapMockRecord";
 import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
 import TimeTable from "../../components/student/TimeTable";
 import WeekFoodMenu from "../../components/student/WeekFoodMenu";
-import { getWeekFood } from "../../axios/studentAxios";
+import { getWeekFood } from "../../api/studentAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";

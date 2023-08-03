@@ -4,7 +4,7 @@ import {
   SchoolRecordListDiv,
   StudentListDiv,
 } from "../../styles/teacher/StudentRecordStyle";
-import { getStudentCount, getStudentList } from "../../axios/teacherAxios";
+import { getStudentCount, getStudentList } from "../../api/teacherAxios";
 
 const StudentSearchList = () => {
   const [studentList, setStudentList] = useState(null);

@@ -50,7 +50,7 @@ const getSignListData = async setStudentListData => {
 // 모의 고사 과목 계열 가져오기
 const getMockMainSubData = async () => {
   try {
-    const res = await axios.get("/api/teacher/subject/mockbiglist");
+    const res = await axiosInstance.get("/api/teacher/subject/mockbiglist");
     return res.data;
   } catch (err) {
     console.log(err);
@@ -59,9 +59,11 @@ const getMockMainSubData = async () => {
 };
 
 // 모의 고사 세부 과목 가져오기
-const getMockSubData = async (categoryid) => {
+const getMockSubData = async categoryid => {
   try {
-    const res = await axios.get(`/api/teacher/subject/mocksmalllist?categoryid=${categoryid}`);
+    const res = await axiosInstance.get(
+      `/api/teacher/subject/mocksmalllist?categoryid=${categoryid}`,
+    );
     return res.data;
   } catch (err) {
     console.log(err);
@@ -90,4 +92,3 @@ export {
   getMockSubData,
   getStudentList,
 };
-

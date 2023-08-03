@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import { Aside, Content, Header, MainDiv } from "../styles/MainStyle";
 import SideMenu from "../components/SideMenu";
 import { useEffect } from "react";
-import { getSchoolInfo } from "../axios/commonAxios";
+import { getSchoolInfo } from "../api/commonAxios";
 
 const Main = () => {
   const [schoolLogo, setSchoolLogo] = useState(null);

@@ -6,7 +6,7 @@ import {
   TimeTableDiv,
 } from "../../styles/teacher/StudentListStyle";
 import { useNavigate } from "react-router";
-import { getStudentData } from "../../axios/teacherAxios";
+import { getStudentData } from "../../api/teacherAxios";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);
@@ -19,7 +19,6 @@ const StudentList = () => {
   const handleSginClick = () => {
     navigate("/teacher/signlist");
   };
-
 
   return (
     <StudentListWrap>

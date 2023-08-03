@@ -5,7 +5,7 @@ import {
   TimeTableDiv,
 } from "../../styles/teacher/SignListStyle";
 import { useNavigate } from "react-router";
-import { getSignListData } from "../../axios/teacherAxios";
+import { getSignListData } from "../../api/teacherAxios";
 
 const SignList = () => {
   const [studentListData, setStudentListData] = useState([]);
