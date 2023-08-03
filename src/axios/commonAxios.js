@@ -20,14 +20,14 @@ const getSchoolInfo = async (
   try {
     // 학교 로고
     const schoolLogoRes = await axiosInstance.get(
-      `/api/header/school_logo?userId=${2}`,
+      `/api/header/school_logo?userId=${41}`,
     );
     const schoolLogo = schoolLogoRes.data[0].logo;
     setSchoolLogo(schoolLogo);
 
     // 학교 정보
     const schoolNameRes = await axiosInstance.get(
-      `/api/header/school_info?userId=${2}`,
+      `/api/header/school_info?userId=${41}`,
     );
     const schoolName = schoolNameRes.data[0].nm;
     const grade = schoolNameRes.data[0].grade;

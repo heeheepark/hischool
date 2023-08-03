@@ -22,7 +22,7 @@ const getWeekFood = async setWeekMenuData => {
 const getSchedule = async setTimeTable => {
   try {
     const res = await axiosInstance.get(
-      `/api/timetable?sdSchulCode=${7240273}&grade=${1}&classNm=${1}`,
+      `/api/timetable?sdSchulCode=${7240273}&grade=${1}&classNm=${2}`,
     );
     const result = res.data.list;
     setTimeTable(result);
