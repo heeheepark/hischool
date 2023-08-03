@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   ISRButton,
+  ISRButtonWrapper,
   ISRHeader,
   ISRTitle,
 } from "../../styles/teacher/InputSchoolRecord";
@@ -11,21 +12,19 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import TSubJect from "../../components/teacher/TSubJect";
+import TSubJectSchool from "../../components/teacher/TSubJectSchool";
 
 const InputSchoolRecord = () => {
   const [dropSemester, setDropSemester] = useState(""); // 학기
   const [dropTest, setDropTest] = useState(""); // 고사
-  const [isSemesterAndTestSelected, setIsSemesterAndTestSelected] =
-    useState(false); // 학기와 고사가 선택되었는지 여부
   const [studentsData, setStudentsData] = useState([]); // 학생 데이터 배열
   const [lastSavedData, setLastSavedData] = useState([]);
   // 최초 학생의 데이터를 셋팅하여야 함.
   useEffect(() => {
-    const 임시데이터 = [{}, {}, {}, {}, {}, {}, {}, {}];
+    const interimData = [{}];
     //{subject: '인문과학', semester: '', test: ''}
-    setStudentsData(임시데이터);
-    setLastSavedData(임시데이터);
+    setStudentsData(interimData);
+    setLastSavedData(interimData);
   }, []);
 
   // 새로운 데이터를 전달하는 함수
@@ -40,12 +39,49 @@ const InputSchoolRecord = () => {
 
     setLastSavedData(updateData);
   };
+  // 학기 항목이 선택되었을 때 처리하는 함수
+  const handleSemester = event => {
+    setDropSemester(event.target.value);
+  };
+
+  // 고사 항목이 선택되었을 때 처리하는 함수
+  const handleDropTest = event => {
+    setDropTest(event.target.value);
+  };
+
+  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
+  const handleSaveButtonClick = () => {
+    if (lastSavedData) {
+      console.log("저장된 학생 데이터:");
+      console.log(lastSavedData);
+    } else {
+      console.log("저장된 학생 데이터가 없습니다.");
+    }
+    // 저장 로직을 추가하세요 (데이터베이스에 저장하거나 다른 처리를 수행할 수 있습니다).
+  };
+  // 항목 추가 버튼을 누를 때 호출되는 함수
+  const handleAddButtonClick = () => {
+    // 새로운 빈 객체를 추가하여 학생 데이터 배열을 업데이트
+    const newStudent = {
+      classRank: "0",
+      grade: 0,
+      schoolRank: "0",
+      score: 0,
+      semester: dropSemester,
+      subSubject: null,
+      subject: null,
+      test: dropTest,
+    };
+    setStudentsData(data => [...data, newStudent]);
+    // lastSavedData에도 빈 객체를 추가하여 배열 길이를 유지
+    setLastSavedData(data => [...data, newStudent]);
+  };
   const subjectData = [
     {
-      mainsubject: "인문과학",
+      mainsubject: "국어",
       data: [
         {
-          subsubject: "한국사",
+          subsubject: "언어와 매체",
         },
         {
           subsubject: "영어",
@@ -53,7 +89,7 @@ const InputSchoolRecord = () => {
       ],
     },
     {
-      mainsubject: "자연과학",
+      mainsubject: "수학",
       data: [
         {
           subsubject: "수학",
@@ -84,50 +120,16 @@ const InputSchoolRecord = () => {
     },
   ];
 
-  // 학기 항목이 선택되었을 때 처리하는 함수
-  const handleSemester = event => {
-    setDropSemester(event.target.value);
-  };
-
-  // 고사 항목이 선택되었을 때 처리하는 함수
-  const handleDropTest = event => {
-    setDropTest(event.target.value);
-  };
-
-  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
-  const handleSaveButtonClick = () => {
-    if (lastSavedData) {
-      console.log("저장된 학생 데이터:");
-      console.log(lastSavedData);
-    } else {
-      console.log("저장된 학생 데이터가 없습니다.");
-    }
-    // 저장 로직을 추가하세요 (데이터베이스에 저장하거나 다른 처리를 수행할 수 있습니다).
-  };
-  // 항목 추가 버튼을 누를 때 호출되는 함수
-  const handleAddButtonClick = () => {
-    // 새로운 빈 객체를 추가하여 학생 데이터 배열을 업데이트
-    console.log(studentsData);
-    const newArr = [...studentsData];
-    const newArr2 = [...lastSavedData];
-    newArr.push({});
-    console.log(newArr);
-    setStudentsData(newArr);
-    setLastSavedData(newArr2);
-  };
-  
   return (
     <div>
       <ISRHeader>
-        <h1>2023 내신 고사 성적 입력표</h1>
-
+        <h1>2023 내신 고사 성적 입력표(학생이름)</h1>
         {/* 드롭다운 메뉴 1 */}
         <select value={dropSemester} onChange={handleSemester}>
           <option value="">-- 선택 --</option>
           <option value="1학기">1학기</option>
           <option value="2학기">2학기</option>
         </select>
-
         {/* 드롭다운 메뉴 2 */}
         <select value={dropTest} onChange={handleDropTest}>
           <option value="">-- 선택 --</option>
@@ -159,26 +161,25 @@ const InputSchoolRecord = () => {
       </ISRTitle>
       <div>
         {studentsData.map((item, index) => (
-          <TSubJect
+          <TSubJectSchool
             key={index}
             id={index}
             subjectData={subjectData}
             schoolClassData={schoolClassData}
-            isSemesterAndTestSelected={isSemesterAndTestSelected}
             dropSemester={dropSemester}
             dropTest={dropTest}
-            studentsData={studentsData}
+            studentsData={studentsData[index]}
             setStudentsData={setStudentsData}
             updateLastSavedData={updateLastSavedData}
           />
         ))}
       </div>
-      <div>
+      <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>
           항목추가
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
-      </div>
+      </ISRButtonWrapper>
     </div>
   );
 };

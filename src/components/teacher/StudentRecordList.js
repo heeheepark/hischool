@@ -1,16 +1,25 @@
+import { useEffect, useState } from "react";
 import {
   MockRecordListDiv,
   SchoolRecordListDiv,
   StudentListDiv,
 } from "../../styles/teacher/StudentRecordStyle";
+import { getStudentCount, getStudentList } from "../../api/teacherAxios";
 
 const StudentSearchList = () => {
+  const [studentList, setStudentList] = useState(null);
+
   const handleStudentList = e => {
     const allStudentList = document.querySelectorAll(".student-detail-list");
     allStudentList.forEach(item => item.classList.remove("active"));
     const clickList = e.currentTarget;
     clickList.classList.add("active");
   };
+
+  useEffect(() => {
+    getStudentList(setStudentList);
+  }, []);
+
   return (
     <StudentListDiv>
       <ul className="category">

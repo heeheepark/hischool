@@ -13,11 +13,15 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SideMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
+
+  useEffect(() => {}, []);
+
   return (
     <SideMenuWrap>
       <div className="user-info-wrap">
