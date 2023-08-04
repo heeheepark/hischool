@@ -4,7 +4,6 @@ import { ISRinput } from "../../styles/teacher/InputSchoolRecord";
 const TSubJectMock = ({
   id,
   subjectData,
-
   dropMonth,
   studentsData,
   updateLastSavedData,
@@ -12,11 +11,11 @@ const TSubJectMock = ({
 }) => {
   const initialStudentData = {
     subject: "",
-    subSubject: "",
-    score: "",
-    grade: "",
-    percentile: "",
-    month: dropMonth,
+    subjectid: "",
+    standardscore: "",
+    rating: "",
+    percent: "",
+    mon: dropMonth,
   };
 
   const [studentData, setStudentData] = useState(initialStudentData);
@@ -36,9 +35,9 @@ const TSubJectMock = ({
     const filteredValue = value;
     // score와 grade 입력 폼의 최댓값 설정
     let updatedValue = filteredValue;
-    if (name === "score") {
+    if (name === "standardscore") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 100);
-    } else if (name === "grade") {
+    } else if (name === "rating") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 9);
     }
     setStudentData(prevData => ({
@@ -49,12 +48,11 @@ const TSubJectMock = ({
     const updatedData = {
       ...studentData,
       [name]: updatedValue,
-      month: dropMonth,
+      mon: dropMonth,
     };
     // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
     updateLastSavedData(id, updatedData);
   };
-
   return (
     <>
       <div>
@@ -75,8 +73,8 @@ const TSubJectMock = ({
             ))}
           </select>
           <select
-            name="subSubject"
-            value={studentData?.subSubject || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            name="subjectid"
+            value={studentData?.subjectid || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
             onChange={handleInputChange}
           >
             <option value="">세부 과목 선택</option>
@@ -87,31 +85,31 @@ const TSubJectMock = ({
                     mainSubject.mainsubject === studentData.subject,
                 )
                 .data.map((subSubject, index) => (
-                  <option key={index} value={subSubject.subsubject}>
+                  <option key={index} value={subSubject.subjectid}>
                     {subSubject.subsubject}
                   </option>
                 ))}
           </select>
           <input
             type="number"
-            name="score"
-            value={studentData?.score || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            name="standardscore"
+            value={studentData?.standardscore || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
             onChange={handleInputChange}
             placeholder="점수"
             max={100}
           />
           <input
             type="number"
-            name="grade"
-            value={studentData?.grade || ""}
+            name="rating"
+            value={studentData?.rating || ""}
             onChange={handleInputChange}
             placeholder="등급"
             max={9}
           />
           <input
             type="number"
-            name="percentile"
-            value={studentData?.percentile || ""}
+            name="percent"
+            value={studentData?.percent || ""}
             onChange={handleInputChange}
             placeholder="백분위"
           />

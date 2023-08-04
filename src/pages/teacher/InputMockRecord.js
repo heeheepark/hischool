@@ -36,19 +36,17 @@ const InputMockRecord = () => {
       }
       return item;
     });
-
     setLastSavedData(updateData);
   };
   // 학기 항목이 선택되었을 때 처리하는 함수
   const handleMonth = event => {
     setDropMonth(event.target.value);
   };
-
   // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
       console.log("저장된 학생 데이터:");
-      console.log(lastSavedData);
+      console.log(...lastSavedData);
     } else {
       console.log("저장된 학생 데이터가 없습니다.");
     }
@@ -58,10 +56,10 @@ const InputMockRecord = () => {
   const handleAddButtonClick = () => {
     // 새로운 빈 객체를 추가하여 학생 데이터 배열을 업데이트
     const newStudent = {
-      grade: 0,
-      score: 0,
-      percentile: "0",
-      month: dropMonth,
+      rating: 0,
+      standardscore: 0,
+      percent: "0",
+      mon: dropMonth,
       subSubject: null,
       subject: null,
     };
@@ -84,6 +82,7 @@ const InputMockRecord = () => {
               mainsubject: mainSubject.nm,
               data: subData.map(subSubject => ({
                 subsubject: subSubject.nm,
+                subjectid: subSubject.subjectid,
               })),
             };
           }),
@@ -107,18 +106,9 @@ const InputMockRecord = () => {
         {/* 드롭다운 메뉴 1 */}
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">-- 선택 --</option>
-          <option value="1월">1월</option>
-          <option value="2월">2월</option>
           <option value="3월">3월</option>
-          <option value="4월">4월</option>
-          <option value="5월">5월</option>
           <option value="6월">6월</option>
-          <option value="7월">7월</option>
-          <option value="8월">8월</option>
           <option value="9월">9월</option>
-          <option value="10월">10월</option>
-          <option value="11월">11월</option>
-          <option value="12월">12월</option>
         </select>
       </ISRHeader>
       <ISRButton>
