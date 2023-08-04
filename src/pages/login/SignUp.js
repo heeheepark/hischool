@@ -9,6 +9,8 @@ import {
   SignUpWrap,
 } from "../../styles/login/SignUpStyle";
 import { useNavigate } from "react-router";
+import DaumPostcode from "react-daum-postcode";
+import DaumPost from "../../components/DaumPost";
 
 const SignUp = () => {
   const [userType, setUserType] = useState("학생");
@@ -16,6 +18,23 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const navigate = useNavigate();
+
+  const [enroll_company, setEnroll_company] = useState({
+    address: "",
+  });
+
+  const [popup, setPopup] = useState(false);
+
+  const handleInput = e => {
+    setEnroll_company({
+      ...enroll_company,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleComplete = data => {
+    setPopup(!popup);
+  };
 
   const handleUserTypeChange = e => {
     setUserType(e.target.value);
@@ -122,7 +141,22 @@ const SignUp = () => {
                     </li>
                     <li className="big-input">
                       <label>주소입력</label>
-                      <input type="text" />
+                      <input
+                        className="user_enroll_text"
+                        placeholder="주소"
+                        type="text"
+                        required={true}
+                        name="address"
+                        onChange={handleInput}
+                        value={enroll_company.address}
+                      />
+                      <button onClick={handleComplete}>우편번호 찾기</button>
+                      {popup && (
+                        <DaumPost
+                          company={enroll_company}
+                          setcompany={setEnroll_company}
+                        ></DaumPost>
+                      )}
                     </li>
                     {userType === "선생님" ? (
                       <li className="big-input">

@@ -14,11 +14,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { fetchLogout } from "../api/client";
 
 const SideMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
+
+  const deleteCookie = name => {
+    document.cookie =
+      name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  };
+
+  const handleDeleteCookie = () => {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+  };
 
   useEffect(() => {}, []);
 
@@ -161,7 +172,7 @@ const SideMenu = () => {
         <div className="footer">
           <Link className="btn-logout" to="/">
             <FontAwesomeIcon icon={faRightFromBracket} className="logout" />
-            <span> 로그아웃</span>
+            <span onClick={handleDeleteCookie}> 로그아웃</span>
           </Link>
           {/* <div>
             <FontAwesomeIcon icon={faCircleInfo} className="info" />

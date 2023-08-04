@@ -1,6 +1,6 @@
 import axios from "axios";
+import { getCookie, setCookie } from "./cookie";
 import { Cookies } from "react-cookie";
-const cookies = new Cookies();
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
@@ -12,9 +12,13 @@ export const client = axios.create({
 
 // Request 처리
 axios.interceptors.request.use(
-  config => {
+  async config => {
     // cookie를 활용 한 경우
-    const token = cookies.get("token");
+    const token = getCookie("accessToken");
+    // if (expireTime <= Date.now() && refreshToken) {
+    //   const {data} = await axios.post('url', { refreshToken });
+    //   config.headers.Authorization = `Bearer ${data.accessToken}`;
+    // }
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,27 +28,36 @@ axios.interceptors.request.use(
 );
 
 // 쿠키 set 하기
-export const fetchLogin = async (email, pw) => {
+export const fetchLogin = async (email, pw, setRole) => {
   try {
-    const res = await client.post(`/api/sign-in?email=${email}&pw=${pw}`, {
+    const res = await client.post(`/api/sign-in`, {
       email: email,
       pw: pw,
     });
     console.log(res.data);
     const result = await res.data;
-    cookies.set("token", result.token, {
+    setCookie("refreshToken", result.refreshToken, {
       path: "/",
       secure: true,
       sameSite: "none",
       httpOnly: true,
     });
+    setCookie("accessToken", result.accessToken, {
+      path: "/",
+      secure: true,
+      sameSite: "none",
+      httpOnly: true,
+    });
+    setRole(result.role);
+    const { data } = await axios.get(`/api/mypage/user-mypage`);
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
 };
 
-// 로그아웃은 토큰을 리무브 해야함
 // logout시 쿠키 지우기
 // export const fetchLogout = () => {
-//   cookies.remove("token");
+//   Cookies.remove("refreshToken", { path: "" });
+//   Cookies.remove("accessToken", { path: "" });
 // };
