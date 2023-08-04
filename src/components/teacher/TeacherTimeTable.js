@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TimeTableDiv } from "../../styles/student/StudentHomeStyle";
 import { TeacherTimeTableDiv } from "../../styles/teacher/TeacherHomeStyle";
+import { getSchedule } from "../../api/studentAxios";
 
 const TeacherTimeTable = () => {
+  const [timeTable, setTimeTable] = useState(null);
+
+  useEffect(() => {
+    getSchedule(setTimeTable);
+  }, []);
+
   return (
     <TeacherTimeTableDiv>
       <ul>
@@ -16,82 +23,62 @@ const TeacherTimeTable = () => {
             <li className="time-table-th">금</li>
           </ul>
         </li>
-        <li className="class">
-          <ul>
-            <li>1교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
-        <li className="class">
-          <ul>
-            <li>2교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
-        <li className="class3">
-          <ul>
-            <li>3교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
-        <li className="class4">
-          <ul>
-            <li>4교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
+        {Array(4)
+          .fill()
+          .map((_, period) => (
+            <li className={`class${period + 1}`} key={period}>
+              <ul>
+                <li>{period + 1}교시</li>
+                {Array(5)
+                  .fill()
+                  .map((_, index) => {
+                    return (
+                      <li key={index}>
+                        {
+                          timeTable
+                            ?.filter(
+                              item => item.period === (period + 1).toString(),
+                            )
+                            .find(item => item.dayMonToSun === index)
+                            ?.class_contents
+                        }
+                      </li>
+                    );
+                  })}
+              </ul>
+            </li>
+          ))}
         <li className="class-lunch">
           <ul className="lunch">
             <li>점심시간</li>
             <li>점심시간</li>
           </ul>
         </li>
-        <li className="class5">
-          <ul>
-            <li>5교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
-        <li className="class6">
-          <ul>
-            <li>6교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
-        <li className="class7">
-          <ul>
-            <li>7교시</li>
-            <li>문학</li>
-            <li>수학I</li>
-            <li>영어</li>
-            <li>한국지리</li>
-            <li>한국사</li>
-          </ul>
-        </li>
+        {Array(3)
+          .fill()
+          .map((_, period) => (
+            <li className={`class${period + 5}`} key={period + 5}>
+              <ul>
+                <li>{period + 5}교시</li>
+                {Array(5)
+                  .fill()
+                  .map((_, index) => {
+                    return (
+                      <li key={index + 5}>
+                        {
+                          timeTable
+                            ?.filter(
+                              item => item.period == (period + 5).toString(),
+                            )
+                            .find(item => item.dayMonToSun === index)
+                            ?.class_contents
+                        }
+                      </li>
+                    );
+                  })}
+              </ul>
+            </li>
+          ))}
       </ul>
     </TeacherTimeTableDiv>
   );

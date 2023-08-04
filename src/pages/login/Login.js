@@ -14,8 +14,6 @@ const Login = () => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {};
-
   const handleSubmit = e => {
     e.preventDefault();
     fetchLogin(email, password, setRole);
