@@ -14,9 +14,10 @@ const Login = () => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    fetchLogin(email, password, setRole);
+    const role = await fetchLogin(email, password);
+    // setRole(role);
     if (role === "ROLE_TC") {
       navigate("/teacher/home");
     } else if (role === "ROLE_STD") {
