@@ -49,8 +49,8 @@ export const fetchLogin = async (email, pw, setRole) => {
       httpOnly: true,
     });
     setRole(result.role);
-    const { data } = await axios.get(`/api/mypage/user-mypage`);
-    console.log(data);
+    // const { data } = await axios.get(`/api/mypage/user-mypage`);
+    // console.log(data);
   } catch (error) {
     console.log(error);
   }
