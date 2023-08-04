@@ -21,19 +21,19 @@ const Login = () => {
 
   const handleLogin = async () => {
     fetchLogin(email, password);
-    // switch (selectedLogin) {
-    //   case "admin":
-    //     navigate("/");
-    //     break;
-    //   case "teacher":
-    //     navigate("/teacher/home");
-    //     break;
-    //   case "student":
-    //     navigate("/student/home");
-    //     break;
-    //   default:
-    //     navigate("/");
-    // }
+    switch (selectedLogin) {
+      case "admin":
+        navigate("/");
+        break;
+      case "teacher":
+        navigate("/teacher/home");
+        break;
+      case "student":
+        navigate("/student/home");
+        break;
+      default:
+        navigate("/");
+    }
   };
 
   const handleSubmit = e => {

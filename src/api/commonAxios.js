@@ -40,17 +40,17 @@ const getSchoolInfo = async (
   }
 };
 
-// const getSchedule = async setTimeTable => {
-//   try {
-//     const res = await axiosInstance.get(
-//       `/api/timetable?sdSchulCode=${7240273}&grade=${1}&classNm=${1}`,
-//     );
-//     const result = res.data.list;
-//     setTimeTable(result);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+const getSchedule = async setTimeTable => {
+  try {
+    const res = await axiosInstance.get(
+      `/api/timetable?sdSchulCode=${7240273}&grade=${1}&classNm=${1}`,
+    );
+    const result = res.data.list;
+    setTimeTable(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export default axiosInstance;
 
