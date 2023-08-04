@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
 import { getMockMainSubData, getMockSubData } from "../../api/teacherAxios";
+import { postMockData } from "../../api/teacher/teacher";
 
 const InputMockRecord = () => {
   const [dropMonth, setDropMonth] = useState(""); // 학기
@@ -42,15 +43,20 @@ const InputMockRecord = () => {
   const handleMonth = event => {
     setDropMonth(event.target.value);
   };
-  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
+  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 서버로 전송하는 함수
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
-      console.log("저장된 학생 데이터:");
-      console.log(...lastSavedData);
-    } else {
-      console.log("저장된 학생 데이터가 없습니다.");
+      // 서버에 전송할 데이터 형식으로 가공
+      const dataToSend = lastSavedData.map(item => ({
+        userid: 40, // 나중에 실제 사용자 ID를 받아서 설정해야 합니다.
+        subjectid: item.subjectid || 0,
+        mon: item.mon || 0,
+        standardscore: item.standardscore || 0,
+        rating: item.rating || 0,
+        percent: item.percent || 0,
+      }));
+      postMockData(dataToSend);
     }
-    // 저장 로직을 추가하세요 (데이터베이스에 저장하거나 다른 처리를 수행할 수 있습니다).
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수
   const handleAddButtonClick = () => {
