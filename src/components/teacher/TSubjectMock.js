@@ -35,9 +35,7 @@ const TSubJectMock = ({
     const filteredValue = value;
     // score와 grade 입력 폼의 최댓값 설정
     let updatedValue = filteredValue;
-    if (name === "standardscore") {
-      updatedValue = Math.min(parseInt(filteredValue, 10), 100);
-    } else if (name === "rating") {
+    if (name === "rating") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 9);
     }
     setStudentData(prevData => ({
