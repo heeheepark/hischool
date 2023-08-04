@@ -1,10 +1,9 @@
 import axios from "axios";
-import axiosInstance from "./commonAxios";
 
 // 학급 총원
 const getStudentCount = async setStudentCount => {
   try {
-    const res = await axios.get(`/api/teacher/classStudent?classid=${2}`);
+    const res = await axios.get(`/api/teacher/class-student?classid=${2}`);
     const result = res.data;
     setStudentCount(result);
   } catch (err) {
@@ -15,7 +14,7 @@ const getStudentCount = async setStudentCount => {
 // 가입 대기 인원
 const getUnSignCount = async setUnSignCount => {
   try {
-    const res = await axios.get(`/api/teacher/aprStudent?classid=${2}`);
+    const res = await axios.get(`/api/teacher/apr-student?classid=${2}`);
     const result = res.data;
     setUnSignCount(result);
   } catch (err) {
@@ -26,11 +25,12 @@ const getUnSignCount = async setUnSignCount => {
 // 학생관리 리스트
 const getStudentData = async setStudentListData => {
   try {
-    const res = await axios.get(`/api/teacher/signed?classId=2`);
+    const res = await axios.get(`/api/teacher/signed?classId=${2}`);
     const result = res.data;
     const listSortData = result.sort((a, b) =>
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
     );
+    console.log(listSortData);
     setStudentListData(listSortData);
   } catch (err) {
     console.error(err);
@@ -40,7 +40,7 @@ const getStudentData = async setStudentListData => {
 // 학생 가입 대기 명단
 const getSignListData = async setStudentListData => {
   try {
-    const res = await axios.get(`/api/teacher/unsigned?classId=2`);
+    const res = await axios.get(`/api/teacher/unsigned?classId=${2}`);
     const result = res.data;
     const signListSortData = result.sort((a, b) =>
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,

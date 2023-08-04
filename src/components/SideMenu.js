@@ -13,9 +13,15 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+// import { fetchLogout } from "../api/client";
 import Cookies from "universal-cookie";
+import { getUserInfo } from "../api/userAxios";
+import { useState } from "react";
 
 const SideMenu = () => {
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
@@ -28,6 +34,10 @@ const SideMenu = () => {
       navigate("/");
     }, 500);
   };
+
+  useEffect(() => {
+    getUserInfo(setUserName, setUserEmail);
+  }, []);
 
   return (
     <SideMenuWrap>
@@ -44,12 +54,12 @@ const SideMenu = () => {
             {/* <FontAwesomeIcon icon={faUserTie} /> */}
           </span>
           <ins onClick={() => navigate(`/${user}/mypage`)}>
-            <span className="user-name">강동원</span>
+            <span className="user-name">{`${userName}`}</span>
           </ins>
           <span>님</span>
           <br />
           <ins onClick={() => navigate(`/${user}/mypage`)}>
-            <span className="user-email">(dongwon@gmail.com)</span>
+            <span className="user-email">{`(${userEmail})`}</span>
           </ins>
           <br />
           <span>반갑습니다!</span>
@@ -131,18 +141,6 @@ const SideMenu = () => {
                   </li>
                 </NavLink>
                 <NavLink
-                  to={`/${user}/studentlist`}
-                  className={({ isActive }) =>
-                    "nav-link" + (isActive ? "-active" : "")
-                  }
-                >
-                  <li>
-                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
-                    <span>학생 관리</span>
-                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-                  </li>
-                </NavLink>
-                <NavLink
                   to={`/${user}/record`}
                   className={({ isActive }) =>
                     "nav-link" + (isActive ? "-active" : "")
@@ -151,6 +149,18 @@ const SideMenu = () => {
                   <li>
                     <FontAwesomeIcon icon={faFileInvoice} className="icon" />
                     <span>성적 관리</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/studentlist`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <span>학생 관리</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>

@@ -11,85 +11,69 @@ import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
 import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/ClassMockRecord";
 import { getStudentCount, getUnSignCount } from "../../api/teacherAxios";
+import { getSchedule } from "../../api/scheduleAxios";
 
 const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
+  const [scheduleData, setScheduleData] = useState(null);
   const eventData = [
-    // {
-    //   idTitle: 1,
-    //   title: "2학기 수업 계획",
-    //   start: "2023-07-31",
-    //   end: "2023-08-03",
-    // },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-07-31",
       end: "2023-08-03",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-07-31",
       end: "2023-08-03",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-08",
       end: "2023-08-11",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-10",
       end: "2023-08-13",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-13",
       end: "2023-08-16",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-15",
       end: "2023-08-18",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-21",
       end: "2023-08-24",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-23",
       end: "2023-08-26",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-28",
       end: "2023-08-30",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-08-29",
       end: "2023-08-31",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-09-04",
       end: "2023-09-06",
     },
     {
-      idTitle: 1,
       title: "2학기 수업 계획",
       start: "2023-09-04",
       end: "2023-09-08",
@@ -99,6 +83,7 @@ const TeacherHome = () => {
   useEffect(() => {
     getStudentCount(setStudentCount);
     getUnSignCount(setUnSignCount);
+    getSchedule(setScheduleData);
   }, []);
 
   return (
@@ -144,7 +129,7 @@ const TeacherHome = () => {
                 initialView="dayGridMonth"
                 locale="ko"
                 dayCellContent={day => day.dayNumberText.replace("일", "")}
-                events={eventData}
+                events={scheduleData ? scheduleData : null}
                 eventColor="#aaa"
                 eventTextColor="#fff"
                 dayMaxEvents={true}

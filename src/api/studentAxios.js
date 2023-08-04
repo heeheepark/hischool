@@ -15,7 +15,7 @@ const getWeekFood = async setWeekMenuData => {
   }
 };
 
-const getSchedule = async setTimeTable => {
+const getTimeTable = async setTimeTable => {
   try {
     const res = await axios.get(`/api/timetable`);
     const result = res.data.list;
@@ -46,4 +46,4 @@ const getMonthFood = async setFoodMenuList => {
   }
 };
 
-export { getWeekFood, getSchedule, getMonthFood };
+export { getWeekFood, getTimeTable, getMonthFood };
