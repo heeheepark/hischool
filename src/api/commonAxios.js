@@ -54,4 +54,4 @@ const getSchedule = async setTimeTable => {
 
 export default axiosInstance;
 
-export { getSchoolInfo };
+export { getSchoolInfo, getSchedule };
