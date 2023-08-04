@@ -49,13 +49,14 @@ const InputMockRecord = () => {
       // 서버에 전송할 데이터 형식으로 가공
       const dataToSend = lastSavedData.map(item => ({
         userid: 40, // 나중에 실제 사용자 ID를 받아서 설정해야 합니다.
-        subjectid: item.subjectid || 0,
-        mon: item.mon || 0,
-        standardscore: item.standardscore || 0,
-        rating: item.rating || 0,
-        percent: item.percent || 0,
+        subjectid: parseInt(item.subjectid) || 0,
+        mon: parseInt(item.mon) || 0,
+        standardscore: parseInt(item.standardscore) || 0,
+        rating: parseInt(item.rating) || 0,
+        percent: parseInt(item.percent) || 0,
       }));
       postMockData(dataToSend);
+      console.log(dataToSend);
     }
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수

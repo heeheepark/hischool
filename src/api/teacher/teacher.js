@@ -5,7 +5,7 @@ export const postMockData = async dataToSend => {
   try {
     const response = await axios.post(
       "/api/teacher/subject/mock-ins",
-      dataToSend,
+      { list: dataToSend },
     );
     console.log("데이터 전송 성공:", response.data);
   } catch (error) {
