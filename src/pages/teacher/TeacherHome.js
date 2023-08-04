@@ -17,68 +17,6 @@ const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
   const [scheduleData, setScheduleData] = useState(null);
-  const eventData = [
-    {
-      title: "2학기 수업 계획",
-      start: "2023-07-31",
-      end: "2023-08-03",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-07-31",
-      end: "2023-08-03",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-08",
-      end: "2023-08-11",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-10",
-      end: "2023-08-13",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-13",
-      end: "2023-08-16",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-15",
-      end: "2023-08-18",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-21",
-      end: "2023-08-24",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-23",
-      end: "2023-08-26",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-28",
-      end: "2023-08-30",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-08-29",
-      end: "2023-08-31",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-09-04",
-      end: "2023-09-06",
-    },
-    {
-      title: "2학기 수업 계획",
-      start: "2023-09-04",
-      end: "2023-09-08",
-    },
-  ];
 
   useEffect(() => {
     getStudentCount(setStudentCount);
