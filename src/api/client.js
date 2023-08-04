@@ -28,7 +28,7 @@ axios.interceptors.request.use(
 );
 
 // 쿠키 set 하기
-export const fetchLogin = async (email, pw, setRole) => {
+export const fetchLogin = async (email, pw) => {
   try {
     const res = await client.post(`/api/sign-in`, {
       email: email,
@@ -36,6 +36,7 @@ export const fetchLogin = async (email, pw, setRole) => {
     });
     console.log(res.data);
     const result = await res.data;
+    const role = result.role;
     setCookie("refreshToken", result.refreshToken, {
       path: "/",
       secure: true,
@@ -48,16 +49,8 @@ export const fetchLogin = async (email, pw, setRole) => {
       sameSite: "none",
       httpOnly: true,
     });
-    setRole(result.role);
-    const { data } = await axios.get(`/api/mypage/user-mypage`);
-    console.log(data);
+    return role;
   } catch (error) {
     console.log(error);
   }
 };
-
-// logout시 쿠키 지우기
-// export const fetchLogout = () => {
-//   Cookies.remove("refreshToken", { path: "" });
-//   Cookies.remove("accessToken", { path: "" });
-// };
