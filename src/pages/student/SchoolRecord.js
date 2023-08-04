@@ -7,8 +7,20 @@ import {
 import { ResponsiveLine } from "@nivo/line";
 import SchoolRecordTable from "../../components/student/SchoolRecordTable";
 import { SchoolRecordFilter } from "../../components/student/Filter";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getUserInfo } from "../../api/userAxios";
+import { getHighestSchoolRecord } from "../../api/studentSchoolRecordAxios";
 
 const SchoolRecord = () => {
+  const [userName, setUserName] = useState(null);
+  const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
+
+  useEffect(() => {
+    getUserInfo(setUserName);
+    getHighestSchoolRecord(setHighestSchoolRecord);
+  }, []);
+
   const data = [
     {
       id: "한국사",
@@ -223,7 +235,7 @@ const SchoolRecord = () => {
         </div>
         <div className="record-text">
           <p>
-            <span className="user-name">강동원</span>
+            <span className="user-name">{userName}</span>
             <span>님의</span>
             <span>주요 과목 등급</span>
           </p>
@@ -231,26 +243,13 @@ const SchoolRecord = () => {
             <div className="high-record-text">
               <span>내신 최고 등급</span>
               <div>
-                <p>
-                  <span className="subject-title">국어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">수학</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">영어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">한국사</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
+                {highestSchoolRecord?.map((item, index) => (
+                  <p key={index}>
+                    <span className="subject-title">{item.nm}</span>
+                    <span className="grade-num">{item.rating}</span>
+                    <span>등급</span>
+                  </p>
+                ))}
               </div>
             </div>
             <div className="current-record-text">
