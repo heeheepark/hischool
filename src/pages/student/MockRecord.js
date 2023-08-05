@@ -9,11 +9,11 @@ import MockRecordTable from "../../components/student/MockRecordTable";
 import { MockRecordFilter } from "../../components/student/Filter";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getUserInfo } from "../../api/userAxios";
+import { getUserInfo } from "../../api/userInfoAxios";
 import {
   getCurrentMockRecord,
   getHighestMockRecord,
-} from "../../api/studentSchoolRecordAxios";
+} from "../../api/student/mockRecordAxios";
 
 const MockRecord = () => {
   const [userName, setUserName] = useState(null);

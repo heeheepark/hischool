@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TimeTableDiv } from "../../styles/student/StudentHomeStyle";
-import { getTimeTable } from "../../api/studentAxios";
+import { getTimeTable } from "../../api/student/studentHomeAxios";
 
 const TimeTable = () => {
   const [timeTable, setTimeTable] = useState(null);

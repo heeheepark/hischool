@@ -1,6 +1,7 @@
 import axios from "axios";
 
-// Student Home
+// Student 메인 홈
+// 주간 급식표
 const getWeekFood = async setWeekMenuData => {
   try {
     const res = await axios.get(`/api/meal/main?sdSchulCode=${7240273}`);
@@ -15,6 +16,7 @@ const getWeekFood = async setWeekMenuData => {
   }
 };
 
+// 시간표
 const getTimeTable = async setTimeTable => {
   try {
     const res = await axios.get(`/api/timetable`);
@@ -25,25 +27,4 @@ const getTimeTable = async setTimeTable => {
   }
 };
 
-//FoodMenuList;
-const getMonthFood = async setFoodMenuList => {
-  try {
-    const res = await axios.get(`/api/meal`);
-    const result = res.data;
-    const foodMenuList = result.list;
-    const newFoodMenuList = foodMenuList.map(item => {
-      const newList = {
-        start: item.date,
-        end: item.date,
-        menuType: item.lunchOrDinner,
-        title: item.menuOftheDay,
-      };
-      return newList;
-    });
-    setFoodMenuList(newFoodMenuList);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export { getWeekFood, getTimeTable, getMonthFood };
+export { getWeekFood, getTimeTable };

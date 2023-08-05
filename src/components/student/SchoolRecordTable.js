@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { SchoolRecordTableDiv } from "../../styles/student/SchoolRecordStyle";
-import { getAllSchoolRecord } from "../../api/studentSchoolRecordAxios";
-import { getStudentCount } from "../../api/teacherAxios";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
+import { getAllSchoolRecord } from "../../api/student/schoolRecordAxios";
+import { getStudentCount } from "../../api/teacher/teacherHomeAxios";
 
 const SchoolRecordTable = () => {
   const cateList = [

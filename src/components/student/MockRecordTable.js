@@ -1,7 +1,7 @@
 import { MockRecordTableDiv } from "../../styles/student/MockRecordStyle";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getAllMockRecord } from "../../api/studentSchoolRecordAxios";
+import { getAllMockRecord } from "../../api/student/mockRecordAxios";
 
 const MockRecordTable = () => {
   const [allMockRecord, setAllMockRecord] = useState(null);

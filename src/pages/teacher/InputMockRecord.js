@@ -12,8 +12,11 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
-import { getMockMainSubData, getMockSubData } from "../../api/teacherAxios";
-import { postMockData } from "../../api/teacher/teacher";
+import {
+  getMockMainSubData,
+  getMockSubData,
+} from "../../api/teacher/inputMockRecordAxios";
+import { postMockData } from "../../api/teacher/inputMockRecordAxios";
 
 const InputMockRecord = () => {
   const [dropMonth, setDropMonth] = useState(""); // 학기

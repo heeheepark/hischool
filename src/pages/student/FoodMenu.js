@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { FoodMenuDiv } from "../../styles/student/FoodMenuStyle";
-import { getMonthFood } from "../../api/studentAxios";
+import { getMonthFood } from "../../api/student/foodMenuAxios";
 
 const FoodMenu = () => {
   const [foodMenuList, setFoodMenuList] = useState(null);

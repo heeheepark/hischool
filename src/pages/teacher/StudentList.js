@@ -6,7 +6,7 @@ import {
   TimeTableDiv,
 } from "../../styles/teacher/StudentListStyle";
 import { useNavigate } from "react-router";
-import { getStudentData } from "../../api/teacherAxios";
+import { getStudentData } from "../../api/teacher/studentListAxios";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);

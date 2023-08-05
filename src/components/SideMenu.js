@@ -16,7 +16,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 // import { fetchLogout } from "../api/client";
 import Cookies from "universal-cookie";
-import { getUserInfo } from "../api/userAxios";
+import { getUserInfo } from "../api/userInfoAxios";
 import { useState } from "react";
 
 const SideMenu = () => {

@@ -4,11 +4,11 @@ import {
   SchoolRecordListDiv,
   StudentListDiv,
 } from "../../styles/teacher/StudentRecordStyle";
-import { getStudentData } from "../../api/teacherAxios";
+import { getStudentData } from "../../api/teacher/studentListAxios";
 import {
   getStudentMockRecord,
   getStudentSchoolRecord,
-} from "../../api/studentRecordAxios";
+} from "../../api/teacher/studentRecordAxios";
 
 // const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
 // const [studentMockRecordList, setStudentMockRecordList] = useState(null);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { WeekFoodMenuDiv } from "../../styles/student/StudentHomeStyle";
-import { getWeekFood, test } from "../../api/studentAxios";
+import { getWeekFood } from "../../api/student/studentHomeAxios";
 
 const WeekFoodMenu = () => {
   const [weekMenuData, setWeekMenuData] = useState(null);

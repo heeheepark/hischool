@@ -9,11 +9,11 @@ import SchoolRecordTable from "../../components/student/SchoolRecordTable";
 import { SchoolRecordFilter } from "../../components/student/Filter";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getUserInfo } from "../../api/userAxios";
+import { getUserInfo } from "../../api/userInfoAxios";
 import {
   getCurrentSchoolRecord,
   getHighestSchoolRecord,
-} from "../../api/studentSchoolRecordAxios";
+} from "../../api/student/schoolRecordAxios";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 
 const SchoolRecord = () => {
