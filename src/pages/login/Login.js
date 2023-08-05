@@ -11,7 +11,6 @@ import { fetchLogin } from "../../api/client";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
