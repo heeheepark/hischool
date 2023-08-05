@@ -7,7 +7,6 @@ const StudentHomeDiv = styled.div`
   height: 100%;
   h3 {
     font-size: 21px;
-    /* font-family: "yg-jalnan"; */
     font-weight: 700;
     margin-bottom: 10px;
     color: #333;
@@ -86,7 +85,6 @@ const RecordDiv = styled.div`
         font-size: 22px;
       }
       .exam-title {
-        /* font-family: "yg-jalnan"; */
         font-size: 27px;
         font-weight: 900;
         color: #176b87;
@@ -105,7 +103,6 @@ const RecordDiv = styled.div`
           color: #64ccc5;
         }
         > span.grade-num {
-          /* font-family: "yg-jalnan"; */
           display: inline-block;
           margin-bottom: 5px;
           font-size: 33px;

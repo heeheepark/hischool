@@ -45,7 +45,7 @@ export const getAllSchoolRecord = async (
   try {
     const res = await axios.get(apiUrl);
     const result = res.data;
-    console.log(result);
+    // console.log(result);
     setAllSchoolRecord(result);
   } catch (err) {
     console.log(err);

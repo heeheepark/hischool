@@ -7,7 +7,6 @@ export const getStudentSchoolRecord = async (
   try {
     const res = await axios.get(`/api/teacher/acaresult?userId=${studentId}`);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }
@@ -20,7 +19,6 @@ export const getStudentMockRecord = async (
   try {
     const res = await axios.get(`/api/teacher/mockresult?userId=${studentId}`);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }

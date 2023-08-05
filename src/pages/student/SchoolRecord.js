@@ -21,7 +21,6 @@ const SchoolRecord = () => {
   const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
   const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
 
-  console.log(currentSchoolRecord);
   useEffect(() => {
     getUserInfo(setUserName);
     getHighestSchoolRecord(setHighestSchoolRecord);

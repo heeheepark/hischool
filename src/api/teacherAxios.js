@@ -30,7 +30,6 @@ const getStudentData = async setStudentListData => {
     const listSortData = result.sort((a, b) =>
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
     );
-    console.log(listSortData);
     setStudentListData(listSortData);
   } catch (err) {
     console.error(err);

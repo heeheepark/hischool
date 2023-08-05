@@ -25,7 +25,6 @@ const handleStudentList = e => {
 
 const StudentSearchList = () => {
   const [studentListData, setStudentListData] = useState(null);
-  console.log(studentListData);
 
   useEffect(() => {
     getStudentData(setStudentListData);

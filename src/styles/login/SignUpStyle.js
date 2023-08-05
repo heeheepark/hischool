@@ -21,7 +21,6 @@ export const SignUpInner = styled.div`
     align-items: center;
     margin-bottom: 10px;
     h3 {
-      font-family: "yg-jalnan";
       font-size: 40px;
       margin-right: 5%;
     }
