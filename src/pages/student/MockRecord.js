@@ -7,8 +7,25 @@ import { ResponsiveLine } from "@nivo/line";
 import { MockRecordDiv } from "../../styles/student/MockRecordStyle";
 import MockRecordTable from "../../components/student/MockRecordTable";
 import { MockRecordFilter } from "../../components/student/Filter";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getUserInfo } from "../../api/userAxios";
+import {
+  getCurrentMockRecord,
+  getHighestMockRecord,
+} from "../../api/studentSchoolRecordAxios";
 
 const MockRecord = () => {
+  const [userName, setUserName] = useState(null);
+  const [highestMockRecord, setHighestMockRecord] = useState(null);
+  const [currentMockRecord, setCurrentMockRecord] = useState(null);
+
+  useEffect(() => {
+    getUserInfo(setUserName);
+    getHighestMockRecord(setHighestMockRecord);
+    getCurrentMockRecord(setCurrentMockRecord);
+  }, []);
+
   const data = [
     {
       id: "한국사",
@@ -171,7 +188,7 @@ const MockRecord = () => {
         </div>
         <div className="record-text">
           <p>
-            <span className="user-name">강동원</span>
+            <span className="user-name">{userName}</span>
             <span>님의</span>
             <span>주요 과목 등급</span>
           </p>
@@ -179,51 +196,25 @@ const MockRecord = () => {
             <div className="high-record-text">
               <span>모의고사 최고 등급</span>
               <div>
-                <p>
-                  <span className="subject-title">국어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">수학</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">영어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">한국사</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
+                {highestMockRecord?.map((item, index) => (
+                  <p key={index}>
+                    <span className="subject-title">{item.nm}</span>
+                    <span className="grade-num">{item.rating}</span>
+                    <span>등급</span>
+                  </p>
+                ))}
               </div>
             </div>
             <div className="current-record-text">
               <span>현재 모의고사 등급</span>
               <div>
-                <p>
-                  <span className="subject-title">국어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">수학</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">영어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">한국사</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
+                {currentMockRecord?.map((item, index) => (
+                  <p key={index}>
+                    <span className="subject-title">{item.nm}</span>
+                    <span className="grade-num">{item.rating}</span>
+                    <span>등급</span>
+                  </p>
+                ))}
               </div>
             </div>
           </div>

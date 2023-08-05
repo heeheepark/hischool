@@ -4,20 +4,31 @@ import {
   SchoolRecordListDiv,
   StudentListDiv,
 } from "../../styles/teacher/StudentRecordStyle";
-import { getStudentCount, getStudentList } from "../../api/teacherAxios";
+import { getStudentData } from "../../api/teacherAxios";
+import {
+  getStudentMockRecord,
+  getStudentSchoolRecord,
+} from "../../api/studentRecordAxios";
+
+// const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
+// const [studentMockRecordList, setStudentMockRecordList] = useState(null);
+
+const handleStudentList = e => {
+  const allStudentList = document.querySelectorAll(".student-detail-list");
+  allStudentList.forEach(item => item.classList.remove("active"));
+  const clickList = e.currentTarget;
+  clickList.classList.add("active");
+  const StudentId = parseInt(clickList.classList[0].slice(10));
+  getStudentSchoolRecord(StudentId);
+  getStudentMockRecord(StudentId);
+};
 
 const StudentSearchList = () => {
-  const [studentList, setStudentList] = useState(null);
-
-  const handleStudentList = e => {
-    const allStudentList = document.querySelectorAll(".student-detail-list");
-    allStudentList.forEach(item => item.classList.remove("active"));
-    const clickList = e.currentTarget;
-    clickList.classList.add("active");
-  };
+  const [studentListData, setStudentListData] = useState(null);
+  console.log(studentListData);
 
   useEffect(() => {
-    getStudentList(setStudentList);
+    getStudentData(setStudentListData);
   }, []);
 
   return (
@@ -30,36 +41,25 @@ const StudentSearchList = () => {
         <li className="category-th">이메일</li>
       </ul>
       <ul className="list-wrap">
-        <li
-          className="student-detail-list active"
-          onClick={e => handleStudentList(e)}
-        >
-          <ul>
-            <li>1</li>
-            <li>홍길동</li>
-            <li>20050808</li>
-            <li>010-1234-1234</li>
-            <li>gildong-hong@hong.com</li>
-          </ul>
-        </li>
-        <li className="student-detail-list" onClick={e => handleStudentList(e)}>
-          <ul>
-            <li>2</li>
-            <li>고길동</li>
-            <li>20050725</li>
-            <li>010-4321-4321</li>
-            <li>ddong@hong.com</li>
-          </ul>
-        </li>
-        <li className="student-detail-list" onClick={e => handleStudentList(e)}>
-          <ul>
-            <li>3</li>
-            <li>김길동</li>
-            <li>20050730</li>
-            <li>010-4322-4322</li>
-            <li>ddonggil@hong.com</li>
-          </ul>
-        </li>
+        {studentListData?.map((item, index) => (
+          <li
+            className={
+              index === 0
+                ? `studentNum${item.userId} student-detail-list active`
+                : `studentNum${item.userId} student-detail-list`
+            }
+            onClick={e => handleStudentList(e)}
+            key={item.userId}
+          >
+            <ul>
+              <li>{index + 1}</li>
+              <li>{item.snm}</li>
+              <li>{item.birth}</li>
+              <li>{item.phone}</li>
+              <li>{item.email}</li>
+            </ul>
+          </li>
+        ))}
       </ul>
     </StudentListDiv>
   );
@@ -91,214 +91,24 @@ const SchoolRecordList = () => {
         <li className="category-th">전교석차</li>
       </ul>
       <ul className="record-data">
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="school-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>2</li>
-            <li>중간</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>2/25</li>
-            <li>10/360</li>
-          </ul>
-        </li>
+        {/* {studentSchoolRecordList?.map(item => (
+          <li className="data-table" key={item.resultId}>
+            <ul>
+              <li>
+                <input type="checkbox" className="school-checkbox" />
+              </li>
+              <li>{item.year}</li>
+              <li></li>
+              <li>중간</li>
+              <li>국어</li>
+              <li>언어와매체</li>
+              <li>97</li>
+              <li>1</li>
+              <li>2/25</li>
+              <li>10/360</li>
+            </ul>
+          </li>
+        ))} */}
       </ul>
     </SchoolRecordListDiv>
   );
@@ -328,118 +138,22 @@ const MockRecordList = () => {
         <li className="category-th">백분위</li>
       </ul>
       <ul className="record-data">
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>3</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>6</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>9</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>
-              <input type="checkbox" className="mock-checkbox" />
-            </li>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
+        {/* {studentMockRecordList?.map(item => (
+          <li className="data-table" key={item.userId}>
+            <ul>
+              <li>
+                <input type="checkbox" className="mock-checkbox" />
+              </li>
+              <li>{item.year}</li>
+              <li>{item.mon}</li>
+              <li>{item.categoryId}</li>
+              <li>{item.nm}</li>
+              <li>{item.sc}</li>
+              <li>{item.rating}</li>
+              <li>{`${item.percent}%`}</li>
+            </ul>
+          </li>
+        ))} */}
       </ul>
     </MockRecordListDiv>
   );

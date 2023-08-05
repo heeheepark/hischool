@@ -76,16 +76,6 @@ const getMockSubData = async categoryid => {
 };
 
 // 학생 성적 관리
-// 학생 목록
-const getStudentList = async setStudentList => {
-  try {
-    const res = await axios.get(`/api/teacher/signed?classId=${2}`);
-    const result = res.data;
-    setStudentList(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export {
   getStudentCount,
@@ -94,5 +84,4 @@ export {
   getSignListData,
   getMockMainSubData,
   getMockSubData,
-  getStudentList,
 };

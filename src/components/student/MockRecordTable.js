@@ -1,6 +1,13 @@
 import { MockRecordTableDiv } from "../../styles/student/MockRecordStyle";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getAllMockRecord } from "../../api/studentSchoolRecordAxios";
 
 const MockRecordTable = () => {
+  const [allMockRecord, setAllMockRecord] = useState(null);
+  useEffect(() => {
+    getAllMockRecord(setAllMockRecord);
+  }, []);
   return (
     <MockRecordTableDiv>
       <ul className="category">
@@ -13,94 +20,19 @@ const MockRecordTable = () => {
         <li className="category-th">백분위</li>
       </ul>
       <ul className="record-data">
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>3</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>6</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>9</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
-        <li className="data-table">
-          <ul>
-            <li>2023</li>
-            <li>1</li>
-            <li>국어</li>
-            <li>언어와매체</li>
-            <li>97</li>
-            <li>1</li>
-            <li>96%</li>
-          </ul>
-        </li>
+        {allMockRecord?.map((item, index) => (
+          <li className="data-table" key={index}>
+            <ul>
+              <li>{item.year}</li>
+              <li>{`${item.mon}월`}</li>
+              <li>{item.cateName}</li>
+              <li>{item.nm}</li>
+              <li>{item.standardScore}</li>
+              <li>{item.rating}</li>
+              <li>{`${item.percent}%`}</li>
+            </ul>
+          </li>
+        ))}
       </ul>
     </MockRecordTableDiv>
   );
