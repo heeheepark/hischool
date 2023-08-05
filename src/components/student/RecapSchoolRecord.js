@@ -173,6 +173,7 @@ const RecapSchoolRecord = () => {
       ],
     },
   ];
+
   return (
     <RecordDiv>
       <div className="chart">

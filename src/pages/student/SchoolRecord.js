@@ -21,6 +21,7 @@ const SchoolRecord = () => {
   const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
   const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
 
+  console.log(currentSchoolRecord);
   useEffect(() => {
     getUserInfo(setUserName);
     getHighestSchoolRecord(setHighestSchoolRecord);
@@ -263,8 +264,8 @@ const SchoolRecord = () => {
               <div>
                 {currentSchoolRecord?.map((item, index) => (
                   <p key={index}>
-                    <span className="subject-title">국어</span>
-                    <span className="grade-num">3</span>
+                    <span className="subject-title">{item.nm}</span>
+                    <span className="grade-num">{item.rating}</span>
                     <span>등급</span>
                   </p>
                 ))}
