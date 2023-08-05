@@ -128,7 +128,7 @@ const RecordTableWrap = styled.div`
     }
   }
   .record-table {
-    height: 100%;
+    height: 42vh;
   }
 `;
 

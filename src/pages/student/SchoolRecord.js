@@ -10,15 +10,21 @@ import { SchoolRecordFilter } from "../../components/student/Filter";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getUserInfo } from "../../api/userAxios";
-import { getHighestSchoolRecord } from "../../api/studentSchoolRecordAxios";
+import {
+  getCurrentSchoolRecord,
+  getHighestSchoolRecord,
+} from "../../api/studentSchoolRecordAxios";
+import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 
 const SchoolRecord = () => {
   const [userName, setUserName] = useState(null);
   const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
+  const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
 
   useEffect(() => {
     getUserInfo(setUserName);
     getHighestSchoolRecord(setHighestSchoolRecord);
+    getCurrentSchoolRecord(setCurrentSchoolRecord);
   }, []);
 
   const data = [
@@ -255,39 +261,20 @@ const SchoolRecord = () => {
             <div className="current-record-text">
               <span>현재 내신 등급</span>
               <div>
-                <p>
-                  <span className="subject-title">국어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">수학</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">영어</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
-                <p>
-                  <span className="subject-title">한국사</span>
-                  <span className="grade-num">3</span>
-                  <span>등급</span>
-                </p>
+                {currentSchoolRecord?.map((item, index) => (
+                  <p key={index}>
+                    <span className="subject-title">국어</span>
+                    <span className="grade-num">3</span>
+                    <span>등급</span>
+                  </p>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </ChartWrap>
       <RecordTableWrap>
-        <div className="title">
-          <h4>내신 성적 목록</h4>
-          <SchoolRecordFilter />
-        </div>
-        <div className="record-table">
-          <SchoolRecordTable />
-        </div>
+        <SchoolRecordTable />
       </RecordTableWrap>
     </SchoolRecordDiv>
   );
