@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getCookie, setCookie } from "./cookie";
-import { Cookies } from "react-cookie";
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
@@ -10,53 +9,9 @@ export const client = axios.create({
   },
 });
 
-// Request 처리
-// axios.interceptors.response.use(
-//   response => {
-//     // 정상적인 응답 처리
-//     return response;
-//   },
-//   async error => {
-//     const originalRequest = error.config;
-//     const refreshToken = getCookie("refreshToken");
-//     if (
-//       error.response &&
-//       error.response.status === 401 &&
-//       refreshToken &&
-//       !originalRequest._retry
-//     ) {
-//       originalRequest._retry = true;
-//       try {
-//         const res = await client.post(`/api/refresh-token`, {
-//           refreshToken: refreshToken,
-//         });
-//         const newAccessToken = res.data.accessToken;
-//         setCookie("accessToken", newAccessToken, {
-//           path: "/",
-//           secure: true,
-//           sameSite: "none",
-//           httpOnly: true,
-//         });
-//         // 원래 요청 재시도
-//         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-//         return client(originalRequest);
-//       } catch (error) {
-//         // refreshToken이 만료되었거나 에러가 발생한 경우 로그아웃 처리 등을 할 수 있음
-//         console.log("토큰 갱신 실패:", error);
-//         // 로그아웃 등 처리
-//       }
-//     }
-//     return Promise.reject(error);
-//   },
-// );
 axios.interceptors.request.use(
   async config => {
-    // cookie를 활용 한 경우
     const token = getCookie("accessToken");
-    // if (expireTime <= Date.now() && refreshToken) {
-    //   const {data} = await axios.post('url', { refreshToken });
-    //   config.headers.Authorization = `Bearer ${data.accessToken}`;
-    // }
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -65,7 +20,46 @@ axios.interceptors.request.use(
   error => console.log(error),
 );
 
-// 쿠키 set 하기
+// 토큰 갱신 후 실패한 요청을 저장하는 배열
+let failedQueue = [];
+
+// 토큰 갱신 함수
+const refreshToken = async () => {
+  try {
+    const res = await axios.post(`/api/refresh-token`, {
+      refreshToken: getCookie("refreshToken"),
+    });
+    const result = res.data;
+    if (result) {
+      setCookie("accessToken", result, {
+        path: "/",
+        secure: true,
+        sameSite: "none",
+        httpOnly: true,
+      });
+      processFailedQueue(null, result);
+    } else {
+      console.log("토큰 갱신 실패");
+    }
+  } catch (error) {
+    processFailedQueue(error, null);
+  }
+};
+
+// 토큰 갱신 후 실패한 요청을 재시도하는 함수
+const processFailedQueue = (error, token = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.config.headers.Authorization = `Bearer ${token}`;
+      prom.resolve(client(prom.config));
+    }
+  });
+  failedQueue = [];
+};
+
+// 로그인 함수
 export const fetchLogin = async (email, pw) => {
   try {
     const res = await client.post(`/api/sign-in`, {
@@ -87,6 +81,10 @@ export const fetchLogin = async (email, pw) => {
       sameSite: "none",
       httpOnly: true,
     });
+
+    // 5분 후에 refreshToken 함수 호출
+    setTimeout(refreshToken, 275000);
+
     return role;
   } catch (error) {
     console.log(error);

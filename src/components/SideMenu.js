@@ -32,6 +32,7 @@ const SideMenu = () => {
     cookies.remove("refreshToken");
     setTimeout(() => {
       navigate("/");
+      // fetchLogout();
     }, 500);
   };
 
