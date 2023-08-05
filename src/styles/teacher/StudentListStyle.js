@@ -13,10 +13,9 @@ export const StudentListTitle = styled.div`
   /* justify-content: space-between; */
   gap: 20px;
   align-items: center;
-  padding: 20px 0 10px 0;
+  padding: 15px 0 15px 0;
   h3 {
-    font-size: 35px;
-    padding-left: 20px;
+    font-size: 30px;
   }
   button {
     width: 120px;
