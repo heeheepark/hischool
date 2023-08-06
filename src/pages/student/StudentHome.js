@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RecapSchoolRecord from "../../components/student/RecapSchoolRecord";
 import RecapMockRecord from "../../components/student/RecapMockRecord";
 import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
@@ -7,10 +7,19 @@ import WeekFoodMenu from "../../components/student/WeekFoodMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
+import Loading from "../../components/Loading";
 
 const StudentHome = () => {
+  const [loading, setLoading] = useState(false);
+
+  useState(() => {
+    setTimeout(() => setLoading(true), 1000);
+  }, []);
+
   return (
     <StudentHomeDiv>
+      {loading ? null : <Loading />}
       <div className="record">
         <div>
           <Link to="/student/schoolrecord">
