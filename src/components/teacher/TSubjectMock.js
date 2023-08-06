@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ISRinput } from "../../styles/teacher/InputSchoolRecord";
+import { IMRinput, ISRinput } from "../../styles/teacher/InputSchoolRecordStyle";
 
 const TSubJectMock = ({
   id,
@@ -54,7 +54,7 @@ const TSubJectMock = ({
   return (
     <>
       <div>
-        <ISRinput>
+        <IMRinput>
           <select
             name="subject"
             value={studentData?.subject || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
@@ -111,7 +111,7 @@ const TSubJectMock = ({
             onChange={handleInputChange}
             placeholder="백분위"
           />
-        </ISRinput>
+        </IMRinput>
       </div>
     </>
   );

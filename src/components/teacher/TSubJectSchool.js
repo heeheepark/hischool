@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ISRinput } from "../../styles/teacher/InputSchoolRecord";
+import { ISRinput } from "../../styles/teacher/InputSchoolRecordStyle";
 
 const TSubJectSchool = ({
   id,

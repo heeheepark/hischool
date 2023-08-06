@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
+  IMRTitle,
   ISRButton,
   ISRButtonWrapper,
   ISRHeader,
   ISRTitle,
-} from "../../styles/teacher/InputSchoolRecord";
+  InputMockRecordWrap,
+} from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFloppyDisk,
@@ -110,34 +112,28 @@ const InputMockRecord = () => {
   }, []);
 
   return (
-    <div>
+    <InputMockRecordWrap>
       <ISRHeader>
-        <h1>2023 모의 고사 성적 입력표(학생이름)</h1>
+        <h3>2023 모의 고사 성적 입력(학생이름)</h3>
         {/* 드롭다운 메뉴 1 */}
         <select value={dropMonth} onChange={handleMonth}>
-          <option value="">-- 선택 --</option>
+          <option value="">월 선택</option>
           <option value="3월">3월</option>
           <option value="6월">6월</option>
           <option value="9월">9월</option>
         </select>
       </ISRHeader>
       <ISRButton>
-        <button onClick={handleSaveButtonClick}>
-          저장
-          <FontAwesomeIcon icon={faFloppyDisk} />
-        </button>
-        <button>
-          취소
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+        <button onClick={handleSaveButtonClick}>저장</button>
+        <button>취소</button>
       </ISRButton>
-      <ISRTitle>
+      <IMRTitle>
         <p>과목 계열</p>
         <p>세부 과목</p>
-        <strong>점수</strong>
+        <strong>표준 점수</strong>
         <strong>등급</strong>
         <strong>백분위</strong>
-      </ISRTitle>
+      </IMRTitle>
       <div>
         {studentsData.map((item, index) => (
           <TSubJectMock
@@ -153,11 +149,11 @@ const InputMockRecord = () => {
       </div>
       <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>
-          항목추가
-          <FontAwesomeIcon icon={faPlusCircle} />
+          항목 추가
+          <FontAwesomeIcon icon={faPlusCircle} className="icon" />
         </button>
       </ISRButtonWrapper>
-    </div>
+    </InputMockRecordWrap>
   );
 };
 

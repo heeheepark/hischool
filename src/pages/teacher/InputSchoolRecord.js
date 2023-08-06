@@ -4,7 +4,8 @@ import {
   ISRButtonWrapper,
   ISRHeader,
   ISRTitle,
-} from "../../styles/teacher/InputSchoolRecord";
+  InputSchoolRecordWrap,
+} from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFloppyDisk,
@@ -121,18 +122,18 @@ const InputSchoolRecord = () => {
   ];
 
   return (
-    <div>
+    <InputSchoolRecordWrap>
       <ISRHeader>
-        <h1>2023 내신 고사 성적 입력표(학생이름)</h1>
+        <h3>2023 내신 고사 성적 입력(학생이름)</h3>
         {/* 드롭다운 메뉴 1 */}
         <select value={dropSemester} onChange={handleSemester}>
-          <option value="">-- 선택 --</option>
+          <option value="">학기 선택</option>
           <option value="1학기">1학기</option>
           <option value="2학기">2학기</option>
         </select>
         {/* 드롭다운 메뉴 2 */}
         <select value={dropTest} onChange={handleDropTest}>
-          <option value="">-- 선택 --</option>
+          <option value="">시험 구분</option>
           <option value="중간고사">중간고사</option>
           <option value="기말고사">기말고사</option>
         </select>
@@ -142,14 +143,8 @@ const InputSchoolRecord = () => {
         <Link to={`/teacher/inputsubject`}>
           <button>과목 정보 입력</button>
         </Link>
-        <button onClick={handleSaveButtonClick}>
-          저장
-          <FontAwesomeIcon icon={faFloppyDisk} />
-        </button>
-        <button>
-          취소
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+        <button onClick={handleSaveButtonClick}>저장</button>
+        <button>취소</button>
       </ISRButton>
       <ISRTitle>
         <p>과목 계열</p>
@@ -176,11 +171,11 @@ const InputSchoolRecord = () => {
       </div>
       <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>
-          항목추가
-          <FontAwesomeIcon icon={faPlusCircle} />
+          항목 추가
+          <FontAwesomeIcon icon={faPlusCircle} className="icon" />
         </button>
       </ISRButtonWrapper>
-    </div>
+    </InputSchoolRecordWrap>
   );
 };
 
