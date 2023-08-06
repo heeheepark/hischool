@@ -89,6 +89,7 @@ const SideMenuWrap = styled.div`
             color: #fff;
             padding-left: 20px;
             margin-bottom: 10px;
+            cursor: pointer;
             .icon {
               margin-right: 20px;
             }
@@ -100,9 +101,6 @@ const SideMenuWrap = styled.div`
               top: calc(50% - 9px);
               font-size: 15px;
             }
-          }
-          :last-of-type {
-            cursor: default;
           }
         }
         .nav-link-active {
@@ -134,6 +132,7 @@ const SideMenuWrap = styled.div`
         }
         .disabled {
           li {
+            cursor: default;
             :hover {
               background: none;
             }
