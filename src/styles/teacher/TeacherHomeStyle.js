@@ -54,6 +54,7 @@ const TeacherHomeDiv = styled.div`
     .teacher-home-left {
       display: flex;
       flex-flow: column nowrap;
+      justify-content: space-between;
       width: 100%;
       height: 100%;
       box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -91,8 +92,38 @@ const ClassSchoolRecordDiv = styled.div`
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  height: 30vh;
+  height: 35vh;
   width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  canvas {
+    margin: 0 auto;
+    height: 93% !important;
+  }
+  > div {
+    color: #444;
+    margin: 10px 0;
+    span {
+      margin-right: 20px;
+    }
+    .icon {
+      margin-right: 5px;
+    }
+    .korean {
+      color: rgba(197, 22, 5, 1);
+    }
+    .math {
+      color: rgba(253, 141, 20, 1);
+    }
+    .english {
+      color: rgba(250, 194, 19, 1);
+    }
+    .history {
+      color: rgba(111, 105, 172, 1);
+    }
+  }
 `;
 
 const TeacherTimeTableDiv = styled.div`
