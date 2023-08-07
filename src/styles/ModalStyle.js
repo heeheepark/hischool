@@ -36,3 +36,4 @@ export const ModalCloseBtn = styled.button`
   &:hover {
     color: rgba(0, 0, 0, 1);
   }
+`;
