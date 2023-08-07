@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router";
-import { Aside, Content, Header, MainDiv } from "../styles/MainStyle";
+import { Aside, Content, Header, MainDiv } from "../styles/main/MainStyle";
 import SideMenu from "../components/SideMenu";
 import { useEffect } from "react";
 import { getSchoolInfo } from "../api/userInfoAxios";

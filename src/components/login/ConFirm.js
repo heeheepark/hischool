@@ -3,8 +3,8 @@ import {
   ConFirmWrap,
   ConFirmInput,
   ConFirmButtons,
-} from "../styles/login/ConFirmStyle";
-import { postEmailCodeConFirm } from "../api/signUpAxios";
+} from "../../styles/login/ConFirmStyle";
+import { postEmailCodeConFirm } from "../../api/signUpAxios";
 
 const ConFirm = () => {
   const [emailConFirm, setEmailConFirm] = useState("");

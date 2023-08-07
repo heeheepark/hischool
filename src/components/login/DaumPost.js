@@ -1,6 +1,6 @@
-import "../styles/DaumPostStyle";
+import "../../styles/login/DaumPostStyle";
 import { useEffect } from "react";
-import { PostWrap } from "../styles/DaumPostStyle";
+import { PostWrap } from "../../styles/login/DaumPostStyle";
 
 const DaumPost = props => {
   const complete = data => {

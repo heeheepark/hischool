@@ -5,10 +5,10 @@ import {
   TcMyPageRightInfo,
   TcMyPageUserInfo,
   TcMyPageWrap,
-} from "../../styles/teacher/TeacherMyPageStyle";
+} from "../styles/MyPageStyle";
 import axios from "axios";
 
-const TeacherMyPage = () => {
+const MyPage = () => {
   const { userid } = useParams();
   const [teacher, setTeacher] = useState({
     userId: 6,
@@ -215,143 +215,7 @@ const TeacherMyPage = () => {
         </TcButtons>
       </div>
     </TcMyPageWrap>
-    // <TcMyPageWrap onSubmit={handleSubmit}>
-    //   <div>
-    //     <div className="TcMypagePic">
-    //       {teacher.pic ? (
-    //         <img src={teacher.pic} alt="pic" />
-    //       ) : (
-    //         <img src={teacher.profilePic} alt="pic" />
-    //       )}
-    //       <input
-    //         type="file"
-    //         accept="image/jpg, image/png, image/jpeg"
-    //         onChange={handlePictureUpload}
-    //       />
-    //     </div>
-    //     <TcMyPageTopInfo>
-    //       <li>
-    //         <label>이름</label>
-    //         <input
-    //           type="text"
-    //           name="tnm"
-    //           value={teacher.tnm}
-    //           onChange={handleChange}
-    //         />
-    //       </li>
-    //       <li>
-    //         <label>생년월일</label>
-    //         <input
-    //           type="text"
-    //           name="birth"
-    //           value={teacher.birth}
-    //           onChange={handleChange}
-    //         />
-    //       </li>
-    //       <li>
-    //         <label>연락처</label>
-    //         <input
-    //           type="text"
-    //           name="phone"
-    //           value={teacher.phone}
-    //           onChange={handleChange}
-    //         />
-    //       </li>
-    //       <li>
-    //         <label>주소</label>
-    //         <input
-    //           type="text"
-    //           name="address"
-    //           value={teacher.address}
-    //           onChange={handleChange}
-    //         />
-    //       </li>
-    //       <li>
-    //         <label>상세주소</label>
-    //         <input
-    //           type="text"
-    //           name="detailAddress"
-    //           value={teacher.detailAddress}
-    //           onChange={handleChange}
-    //         />
-    //       </li>
-    //     </TcMyPageTopInfo>
-    //   </div>
-    //   <TcMyPageDownInfo>
-    //     <TcMyPageLeftInfo>
-    //       <ul>
-    //         <li>
-    //           <label>학교</label>
-    //           <input
-    //             type="text"
-    //             name="snm"
-    //             value={teacher.snm}
-    //             onChange={handleChange}
-    //           />
-    //         </li>
-    //         <li className="grade-van">
-    //           <div>
-    //             <label>학년</label>
-    //             <input
-    //               type="text"
-    //               name="grade"
-    //               value={teacher.grade}
-    //               onChange={handleChange}
-    //             />
-    //           </div>
-    //           <div>
-    //             <label>반</label>
-    //             <input
-    //               type="text"
-    //               name="van"
-    //               value={teacher.van}
-    //               onChange={handleChange}
-    //             />
-    //           </div>
-    //         </li>
-    //       </ul>
-    //     </TcMyPageLeftInfo>
-    //     <TcMyPageRightInfo>
-    //       <ul>
-    //         <li>
-    //           <label>이메일</label>
-    //           <input
-    //             type="email"
-    //             name="email"
-    //             value={teacher.email}
-    //             onChange={handleChange}
-    //           />
-    //         </li>
-    //         <li>
-    //           <label>비밀번호</label>
-    //           <input
-    //             type="password"
-    //             name="password"
-    //             value={teacher.password}
-    //             onChange={handleChange}
-    //           />
-    //         </li>
-    //         <li>
-    //           <label>비밀번호 확인</label>
-    //           <input
-    //             type="password"
-    //             name="confirmPassword"
-    //             value={teacher.confirmPassword}
-    //             onChange={handleChange}
-    //           />
-    //         </li>
-    //       </ul>
-    //     </TcMyPageRightInfo>
-    //   </TcMyPageDownInfo>
-    //   <TcButtons>
-    //     <button type="button">회원탈퇴</button>
-    //     <div>
-    //       <button type="submit">수정</button>
-    //       <button type="button">취소</button>
-    //     </div>
-    //   </TcButtons>
-    // </TcMyPageWrap>
   );
 };
 
-export default TeacherMyPage;
+export default MyPage;

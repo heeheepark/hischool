@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import userImg from "../assets/gangdongwon.jpeg";
+import userImg from "../../assets/gangdongwon.jpeg";
 
 const SideMenuWrap = styled.div`
   background: linear-gradient(

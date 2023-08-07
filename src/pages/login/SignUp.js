@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IntroImage } from "../../styles/LoginStyle";
+import { IntroImage } from "../../styles/login/LoginStyle";
 import {
   LeftForm,
   RightForm,
@@ -9,7 +9,7 @@ import {
   SignUpWrap,
 } from "../../styles/login/SignUpStyle";
 import { useNavigate } from "react-router";
-import DaumPost from "../../components/DaumPost";
+import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
 import {
   postSignUp,
@@ -17,7 +17,7 @@ import {
   postEmailCodeConFirm,
 } from "../../api/signUpAxios";
 import Modal from "../../components/Modal";
-import ConFirm from "../../components/ConFirm";
+import ConFirm from "../../components/login/ConFirm";
 
 const SignUp = () => {
   const [userType, setUserType] = useState("STD");

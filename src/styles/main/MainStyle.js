@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import schoolLogo from "../assets/hamji.png";
+import schoolLogo from "../../assets/hamji.png";
 
 const MainDiv = styled.div`
   position: relative;

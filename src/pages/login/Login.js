@@ -4,7 +4,7 @@ import {
   LoginContain,
   LoginForm,
   LoginWrap,
-} from "../../styles/LoginStyle";
+} from "../../styles/login/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../../api/client";
 

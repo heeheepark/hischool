@@ -1,4 +1,4 @@
-import { SideMenuWrap } from "../styles/SideMenuStyle";
+import { SideMenuWrap } from "../styles/main/SideMenuStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
