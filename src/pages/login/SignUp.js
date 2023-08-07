@@ -9,41 +9,85 @@ import {
   SignUpWrap,
 } from "../../styles/login/SignUpStyle";
 import { useNavigate } from "react-router";
-import DaumPostcode from "react-daum-postcode";
 import DaumPost from "../../components/DaumPost";
+import { useEffect } from "react";
+import { postSignUp } from "../../api/signUpAxios";
+import Modal from "../../components/Modal";
+import ConFirm from "../../components/ConFirm";
 
 const SignUp = () => {
-  const [userType, setUserType] = useState("학생");
-  const [email, setEmail] = useState("");
+  const [userType, setUserType] = useState("student");
+  const [idEmail, setIdEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const navigate = useNavigate();
-
-  const [enroll_company, setEnroll_company] = useState({
+  const [name, setName] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [grade, setGrade] = useState("");
+  const [classNumber, setClassNumber] = useState("");
+  const [birth, setBirth] = useState("");
+  const [phone, setPhone] = useState("");
+  const [houseAddress, setHouseAddress] = useState({
     address: "",
   });
-
+  const [detailAddress, setDetailAddress] = useState("");
+  const [userPic, setUserPic] = useState("");
+  const [aprPic, setAprPic] = useState("");
   const [popup, setPopup] = useState(false);
+  const [codeConFirm, setCodeConFirm] = useState(false);
+  const navigate = useNavigate();
 
-  const handleInput = e => {
-    setEnroll_company({
-      ...enroll_company,
-      [e.target.name]: e.target.value,
-    });
+  useEffect(() => {
+    const addressInput = document.getElementById("address-input");
+    if (addressInput) {
+      addressInput.value = houseAddress.address;
+    }
+  }, [houseAddress.address]);
+
+  const handleCodeConfirm = () => {
+    setCodeConFirm(prev => !prev);
   };
 
-  const handleComplete = data => {
-    setPopup(!popup);
+  const handleModalOpen = () => {
+    setPopup(true);
+  };
+
+  const handleModalClose = () => {
+    setPopup(false);
+  };
+
+  const handleInput = e => {
+    const { name, value } = e.target;
+    setHouseAddress({
+      ...houseAddress,
+      [name]: value,
+    });
   };
 
   const handleUserTypeChange = e => {
     setUserType(e.target.value);
   };
 
+  const collectUserData = () => {
+    return {
+      email: idEmail,
+      pw: password,
+      nm: name,
+      schoolNm: schoolName,
+      grade,
+      classNum: classNumber,
+      birth,
+      phone,
+      address: houseAddress,
+      role: userType,
+      pic: userPic,
+      aprPic,
+    };
+  };
+
   const handleSignUp = e => {
     e.preventDefault();
 
-    if (!userType || !email || !password || !passwordConfirm) {
+    if (!userType || !idEmail || !password || !passwordConfirm) {
       alert("모든 필드를 입력해주세요.");
       return;
     }
@@ -52,6 +96,10 @@ const SignUp = () => {
       alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
+    const userData = collectUserData();
+
+    postSignUp(userData);
+
     navigate("/");
   };
 
@@ -71,22 +119,22 @@ const SignUp = () => {
             <form>
               <input
                 type="radio"
-                id="선생님"
+                id="teacher"
                 name="userType"
-                value="선생님"
-                checked={userType === "선생님"}
+                value="teacher"
+                checked={userType === "teacher"}
                 onChange={handleUserTypeChange}
               />
-              <label htmlFor="선생님">선생님</label>
+              <label htmlFor="teacher">선생님</label>
               <input
                 type="radio"
-                id="학생"
+                id="student"
                 name="userType"
-                value="학생"
-                checked={userType === "학생"}
+                value="student"
+                checked={userType === "student"}
                 onChange={handleUserTypeChange}
               />
-              <label htmlFor="학생">학생</label>
+              <label htmlFor="student">학생</label>
             </form>
           </div>
           <SignUpContain>
@@ -99,28 +147,58 @@ const SignUp = () => {
                   <ul>
                     <li className="big-input">
                       <label>이메일</label>
-                      <input type="email" />
+                      <button type="button" onClick={handleCodeConfirm}>
+                        인증
+                      </button>
+                      {codeConFirm && (
+                        <Modal
+                          isOpen={codeConFirm}
+                          onRequestClose={handleModalClose}
+                        >
+                          <ConFirm />
+                        </Modal>
+                      )}
+                      <input type="text"></input>
                     </li>
                     <li className="big-input">
                       <label>비밀번호</label>
-                      <input type="password" />
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                      />
                     </li>
                     <li className="big-input">
                       <label>비밀번호 확인</label>
-                      <input type="password" />
+                      <input
+                        type="password"
+                        onChange={e => setPasswordConfirm(e.target.value)}
+                      />
                     </li>
                     <li className="big-input">
                       <label>학교</label>
-                      <input type="text" />
+                      <input
+                        type="text"
+                        value={schoolName}
+                        onChange={e => setSchoolName(e.target.value)}
+                      />
                     </li>
                     <li className="small-input">
                       <div>
                         <label>학년</label>
-                        <input type="text" />
+                        <input
+                          type="text"
+                          value={grade}
+                          onChange={e => setGrade(e.target.value)}
+                        />
                       </div>
                       <div>
                         <label>반</label>
-                        <input type="text" />
+                        <input
+                          type="text"
+                          value={classNumber}
+                          onChange={e => setClassNumber(e.target.value)}
+                        />
                       </div>
                     </li>
                   </ul>
@@ -129,39 +207,71 @@ const SignUp = () => {
                   <ul>
                     <li className="big-input">
                       <label>이름</label>
-                      <input type="text" />
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                      />
                     </li>
                     <li className="big-input">
                       <label>생년월일</label>
-                      <input type="text" />
+                      <input
+                        type="text"
+                        value={birth}
+                        onChange={e => setBirth(e.target.value)}
+                      />
                     </li>
                     <li className="big-input">
                       <label>연락처</label>
-                      <input type="text" />
+                      <input
+                        type="text"
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                      />
                     </li>
                     <li className="big-input">
                       <label>주소입력</label>
                       <input
                         className="user_enroll_text"
-                        placeholder="주소"
+                        id="address-input"
                         type="text"
                         required={true}
                         name="address"
                         onChange={handleInput}
-                        value={enroll_company.address}
+                        onClick={() => setPopup(true)}
+                        value={houseAddress.address}
+                        readOnly
                       />
-                      <button onClick={handleComplete}>우편번호 찾기</button>
                       {popup && (
-                        <DaumPost
-                          company={enroll_company}
-                          setcompany={setEnroll_company}
-                        ></DaumPost>
+                        <Modal
+                          isOpen={popup}
+                          onRequestClose={handleModalClose}
+                          onAfterOpen={handleModalOpen}
+                        >
+                          <DaumPost
+                            company={houseAddress}
+                            setHouseAddress={setHouseAddress}
+                            onComplete={handleModalClose}
+                          />
+                        </Modal>
                       )}
                     </li>
-                    {userType === "선생님" ? (
+                    <li className="big-input">
+                      <label>상세주소 입력</label>
+                      <input
+                        type="text"
+                        value={detailAddress}
+                        onChange={e => setDetailAddress(e.target.value)}
+                      />
+                    </li>
+                    {userType === "teacher" ? (
                       <li className="big-input">
                         <label>교원 인증 사진</label>
-                        <input type="text" />
+                        <input
+                          type="file"
+                          value={aprPic}
+                          onChange={e => setAprPic(e.target.value)}
+                        />
                       </li>
                     ) : null}
                   </ul>
@@ -170,7 +280,9 @@ const SignUp = () => {
             </form>
           </SignUpContain>
           <div className="signup-submit">
-            <button onClick={handleSignUp}>회원가입</button>
+            <button type="submit" onClick={handleSignUp}>
+              회원가입
+            </button>
             <button onClick={handleCancel}>취소</button>
           </div>
         </div>
