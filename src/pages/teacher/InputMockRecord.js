@@ -21,14 +21,12 @@ import {
 import { postMockData } from "../../api/teacher/inputMockRecordAxios";
 
 const InputMockRecord = () => {
-  const [dropMonth, setDropMonth] = useState(""); // 학기
-  const [studentsData, setStudentsData] = useState([]); // 학생 데이터 배열
+  const [dropMonth, setDropMonth] = useState(""); 
+  const [studentsData, setStudentsData] = useState([]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
-  // 최초 학생의 데이터를 셋팅하여야 함.
   useEffect(() => {
     const interimData = [{}];
-    //{subject: '인문과학', semester: '', test: ''}
     setStudentsData(interimData);
     setLastSavedData(interimData);
   }, []);
@@ -36,7 +34,6 @@ const InputMockRecord = () => {
   // 새로운 데이터를 전달하는 함수
   const updateLastSavedData = (_id, newData) => {
     const updateData = lastSavedData.map((item, idx) => {
-      // 변경된 데이터 순서 번호와 같다면 데이터를 업데이트 한다.
       if (idx === _id) {
         item = newData;
       }
@@ -44,16 +41,14 @@ const InputMockRecord = () => {
     });
     setLastSavedData(updateData);
   };
-  // 학기 항목이 선택되었을 때 처리하는 함수
+  // 월 항목이 선택되었을 때 처리하는 함수
   const handleMonth = event => {
     setDropMonth(event.target.value);
   };
   // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 서버로 전송하는 함수
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
-      // 서버에 전송할 데이터 형식으로 가공
       const dataToSend = lastSavedData.map(item => ({
-        userid: 40, // 나중에 실제 사용자 ID를 받아서 설정해야 합니다.
         subjectid: parseInt(item.subjectid) || 0,
         mon: parseInt(item.mon) || 0,
         standardscore: parseInt(item.standardscore) || 0,
@@ -66,7 +61,6 @@ const InputMockRecord = () => {
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수
   const handleAddButtonClick = () => {
-    // 새로운 빈 객체를 추가하여 학생 데이터 배열을 업데이트
     const newStudent = {
       rating: 0,
       standardscore: 0,
@@ -76,7 +70,6 @@ const InputMockRecord = () => {
       subject: null,
     };
     setStudentsData(data => [...data, newStudent]);
-    // lastSavedData에도 빈 객체를 추가하여 배열 길이를 유지
     setLastSavedData(data => [...data, newStudent]);
   };
   useEffect(() => {
@@ -84,9 +77,7 @@ const InputMockRecord = () => {
       try {
         // 주요과목 데이터 가져오기
         const mainSubData = await getMockMainSubData();
-
         // 하위과목 데이터 가져오기
-        // 주요과목 데이터를 기반으로 하위과목 데이터를 가져오도록 수정
         const newSubjectData = await Promise.all(
           mainSubData.map(async mainSubject => {
             const subData = await getMockSubData(mainSubject.categoryid);
@@ -115,7 +106,6 @@ const InputMockRecord = () => {
     <InputMockRecordWrap>
       <ISRHeader>
         <h3>2023 모의 고사 성적 입력(학생이름)</h3>
-        {/* 드롭다운 메뉴 1 */}
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">월 선택</option>
           <option value="3월">3월</option>
