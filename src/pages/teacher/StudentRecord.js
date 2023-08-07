@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StudentRecordDiv } from "../../styles/teacher/StudentRecordStyle";
 import {
   StudentSearchList,
@@ -14,23 +14,21 @@ import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { StudentRecordModal } from "../../components/Modal";
 
 const StudentRecord = () => {
-  // const modal = document.querySelector(".modal");
-
-  useEffect(() => {
-    // closeModal();
-  }, []);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
-    // modal.style.display = "block";
+    setModalOpen(true);
   };
 
   const closeModal = () => {
-    // modal.style.display = "none";
+    setModalOpen(false);
   };
 
   return (
     <>
-      <StudentRecordModal />
+      {modalOpen && (
+        <StudentRecordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      )}
       <StudentRecordDiv>
         <h3>학생 성적 관리</h3>
         <div className="record-wrap">
