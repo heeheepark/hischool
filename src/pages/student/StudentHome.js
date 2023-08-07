@@ -7,7 +7,7 @@ import WeekFoodMenu from "../../components/student/WeekFoodMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { FadeLoader } from "react-spinners";
+// import { FadeLoader } from "react-spinners";
 import Loading from "../../components/Loading";
 
 const StudentHome = () => {

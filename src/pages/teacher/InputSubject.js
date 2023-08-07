@@ -8,6 +8,7 @@ import {
   SJTitle,
 } from "../../styles/teacher/InputSubectStyle";
 import TSubjectPlus from "../../components/teacher/TSubjectPlus";
+import { Link } from "react-router-dom";
 
 const InputSubject = () => {
   return (
@@ -16,7 +17,9 @@ const InputSubject = () => {
         <h3>과목 정보 입력</h3>
         <SJButton>
           <button>저장</button>
-          <button>취소</button>
+          <Link to={`/teacher/inputschoolrecord`}>
+            <button>취소</button>
+          </Link>
         </SJButton>
       </SJHeader>
       <SJTitle>

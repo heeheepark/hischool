@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { IMRinput, ISRinput } from "../../styles/teacher/InputSchoolRecordStyle";
+import {
+  IMRinput,
+  ISRinput,
+} from "../../styles/teacher/InputSchoolRecordStyle";
 
 const TSubJectMock = ({
   id,
@@ -37,12 +40,14 @@ const TSubJectMock = ({
     let updatedValue = filteredValue;
     if (name === "rating") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 9);
+    } else if (name === "percent") {
+      updatedValue = Math.min(parseInt(filteredValue, 10), 100);
     }
     setStudentData(prevData => ({
       ...prevData,
       [name]: updatedValue,
     }));
-    // 데이터를 바로 저장하는 로직 추가 (예시로 콘솔에 출력)
+
     const updatedData = {
       ...studentData,
       [name]: updatedValue,
@@ -57,7 +62,7 @@ const TSubJectMock = ({
         <IMRinput>
           <select
             name="subject"
-            value={studentData?.subject || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            value={studentData?.subject || ""}
             onChange={handleInputChange}
           >
             <option value="">과목 계열 선택</option>
@@ -72,7 +77,7 @@ const TSubJectMock = ({
           </select>
           <select
             name="subjectid"
-            value={studentData?.subjectid || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            value={studentData?.subjectid || ""}
             onChange={handleInputChange}
           >
             <option value="">세부 과목 선택</option>
@@ -91,7 +96,7 @@ const TSubJectMock = ({
           <input
             type="number"
             name="standardscore"
-            value={studentData?.standardscore || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            value={studentData?.standardscore || ""} 
             onChange={handleInputChange}
             placeholder="점수"
             max={100}
