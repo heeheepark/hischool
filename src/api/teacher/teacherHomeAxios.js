@@ -1,9 +1,20 @@
 import axios from "axios";
+// 전교 학생 인원
+export const getAllStudentCount = async setAllStudentCount => {
+  try {
+    const res = await axios.get(`/api/subject/school-snum
+    `);
+    const result = res.data;
+    setAllStudentCount(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 // 학급 총원
 export const getStudentCount = async setStudentCount => {
   try {
-    const res = await axios.get(`/api/teacher/class-student?classid=${2}`);
+    const res = await axios.get(`/api/subject/class-num`);
     const result = res.data;
     setStudentCount(result);
   } catch (err) {

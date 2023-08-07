@@ -12,7 +12,7 @@ const Main = () => {
   const [classNum, setClassNum] = useState(null);
 
   useEffect(() => {
-    getSchoolInfo(setSchoolLogo, setSchoolName, setGrade, setClassNum);
+    getSchoolInfo(setSchoolName, setGrade, setClassNum);
   }, []);
 
   return (
@@ -26,8 +26,8 @@ const Main = () => {
             <div>
               <div className="school-logo">교표</div>
               <span className="school-name">{schoolName}</span>
-              <span className="grade">{grade} 학년</span>
-              <span className="class-num">{classNum} 반</span>
+              <span className="grade">{`${grade} 학년`}</span>
+              <span className="class-num">{`${classNum} 반`}</span>
             </div>
           </Header>
           <Content>

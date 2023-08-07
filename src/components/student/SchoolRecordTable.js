@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { SchoolRecordTableDiv } from "../../styles/student/SchoolRecordStyle";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { getAllSchoolRecord } from "../../api/student/schoolRecordAxios";
-import { getStudentCount } from "../../api/teacher/teacherHomeAxios";
+import {
+  getAllStudentCount,
+  getStudentCount,
+} from "../../api/teacher/teacherHomeAxios";
 
 const SchoolRecordTable = () => {
   const cateList = [
@@ -17,6 +20,7 @@ const SchoolRecordTable = () => {
     "전교석차",
   ];
   const [allSchoolRecord, setAllSchoolRecord] = useState(null);
+  const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
   const [year, setYear] = useState(null);
   const [semester, setSemester] = useState(null);
@@ -25,6 +29,7 @@ const SchoolRecordTable = () => {
   useEffect(() => {
     getAllSchoolRecord(setAllSchoolRecord);
     getStudentCount(setStudentCount);
+    getAllStudentCount(setAllStudentCount);
   }, []);
 
   const handleYearList = e => {
@@ -126,7 +131,7 @@ const SchoolRecordTable = () => {
                   <li>{`${item.classRank}/${
                     studentCount ? studentCount : null
                   }`}</li>
-                  <li>{`${item.wholeRank}/360`}</li>
+                  <li>{`${item.wholeRank}/${allStudentCount}`}</li>
                 </ul>
               </li>
             ))}
