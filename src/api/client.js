@@ -83,7 +83,7 @@ export const fetchLogin = async (email, pw) => {
     });
 
     // 5분 후에 refreshToken 함수 호출
-    setTimeout(refreshToken, 275000);
+    setTimeout(refreshToken, 270000);
 
     return role;
   } catch (error) {

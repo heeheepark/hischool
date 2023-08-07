@@ -1,6 +1,6 @@
-import REACT, { useState } from "react";
-import DaumPostcode from "react-daum-postcode";
 import "../styles/DaumPostStyle";
+import { useEffect } from "react";
+import { PostWrap } from "../styles/DaumPostStyle";
 
 const DaumPost = props => {
   const complete = data => {
@@ -21,15 +21,20 @@ const DaumPost = props => {
     console.log(fullAddress);
     console.log(data.zonecode);
 
-    props.setcompany({
+    props.setHouseAddress({
       ...props.company,
       address: fullAddress,
     });
+    props.onComplete(); // 주소 선택이 완료되면 호출하여 모달을 닫습니다.
   };
+  useEffect(() => {
+    // enroll_company 상태가 변경될 때마다 input에 값을 반영
+    document.getElementById("address-input").value = props.company.address;
+  }, [props.company.address]);
 
   return (
     <div>
-      <DaumPostcode className="postmodal" autoClose onComplete={complete} />
+      <PostWrap className="postmodal" autoClose onComplete={complete} />
     </div>
   );
 };
