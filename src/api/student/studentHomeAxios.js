@@ -1,6 +1,55 @@
 import axios from "axios";
 
-// Student 메인 홈
+// 내신 성적 현황
+const getAllSchoolRecord = async setAllSchoolRecordData => {
+  try {
+    const res = await axios.get(`/api/student/aca-graph`);
+    const result = res.data;
+    setAllSchoolRecordData(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getRecentSchoolRecord = async (
+  setRecentSchoolRecordData,
+  setRecentTestTitle,
+) => {
+  try {
+    const res = await axios.get(`/api/student/aca-latest`);
+    const result = res.data;
+    setRecentSchoolRecordData(result.list);
+    setRecentTestTitle(result.date.split("-"));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 모의고사 성적 현황
+const getAllMockRecord = async setAllMockRecordData => {
+  try {
+    const res = await axios.get(`/api/student/mock-graph`);
+    const result = res.data;
+    setAllMockRecordData(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getRecentMockRecord = async (
+  setRecentMockRecordData,
+  setRecentTestTitle,
+) => {
+  try {
+    const res = await axios.get(`/api/student/mock-currentrating`);
+    const result = res.data;
+    setRecentMockRecordData(result.list);
+    setRecentTestTitle(result.date.split("-"));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // 주간 급식표
 const getWeekFood = async setWeekMenuData => {
   try {
@@ -27,4 +76,11 @@ const getTimeTable = async setTimeTable => {
   }
 };
 
-export { getWeekFood, getTimeTable };
+export {
+  getAllSchoolRecord,
+  getRecentSchoolRecord,
+  getAllMockRecord,
+  getRecentMockRecord,
+  getWeekFood,
+  getTimeTable,
+};

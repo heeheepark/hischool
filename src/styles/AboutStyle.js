@@ -4,20 +4,20 @@ export const AboutDiv = styled.div`
   width: 100%;
   height: 100%;
   background: #f7f7f7;
-  padding: 30px;
+  padding: 55px 30px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column nowrap;
-  gap: 50px;
+  gap: 80px;
   h3 {
     color: #176b87;
-    font-size: 27px;
+    font-size: 30px;
     margin-bottom: 20px;
   }
   .service-info-wrap {
     width: 100%;
     p {
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.7;
       margin-bottom: 18px;
       .info-message {
@@ -37,9 +37,17 @@ export const AboutDiv = styled.div`
         margin-bottom: 30px;
         > p {
           font-size: 18px;
-          > span {
-            :not(:last-of-type) {
-              margin-right: 5px;
+          a {
+            margin-right: 20px;
+            font-weight: 600;
+            > span {
+              :not(:last-of-type) {
+                margin-right: 10px;
+              }
+              > img {
+                width: 30px;
+                height: 30px;
+              }
             }
           }
         }
@@ -57,8 +65,8 @@ export const AboutDiv = styled.div`
           display: flex;
           align-items: center;
           > img {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: gray;
           }
@@ -67,18 +75,25 @@ export const AboutDiv = styled.div`
             > div {
               .member-name {
                 display: inline-block;
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 600;
                 margin-right: 10px;
                 margin-bottom: 5px;
               }
               .icons {
                 display: inline-block;
+                vertical-align: top;
+                a {
+                  img {
+                    width: 24px;
+                    height: 24px;
+                  }
+                }
               }
             }
             span {
               display: block;
-              font-size: 15px;
+              font-size: 16px;
             }
           }
         }

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 내신 성적 페이지
 export const getHighestSchoolRecord = async setHighestSchoolRecord => {
   try {
     const res = await axios.get(`/api/student/aca-highest`);
@@ -41,11 +40,9 @@ export const getAllSchoolRecord = async (
     apiUrl = `/api/student/aca-table`;
   }
 
-  console.log(apiUrl);
   try {
     const res = await axios.get(apiUrl);
     const result = res.data;
-    // console.log(result);
     setAllSchoolRecord(result);
   } catch (err) {
     console.log(err);

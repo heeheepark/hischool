@@ -1,6 +1,5 @@
 import axios from "axios";
 
-//FoodMenuList;
 const getMonthFood = async setFoodMenuList => {
   try {
     const res = await axios.get(`/api/meal`);
