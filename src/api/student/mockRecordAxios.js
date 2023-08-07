@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 모의고사 성적 페이지
 export const getHighestMockRecord = async setHighestMockRecord => {
   try {
     const res = await axios.get(`/api/student/mock-highrating`);

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Student 메인 홈
 // 내신 성적 현황
 const getAllSchoolRecord = async setAllSchoolRecordData => {
   try {
