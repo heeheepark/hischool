@@ -11,12 +11,16 @@ import {
 import { useNavigate } from "react-router";
 import DaumPost from "../../components/DaumPost";
 import { useEffect } from "react";
-import { postSignUp } from "../../api/signUpAxios";
+import {
+  postSignUp,
+  postEmail,
+  postEmailCodeConFirm,
+} from "../../api/signUpAxios";
 import Modal from "../../components/Modal";
 import ConFirm from "../../components/ConFirm";
 
 const SignUp = () => {
-  const [userType, setUserType] = useState("student");
+  const [userType, setUserType] = useState("STD");
   const [idEmail, setIdEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -34,7 +38,40 @@ const SignUp = () => {
   const [aprPic, setAprPic] = useState("");
   const [popup, setPopup] = useState(false);
   const [codeConFirm, setCodeConFirm] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const birthFormatter = num => {
+    if (!num) {
+      return "";
+    }
+    var formatNum = "";
+    num = num.replace(/\s/gi, "");
+    if (num.length === 8) {
+      formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+    } else {
+      formatNum = num;
+    }
+    return formatNum;
+  };
+
+  const phoneFormatter = num => {
+    try {
+      num = num.replace(/\s/gi, ""); // 공백 제거
+
+      if (num.length === 11) {
+        return num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+      } else if (num.length === 10) {
+        return num.replace(/(\d{3})(\d{4})(\d{3})/, "$1-$2-$3");
+      } else if (/^02/.test(num) && num.length === 9) {
+        return num.replace(/(\d{2})(\d{3})(\d{4})/, "$1-$2-$3");
+      } else {
+        return num;
+      }
+    } catch (e) {
+      return num;
+    }
+  };
 
   useEffect(() => {
     const addressInput = document.getElementById("address-input");
@@ -44,15 +81,17 @@ const SignUp = () => {
   }, [houseAddress.address]);
 
   const handleCodeConfirm = () => {
-    setCodeConFirm(prev => !prev);
+    postEmailCodeConFirm(idEmail);
   };
 
   const handleModalOpen = () => {
     setPopup(true);
+    setCodeConFirm(true);
   };
 
   const handleModalClose = () => {
     setPopup(false);
+    setCodeConFirm(false);
   };
 
   const handleInput = e => {
@@ -107,6 +146,21 @@ const SignUp = () => {
     navigate("/");
   };
 
+  const formattedBirth = birthFormatter(birth);
+  const formattedPhone = phoneFormatter(phone);
+
+  // ConFirm 컴포넌트가 닫힐 때 호출되는 콜백 함수
+  const handleConFirmClose = () => {
+    setConfirmModalOpen(false);
+    setCodeConFirm(false);
+  };
+
+  // ConFirm 컴포넌트에서 확인 버튼 클릭 시 호출되는 콜백 함수
+  const handleConFirmConfirm = () => {
+    // 필요한 작업 수행
+    handleConFirmClose(); // 모달 닫기
+  };
+
   return (
     <SignUpWrap>
       <IntroImage>
@@ -121,8 +175,8 @@ const SignUp = () => {
                 type="radio"
                 id="teacher"
                 name="userType"
-                value="teacher"
-                checked={userType === "teacher"}
+                value="TC"
+                checked={userType === "TC"}
                 onChange={handleUserTypeChange}
               />
               <label htmlFor="teacher">선생님</label>
@@ -130,8 +184,8 @@ const SignUp = () => {
                 type="radio"
                 id="student"
                 name="userType"
-                value="student"
-                checked={userType === "student"}
+                value="STD"
+                checked={userType === "STD"}
                 onChange={handleUserTypeChange}
               />
               <label htmlFor="student">학생</label>
@@ -147,18 +201,28 @@ const SignUp = () => {
                   <ul>
                     <li className="big-input">
                       <label>이메일</label>
-                      <button type="button" onClick={handleCodeConfirm}>
-                        인증
-                      </button>
+                      <div>
+                        <input
+                          type="email"
+                          style={{ display: "inline-block" }}
+                          value={idEmail}
+                          onChange={e => setIdEmail(e.target.value)}
+                        ></input>
+                        <span onClick={handleCodeConfirm}>인증</span>
+                      </div>
                       {codeConFirm && (
                         <Modal
                           isOpen={codeConFirm}
                           onRequestClose={handleModalClose}
+                          onAfterOpen={handleCodeConfirm}
                         >
-                          <ConFirm />
+                          <ConFirm
+                            emailConFirm={idEmail}
+                            onClose={handleConFirmClose}
+                            onConfirm={handleConFirmConfirm}
+                          />
                         </Modal>
                       )}
-                      <input type="text"></input>
                     </li>
                     <li className="big-input">
                       <label>비밀번호</label>
@@ -217,7 +281,7 @@ const SignUp = () => {
                       <label>생년월일</label>
                       <input
                         type="text"
-                        value={birth}
+                        value={formattedBirth}
                         onChange={e => setBirth(e.target.value)}
                       />
                     </li>
@@ -225,12 +289,12 @@ const SignUp = () => {
                       <label>연락처</label>
                       <input
                         type="text"
-                        value={phone}
+                        value={formattedPhone}
                         onChange={e => setPhone(e.target.value)}
                       />
                     </li>
                     <li className="big-input">
-                      <label>주소입력</label>
+                      <label>주소</label>
                       <input
                         className="user_enroll_text"
                         id="address-input"
@@ -257,7 +321,7 @@ const SignUp = () => {
                       )}
                     </li>
                     <li className="big-input">
-                      <label>상세주소 입력</label>
+                      <label>상세주소</label>
                       <input
                         type="text"
                         value={detailAddress}

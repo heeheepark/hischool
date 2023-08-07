@@ -3,7 +3,6 @@ import { getCookie, setCookie } from "./cookie";
 
 export const client = axios.create({
   baseURL: "http://localhost:3000",
-  timeout: 1000,
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
   },
@@ -37,6 +36,7 @@ const refreshToken = async () => {
         sameSite: "none",
         httpOnly: true,
       });
+      console.log("Access token has been updated:", result);
       processFailedQueue(null, result);
     } else {
       console.log("토큰 갱신 실패");
@@ -83,7 +83,8 @@ export const fetchLogin = async (email, pw) => {
     });
 
     // 5분 후에 refreshToken 함수 호출
-    setTimeout(refreshToken, 270000);
+    // setInterval(refreshToken, 1200000);
+    setInterval(refreshToken, 600000);
 
     return role;
   } catch (error) {
