@@ -77,28 +77,41 @@ export const SignUpUl = styled.ul`
   .big-input {
     input {
       display: block;
-      width: 300px;
+      width: 21vw;
       height: 35px;
-      padding-left: 20px;
-      padding-right: 20px;
-      border-radius: 20px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding-left: 10px;
+      margin-right: 5px;
       font-size: 18px;
     }
   }
+  span {
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 4px;
+    background: #176b87;
+    cursor: pointer;
+  }
   .small-input {
     display: flex;
-    justify-content: space-between;
     div {
       display: flex;
       flex-direction: column;
       input {
         display: block;
-        font-size: 18px;
-        width: 135px;
+        width: 10.4vw;
         height: 35px;
-        padding-left: 15px;
-        padding-right: 15px;
-        border-radius: 20px;
+        border: 1px solid #bbb;
+        border-radius: 4px;
+        padding-left: 10px;
+        margin-right: 5px;
+        font-size: 18px;
       }
     }
   }

@@ -2,12 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   TcButtons,
-  TcMyPageDownInfo,
-  TcMyPageLeftInfo,
   TcMyPageRightInfo,
   TcMyPageUserInfo,
-  TcMyPageSchoolInfo,
-  TcMyPageTopInfo,
   TcMyPageWrap,
 } from "../../styles/teacher/TeacherMyPageStyle";
 import axios from "axios";
