@@ -52,7 +52,6 @@ const SideMenu = () => {
         <p>
           <span className="user-icon">
             <FontAwesomeIcon icon={faUser} />
-            {/* <FontAwesomeIcon icon={faUserTie} /> */}
           </span>
           <ins onClick={() => navigate(`/${user}/mypage`)}>
             <span className="user-name">{`${userName}`}</span>
@@ -126,6 +125,18 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faLock} className="arrow" />
                   </li>
                 </NavLink>
+                <NavLink
+                  to={`${user}/about`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faCircleInfo} className="icon" />
+                    <span>Hi School ?</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
               </>
             ) : (
               <>
@@ -170,6 +181,18 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faCommentDots} className="icon" />
                     <span>커뮤니티</span>
                     <FontAwesomeIcon icon={faLock} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`${user}/about`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faCircleInfo} className="icon" />
+                    <span>Hi School ?</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>
               </>

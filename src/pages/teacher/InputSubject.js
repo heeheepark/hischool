@@ -1,23 +1,22 @@
 import { faFloppyDisk, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { SJButton, SJHeader, SJTitle } from "../../styles/teacher/InputSubect";
+import {
+  InputSubJectWrap,
+  SJButton,
+  SJHeader,
+  SJTitle,
+} from "../../styles/teacher/InputSubectStyle";
 import TSubjectPlus from "../../components/teacher/TSubjectPlus";
 
 const InputSubject = () => {
   return (
-    <>
+    <InputSubJectWrap>
       <SJHeader>
-        <h1>과목 정보 입력창</h1>
+        <h3>과목 정보 입력</h3>
         <SJButton>
-          <button>
-            저장
-            <FontAwesomeIcon icon={faFloppyDisk} />
-          </button>
-          <button>
-            취소
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
+          <button>저장</button>
+          <button>취소</button>
         </SJButton>
       </SJHeader>
       <SJTitle>
@@ -27,7 +26,7 @@ const InputSubject = () => {
       <div>
         <TSubjectPlus />
       </div>
-    </>
+    </InputSubJectWrap>
   );
 };
 

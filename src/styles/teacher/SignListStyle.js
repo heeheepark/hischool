@@ -14,13 +14,11 @@ const StudentListTitle = styled.div`
   align-items: center;
   padding: 20px 0 10px 0;
   h3 {
-    font-size: 35px;
-    padding-left: 20px;
+    font-size: 30px;
+    margin-bottom: 5px;
   }
   .ListButtons {
     display: flex;
-
-    margin-right: 20px;
     gap: 5px;
     button {
       width: 2.5vw;
@@ -30,6 +28,11 @@ const StudentListTitle = styled.div`
       border: 1px solid #bbb;
       border-radius: 3px;
       cursor: pointer;
+      :first-of-type {
+        background: #176b87;
+        color: #fff;
+        border: 0;
+      }
     }
   }
 `;

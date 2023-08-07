@@ -21,3 +21,4 @@ const Modal = ({ isOpen, onRequestClose, children }) => {
 };
 
 export default Modal;
+
