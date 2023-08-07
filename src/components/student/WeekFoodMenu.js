@@ -4,8 +4,24 @@ import { getWeekFood } from "../../api/student/studentHomeAxios";
 
 const WeekFoodMenu = () => {
   const [weekMenuData, setWeekMenuData] = useState(null);
-  const dayList = ["일", "월", "화", "수", "목", "금", "토"];
-  const defaultArray = [{}, {}, {}, {}, {}, {}, {}];
+  const dayList = [
+    { id: "일요일", data: "일" },
+    { id: "월요일", data: "월" },
+    { id: "화요일", data: "화" },
+    { id: "수요일", data: "수" },
+    { id: "목요일", data: "목" },
+    { id: "금요일", data: "금" },
+    { id: "토요일", data: "토" },
+  ];
+  const defaultArray = [
+    { id: "sun", data: "" },
+    { id: "mon", data: "" },
+    { id: "tue", data: "" },
+    { id: "wed", data: "" },
+    { id: "thu", data: "" },
+    { id: "fri", data: "" },
+    { id: "sat", data: "" },
+  ];
 
   // 요일 구하기
   const getDayOfWeek = weektest => {
@@ -18,14 +34,13 @@ const WeekFoodMenu = () => {
     weekMenuData
       ? weekMenuData.forEach(dayMenu => {
           if (getDayOfWeek(dayMenu.date) === index) {
-            item = dayMenu;
+            item.data = dayMenu;
           }
         })
       : "";
-    return item;
+    return { ...item };
   });
 
-  // console.log(newMenuList);
   useEffect(() => {
     getWeekFood(setWeekMenuData);
   }, []);
@@ -35,23 +50,23 @@ const WeekFoodMenu = () => {
       <ul>
         <li className="day-list">
           <ul>
-            {dayList.map((item, index) => (
-              <li className="day" key={index}>
-                {item}
+            {dayList.map(item => (
+              <li className="day" key={item.id}>
+                {item.data}
               </li>
             ))}
           </ul>
         </li>
         <li className="lunch-menu-list">
           <ul>
-            {newMenuList.map((item, index) => {
-              if (item.menuOftheDay) {
+            {newMenuList.map(item => {
+              if (item.data.menuOftheDay) {
                 return (
-                  <li className="menu" key={index}>
-                    <span className="menu-type">{item.lunchOrDinner}</span>
+                  <li className="menu" key={item.id}>
+                    <span className="menu-type">{item.data.lunchOrDinner}</span>
                     <p>
-                      {item.menuOftheDay
-                        ? item.menuOftheDay.map((item, index) => (
+                      {item.data.menuOftheDay
+                        ? item.data.menuOftheDay.map((item, index) => (
                             <span key={index}>{item}</span>
                           ))
                         : ""}
@@ -60,7 +75,7 @@ const WeekFoodMenu = () => {
                 );
               } else {
                 return (
-                  <li className="menu" key={index}>
+                  <li className="menu" key={item.id}>
                     <p>
                       <span>-</span>
                     </p>
@@ -72,7 +87,7 @@ const WeekFoodMenu = () => {
         </li>
         <li className="dinner-menu-list">
           <ul>
-            {newMenuList.map(item => {
+            {newMenuList.map((item, index) => {
               if (item.lunchOrDinner === "석식") {
                 return (
                   <li className="menu" key={item.date}>
@@ -89,10 +104,8 @@ const WeekFoodMenu = () => {
                 );
               } else {
                 return (
-                  <li className="menu" key={item.date}>
-                    <p>
-                      <span>-</span>
-                    </p>
+                  <li className="menu" key={index}>
+                    <p>-</p>
                   </li>
                 );
               }

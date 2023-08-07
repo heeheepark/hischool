@@ -15,229 +15,91 @@ import {
   getHighestSchoolRecord,
 } from "../../api/student/schoolRecordAxios";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
+import { getAllSchoolRecord } from "../../api/student/studentHomeAxios";
 
 const SchoolRecord = () => {
   const [userName, setUserName] = useState(null);
   const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
   const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
+  const [allSchoolRecordData, setAllSchoolRecordData] = useState(null);
 
   useEffect(() => {
     getUserInfo(setUserName);
     getHighestSchoolRecord(setHighestSchoolRecord);
     getCurrentSchoolRecord(setCurrentSchoolRecord);
+    getAllSchoolRecord(setAllSchoolRecordData);
   }, []);
 
-  const data = [
-    {
-      id: "한국사",
-      color: "hsl(231, 100%, 59%)",
-      data: [
-        {
-          x: `2021-1 중간`,
-          y: 4,
-        },
-        {
-          x: "2021-1 기말",
-          y: 4,
-        },
-        {
-          x: "2021-2 중간",
-          y: 5,
-        },
-        {
-          x: "2021-2 기말",
-          y: 4,
-        },
-        {
-          x: "2022-1 중간",
-          y: 3,
-        },
-        {
-          x: "2022-1 기말",
-          y: 2,
-        },
-        {
-          x: "2022-2 중간",
-          y: 2,
-        },
-        {
-          x: "2022-2 기말",
-          y: 2,
-        },
-      ],
-    },
-    {
-      id: "영어",
-      color: "hsl(213, 70%, 50%)",
-      data: [
-        {
-          x: `2021-1 중간`,
-          y: 3,
-        },
-        {
-          x: "2021-1 기말",
-          y: 2,
-        },
-        {
-          x: "2021-2 중간",
-          y: 2,
-        },
-        {
-          x: "2021-2 기말",
-          y: 1,
-        },
-        {
-          x: "2022-1 중간",
-          y: 2,
-        },
-        {
-          x: "2022-1 기말",
-          y: 2,
-        },
-        {
-          x: "2022-2 중간",
-          y: 1,
-        },
-        {
-          x: "2022-2 기말",
-          y: 2,
-        },
-      ],
-    },
-    {
-      id: "수학",
-      color: "hsl(342, 70%, 50%)",
-      data: [
-        {
-          x: `2021-1 중간`,
-          y: 1,
-        },
-        {
-          x: "2021-1 기말",
-          y: 5,
-        },
-        {
-          x: "2021-2 중간",
-          y: 3,
-        },
-        {
-          x: "2021-2 기말",
-          y: 2,
-        },
-        {
-          x: "2022-1 중간",
-          y: 2,
-        },
-        {
-          x: "2022-1 기말",
-          y: 1,
-        },
-        {
-          x: "2022-2 중간",
-          y: 1,
-        },
-        {
-          x: "2022-2 기말",
-          y: 1,
-        },
-      ],
-    },
-    {
-      id: "국어",
-      color: "hsl(45, 70%, 50%)",
-      data: [
-        {
-          x: `2021-1 중간`,
-          y: 1,
-        },
-        {
-          x: "2021-1 기말",
-          y: 2,
-        },
-        {
-          x: "2021-2 중간",
-          y: 3,
-        },
-        {
-          x: "2021-2 기말",
-          y: 2,
-        },
-        {
-          x: "2022-1 중간",
-          y: 1,
-        },
-        {
-          x: "2022-1 기말",
-          y: 1,
-        },
-        {
-          x: "2022-2 중간",
-          y: 3,
-        },
-        {
-          x: "2022-2 기말",
-          y: 1,
-        },
-        // {
-        //   x: "2023-1 중간",
-        //   y: 1,
-        // },
-        // {
-        //   x: "2023-1 기말",
-        //   y: 1,
-        // },
-        // {
-        //   x: "2023-2 중간",
-        //   y: 3,
-        // },
-        // {
-        //   x: "2023-2 기말",
-        //   y: 1,
-        // },
-      ],
-    },
+  // 내신 차트 데이터
+  const subject = ["한국사", "영어", "수학", "국어"];
+  const chartColor = [
+    "hsl(231, 100%, 59%)",
+    "hsl(45, 70%, 50%)",
+    "hsl(342, 70%, 50%)",
+    "hsl(213, 70%, 50%)",
   ];
+  const ratingList = allSchoolRecordData?.map(item => parseInt(item.rating));
+  const highGrade = ratingList?.reduce((a, b) => {
+    return Math.max(a, b);
+  });
+  const gradeArray = Array.from({ length: highGrade }, (_, index) => index + 1);
+  const newSchoolRecordData = Array(4)
+    .fill()
+    .map((_, index) => {
+      const data = allSchoolRecordData
+        ?.filter(originRecord => originRecord.nm === subject[index])
+        .map(item => {
+          return {
+            x: item.date,
+            y: parseInt(item.rating),
+          };
+        });
+      return { id: subject[index], color: chartColor[index], data };
+    });
+
   return (
     <SchoolRecordDiv>
       <h3>내신 성적 관리</h3>
       <ChartWrap>
         <div className="chart">
-          <ResponsiveLine
-            data={data}
-            margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "1",
-              max: "5",
-              stacked: false,
-              reverse: true,
-            }}
-            axisLeft={{ tickValues: [1, 2, 3, 4, 5] }}
-            gridYValues={[1, 2, 3, 4, 5]}
-            colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
-            lineWidth={3}
-            pointSize={5}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={3}
-            pointBorderColor={{ from: "serieColor" }}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 60,
-                itemDirection: "left-to-right",
-                itemWidth: 70,
-                itemHeight: 20,
-                itemOpacity: 1,
-                symbolSize: 12,
-                symbolShape: "circle",
-              },
-            ]}
-          />
+          {allSchoolRecordData ? (
+            <ResponsiveLine
+              data={newSchoolRecordData}
+              margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
+              xScale={{ type: "point" }}
+              yScale={{
+                type: "linear",
+                min: "1",
+                max: highGrade,
+                stacked: false,
+                reverse: true,
+              }}
+              axisLeft={{ tickValues: gradeArray }}
+              gridYValues={gradeArray}
+              colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
+              lineWidth={3}
+              pointSize={5}
+              pointColor={{ theme: "background" }}
+              pointBorderWidth={3}
+              pointBorderColor={{ from: "serieColor" }}
+              useMesh={true}
+              legends={[
+                {
+                  anchor: "bottom",
+                  direction: "row",
+                  justify: false,
+                  translateX: 0,
+                  translateY: 55,
+                  itemDirection: "left-to-right",
+                  itemWidth: 70,
+                  itemHeight: 20,
+                  itemOpacity: 1,
+                  symbolSize: 12,
+                  symbolShape: "circle",
+                },
+              ]}
+            />
+          ) : null}
         </div>
         <div className="record-text">
           <p>

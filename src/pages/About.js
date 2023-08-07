@@ -1,5 +1,8 @@
 import { AboutDiv } from "../styles/AboutStyle";
 import userImg from "../assets/gangdongwon.jpeg";
+import canvaImg from "../assets/canva-logo.png";
+import githubImg from "../assets/github-logo.png";
+import notionImg from "../assets/Notion-logo.png";
 
 const About = () => {
   return (
@@ -30,7 +33,7 @@ const About = () => {
           </span>
           <br />
           <span className="info-message">
-            ※ 커뮤니티 서비스는 추후 업데이트될 예정입니다.
+            ※ 커뮤니티 기능은 추후 업데이트될 예정입니다.
           </span>
         </p>
       </div>
@@ -38,14 +41,18 @@ const About = () => {
         <h3>서비스를 만든 사람들</h3>
         <div className="team-info">
           <p>
-            <span>
-              <img src="" alt="노션 아이콘" />
-            </span>
-            <span>팀 노션 바로가기 /</span>
-            <span>
-              <img src="" alt="캔바 아이콘" />
-            </span>
-            <span>프로젝트 발표 자료 바로가기</span>
+            <a href="">
+              <span>
+                <img src={notionImg} alt="노션 아이콘" />
+              </span>
+              <span>팀 노션</span>
+            </a>
+            <a href="">
+              <span>
+                <img src={canvaImg} alt="캔바 아이콘" />
+              </span>
+              <span>프로젝트 발표 자료</span>
+            </a>
           </p>
         </div>
         <h4>Front-end</h4>
@@ -58,7 +65,11 @@ const About = () => {
                   <span className="member-name">박주희</span>
                   <div className="icons">
                     <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
@@ -77,8 +88,16 @@ const About = () => {
                 <div>
                   <span className="member-name">견기성</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                    <a
+                      href="https://github.com/gyeongisung"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
@@ -96,8 +115,16 @@ const About = () => {
                 <div>
                   <span className="member-name">박호진</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                    <a
+                      href="https://github.com/devicepac"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
@@ -114,11 +141,6 @@ const About = () => {
               <div>
                 <div>
                   <span className="member-name">신지호</span>
-                  <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
-                    </a>
-                  </div>
                 </div>
                 <span className="roles">
                   내신 점수 / 모의고사 점수 / <br />
@@ -137,14 +159,22 @@ const About = () => {
                 <div>
                   <span className="member-name">성수천</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                    <a
+                      href="https://github.com/sucheo"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
                 <span className="roles">
-                  기본 UI / 지도 페이지 /<br />
-                  여행 일정 등록·수정 페이지 / 노션 관리
+                  선생님 메인 / 급식표 / 과목 정보 입력 /<br />
+                  내신 성적 입력 / 모의고사 성적 입력
                 </span>
               </div>
             </div>
@@ -156,14 +186,22 @@ const About = () => {
                 <div>
                   <span className="member-name">남규진</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                    <a
+                      href="https://github.com/Minami0717"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
                 <span className="roles">
-                  기본 UI / 지도 페이지 /<br />
-                  여행 일정 등록·수정 페이지 / 노션 관리
+                  로그인 / 회원가입
+                  <br />
                 </span>
               </div>
             </div>
@@ -176,13 +214,17 @@ const About = () => {
                   <span className="member-name">노정민</span>
                   <div className="icons">
                     <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
                 <span className="roles">
-                  기본 UI / 지도 페이지 /<br />
-                  여행 일정 등록·수정 페이지 / 노션 관리
+                  Notion / 마이페이지 / 학생 관리 <br />
+                  가입 대기 명단 / 성적 관리
                 </span>
               </div>
             </div>
@@ -195,13 +237,17 @@ const About = () => {
                   <span className="member-name">석민경</span>
                   <div className="icons">
                     <a href="" rel="noreferrer" target="_blank">
-                      <img src="" alt="깃허브 바로가기" className="github" />
+                      <img
+                        src={githubImg}
+                        alt="깃허브 바로가기"
+                        className="github"
+                      />
                     </a>
                   </div>
                 </div>
                 <span className="roles">
-                  기본 UI / 지도 페이지 /<br />
-                  여행 일정 등록·수정 페이지 / 노션 관리
+                  학생 메인 / 내신 점수 / 모의고사 점수 /<br />
+                  주간, 월간 급식표 / 시간표
                 </span>
               </div>
             </div>

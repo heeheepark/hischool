@@ -11,10 +11,10 @@ import {
 } from "../../components/student/Filter";
 import { Link } from "react-router-dom";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
-// import { StudentRecordModal } from "../../components/Modal";
+import { StudentRecordModal } from "../../components/Modal";
 
 const StudentRecord = () => {
-  const modal = document.querySelector(".modal");
+  // const modal = document.querySelector(".modal");
 
   useEffect(() => {
     // closeModal();
@@ -30,7 +30,7 @@ const StudentRecord = () => {
 
   return (
     <>
-      {/* <StudentRecordModal /> */}
+      <StudentRecordModal />
       <StudentRecordDiv>
         <h3>학생 성적 관리</h3>
         <div className="record-wrap">

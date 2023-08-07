@@ -15,7 +15,7 @@ export const getCurrentMockRecord = async setCurrentMockRecord => {
   try {
     const res = await axios.get(`/api/student/mock-currentrating`);
     const result = res.data;
-    // setCurrentMockRecord(result);
+    setCurrentMockRecord(result);
   } catch (err) {
     console.log(err);
   }

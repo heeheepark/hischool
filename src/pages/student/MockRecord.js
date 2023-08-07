@@ -14,177 +14,93 @@ import {
   getCurrentMockRecord,
   getHighestMockRecord,
 } from "../../api/student/mockRecordAxios";
+import { getAllMockRecord } from "../../api/student/studentHomeAxios";
 
 const MockRecord = () => {
   const [userName, setUserName] = useState(null);
   const [highestMockRecord, setHighestMockRecord] = useState(null);
   const [currentMockRecord, setCurrentMockRecord] = useState(null);
+  const [allMockRecordData, setAllMockRecordData] = useState(null);
+
+  console.log(currentMockRecord);
 
   useEffect(() => {
     getUserInfo(setUserName);
     getHighestMockRecord(setHighestMockRecord);
     getCurrentMockRecord(setCurrentMockRecord);
+    getAllMockRecord(setAllMockRecordData);
   }, []);
 
-  const data = [
-    {
-      id: "한국사",
-      data: [
-        {
-          x: `2023년 3월`,
-          y: 1,
-        },
-        {
-          x: "2023년 4월",
-          y: 2,
-        },
-        {
-          x: "2023년 6월",
-          y: 3,
-        },
-        {
-          x: "2023년 9월",
-          y: 2,
-        },
-        {
-          x: "2023년 10월",
-          y: 1,
-        },
-        {
-          x: "2023년 11월",
-          y: 1,
-        },
-      ],
-    },
-    {
-      id: "영어",
-      data: [
-        {
-          x: `2023년 3월`,
-          y: 4,
-        },
-        {
-          x: "2023년 4월",
-          y: 3,
-        },
-        {
-          x: "2023년 6월",
-          y: 3,
-        },
-        {
-          x: "2023년 9월",
-          y: 5,
-        },
-        {
-          x: "2023년 10월",
-          y: 4,
-        },
-        {
-          x: "2023년 11월",
-          y: 4,
-        },
-      ],
-    },
-    {
-      id: "수학",
-      data: [
-        {
-          x: `2023년 3월`,
-          y: 2,
-        },
-        {
-          x: "2023년 4월",
-          y: 2,
-        },
-        {
-          x: "2023년 6월",
-          y: 3,
-        },
-        {
-          x: "2023년 9월",
-          y: 3,
-        },
-        {
-          x: "2023년 10월",
-          y: 2,
-        },
-        {
-          x: "2023년 11월",
-          y: 2,
-        },
-      ],
-    },
-    {
-      id: "국어",
-      data: [
-        {
-          x: `2023년 3월`,
-          y: 3,
-        },
-        {
-          x: "2023년 4월",
-          y: 1,
-        },
-        {
-          x: "2023년 6월",
-          y: 2,
-        },
-        {
-          x: "2023년 9월",
-          y: 4,
-        },
-        {
-          x: "2023년 10월",
-          y: 3,
-        },
-        {
-          x: "2023년 11월",
-          y: 3,
-        },
-      ],
-    },
+  // 모의고사 차트 데이터
+  const subject = ["한국사", "영어", "수학", "국어"];
+  const chartColor = [
+    "hsl(231, 100%, 59%)",
+    "hsl(45, 70%, 50%)",
+    "hsl(342, 70%, 50%)",
+    "hsl(213, 70%, 50%)",
   ];
+  const ratingList = allMockRecordData?.map(item => parseInt(item.rating));
+  const highGrade = ratingList?.reduce((a, b) => {
+    return Math.max(a, b);
+  });
+  const gradeArray = Array.from({ length: highGrade }, (_, index) => index + 1);
+  const newMockRecordData = Array(4)
+    .fill()
+    .map((_, index) => {
+      const data = allMockRecordData
+        ?.filter(originRecord => originRecord.nm === subject[index])
+        .map(item => {
+          return {
+            x: item.date,
+            y: parseInt(item.rating),
+          };
+        });
+      return { id: subject[index], color: chartColor[index], data };
+    });
+
   return (
     <MockRecordDiv>
       <h3>모의고사 성적 관리</h3>
       <ChartWrap>
         <div className="chart">
-          <ResponsiveLine
-            data={data}
-            margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "1",
-              max: "5",
-              stacked: false,
-              reverse: true,
-            }}
-            axisLeft={{ tickValues: [1, 2, 3, 4, 5] }}
-            gridYValues={[1, 2, 3, 4, 5]}
-            colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
-            lineWidth={3}
-            pointSize={5}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={3}
-            pointBorderColor={{ from: "serieColor" }}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 60,
-                itemDirection: "left-to-right",
-                itemWidth: 70,
-                itemHeight: 20,
-                itemOpacity: 1,
-                symbolSize: 12,
-                symbolShape: "circle",
-              },
-            ]}
-          />
+          {allMockRecordData ? (
+            <ResponsiveLine
+              data={newMockRecordData}
+              margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
+              xScale={{ type: "point" }}
+              yScale={{
+                type: "linear",
+                min: "1",
+                max: highGrade,
+                stacked: false,
+                reverse: true,
+              }}
+              axisLeft={{ tickValues: gradeArray }}
+              gridYValues={gradeArray}
+              colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
+              lineWidth={3}
+              pointSize={5}
+              pointColor={{ theme: "background" }}
+              pointBorderWidth={3}
+              pointBorderColor={{ from: "serieColor" }}
+              useMesh={true}
+              legends={[
+                {
+                  anchor: "bottom",
+                  direction: "row",
+                  justify: false,
+                  translateX: 0,
+                  translateY: 55,
+                  itemDirection: "left-to-right",
+                  itemWidth: 70,
+                  itemHeight: 20,
+                  itemOpacity: 1,
+                  symbolSize: 12,
+                  symbolShape: "circle",
+                },
+              ]}
+            />
+          ) : null}
         </div>
         <div className="record-text">
           <p>
@@ -208,7 +124,7 @@ const MockRecord = () => {
             <div className="current-record-text">
               <span>현재 모의고사 등급</span>
               <div>
-                {currentMockRecord?.map((item, index) => (
+                {currentMockRecord?.list.map((item, index) => (
                   <p key={index}>
                     <span className="subject-title">{item.nm}</span>
                     <span className="grade-num">{item.rating}</span>
