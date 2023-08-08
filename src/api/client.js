@@ -84,7 +84,7 @@ export const fetchLogin = async (email, pw) => {
 
     // 5분 후에 refreshToken 함수 호출
     // setInterval(refreshToken, 1200000);
-    setInterval(refreshToken, 60000);
+    setInterval(refreshToken, 40000);
 
     return role;
   } catch (error) {

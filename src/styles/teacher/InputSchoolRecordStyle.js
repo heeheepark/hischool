@@ -104,7 +104,6 @@ const ISRinput = styled.div`
   width: 100%;
   height: 40px;
   font-size: 18px;
-  color: #fff;
   margin-bottom: 10px;
   > select {
     margin: 0 auto;
@@ -122,12 +121,22 @@ const ISRinput = styled.div`
     border-radius: 3px;
     height: 25px;
     text-align: center;
-    :nth-of-type(3) {
-      width: 85px;
-    }
-    :nth-of-type(4) {
-      width: 90px;
-    }
+  }
+`;
+const ISainput = styled.div`
+  margin: auto;
+  height: 25px;
+  > span {
+    color: #000;
+    font-size: 15px;
+  }
+  > input {
+    margin: 0 auto;
+    text-align: center;
+    width: 77px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    height: 25px;
   }
 `;
 const ISJinput = styled.div`
@@ -244,4 +253,5 @@ export {
   IMRTitle,
   IMRinput,
   ISJinput,
+  ISainput,
 };

@@ -6,7 +6,7 @@ import {
   SJTitle,
 } from "../../styles/teacher/InputSubectStyle";
 import TSubjectPlus from "../../components/teacher/TSubjectPlus";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import {
@@ -22,6 +22,7 @@ const InputSubject = () => {
   const [studentsData, setStudentsData] = useState([]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const interimData = [{}];
     setStudentsData(interimData);
@@ -89,9 +90,7 @@ const InputSubject = () => {
         <h3>과목 정보 입력</h3>
         <SJButton>
           <button onClick={handleSaveButtonClick}>저장</button>
-          <Link to={`/teacher/inputschoolrecord`}>
-            <button>취소</button>
-          </Link>
+          <button onClick={() => navigate(-1)}>취소</button>
         </SJButton>
       </SJHeader>
       <SJTitle>

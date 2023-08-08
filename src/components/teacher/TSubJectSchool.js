@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ISRinput } from "../../styles/teacher/InputSchoolRecordStyle";
+import { ISRinput, ISainput } from "../../styles/teacher/InputSchoolRecordStyle";
 import { getSchoolSubData } from "../../api/teacher/inputSchoolRecordAxios";
 
 const TSubJectSchool = ({
@@ -10,6 +10,8 @@ const TSubJectSchool = ({
   studentsData,
   updateLastSavedData,
   selectedStudentIndex,
+  schoolData,
+  schoolClassData,
 }) => {
   const initialStudentData = {
     subject: "",
@@ -23,13 +25,13 @@ const TSubJectSchool = ({
   };
 
   const [studentData, setStudentData] = useState(initialStudentData);
+  const [detailList, setDetailList] = useState([]);
 
   // 세부항목 호출
   const getDetailList = async _sid => {
     const result = await getSchoolSubData();
     const arr = result.filter(item => item.subjectid === parseInt(_sid));
-    console.log("상세목록 정리된 리스트 : ", arr);
-    setStudentData(arr);
+    setDetailList(arr); // 상세목록을 상태로 저장
   };
 
   useEffect(() => {
@@ -92,13 +94,11 @@ const TSubJectSchool = ({
             onChange={handleInputChange}
           >
             <option value="">세부 과목 선택</option>
-            {studentData?.nm &&
-              subjectData.map(item => (
-                // 세부과목의 subjectid와 선택된 subjectid가 일치할 때만 옵션을 보이도록 함
-                <option key={item.subjectid} value={item.nm}>
-                  {item.nm}
-                </option>
-              ))}
+            {detailList.map(item => (
+              <option key={item.subjectid} value={item.subjectid}>
+                {item.nm}
+              </option>
+            ))}
           </select>
           <input
             type="number"
@@ -116,20 +116,26 @@ const TSubJectSchool = ({
             placeholder="등급"
             max={9}
           />
-          <input
-            type="number"
-            name="classrank"
-            value={studentData?.classrank || ""}
-            onChange={handleInputChange}
-            placeholder="반 석차"
-          />
-          <input
-            type="number"
-            name="wholerank"
-            value={studentData?.wholerank || ""}
-            onChange={handleInputChange}
-            placeholder="전교 석차"
-          />
+          <ISainput>
+            <input
+              type="number"
+              name="classrank"
+              value={studentData?.classrank || ""}
+              onChange={handleInputChange}
+              placeholder="반 석차"
+            />
+            <span>/ {schoolClassData}</span>
+          </ISainput>
+          <ISainput>
+            <input
+              type="number"
+              name="wholerank"
+              value={studentData?.wholerank || ""}
+              onChange={handleInputChange}
+              placeholder="전교 석차"
+            />
+            <span>/ {schoolData}</span>
+          </ISainput>
         </ISRinput>
       </div>
     </>
