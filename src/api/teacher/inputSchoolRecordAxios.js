@@ -1,17 +1,16 @@
 import { client } from "../client";
 
 // 서버로 datatoMock 데이터를 전송하는 함수
-// export const postSchoolData = async () => {
-//   try {
-//     const response = await client.post("/api/teacher/subject/aca-ins", {
-//       list: ,
-//     });
-//     console.log("데이터 전송 성공:", response.data);
-//   } catch (error) {
-//     console.error("데이터 전송 오류:", error);
-//   }
-// };
-
+export const postSchoolData = async SdataToSend => {
+  try {
+    const response = await client.post("/api/teacher/subject/aca-ins", {
+      list: SdataToSend,
+    });
+    console.log("데이터 전송 성공:", response.data);
+  } catch (error) {
+    console.error("데이터 전송 오류:", error);
+  }
+};
 // 내신 등록 후 과목 계열 가져오기
 export const getSchoolMainSubData = async () => {
   try {
@@ -26,7 +25,7 @@ export const getSchoolMainSubData = async () => {
 // 내신 등록 후 세부 과목 가져오기
 export const getSchoolSubData = async () => {
   try {
-    const res = await axios.get("/api/teacher/subject/category/small");
+    const res = await client.get("/api/teacher/subject/category/small");
     return res.data;
   } catch (err) {
     console.log(err);
@@ -36,18 +35,17 @@ export const getSchoolSubData = async () => {
 
 export const getSchoolData = async () => {
   try {
-    const res = await axios.get("/api/subject/school-snum");
+    const res = await client.get("/api/subject/school-snum");
     return res.data;
   } catch (err) {
     console.log(err);
     return [];
   }
 };
+
 export const getSchoolclassData = async () => {
   try {
-    const res = await client.get(
-      `/api/teacher/subject/category/small?categoryid=${categoryid}`,
-    );
+    const res = await client.get("/api/subject/class-num");
     return res.data;
   } catch (err) {
     console.log(err);
