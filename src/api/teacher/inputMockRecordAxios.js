@@ -1,9 +1,9 @@
-import axios from "axios";
+import { client } from "../client";
 
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
   try {
-    const response = await axios.post("/api/teacher/subject/mock-ins", {
+    const response = await client.post("/api/teacher/subject/mock-ins", {
       list: dataToSend,
     });
     console.log("데이터 전송 성공:", response.data);
@@ -15,7 +15,7 @@ export const postMockData = async dataToSend => {
 // 모의 고사 과목 계열 가져오기
 export const getMockMainSubData = async () => {
   try {
-    const res = await axios.get("/api/teacher/subject/mockbig-list");
+    const res = await client.get("/api/teacher/subject/mockbig-list");
     return res.data;
   } catch (err) {
     console.log(err);
@@ -26,7 +26,7 @@ export const getMockMainSubData = async () => {
 // 모의 고사 세부 과목 가져오기
 export const getMockSubData = async categoryid => {
   try {
-    const res = await axios.get(
+    const res = await client.get(
       `/api/teacher/subject/mocksmall-list?categoryid=${categoryid}`,
     );
     return res.data;

@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import { Aside, Content, Header, MainDiv } from "../styles/main/MainStyle";
 import SideMenu from "../components/SideMenu";
 import { useEffect } from "react";
-import { getSchoolInfo } from "../api/userInfoAxios";
+import { getSchoolInfo, getSchoolLogo } from "../api/userInfoAxios";
 
 const Main = () => {
   const [schoolLogo, setSchoolLogo] = useState(null);
@@ -12,7 +12,8 @@ const Main = () => {
   const [classNum, setClassNum] = useState(null);
 
   useEffect(() => {
-    getSchoolInfo(setSchoolLogo, setSchoolName, setGrade, setClassNum);
+    getSchoolInfo(setSchoolName, setGrade, setClassNum);
+    getSchoolLogo(setSchoolLogo);
   }, []);
 
   return (
@@ -24,10 +25,12 @@ const Main = () => {
         <div className="main-right">
           <Header>
             <div>
-              <div className="school-logo">교표</div>
+              <div className="school-logo">
+                <img src={schoolLogo} alt="" />
+              </div>
               <span className="school-name">{schoolName}</span>
-              <span className="grade">{grade} 학년</span>
-              <span className="class-num">{classNum} 반</span>
+              <span className="grade">{`${grade} 학년`}</span>
+              <span className="class-num">{`${classNum} 반`}</span>
             </div>
           </Header>
           <Content>

@@ -1,14 +1,17 @@
 import axios from "axios";
 import { getCookie, setCookie } from "./cookie";
 
+// axios 인스턴스 생성
 export const client = axios.create({
   baseURL: "http://localhost:3000",
+  timeout: 59000,
   headers: {
-    "Content-Type": "application/json;charset=UTF-8",
+    "Content-Type": "application/json",
   },
 });
 
-axios.interceptors.request.use(
+// 요청 인터셉터 설정
+client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
     if (token) {
@@ -16,48 +19,42 @@ axios.interceptors.request.use(
     }
     return config;
   },
-  error => console.log(error),
+  error => {
+    console.log(error);
+    return Promise.reject(error);
+  },
 );
 
-// 토큰 갱신 후 실패한 요청을 저장하는 배열
-let failedQueue = [];
+// 응답 인터셉터 설정
+client.interceptors.response.use(
+  response => {
+    console.log("결과내놔", response);
+    return response;
+  },
+  async error => {
+    const { config, response } = error;
 
-// 토큰 갱신 함수
-const refreshToken = async () => {
-  try {
-    const res = await axios.post(`/api/refresh-token`, {
-      refreshToken: getCookie("refreshToken"),
-    });
-    const result = res.data;
-    if (result) {
-      setCookie("accessToken", result, {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-        httpOnly: true,
-      });
-      console.log("Access token has been updated:", result);
-      processFailedQueue(null, result);
-    } else {
-      console.log("토큰 갱신 실패");
-    }
-  } catch (error) {
-    processFailedQueue(error, null);
-  }
-};
+    const refreshToken = getCookie("refreshToken");
 
-// 토큰 갱신 후 실패한 요청을 재시도하는 함수
-const processFailedQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.config.headers.Authorization = `Bearer ${token}`;
-      prom.resolve(client(prom.config));
+    if (response.status === 401 && refreshToken) {
+      console.log("토큰 만료! 갱신 시도");
+      try {
+        const { data } = await client.post(`/api/refresh-token`, {
+          refreshToken,
+        });
+        const accessToken = data;
+        setCookie("accessToken", accessToken);
+        console.log(accessToken);
+        config.headers.Authorization = `Bearer ${accessToken}`;
+
+        return client(config);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  });
-  failedQueue = [];
-};
+    return Promise.reject(error);
+  },
+);
 
 // 로그인 함수
 export const fetchLogin = async (email, pw) => {
@@ -81,13 +78,9 @@ export const fetchLogin = async (email, pw) => {
       sameSite: "none",
       httpOnly: true,
     });
-
-    // 5분 후에 refreshToken 함수 호출
-    // setInterval(refreshToken, 1200000);
-    setInterval(refreshToken, 40000);
-
     return role;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };

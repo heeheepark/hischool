@@ -11,6 +11,8 @@ const RecapSchoolRecord = () => {
   const [recentSchoolRecordData, setRecentSchoolRecordData] = useState(null);
   const [recentTestTitle, setRecentTestTitle] = useState(null);
 
+    
+
   useState(() => {
     getAllSchoolRecord(setAllSchoolRecordData);
     getRecentSchoolRecord(setRecentSchoolRecordData, setRecentTestTitle);

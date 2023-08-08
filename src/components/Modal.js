@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
-const Modal = ({ isOpen, onRequestClose, children }) => {
+export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleModalClose = () => {
     onRequestClose();
   };
@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onRequestClose, children }) => {
       {isOpen && (
         <ModalContain onClick={handleModalClose}>
           <ModalBody onClick={e => e.stopPropagation()}>
-            <ModalCloseBtn onClick={handleModalClose}>✖</ModalCloseBtn>
+            {/* <ModalCloseBtn onClick={handleModalClose}>✖</ModalCloseBtn> */}
             {children}
           </ModalBody>
         </ModalContain>
@@ -26,8 +26,6 @@ const Modal = ({ isOpen, onRequestClose, children }) => {
     </>
   );
 };
-
-export default Modal;
 
 export const StudentRecordModal = ({ modalOpen, setModalOpen }) => {
   const handleOk = () => {

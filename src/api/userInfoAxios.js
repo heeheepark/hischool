@@ -1,34 +1,8 @@
-import axios from "axios";
-
-// Main - Header
-const getSchoolInfo = async (
-  setSchoolLogo,
-  setSchoolName,
-  setGrade,
-  setClassNum,
-) => {
-  try {
-    // 학교 로고
-    const schoolLogoRes = await axios.get(`/api/header/school-logo`);
-    const schoolLogo = schoolLogoRes.data[0].logo;
-    setSchoolLogo(schoolLogo);
-
-    // 학교 정보
-    const schoolNameRes = await axios.get(`/api/header/school-info`);
-    const schoolName = schoolNameRes.data[0].nm;
-    const grade = schoolNameRes.data[0].grade;
-    const classNum = schoolNameRes.data[0].van;
-    setSchoolName(schoolName);
-    setGrade(grade);
-    setClassNum(classNum);
-  } catch (err) {
-    console.log(err);
-  }
-};
+import { client } from "./client";
 
 export const getUserInfo = async (setUserName, setUserEmail) => {
   try {
-    const res = await axios.get(`/api/mypage/user-mypage`);
+    const res = await client.get(`/api/mypage/user-mypage`);
     const result = res.data;
     const userName = result[0].unm;
     const userEmail = result[0].email;
@@ -39,4 +13,29 @@ export const getUserInfo = async (setUserName, setUserEmail) => {
   }
 };
 
-export { getSchoolInfo };
+export const getSchoolLogo = async setSchoolLogo => {
+  try {
+    const res = await client.get(`/api/mypage/user-mypage`);
+    const result = res.data[0].pic;
+    const test = `http://192.168.0.144:5003/${result}`;
+    // console.log(test);
+    // setSchoolLogo(test);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getSchoolInfo = async (setSchoolName, setGrade, setClassNum) => {
+  try {
+    const res = await client.get(`/api/header/school-info`);
+    const result = res.data;
+    const userSchool = result[0].nm;
+    const userGrade = result[0].grade;
+    const userClass = result[0].van;
+    setSchoolName(userSchool);
+    setGrade(userGrade);
+    setClassNum(userClass);
+  } catch (err) {
+    console.log(err);
+  }
+};

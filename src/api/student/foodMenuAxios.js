@@ -1,8 +1,8 @@
-import axios from "axios";
+import { client } from "../client";
 
 const getMonthFood = async setFoodMenuList => {
   try {
-    const res = await axios.get(`/api/meal`);
+    const res = await client.get(`/api/meal`);
     const result = res.data;
     const foodMenuList = result.list;
     const newFoodMenuList = foodMenuList.map(item => {

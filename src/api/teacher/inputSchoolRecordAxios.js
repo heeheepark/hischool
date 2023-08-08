@@ -1,21 +1,21 @@
-import axios from "axios";
+import { client } from "../client";
 
 // 서버로 datatoMock 데이터를 전송하는 함수
-export const postSchoolData = async SdataToSend => {
-  try {
-    const response = await axios.post("/api/teacher/subject/aca-ins", {
-      list: SdataToSend,
-    });
-    console.log("데이터 전송 성공:", response.data);
-  } catch (error) {
-    console.error("데이터 전송 오류:", error);
-  }
-};
+// export const postSchoolData = async () => {
+//   try {
+//     const response = await client.post("/api/teacher/subject/aca-ins", {
+//       list: ,
+//     });
+//     console.log("데이터 전송 성공:", response.data);
+//   } catch (error) {
+//     console.error("데이터 전송 오류:", error);
+//   }
+// };
 
 // 내신 등록 후 과목 계열 가져오기
 export const getSchoolMainSubData = async () => {
   try {
-    const res = await axios.get("/api/teacher/subject/category/big");
+    const res = await client.get("/api/teacher/subject/category/big");
     return res.data;
   } catch (err) {
     console.log(err);
@@ -45,7 +45,9 @@ export const getSchoolData = async () => {
 };
 export const getSchoolclassData = async () => {
   try {
-    const res = await axios.get("/api/subject/class-num");
+    const res = await client.get(
+      `/api/teacher/subject/category/small?categoryid=${categoryid}`,
+    );
     return res.data;
   } catch (err) {
     console.log(err);

@@ -8,17 +8,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
+import { getSchoolInfo, getUserInfo } from "../../api/userInfoAxios";
 
 const StudentHome = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [test, setTest] = useState(null);
+  // const [test2, setTest] = useState(null);
 
   useState(() => {
-    setTimeout(() => setLoading(true), 1000);
+    // setTimeout(() => setLoading(true), 1000);
+    // // getSchoolInfo();
   }, []);
 
   return (
     <StudentHomeDiv>
-      {loading ? null : <Loading />}
+      {/* {loading ? null : <Loading />} */}
       <div className="record">
         <div>
           <Link to="/student/schoolrecord">
