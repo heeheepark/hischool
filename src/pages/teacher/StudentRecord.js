@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { StudentRecordDiv } from "../../styles/teacher/StudentRecordStyle";
 import {
-  StudentSearchList,
-  SchoolRecordList,
-  MockRecordList,
-} from "../../components/teacher/StudentRecordList";
-import {
-  MockRecordFilter,
-  SchoolRecordFilter,
-} from "../../components/student/Filter";
+  StudentListDiv,
+  StudentRecordDiv,
+} from "../../styles/teacher/StudentRecordStyle";
+import { MockRecordList } from "../../components/teacher/MockRecordList";
+import { MockRecordFilter } from "../../components/student/Filter";
 import { Link } from "react-router-dom";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { StudentRecordModal } from "../../components/Modal";
+import { getStudentData } from "../../api/teacher/studentListAxios";
+import {
+  getStudentMockRecord,
+  getStudentSchoolRecord,
+} from "../../api/teacher/studentRecordAxios";
+import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 
 const StudentRecord = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [studentListData, setStudentListData] = useState(null);
+  const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
+  // console.log(studentSchoolRecordList);
+  const [studentMockRecordList, setStudentMockRecordList] = useState(null);
 
   const showModal = () => {
     setModalOpen(true);
@@ -23,6 +29,20 @@ const StudentRecord = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  const handleStudentList = e => {
+    const allStudentList = document.querySelectorAll(".student-detail-list");
+    allStudentList.forEach(item => item.classList.remove("active"));
+    const clickList = e.currentTarget;
+    clickList.classList.add("active");
+    const studentId = parseInt(clickList.classList[0].slice(10));
+    getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
+    getStudentMockRecord(studentId, setStudentMockRecordList);
+  };
+
+  useEffect(() => {
+    getStudentData(setStudentListData);
+  }, []);
 
   return (
     <>
@@ -38,7 +58,37 @@ const StudentRecord = () => {
               <button>검색</button>
             </form>
             <div className="student-list">
-              <StudentSearchList />
+              <StudentListDiv>
+                <ul className="category">
+                  <li className="category-th">연번</li>
+                  <li className="category-th">이름</li>
+                  <li className="category-th">생년월일</li>
+                  <li className="category-th">연락처</li>
+                  <li className="category-th">이메일</li>
+                </ul>
+                <ul className="list-wrap">
+                  {studentListData?.map((item, index) => (
+                    <li
+                      className={
+                        index === 0
+                          ? `studentNum${item.userId} student-detail-list active`
+                          : `studentNum${item.userId} student-detail-list`
+                      }
+                      onClick={e => handleStudentList(e)}
+                      // onLoad={e => handleStudentList(e)}
+                      key={item.userId}
+                    >
+                      <ul>
+                        <li>{index + 1}</li>
+                        <li>{item.snm}</li>
+                        <li>{item.birth}</li>
+                        <li>{item.phone}</li>
+                        <li>{item.email}</li>
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </StudentListDiv>
             </div>
           </div>
           <div className="school-record-wrap">
@@ -72,7 +122,9 @@ const StudentRecord = () => {
                 </Link>
               </div>
             </div>
-            <SchoolRecordList />
+            <SchoolRecordList
+              studentSchoolRecordList={studentSchoolRecordList}
+            />
           </div>
           <div className="mock-record-wrap">
             <div className="mock-record-header">
@@ -90,7 +142,7 @@ const StudentRecord = () => {
                 </Link>
               </div>
             </div>
-            <MockRecordList />
+            <MockRecordList studentMockRecordList={studentMockRecordList} />
           </div>
         </div>
       </StudentRecordDiv>
