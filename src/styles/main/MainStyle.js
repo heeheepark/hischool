@@ -29,12 +29,15 @@ const Header = styled.div`
       width: 30px;
       height: 30px;
       font-size: 0;
-      background: url(${schoolLogo}) no-repeat center;
+      /* background: url(${schoolLogo}) no-repeat center; */
       background-position: 3px 1.4px;
       background-size: 24px;
       background-color: #fff;
       border-radius: 50%;
       margin-right: 10px;
+      img {
+        background: #ccc;
+      }
     }
     span {
       font-size: 18px;

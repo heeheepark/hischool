@@ -34,10 +34,10 @@ export const getUnSignCount = async setUnSignCount => {
 };
 
 // 학사일정
-export const getSchedule = async setScheduleData => {
+export const getSchedule = async (setScheduleData, startDate, endDate) => {
   try {
     const res = await axios.get(
-      `/api/schedule?sdSchulCode=${7240273}&aaFromYmd=${20230801}&aaToYmd=${20230831}`,
+      `/api/schedule?sdSchulCode=${7240273}&aaFromYmd=${startDate}&aaToYmd=${endDate}`,
     );
     const scheduleList = res.data.infoList;
     const newScheduleList = scheduleList.map(item => {

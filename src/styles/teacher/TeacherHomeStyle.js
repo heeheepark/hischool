@@ -293,6 +293,18 @@ const FullCalendarDiv = styled.div`
       .fc-event-main {
         height: 100% !important;
         line-height: 15px !important;
+        padding-left: 0.8vw;
+        position: relative;
+        ::before {
+          position: absolute;
+          content: "";
+          top: calc(50% - 1.8px);
+          left: 8px;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #64ccc5;
+        }
         .fc-event-main-frame {
           height: 100%;
           .fc-event-title {
