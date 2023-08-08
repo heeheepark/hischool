@@ -1,9 +1,9 @@
-import axios from "axios";
+import { client } from "../client";
 
 // 학생관리 리스트
 export const getStudentData = async setStudentListData => {
   try {
-    const res = await axios.get(`/api/teacher/signed?classId=${2}`);
+    const res = await client.get(`/api/teacher/signed?classId=${2}`);
     const result = res.data;
     const listSortData = result.sort((a, b) =>
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
@@ -17,7 +17,7 @@ export const getStudentData = async setStudentListData => {
 // 학생 가입 대기 명단
 export const getSignListData = async setStudentListData => {
   try {
-    const res = await axios.get(`/api/teacher/unsigned?classId=${2}`);
+    const res = await client.get(`/api/teacher/unsigned?classId=${2}`);
     const result = res.data;
     const signListSortData = result.sort((a, b) =>
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,

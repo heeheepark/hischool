@@ -1,9 +1,9 @@
-import axios from "axios";
+import { client } from "../client";
 
 // 내신 성적 현황
 const getAllSchoolRecord = async setAllSchoolRecordData => {
   try {
-    const res = await axios.get(`/api/student/aca-graph`);
+    const res = await client.get(`/api/student/aca-graph`);
     const result = res.data;
     setAllSchoolRecordData(result);
   } catch (err) {
@@ -16,7 +16,7 @@ const getRecentSchoolRecord = async (
   setRecentTestTitle,
 ) => {
   try {
-    const res = await axios.get(`/api/student/aca-latest`);
+    const res = await client.get(`/api/student/aca-latest`);
     const result = res.data;
     setRecentSchoolRecordData(result.list);
     setRecentTestTitle(result.date.split("-"));
@@ -28,7 +28,7 @@ const getRecentSchoolRecord = async (
 // 모의고사 성적 현황
 const getAllMockRecord = async setAllMockRecordData => {
   try {
-    const res = await axios.get(`/api/student/mock-graph`);
+    const res = await client.get(`/api/student/mock-graph`);
     const result = res.data;
     setAllMockRecordData(result);
   } catch (err) {
@@ -41,7 +41,7 @@ const getRecentMockRecord = async (
   setRecentTestTitle,
 ) => {
   try {
-    const res = await axios.get(`/api/student/mock-currentrating`);
+    const res = await client.get(`/api/student/mock-currentrating`);
     const result = res.data;
     setRecentMockRecordData(result.list);
     setRecentTestTitle(result.date.split("-"));
@@ -53,7 +53,7 @@ const getRecentMockRecord = async (
 // 주간 급식표
 const getWeekFood = async setWeekMenuData => {
   try {
-    const res = await axios.get(`/api/meal/main?sdSchulCode=${7240273}`);
+    const res = await client.get(`/api/meal/main?sdSchulCode=${7240273}`);
     const result = res.data.list;
     const menuList = result.map(item => {
       item.menuOftheDay = item.menuOftheDay.split(",");
@@ -68,7 +68,7 @@ const getWeekFood = async setWeekMenuData => {
 // 시간표
 const getTimeTable = async setTimeTable => {
   try {
-    const res = await axios.get(`/api/timetable`);
+    const res = await client.get(`/api/timetable`);
     const result = res.data.list;
     setTimeTable(result);
   } catch (err) {

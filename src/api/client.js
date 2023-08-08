@@ -14,7 +14,7 @@ client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
     if (token) {
-      console.log("잘나오니?", token);
+      // console.log("잘나오니?", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -28,7 +28,7 @@ client.interceptors.request.use(
 // 응답 인터셉터 설정
 client.interceptors.response.use(
   response => {
-    console.log("리스퐌쯔 성공?", response);
+    // console.log("리스퐌쯔 성공?", response);
     return response;
   },
   async error => {
@@ -40,7 +40,7 @@ client.interceptors.response.use(
     if (status === 401) {
       try {
         await refreshToken();
-        console.log(getCookie("accessToken"));
+        // console.log(getCookie("accessToken"));
         config.headers.Authorization = `Bearer ${getCookie("accessToken")}`;
         return client(config);
       } catch (error) {
@@ -84,7 +84,7 @@ export const fetchLogin = async (email, pw) => {
       email: email,
       pw: pw,
     });
-    console.log(res.data);
+    // console.log(res.data);
     const result = await res.data;
     const role = result.role;
     setCookie("refreshToken", result.refreshToken, {

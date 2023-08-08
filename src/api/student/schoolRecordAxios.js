@@ -1,8 +1,8 @@
-import axios from "axios";
+import { client } from "../client";
 
 export const getHighestSchoolRecord = async setHighestSchoolRecord => {
   try {
-    const res = await axios.get(`/api/student/aca-highest`);
+    const res = await client.get(`/api/student/aca-highest`);
     const result = res.data;
     setHighestSchoolRecord(result);
   } catch (err) {
@@ -12,7 +12,7 @@ export const getHighestSchoolRecord = async setHighestSchoolRecord => {
 
 export const getCurrentSchoolRecord = async setCurrentSchoolRecord => {
   try {
-    const res = await axios.get(`/api/student/aca-latest`);
+    const res = await client.get(`/api/student/aca-latest`);
     const result = res.data.list;
     setCurrentSchoolRecord(result);
   } catch (err) {
@@ -41,7 +41,7 @@ export const getAllSchoolRecord = async (
   }
 
   try {
-    const res = await axios.get(apiUrl);
+    const res = await client.get(apiUrl);
     const result = res.data;
     setAllSchoolRecord(result);
   } catch (err) {
