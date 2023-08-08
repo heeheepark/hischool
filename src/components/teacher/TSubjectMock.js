@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   IMRinput,
-  ISRinput,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 
 const TSubJectMock = ({

@@ -4,14 +4,11 @@ import {
   ISRButton,
   ISRButtonWrapper,
   ISRHeader,
-  ISRTitle,
   InputMockRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFloppyDisk,
   faPlusCircle,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
 import {
@@ -19,12 +16,14 @@ import {
   getMockSubData,
 } from "../../api/teacher/inputMockRecordAxios";
 import { postMockData } from "../../api/teacher/inputMockRecordAxios";
+import { useNavigate } from "react-router";
 
 const InputMockRecord = () => {
   const [dropMonth, setDropMonth] = useState(""); 
   const [studentsData, setStudentsData] = useState([]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const interimData = [{}];
     setStudentsData(interimData);
@@ -49,6 +48,7 @@ const InputMockRecord = () => {
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
       const dataToSend = lastSavedData.map(item => ({
+        userid: 40, //임시유저값
         subjectid: parseInt(item.subjectid) || 0,
         mon: parseInt(item.mon) || 0,
         standardscore: parseInt(item.standardscore) || 0,
@@ -115,7 +115,7 @@ const InputMockRecord = () => {
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>저장</button>
-        <button>취소</button>
+        <button onClick={() => navigate(-1)}>취소</button>
       </ISRButton>
       <IMRTitle>
         <p>과목 계열</p>

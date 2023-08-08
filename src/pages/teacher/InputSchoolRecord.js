@@ -7,14 +7,16 @@ import {
   InputSchoolRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFloppyDisk,
-  faPlusCircle,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { Link, useNavigate } from "react-router-dom";
 import TSubJectSchool from "../../components/teacher/TSubJectSchool";
-import { getSchoolMainSubData, getSchoolSubData } from "../../api/teacher/inputSchoolRecordAxios";
+import {
+  getSchoolData,
+  getSchoolMainSubData,
+  getSchoolSubData,
+  getSchoolclassData,
+  postSchoolData,
+} from "../../api/teacher/inputSchoolRecordAxios";
 
 const InputSchoolRecord = () => {
   const [dropSemester, setDropSemester] = useState(""); // 학기
@@ -22,6 +24,9 @@ const InputSchoolRecord = () => {
   const [studentsData, setStudentsData] = useState([]);
   const [lastSchoolSavedData, setLastSchoolSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
+  const [schoolData, setSchoolData] = useState([]);
+  const [schoolClassData, setSchoolClassData] = useState([]);
+  const navigate = useNavigate();
   // 최초 학생의 데이터를 셋팅하여야 함.
   useEffect(() => {
     const interimData = [{}];
@@ -29,6 +34,8 @@ const InputSchoolRecord = () => {
     setStudentsData(interimData);
     setLastSchoolSavedData(interimData);
   }, []);
+
+  
 
   // 새로운 데이터를 전달하는 함수
   const updateLastSavedData = (_id, newData) => {
@@ -55,7 +62,8 @@ const InputSchoolRecord = () => {
   // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 콘솔에 출력하는 함수
   const handleSaveButtonClick = () => {
     if (lastSchoolSavedData) {
-      const dataToSend = lastSchoolSavedData.map(item => ({
+      const SdataToSend = lastSchoolSavedData.map(item => ({
+        userid: 40, //임시 유저 아이디 추후 수정 필요
         subjectid: parseInt(item.subjectid) || 0,
         semester: parseInt(item.semester) || 0,
         midfinal: parseInt(item.midfinal) || 0,
@@ -64,7 +72,8 @@ const InputSchoolRecord = () => {
         classrank: parseInt(item.classrank) || 0,
         wholerank: parseInt(item.wholerank) || 0,
       }));
-      console.log(dataToSend);
+      postSchoolData(SdataToSend);
+      console.log(SdataToSend);
     }
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수
@@ -84,27 +93,17 @@ const InputSchoolRecord = () => {
     // lastSavedData에도 빈 객체를 추가하여 배열 길이를 유지
     setLastSchoolSavedData(data => [...data, newStudent]);
   };
+
+  // 과목 정보 입력 관련
   useEffect(() => {
     async function fetchData() {
       try {
         // 주요과목 데이터 가져오기
         const mainSubData = await getSchoolMainSubData();
-        // 하위과목 데이터 가져오기
-        const newSubjectData = await Promise.all(
-          mainSubData.map(async mainSubject => {
-            const subData = await getSchoolSubData(mainSubject.categoryid);
-            return {
-              mainsubject: mainSubject.nm,
-              data: subData.map(subSubject => ({
-                subsubject: subSubject.nm,
-                subjectid: subSubject.subjectid,
-              })),
-            };
-          }),
-        );
+        console.log(mainSubData);
 
         // subjectData 상태 업데이트
-        setSubjectData(newSubjectData);
+        setSubjectData(mainSubData);
       } catch (err) {
         console.log(err);
         setSubjectData([]);
@@ -113,25 +112,24 @@ const InputSchoolRecord = () => {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    async function personnelData() {
+      try {
+        // 전교 인원
+        const schoolData = await getSchoolData();
+        // 클래스 인원 데이터
+        const schoolclassData = await getSchoolclassData();
+        setSchoolData(schoolData);
+        setSchoolClassData(schoolclassData);
+      } catch (err) {
+        console.log(err);
+        setSchoolData([]);
+        setSchoolClassData([]);
+      }
+    }
 
-  const schoolClassData = [
-    {
-      class: "2-5",
-      data: [
-        {
-          totalclass: "25",
-        },
-      ],
-    },
-    {
-      school: "함양",
-      data: [
-        {
-          totalschool: "150",
-        },
-      ],
-    },
-  ];
+    personnelData();
+  }, []);
 
   return (
     <InputSchoolRecordWrap>
@@ -156,7 +154,7 @@ const InputSchoolRecord = () => {
           <button>과목 정보 입력</button>
         </Link>
         <button onClick={handleSaveButtonClick}>저장</button>
-        <button>취소</button>
+        <button onClick={() => navigate(-1)}>취소</button>
       </ISRButton>
       <ISRTitle>
         <p>과목 계열</p>
@@ -171,8 +169,9 @@ const InputSchoolRecord = () => {
           <TSubJectSchool
             key={index}
             id={index}
-            subjectData={subjectData}
+            schoolData={schoolData}
             schoolClassData={schoolClassData}
+            subjectData={subjectData}
             dropSemester={dropSemester}
             dropTest={dropTest}
             studentsData={studentsData[index]}
