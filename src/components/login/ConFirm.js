@@ -6,11 +6,22 @@ import {
 } from "../../styles/login/ConFirmStyle";
 import { postEmailCodeConFirm } from "../../api/signUpAxios";
 
-const ConFirm = () => {
+const ConFirm = ({ setAuthModal }) => {
   const [emailConFirm, setEmailConFirm] = useState("");
 
-  const handleCodeConfirm = () => {
+  const handleCodeConfirm = e => {
+    e.preventDefault();
     postEmailCodeConFirm(emailConFirm);
+    setAuthModal(false);
+  };
+
+  const handleCancel = e => {
+    e.preventDefault();
+    setAuthModal(false);
+  };
+
+  const handleConfirmInput = e => {
+    setEmailConFirm(e.target.value);
   };
 
   return (
@@ -23,13 +34,19 @@ const ConFirm = () => {
             placeholder="인증번호 6자리를 입력해주세요"
             name="email-check"
             value={emailConFirm}
-            // onChange={setEmailConFirm}
+            onChange={e => handleConfirmInput(e)}
           />
         </div>
       </ConFirmInput>
       <ConFirmButtons>
-        <button onClick={handleCodeConfirm}>인증확인</button>
-        <button>취소</button>
+        <button
+          onClick={e => {
+            handleCodeConfirm(e);
+          }}
+        >
+          인증확인
+        </button>
+        <button onClick={e => handleCancel(e)}>취소</button>
       </ConFirmButtons>
     </ConFirmWrap>
   );

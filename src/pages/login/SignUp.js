@@ -11,12 +11,8 @@ import {
 import { useNavigate } from "react-router";
 import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
-import {
-  postSignUp,
-  postEmail,
-  postEmailCodeConFirm,
-} from "../../api/signUpAxios";
-import Modal from "../../components/Modal";
+import { postSignUp, postEmail } from "../../api/signUpAxios";
+import { Modal } from "../../components/Modal";
 import ConFirm from "../../components/login/ConFirm";
 
 const SignUp = () => {
@@ -36,28 +32,34 @@ const SignUp = () => {
   const [detailAddress, setDetailAddress] = useState("");
   const [userPic, setUserPic] = useState("");
   const [aprPic, setAprPic] = useState("");
-  const [popup, setPopup] = useState(false);
+  const [authModal, setAuthModal] = useState(false);
+  const [addressModal, setAddressModal] = useState(false);
   const [codeConFirm, setCodeConFirm] = useState(false);
-  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const birthFormatter = num => {
-    if (!num) {
-      return "";
+    console.log(birth);
+    try {
+      num = num.replace(/\s/gi, "");
+      if (num.length === 8) {
+        return num.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+      } else if (num.length === 7) {
+        return num.replace(/(\d{4})(\d{2})(\d{1})/, "$1-$2-$3");
+      } else if (/^02/.test(num) && num.length === 6) {
+        return num.replace(/(\d{4})(\d{1})(\d{1})/, "$1-$2-$3");
+      } else {
+        return num;
+      }
+    } catch (error) {
+      console.error("Error formatting birth:", error);
+      return num;
     }
-    var formatNum = "";
-    num = num.replace(/\s/gi, "");
-    if (num.length === 8) {
-      formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
-    } else {
-      formatNum = num;
-    }
-    return formatNum;
   };
 
   const phoneFormatter = num => {
+    console.log(phone);
     try {
-      num = num.replace(/\s/gi, ""); // 공백 제거
+      num = num.replace(/\s/gi, "");
 
       if (num.length === 11) {
         return num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
@@ -73,6 +75,9 @@ const SignUp = () => {
     }
   };
 
+  const formattedBirth = birthFormatter(birth);
+  const formattedPhone = phoneFormatter(phone);
+
   useEffect(() => {
     const addressInput = document.getElementById("address-input");
     if (addressInput) {
@@ -80,17 +85,17 @@ const SignUp = () => {
     }
   }, [houseAddress.address]);
 
-  const handleCodeConfirm = () => {
-    postEmailCodeConFirm(idEmail);
+  const handleEmailConfirm = () => {
+    setAuthModal(true);
+    postEmail(idEmail);
   };
 
   const handleModalOpen = () => {
-    setPopup(true);
     setCodeConFirm(true);
   };
 
   const handleModalClose = () => {
-    setPopup(false);
+    setAuthModal(false);
     setCodeConFirm(false);
   };
 
@@ -106,23 +111,6 @@ const SignUp = () => {
     setUserType(e.target.value);
   };
 
-  const collectUserData = () => {
-    return {
-      email: idEmail,
-      pw: password,
-      nm: name,
-      schoolNm: schoolName,
-      grade,
-      classNum: classNumber,
-      birth,
-      phone,
-      address: houseAddress,
-      role: userType,
-      pic: userPic,
-      aprPic,
-    };
-  };
-
   const handleSignUp = e => {
     e.preventDefault();
 
@@ -135,30 +123,41 @@ const SignUp = () => {
       alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
-    const userData = collectUserData();
+    const collectUserData = {
+      email: idEmail,
+      pw: password,
+      nm: name,
+      schoolNm: schoolName,
+      grade,
+      classNum: classNumber,
+      birth,
+      phone,
+      address: houseAddress.address,
+      role: userType,
+      pic: userPic,
+      aprPic,
+    };
 
-    postSignUp(userData);
+    console.log(collectUserData);
+    // postSignUp(collectUserData);
 
-    navigate("/");
+    // navigate("/");
   };
 
   const handleCancel = () => {
     navigate("/");
   };
 
-  const formattedBirth = birthFormatter(birth);
-  const formattedPhone = phoneFormatter(phone);
-
-  // ConFirm 컴포넌트가 닫힐 때 호출되는 콜백 함수
-  const handleConFirmClose = () => {
-    setConfirmModalOpen(false);
-    setCodeConFirm(false);
-  };
-
-  // ConFirm 컴포넌트에서 확인 버튼 클릭 시 호출되는 콜백 함수
-  const handleConFirmConfirm = () => {
-    // 필요한 작업 수행
-    handleConFirmClose(); // 모달 닫기
+  // 사진을 업로드할 때 호출되는 함수입니다.
+  const handlePictureUpload = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = e => {
+      setUserPic(e.target.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -194,7 +193,14 @@ const SignUp = () => {
           <SignUpContain>
             <form className="input-form">
               <div className="image-upload">
-                <img src="" alt="pic" />
+                <div className="picture-img">
+                  <img src={userPic} alt="pic" />
+                </div>
+                <input
+                  type="file"
+                  accept="image/jpg, image/png, image/jpeg"
+                  onChange={handlePictureUpload}
+                />
               </div>
               <SignUpUl>
                 <LeftForm>
@@ -208,18 +214,20 @@ const SignUp = () => {
                           value={idEmail}
                           onChange={e => setIdEmail(e.target.value)}
                         ></input>
-                        <span onClick={handleCodeConfirm}>인증</span>
+                        <span onClick={handleEmailConfirm}>인증</span>
                       </div>
-                      {codeConFirm && (
+                      {authModal && (
                         <Modal
-                          isOpen={codeConFirm}
-                          onRequestClose={handleModalClose}
-                          onAfterOpen={handleCodeConfirm}
+                          isOpen={authModal}
+                          setAuthModal={setAuthModal}
+                          // onRequestClose={handleModalClose}
+                          // onAfterOpen={handleCodeConfirm}
                         >
                           <ConFirm
-                            emailConFirm={idEmail}
-                            onClose={handleConFirmClose}
-                            onConfirm={handleConFirmConfirm}
+                            setAuthModal={setAuthModal}
+                            // emailConFirm={idEmail}
+                            // onClose={handleConFirmClose}
+                            // onConfirm={handleConFirmConfirm}
                           />
                         </Modal>
                       )}
@@ -302,20 +310,20 @@ const SignUp = () => {
                         required={true}
                         name="address"
                         onChange={handleInput}
-                        onClick={() => setPopup(true)}
+                        onClick={() => setAddressModal(true)}
                         value={houseAddress.address}
                         readOnly
                       />
-                      {popup && (
+                      {addressModal && (
                         <Modal
-                          isOpen={popup}
+                          isOpen={addressModal}
                           onRequestClose={handleModalClose}
                           onAfterOpen={handleModalOpen}
                         >
                           <DaumPost
                             company={houseAddress}
                             setHouseAddress={setHouseAddress}
-                            onComplete={handleModalClose}
+                            onComplete={() => setAddressModal(false)}
                           />
                         </Modal>
                       )}

@@ -1,9 +1,9 @@
-import axios from "axios";
+import { client } from "./client";
 
-export const postSignUp = async userData => {
+export const postSignUp = async collectUserData => {
   try {
-    const res = await axios.post("/api/sign-up", {
-      userData,
+    const res = await client.post("/api/sign-up", {
+      collectUserData,
     });
     console.log("성공했니?:", res.data);
   } catch (error) {
@@ -13,7 +13,7 @@ export const postSignUp = async userData => {
 
 export const postEmail = async idEmail => {
   try {
-    const res = await axios.post(`/api/mail-confirm?email=${idEmail}`);
+    const res = await client.post(`/api/mail-confirm?email=${idEmail}`);
     console.log(res.data);
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ export const postEmail = async idEmail => {
 
 export const postEmailCodeConFirm = async emailConFirm => {
   try {
-    const res = await axios.post(`/api/code-confirm?code=${emailConFirm}`);
+    const res = await client.post(`/api/code-confirm?code=${emailConFirm}`);
     console.log(res.data);
     if (res.data === 1) {
       alert("이메일 인증이 완료되었습니다");
