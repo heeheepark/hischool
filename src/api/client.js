@@ -4,8 +4,9 @@ import { getCookie, setCookie } from "./cookie";
 // axios 인스턴스 생성
 export const client = axios.create({
   baseURL: "http://localhost:3000",
+  timeout: 59000,
   headers: {
-    "Content-Type": "application/json;charset=UTF-8",
+    "Content-Type": "application/json",
   },
 });
 
@@ -14,7 +15,6 @@ client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
     if (token) {
-      // console.log("잘나오니?", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -28,54 +28,33 @@ client.interceptors.request.use(
 // 응답 인터셉터 설정
 client.interceptors.response.use(
   response => {
-    // console.log("리스퐌쯔 성공?", response);
+    console.log("결과내놔", response);
     return response;
   },
   async error => {
-    const {
-      config,
-      response: { status },
-    } = error;
+    const { config, response } = error;
 
-    if (status === 401) {
+    const refreshToken = getCookie("refreshToken");
+
+    if (response.status === 401 && refreshToken) {
+      console.log("토큰 만료! 갱신 시도");
       try {
-        await refreshToken();
-        // console.log(getCookie("accessToken"));
-        config.headers.Authorization = `Bearer ${getCookie("accessToken")}`;
+        const { data } = await client.post(`/api/refresh-token`, {
+          refreshToken,
+        });
+        const accessToken = data;
+        setCookie("accessToken", accessToken);
+        console.log(accessToken);
+        config.headers.Authorization = `Bearer ${accessToken}`;
+
         return client(config);
       } catch (error) {
-        console.log("리스뽠쯔 에러 왔니?", error);
+        console.log(error);
       }
     }
     return Promise.reject(error);
   },
 );
-
-// 토큰 갱신 함수
-const refreshToken = async () => {
-  try {
-    const res = await client.post(`/api/refresh-token`, {
-      refreshToken: getCookie("refreshToken"),
-    });
-    const result = res.data;
-    if (result) {
-      setCookie("accessToken", result.accessToken, {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-        httpOnly: true,
-      });
-      client.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${result.accessToken}`;
-      console.log("AccessToken 업뎃 :", result);
-    } else {
-      console.log("토큰 갱신 실패");
-    }
-  } catch (error) {
-    console.error("토큰 갱신 에러:", error);
-  }
-};
 
 // 로그인 함수
 export const fetchLogin = async (email, pw) => {
@@ -84,7 +63,7 @@ export const fetchLogin = async (email, pw) => {
       email: email,
       pw: pw,
     });
-    // console.log(res.data);
+    console.log(res.data);
     const result = await res.data;
     const role = result.role;
     setCookie("refreshToken", result.refreshToken, {
