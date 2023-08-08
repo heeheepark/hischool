@@ -4,14 +4,11 @@ import {
   ISRButton,
   ISRButtonWrapper,
   ISRHeader,
-  ISRTitle,
   InputMockRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFloppyDisk,
   faPlusCircle,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
 import {

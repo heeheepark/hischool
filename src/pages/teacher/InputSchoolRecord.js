@@ -7,14 +7,13 @@ import {
   InputSchoolRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFloppyDisk,
-  faPlusCircle,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import TSubJectSchool from "../../components/teacher/TSubJectSchool";
-import { getSchoolMainSubData, getSchoolSubData } from "../../api/teacher/inputSchoolRecordAxios";
+import {
+  getSchoolMainSubData,
+  getSchoolSubData,
+} from "../../api/teacher/inputSchoolRecordAxios";
 
 const InputSchoolRecord = () => {
   const [dropSemester, setDropSemester] = useState(""); // 학기
@@ -84,27 +83,45 @@ const InputSchoolRecord = () => {
     // lastSavedData에도 빈 객체를 추가하여 배열 길이를 유지
     setLastSchoolSavedData(data => [...data, newStudent]);
   };
+
+  // 과목 정보 입력 관련
   useEffect(() => {
     async function fetchData() {
       try {
         // 주요과목 데이터 가져오기
         const mainSubData = await getSchoolMainSubData();
+        console.log(mainSubData);
         // 하위과목 데이터 가져오기
-        const newSubjectData = await Promise.all(
-          mainSubData.map(async mainSubject => {
-            const subData = await getSchoolSubData(mainSubject.categoryid);
-            return {
-              mainsubject: mainSubject.nm,
-              data: subData.map(subSubject => ({
-                subsubject: subSubject.nm,
-                subjectid: subSubject.subjectid,
-              })),
-            };
-          }),
-        );
+        // const newSubjectData = await Promise.all(
+        //   mainSubData.map(async mainSubject => {
+        //     const subData = await getSchoolSubData(mainSubject.categoryid);
+        //     return {
+        //       mainsubject: mainSubject.nm,
+        //       mainsubjectid: mainSubject.subjectid,
+        //       data: subData.map(subSubject => ({
+        //         subsubject: subSubject.nm,
+        //         subjectid: subSubject.subjectid,
+        //       })),
+        //     };
+        //   }),
+        // );
+
+        // 과목 이름이 같은 것은 하나만 남기고 필터링
+        // const filteredSubjectData = newSubjectData.reduce(
+        //   (accumulator, current) => {
+        //     const existingSubject = accumulator.find(
+        //       item => item.mainsubject === current.mainsubject,
+        //     );
+        //     if (!existingSubject) {
+        //       accumulator.push(current);
+        //     }
+        //     return accumulator;
+        //   },
+        //   [],
+        // );
 
         // subjectData 상태 업데이트
-        setSubjectData(newSubjectData);
+        setSubjectData(mainSubData);
       } catch (err) {
         console.log(err);
         setSubjectData([]);

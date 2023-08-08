@@ -24,10 +24,10 @@ export const getSchoolMainSubData = async () => {
 };
 
 // 내신 등록 후 세부 과목 가져오기
-export const getSchoolSubData = async categoryid => {
+export const getSchoolSubData = async () => {
   try {
     const res = await axios.get(
-      `/api/teacher/subject/category/small?categoryid=${categoryid}`,
+      `/api/teacher/subject/category/small`,
     );
     return res.data;
   } catch (err) {
