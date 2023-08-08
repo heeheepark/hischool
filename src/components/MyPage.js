@@ -1,57 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import {
   TcButtons,
   TcMyPageRightInfo,
   TcMyPageUserInfo,
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
-import axios from "axios";
+import { getUserData } from "../api/myPageAxios";
 
 const MyPage = () => {
-  const { userid } = useParams();
-  const [teacher, setTeacher] = useState({
-    userId: 6,
-    tnm: "김담임",
-    email: "teacher11@naver.com",
-    pic: "123123",
-    birth: "1981-01-15",
-    phone: "01014142323",
-    classId: null,
-    grade: "1",
-    van: "2",
-    schoolId: "1",
-    snm: "함지고등학교",
-    address: "12323",
-  });
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    const getTeacherData = async () => {
-      try {
-        const res = await axios.get(
-          `api/mypage/teacher_mypage?userid=${userid}`,
-        );
-        const data = res.data;
-        setTeacher(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getTeacherData();
-  }, [userid]);
+    getUserData(setUserData);
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("Updated Teacher:", teacher);
+    console.log("Updated Teacher:", userData);
   };
 
   // 입력 양식을 변경할 때 호출되는 함수입니다.
   const handleChange = e => {
-    const { name, value } = e.target;
-    setTeacher(prevTeacher => ({
-      ...prevTeacher,
-      [name]: value,
-    }));
+    e.preventDefault();
+    setUserData();
   };
 
   // 사진을 업로드할 때 호출되는 함수입니다.
@@ -59,7 +30,7 @@ const MyPage = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setTeacher(prevTeacher => ({
+      setUserData(prevTeacher => ({
         ...prevTeacher,
         pic: reader.result,
       }));
@@ -68,7 +39,7 @@ const MyPage = () => {
       reader.readAsDataURL(file);
     }
   };
-
+  console.log(userData);
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
       <div className="mypage-top">
@@ -76,11 +47,7 @@ const MyPage = () => {
           <div className="user-info-wrap">
             <div className="user-picture-wrap">
               <div className="picture-img">
-                {teacher.pic ? (
-                  <img src={teacher.pic} alt="pic" />
-                ) : (
-                  <img src={teacher.profilePic} alt="pic" />
-                )}
+                <img src={userData.pic} alt="pic" />
               </div>
               <input
                 type="file"
@@ -95,7 +62,7 @@ const MyPage = () => {
                   <input
                     type="email"
                     name="email"
-                    value={teacher.email}
+                    value={userData.email}
                     readOnly
                   />
                 </li>
@@ -104,7 +71,7 @@ const MyPage = () => {
                   <input
                     type="password"
                     name="password"
-                    value={teacher.password}
+                    value={userData.password}
                     onChange={handleChange}
                   />
                 </li>
@@ -113,31 +80,32 @@ const MyPage = () => {
                   <input
                     type="password"
                     name="confirmPassword"
-                    value={teacher.confirmPassword}
+                    value={userData.confirmPassword}
                     onChange={handleChange}
                   />
                 </li>
                 <li>
                   <label>이름</label>
-                  <input type="text" name="tnm" value={teacher.tnm} readOnly />
+                  <input type="text" name="tnm" value={userData.unm} readOnly />
                 </li>
                 <li>
                   <label>생년월일</label>
                   <input
                     type="text"
                     name="birth"
-                    value={`${teacher.birth.split("-")[0]}년 ${
-                      teacher.birth.split("-")[1]
-                    }월 ${teacher.birth.split("-")[2]}일`}
+                    value={userData.birth}
                     readOnly
                   />
+                  {/* `${userData.birth.split("-")[0]}년 ${
+                      userData.birth.split("-")[1]
+                    }월 ${userData.birth.split("-")[2]}일` */}
                 </li>
                 <li>
                   <label>연락처</label>
                   <input
                     type="text"
                     name="phone"
-                    value={teacher.phone}
+                    value={userData.phone}
                     onChange={handleChange}
                   />
                 </li>
@@ -148,7 +116,7 @@ const MyPage = () => {
                       <input
                         type="text"
                         name="address"
-                        value={teacher.address}
+                        value={userData.address}
                         onChange={handleChange}
                         readOnly
                       />
@@ -158,7 +126,7 @@ const MyPage = () => {
                       type="text"
                       name="detailAddress"
                       className="detail-address"
-                      value={teacher.detailAddress}
+                      value={userData.detailAddress}
                       onChange={handleChange}
                       placeholder="상세 주소를 입력하세요."
                     />
@@ -170,7 +138,7 @@ const MyPage = () => {
                     <input
                       type="text"
                       name="snm"
-                      value={teacher.snm}
+                      value={userData.shnm}
                       onChange={handleChange}
                       readOnly
                     />
@@ -178,14 +146,14 @@ const MyPage = () => {
                       <input
                         type="text"
                         name="grade"
-                        value={`${teacher.grade}학년`}
+                        value={userData.grade}
                         onChange={handleChange}
                         readOnly
                       />
                       <input
                         type="text"
                         name="van"
-                        value={`${teacher.van}반`}
+                        value={userData.van}
                         onChange={handleChange}
                         readOnly
                       />

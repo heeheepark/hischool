@@ -32,14 +32,11 @@ client.interceptors.response.use(
     return response;
   },
   async error => {
-    const {
-      config,
-      response: { status },
-    } = error;
+    const { config, response } = error;
 
     const refreshToken = getCookie("refreshToken");
 
-    if (status === 401 && refreshToken) {
+    if (response.status === 401 && refreshToken) {
       console.log("토큰 만료! 갱신 시도");
       try {
         const { data } = await client.post(`/api/refresh-token`, {
