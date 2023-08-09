@@ -19,6 +19,7 @@ const SchoolRecordTable = () => {
     "반석차",
     "전교석차",
   ];
+  const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [allSchoolRecord, setAllSchoolRecord] = useState(null);
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);

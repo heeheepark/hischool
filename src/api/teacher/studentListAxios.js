@@ -1,7 +1,7 @@
 import { client } from "../client";
 
 // 학생관리 리스트
-export const getStudentData = async setStudentListData => {
+export const getStudentData = async (setStudentListData, setIsLoading) => {
   try {
     const res = await client.get(`/api/teacher/signed?classId=${2}`);
     const result = res.data;
@@ -9,6 +9,7 @@ export const getStudentData = async setStudentListData => {
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
     );
     setStudentListData(listSortData);
+    // setIsLoading(true);
   } catch (err) {
     console.error(err);
   }

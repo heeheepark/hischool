@@ -19,10 +19,25 @@ const SideMenuWrap = styled.div`
     color: #fff;
     padding: 20px 30px;
     .main-logo {
+      width: 100%;
+      height: 100%;
+      text-align: center;
       font-size: 24px;
       font-weight: 900;
-      height: 30px;
+      height: 36px;
       cursor: pointer;
+      /* line-height: 2; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* img {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 10px;
+      } */
+      span {
+        /* margin-left: 10px; */
+      }
     }
     .user-img {
       border-radius: 50%;

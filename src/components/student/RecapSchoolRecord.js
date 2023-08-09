@@ -11,8 +11,6 @@ const RecapSchoolRecord = () => {
   const [recentSchoolRecordData, setRecentSchoolRecordData] = useState(null);
   const [recentTestTitle, setRecentTestTitle] = useState(null);
 
-    
-
   useState(() => {
     getAllSchoolRecord(setAllSchoolRecordData);
     getRecentSchoolRecord(setRecentSchoolRecordData, setRecentTestTitle);
@@ -28,10 +26,10 @@ const RecapSchoolRecord = () => {
   // 내신 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
   const chartColor = [
-    "hsl(231, 100%, 59%)",
-    "hsl(45, 70%, 50%)",
-    "hsl(342, 70%, 50%)",
-    "hsl(213, 70%, 50%)",
+    "hsl(49, 70%, 50%)",
+    "hsl(122, 70%, 50%)",
+    "hsl(327, 70%, 50%)",
+    "hsl(168, 70%, 50%)",
   ];
   const ratingList = allSchoolRecordData?.map(item => parseInt(item.rating));
   const highGrade = ratingList?.reduce((a, b) => {
@@ -69,7 +67,7 @@ const RecapSchoolRecord = () => {
             }}
             axisLeft={{ tickValues: gradeArray }}
             gridYValues={gradeArray}
-            colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
+            colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
             lineWidth={3}
             pointSize={5}
             pointColor={{ theme: "background" }}

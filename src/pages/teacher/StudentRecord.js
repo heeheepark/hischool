@@ -4,7 +4,7 @@ import {
   StudentRecordDiv,
 } from "../../styles/teacher/StudentRecordStyle";
 import { MockRecordList } from "../../components/teacher/MockRecordList";
-import { MockRecordFilter } from "../../components/student/Filter";
+// import { MockRecordFilter } from "../../components/student/Filter";
 import { Link } from "react-router-dom";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { StudentRecordModal } from "../../components/Modal";
@@ -16,6 +16,7 @@ import {
 import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 
 const StudentRecord = () => {
+  const [selectedId, setSelectedId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [studentListData, setStudentListData] = useState(null);
   const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
@@ -42,7 +43,20 @@ const StudentRecord = () => {
 
   useEffect(() => {
     getStudentData(setStudentListData);
+
+    // const defaultSelectedId = document.querySelector("li.active");
+    // console.log(defaultSelectedId);
   }, []);
+
+  useEffect(() => {
+    if (studentListData) {
+      const defaultSelectedId = document.querySelector("li.active");
+      const studentId = parseInt(defaultSelectedId.classList[0].slice(10));
+      setSelectedId(studentId);
+      getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
+      getStudentMockRecord(studentId, setStudentMockRecordList);
+    }
+  }, [studentListData]);
 
   return (
     <>
@@ -130,7 +144,7 @@ const StudentRecord = () => {
             <div className="mock-record-header">
               <div className="header-left">
                 <h4>모의고사 성적 관리</h4>
-                <MockRecordFilter />
+                {/* <MockRecordFilter /> */}
               </div>
               <div className="btns">
                 <button>수정</button>

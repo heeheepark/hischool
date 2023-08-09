@@ -89,20 +89,30 @@ const TeacherHomeDiv = styled.div`
 `;
 
 const ClassSchoolRecordDiv = styled.div`
+  /* position: relative; */
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   height: 35vh;
   width: 100%;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
-  canvas {
-    margin: 0 auto;
-    height: 93% !important;
+  .title-wrap {
+    span {
+      font-size: 21px;
+      font-weight: 800;
+      color: #555;
+      :first-of-type {
+        font-size: 24px;
+        font-weight: 900;
+        color: #176b87;
+        margin-right: 7px;
+      }
+    }
   }
-  > div {
+  .subject-info-wrap {
     color: #444;
     margin: 10px 0;
     span {
@@ -122,6 +132,25 @@ const ClassSchoolRecordDiv = styled.div`
     }
     .history {
       color: rgba(111, 105, 172, 1);
+    }
+  }
+`;
+
+export const ChartWrap = styled.div`
+  width: 100%;
+  height: 60%;
+  display: flex;
+  > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    > span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 15px;
+      font-weight: 600;
     }
   }
 `;

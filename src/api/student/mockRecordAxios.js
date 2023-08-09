@@ -20,10 +20,14 @@ export const getCurrentMockRecord = async setCurrentMockRecord => {
   }
 };
 
-export const getAllMockRecord = async setAllMockRecord => {
+export const getAllMockRecord = async (
+  setDefaultMockRecord,
+  setAllMockRecord,
+) => {
   try {
     const res = await client.get(`/api/student/mock-table`);
     const result = res.data;
+    setDefaultMockRecord(result);
     setAllMockRecord(result);
   } catch (err) {
     console.log(err);

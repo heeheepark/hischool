@@ -6,7 +6,6 @@ import {
 import { ResponsiveLine } from "@nivo/line";
 import { MockRecordDiv } from "../../styles/student/MockRecordStyle";
 import MockRecordTable from "../../components/student/MockRecordTable";
-import { MockRecordFilter } from "../../components/student/Filter";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getUserInfo } from "../../api/userInfoAxios";
@@ -77,7 +76,7 @@ const MockRecord = () => {
               }}
               axisLeft={{ tickValues: gradeArray }}
               gridYValues={gradeArray}
-              colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
+              colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
               lineWidth={3}
               pointSize={5}
               pointColor={{ theme: "background" }}
@@ -137,13 +136,7 @@ const MockRecord = () => {
         </div>
       </ChartWrap>
       <RecordTableWrap>
-        <div className="title">
-          <h4>모의고사 성적 목록</h4>
-          <MockRecordFilter />
-        </div>
-        <div className="record-table">
-          <MockRecordTable />
-        </div>
+        <MockRecordTable />
       </RecordTableWrap>
     </MockRecordDiv>
   );

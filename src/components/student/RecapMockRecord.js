@@ -65,7 +65,7 @@ const RecapSchoolRecord = () => {
             }}
             axisLeft={{ tickValues: gradeArray }}
             gridYValues={gradeArray}
-            colors={["#B2A4FF", "#FFB4B4", "#C3EDC0", "gold"]}
+            colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
             lineWidth={3}
             pointSize={5}
             pointColor={{ theme: "background" }}

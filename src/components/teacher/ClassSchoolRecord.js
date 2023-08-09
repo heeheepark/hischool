@@ -1,310 +1,190 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faSquare } from "@fortawesome/free-solid-svg-icons";
-import { Chart } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import { ClassSchoolRecordDiv } from "../../styles/teacher/TeacherHomeStyle";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  ChartDataLabels,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-);
+  ChartWrap,
+  ClassSchoolRecordDiv,
+} from "../../styles/teacher/TeacherHomeStyle";
+import { ResponsivePie } from "@nivo/pie";
 
 const ClassSchoolRecord = () => {
-  const data = {
-    labels: ["2023-1 중간", "2023-1 기말", "2023-2 중간", "2023-2 기말"],
-    datasets: [
-      {
-        label: "국어 9등급",
-        backgroundColor: "rgba(197, 22, 5, 1)",
-        stack: "국어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "국어 8등급",
-        backgroundColor: "rgba(197, 22, 5, 0.9)",
-        stack: "국어",
-        data: [2, 2, 2, 2],
-      },
-      {
-        label: "국어 7등급",
-        backgroundColor: "rgba(197, 22, 5, 0.8)",
-        stack: "국어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "국어 6등급",
-        backgroundColor: "rgba(197, 22, 5, 0.7)",
-        stack: "국어",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "국어 5등급",
-        backgroundColor: "rgba(197, 22, 5, 0.6)",
-        stack: "국어",
-        data: [6, 6, 6, 6],
-      },
-      {
-        label: "국어 4등급",
-        backgroundColor: "rgba(197, 22, 5, 0.5)",
-        stack: "국어",
-        data: [5, 5, 5, 5],
-      },
-      {
-        label: "국어 3등급",
-        backgroundColor: "rgba(197, 22, 5, 0.4)",
-        stack: "국어",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "국어 2등급",
-        backgroundColor: "rgba(197, 22, 5, 0.3)",
-        stack: "국어",
-        data: [3, 3, 3, 3],
-      },
-      {
-        label: "국어 1등급",
-        backgroundColor: "rgba(197, 22, 5, 0.2)",
-        stack: "국어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "수학 9등급",
-        backgroundColor: "rgba(253, 141, 20, 1)",
-        stack: "수학",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "수학 8등급",
-        backgroundColor: "rgba(253, 141, 20, 0.9)",
-        stack: "수학",
-        data: [2, 2, 2, 2],
-      },
-      {
-        label: "수학 7등급",
-        backgroundColor: "rgba(253, 141, 20, 0.8)",
-        stack: "수학",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "수학 6등급",
-        backgroundColor: "rgba(253, 141, 20, 0.7)",
-        stack: "수학",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "수학 5등급",
-        backgroundColor: "rgba(253, 141, 20, 0.6)",
-        stack: "수학",
-        data: [6, 6, 6, 6],
-      },
-      {
-        label: "수학 4등급",
-        backgroundColor: "rgba(253, 141, 20, 0.5)",
-        stack: "수학",
-        data: [5, 5, 5, 5],
-      },
-      {
-        label: "수학 3등급",
-        backgroundColor: "rgba(253, 141, 20, 0.4)",
-        stack: "수학",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "수학 2등급",
-        backgroundColor: "rgba(253, 141, 20, 0.3)",
-        stack: "수학",
-        data: [3, 3, 3, 3],
-      },
-      {
-        label: "수학 1등급",
-        backgroundColor: "rgba(253, 141, 20, 0.2)",
-        stack: "수학",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "영어 9등급",
-        backgroundColor: "rgba(250, 194, 19, 1)",
-        stack: "영어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "영어 8등급",
-        backgroundColor: "rgba(250, 194, 19, 0.9)",
-        stack: "영어",
-        data: [2, 2, 2, 2],
-      },
-      {
-        label: "영어 7등급",
-        backgroundColor: "rgba(250, 194, 19, 0.8)",
-        stack: "영어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "영어 6등급",
-        backgroundColor: "rgba(250, 194, 19, 0.7)",
-        stack: "영어",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "영어 5등급",
-        backgroundColor: "rgba(250, 194, 19, 0.6)",
-        stack: "영어",
-        data: [6, 6, 6, 6],
-      },
-      {
-        label: "영어 4등급",
-        backgroundColor: "rgba(250, 194, 19, 0.5)",
-        stack: "영어",
-        data: [5, 5, 5, 5],
-      },
-      {
-        label: "영어 3등급",
-        backgroundColor: "rgba(250, 194, 19, 0.4)",
-        stack: "영어",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "영어 2등급",
-        backgroundColor: "rgba(250, 194, 19, 0.3)",
-        stack: "영어",
-        data: [3, 3, 3, 3],
-      },
-      {
-        label: "영어 1등급",
-        backgroundColor: "rgba(250, 194, 19, 0.2)",
-        stack: "영어",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "한국사 9등급",
-        backgroundColor: "rgba(111, 105, 172, 1)",
-        stack: "한국사",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "한국사 8등급",
-        backgroundColor: "rgba(111, 105, 172, 0.9)",
-        stack: "한국사",
-        data: [2, 2, 2, 2],
-      },
-      {
-        label: "한국사 7등급",
-        backgroundColor: "rgba(111, 105, 172, 0.8)",
-        stack: "한국사",
-        data: [1, 1, 1, 1],
-      },
-      {
-        label: "한국사 6등급",
-        backgroundColor: "rgba(111, 105, 172, 0.7)",
-        stack: "한국사",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "한국사 5등급",
-        backgroundColor: "rgba(111, 105, 172, 0.6)",
-        stack: "한국사",
-        data: [6, 6, 6, 6],
-      },
-      {
-        label: "한국사 4등급",
-        backgroundColor: "rgba(111, 105, 172, 0.5)",
-        stack: "한국사",
-        data: [5, 5, 5, 5],
-      },
-      {
-        label: "한국사 3등급",
-        backgroundColor: "rgba(111, 105, 172, 0.4)",
-        stack: "한국사",
-        data: [3, 3, 3, 3, 3],
-      },
-      {
-        label: "한국사 2등급",
-        backgroundColor: "rgba(111, 105, 172, 0.3)",
-        stack: "한국사",
-        data: [3, 3, 3, 3],
-      },
-      {
-        label: "한국사 1등급",
-        backgroundColor: "rgba(111, 105, 172, 0.2)",
-        stack: "한국사",
-        data: [1, 1, 1, 1],
-      },
-    ],
-  };
-
-  const options = {
-    plugins: {
-      datalabels: {
-        color: "#fff",
-        anchor: "center",
-        align: "center",
-        offset: 4,
-        font: {
-          size: 9,
-        },
-        formatter: (value, context) => {
-          return value;
-        },
-      },
-      legend: {
-        display: false,
-      },
+  const data = [
+    {
+      id: "1등급",
+      label: "1등급",
+      value: 3,
+      color: "hsl(168, 70%, 50%)",
     },
-    scales: {
-      x: {
-        stacked: true,
-        fontSize: 20,
-      },
-      y: {
-        stacked: true,
-      },
+    {
+      id: "2등급",
+      label: "2등급",
+      value: 7,
+      color: "hsl(49, 70%, 50%)",
     },
-    tooltips: {
-      enabled: true,
-      mode: "index",
-      intersect: false,
+    {
+      id: "3등급",
+      label: "3등급",
+      value: 10,
+      color: "hsl(122, 70%, 50%)",
     },
-  };
+    {
+      id: "4등급",
+      label: "4등급",
+      value: 25,
+      color: "hsl(327, 70%, 50%)",
+    },
+    {
+      id: "5등급",
+      label: "5등급",
+      value: 20,
+      color: "hsl(165, 70%, 50%)",
+    },
+    {
+      id: "6등급",
+      label: "6등급",
+      value: 15,
+      color: "hsl(168, 70%, 50%)",
+    },
+    {
+      id: "7등급",
+      label: "7등급",
+      value: 10,
+      color: "hsl(49, 70%, 50%)",
+    },
+    {
+      id: "8등급",
+      label: "8등급",
+      value: 5,
+      color: "hsl(122, 70%, 50%)",
+    },
+    {
+      id: "9등급",
+      label: "9등급",
+      value: 5,
+      color: "hsl(327, 70%, 50%)",
+    },
+  ];
 
   return (
     <ClassSchoolRecordDiv>
-      <Chart
-        type="bar"
-        data={data}
-        options={options}
-        plugins={ChartDataLabels}
-      />
-      <div>
+      <div className="title-wrap">
+        <span>2023년 1학기 기말고사</span>
+        <span>주요 과목 등급 분포</span>
+      </div>
+      <ChartWrap>
+        <div>
+          <ResponsivePie
+            data={data}
+            width={200}
+            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={0}
+            activeOuterRadiusOffset={8}
+            borderWidth={1}
+            borderColor={{
+              from: "color",
+              modifiers: [["darker", 0.2]],
+            }}
+            enableArcLinkLabels={false}
+            arcLinkLabelsSkipAngle={10}
+          />
+          <span>국어</span>
+        </div>
+        <div>
+          <ResponsivePie
+            data={data}
+            width={200}
+            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={0}
+            activeOuterRadiusOffset={8}
+            borderWidth={1}
+            borderColor={{
+              from: "color",
+              modifiers: [["darker", 0.2]],
+            }}
+            enableArcLinkLabels={false}
+            arcLinkLabelsSkipAngle={10}
+          />
+          <span>수학</span>
+        </div>
+        <div>
+          <ResponsivePie
+            data={data}
+            width={200}
+            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={0}
+            activeOuterRadiusOffset={8}
+            borderWidth={1}
+            borderColor={{
+              from: "color",
+              modifiers: [["darker", 0.2]],
+            }}
+            enableArcLinkLabels={false}
+            arcLinkLabelsSkipAngle={10}
+          />
+          <span>영어</span>
+        </div>
+        <div>
+          <ResponsivePie
+            data={data}
+            width={200}
+            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            innerRadius={0.5}
+            padAngle={0.7}
+            cornerRadius={0}
+            activeOuterRadiusOffset={8}
+            borderWidth={1}
+            borderColor={{
+              from: "color",
+              modifiers: [["darker", 0.2]],
+            }}
+            enableArcLinkLabels={false}
+            arcLinkLabelsSkipAngle={10}
+          />
+          <span>한국사</span>
+        </div>
+      </ChartWrap>
+      <div className="subject-info-wrap">
         <span>
           <FontAwesomeIcon icon={faCircle} className="icon korean" />
-          국어
+          1등급
         </span>
         <span>
           <FontAwesomeIcon icon={faCircle} className="icon math" />
-          수학
+          2등급
         </span>
         <span>
           <FontAwesomeIcon icon={faCircle} className="icon english" />
-          영어
+          3등급
         </span>
         <span>
           <FontAwesomeIcon icon={faCircle} className="icon history" />
-          한국사
+          4등급
+        </span>
+        <span>
+          <FontAwesomeIcon icon={faCircle} className="icon korean" />
+          5등급
+        </span>
+        <span>
+          <FontAwesomeIcon icon={faCircle} className="icon math" />
+          6등급
+        </span>
+        <span>
+          <FontAwesomeIcon icon={faCircle} className="icon english" />
+          7등급
+        </span>
+        <span>
+          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          8등급
+        </span>
+        <span>
+          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          9등급
         </span>
       </div>
     </ClassSchoolRecordDiv>

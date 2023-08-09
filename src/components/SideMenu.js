@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import Cookies from "universal-cookie";
 import { getUserInfo } from "../api/userInfoAxios";
 import { useState } from "react";
+import { logo } from "../assets/logo.png";
 
 const SideMenu = () => {
   const [userName, setUserName] = useState(null);
@@ -44,7 +45,8 @@ const SideMenu = () => {
     <SideMenuWrap>
       <div className="user-info-wrap">
         <div className="main-logo" onClick={() => navigate(`/${user}/home`)}>
-          Hi! School
+          {/* <img src={logo} alt="로고" /> */}
+          <span>Hi! School</span>
         </div>
         <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>
           <span>사용자 사진</span>

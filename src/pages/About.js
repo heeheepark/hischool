@@ -29,7 +29,8 @@ const About = () => {
             고등학생과 담임 교사가 직접{" "}
             <strong>내신 성적과 모의고사 성적을 관리</strong>하고, <br />
             이를 바탕으로 원활한 <strong>대입 상담 및 계획</strong>이 이루어질
-            수 있도록 돕는 <strong>‘고등학생 성적 관리 서비스’</strong>입니다.
+            수 있도록 돕는 <strong>‘고등학교 통합성적관리 플랫폼’</strong>
+            입니다.
           </span>
           <br />
           <span className="info-message">
