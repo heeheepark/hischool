@@ -75,7 +75,6 @@ const InputSchoolRecord = () => {
         wholerank: parseInt(item.wholerank) || 0,
       }));
       postSchoolData(SdataToSend);
-      console.log(SdataToSend);
     }
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수
@@ -102,7 +101,6 @@ const InputSchoolRecord = () => {
       try {
         // 주요과목 데이터 가져오기
         const mainSubData = await getSchoolMainSubData();
-        console.log(mainSubData);
 
         // subjectData 상태 업데이트
         setSubjectData(mainSubData);

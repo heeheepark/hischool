@@ -44,7 +44,6 @@ const InputSubject = () => {
         subjectid: parseInt(item.subjectid) || 0,
       }));
       postALLData(dataToSend);
-      console.log(dataToSend);
     }
   };
   const handleAddButtonClick = () => {

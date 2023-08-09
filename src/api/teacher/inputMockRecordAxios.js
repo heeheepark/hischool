@@ -6,7 +6,7 @@ export const postMockData = async dataToSend => {
     const response = await client.post("/api/teacher/subject/mock-ins", {
       list: dataToSend,
     });
-    console.log("데이터 전송 성공:", response.data);
+    console.log("데이터 전송 성공 : ", response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }

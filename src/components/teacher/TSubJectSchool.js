@@ -124,7 +124,7 @@ const TSubJectSchool = ({
               onChange={handleInputChange}
               placeholder="반 석차"
             />
-            <span>/ {schoolClassData}</span>
+            <span> / {schoolClassData}</span>
           </ISainput>
           <ISainput>
             <input
@@ -134,7 +134,7 @@ const TSubJectSchool = ({
               onChange={handleInputChange}
               placeholder="전교 석차"
             />
-            <span>/ {schoolData}</span>
+            <span> / {schoolData}</span>
           </ISainput>
         </ISRinput>
       </div>

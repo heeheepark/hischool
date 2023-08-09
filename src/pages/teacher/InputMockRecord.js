@@ -58,7 +58,6 @@ const InputMockRecord = () => {
         percent: parseInt(item.percent) || 0,
       }));
       postMockData(dataToSend);
-      console.log(dataToSend);
     }
   };
   // 항목 추가 버튼을 누를 때 호출되는 함수
