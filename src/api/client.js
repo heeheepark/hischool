@@ -47,7 +47,11 @@ client.interceptors.response.use(
         console.log(accessToken);
         config.headers.Authorization = `Bearer ${accessToken}`;
 
-        return client(config);
+        // 토큰 갱신 후 재시도
+        const retryResponse = await client(config);
+        return retryResponse;
+
+        // return client(config);
       } catch (error) {
         console.log(error);
       }

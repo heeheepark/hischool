@@ -1,9 +1,12 @@
+import axios from "axios";
 import { client } from "./client";
 
-export const postSignUp = async collectUserData => {
+export const postSignUp = async formData => {
   try {
-    const res = await client.post("/api/sign-up", {
-      collectUserData,
+    console.log(formData);
+    console.log("시도");
+    const res = await axios.post("/api/sign-up", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
     console.log("성공했니?:", res.data);
   } catch (error) {
