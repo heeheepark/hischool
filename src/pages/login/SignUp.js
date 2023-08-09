@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IntroImage } from "../../styles/login/LoginStyle";
 import {
   LeftForm,
@@ -26,15 +26,16 @@ const SignUp = () => {
   const [classNumber, setClassNumber] = useState("");
   const [birth, setBirth] = useState("");
   const [phone, setPhone] = useState("");
+  const [userPic, setUserPic] = useState("");
+  const [aprPic, setAprPic] = useState("");
   const [houseAddress, setHouseAddress] = useState({
     address: "",
   });
   const [detailAddress, setDetailAddress] = useState("");
-  const [userPic, setUserPic] = useState("");
-  const [aprPic, setAprPic] = useState("");
   const [authModal, setAuthModal] = useState(false);
   const [addressModal, setAddressModal] = useState(false);
   const [codeConFirm, setCodeConFirm] = useState(false);
+  const [selectFile, setSelectFile] = useState(null);
   const navigate = useNavigate();
 
   const birthFormatter = num => {
@@ -111,8 +112,13 @@ const SignUp = () => {
     setUserType(e.target.value);
   };
 
+  const handleCancel = () => {
+    navigate("/");
+  };
+
   const handleSignUp = e => {
     e.preventDefault();
+    e.persist();
 
     if (!userType || !idEmail || !password || !passwordConfirm) {
       alert("모든 필드를 입력해주세요.");
@@ -123,6 +129,7 @@ const SignUp = () => {
       alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
+
     const collectUserData = {
       email: idEmail,
       pw: password,
@@ -134,30 +141,20 @@ const SignUp = () => {
       phone,
       address: houseAddress.address,
       role: userType,
-      pic: userPic,
-      aprPic,
+      detailAddress,
     };
+    let formData = new FormData();
+    formData.append("pic", selectFile);
+    formData.append("p", JSON.stringify(collectUserData));
 
-    console.log(collectUserData);
-    // postSignUp(collectUserData);
-
-    // navigate("/");
-  };
-
-  const handleCancel = () => {
+    postSignUp(formData);
     navigate("/");
   };
 
-  // 사진을 업로드할 때 호출되는 함수입니다.
-  const handlePictureUpload = e => {
+  const handleChangeFile = e => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = e => {
-      setUserPic(e.target.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    setSelectFile(file);
+    setUserPic(URL.createObjectURL(file));
   };
 
   return (
@@ -194,12 +191,12 @@ const SignUp = () => {
             <form className="input-form">
               <div className="image-upload">
                 <div className="picture-img">
-                  <img src={userPic} alt="pic" />
+                  {userPic && <img src={userPic} alt="pic" />}
                 </div>
                 <input
                   type="file"
                   accept="image/jpg, image/png, image/jpeg"
-                  onChange={handlePictureUpload}
+                  onChange={handleChangeFile}
                 />
               </div>
               <SignUpUl>
@@ -217,18 +214,8 @@ const SignUp = () => {
                         <span onClick={handleEmailConfirm}>인증</span>
                       </div>
                       {authModal && (
-                        <Modal
-                          isOpen={authModal}
-                          setAuthModal={setAuthModal}
-                          // onRequestClose={handleModalClose}
-                          // onAfterOpen={handleCodeConfirm}
-                        >
-                          <ConFirm
-                            setAuthModal={setAuthModal}
-                            // emailConFirm={idEmail}
-                            // onClose={handleConFirmClose}
-                            // onConfirm={handleConFirmConfirm}
-                          />
+                        <Modal isOpen={authModal} setAuthModal={setAuthModal}>
+                          <ConFirm setAuthModal={setAuthModal} />
                         </Modal>
                       )}
                     </li>

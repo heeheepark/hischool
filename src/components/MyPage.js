@@ -6,10 +6,35 @@ import {
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
 import { getUserData } from "../api/myPageAxios";
+import { Modal } from "./Modal";
+import DaumPost from "./login/DaumPost";
 
 const MyPage = () => {
   const [userData, setUserData] = useState([]);
+  const [houseAddress, setHouseAddress] = useState({
+    address: "",
+  });
+  console.log(houseAddress);
+  const [detailAddress, setDetailAddress] = useState("");
+  const [authModal, setAuthModal] = useState(false);
+  const [addressModal, setAddressModal] = useState(false);
+  const [codeConFirm, setCodeConFirm] = useState(false);
 
+  const handleModalOpen = () => {
+    setCodeConFirm(true);
+  };
+
+  const handleModalClose = () => {
+    setAuthModal(false);
+  };
+
+  const handleInput = e => {
+    const { name, value } = e.target;
+    setHouseAddress({
+      ...houseAddress,
+      [name]: value,
+    });
+  };
   useEffect(() => {
     getUserData(setUserData);
   }, []);
@@ -25,21 +50,8 @@ const MyPage = () => {
     setUserData();
   };
 
-  // 사진을 업로드할 때 호출되는 함수입니다.
-  const handlePictureUpload = e => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUserData(prevTeacher => ({
-        ...prevTeacher,
-        pic: reader.result,
-      }));
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
   console.log(userData);
+
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
       <div className="mypage-top">
@@ -49,10 +61,11 @@ const MyPage = () => {
               <div className="picture-img">
                 <img src={userData.pic} alt="pic" />
               </div>
+              {/* {renderImagePreview} */}
               <input
                 type="file"
-                accept="image/jpg, image/png, image/jpeg"
-                onChange={handlePictureUpload}
+                accept="image/png, image/gif, image/jpeg"
+                // onChange={handleFileChange}
               />
             </div>
             <div className="school-info">
@@ -114,12 +127,29 @@ const MyPage = () => {
                   <div className="address-wrap">
                     <div>
                       <input
+                        className="user_enroll_text"
+                        id="address-input"
                         type="text"
+                        required={true}
                         name="address"
-                        value={userData.address}
-                        onChange={handleChange}
+                        onChange={handleInput}
+                        onClick={() => setAddressModal(true)}
+                        value={houseAddress.address}
                         readOnly
                       />
+                      {addressModal && (
+                        <Modal
+                          isOpen={addressModal}
+                          onRequestClose={handleModalClose}
+                          onAfterOpen={handleModalOpen}
+                        >
+                          <DaumPost
+                            company={houseAddress}
+                            setHouseAddress={setHouseAddress}
+                            onComplete={() => setAddressModal(false)}
+                          />
+                        </Modal>
+                      )}
                       <button>주소 검색</button>
                     </div>
                     <input
