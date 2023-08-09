@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -6,64 +6,49 @@ import {
   ClassSchoolRecordDiv,
 } from "../../styles/teacher/TeacherHomeStyle";
 import { ResponsivePie } from "@nivo/pie";
+import { getSchoolData } from "../../api/teacher/teacherHomeAxios";
 
 const ClassSchoolRecord = () => {
-  const data = [
-    {
-      id: "1등급",
-      label: "1등급",
-      value: 3,
+  const [schoolData, setSchoolData] = useState(null);
+  useEffect(() => {
+    getSchoolData(setSchoolData);
+  }, []);
+
+  const koreanDataList = schoolData?.list[0].map(item => {
+    return {
+      id: `${item.rating}등급`,
+      label: `${item.rating}등급`,
+      value: item.percentage,
       color: "hsl(168, 70%, 50%)",
-    },
-    {
-      id: "2등급",
-      label: "2등급",
-      value: 7,
-      color: "hsl(49, 70%, 50%)",
-    },
-    {
-      id: "3등급",
-      label: "3등급",
-      value: 10,
-      color: "hsl(122, 70%, 50%)",
-    },
-    {
-      id: "4등급",
-      label: "4등급",
-      value: 25,
-      color: "hsl(327, 70%, 50%)",
-    },
-    {
-      id: "5등급",
-      label: "5등급",
-      value: 20,
-      color: "hsl(165, 70%, 50%)",
-    },
-    {
-      id: "6등급",
-      label: "6등급",
-      value: 15,
+    };
+  });
+
+  const mathDataList = schoolData?.list[1].map(item => {
+    return {
+      id: `${item.rating}등급`,
+      label: `${item.rating}등급`,
+      value: item.percentage,
       color: "hsl(168, 70%, 50%)",
-    },
-    {
-      id: "7등급",
-      label: "7등급",
-      value: 10,
-      color: "hsl(49, 70%, 50%)",
-    },
-    {
-      id: "8등급",
-      label: "8등급",
-      value: 5,
-      color: "hsl(122, 70%, 50%)",
-    },
-    {
-      id: "9등급",
-      label: "9등급",
-      value: 5,
-      color: "hsl(327, 70%, 50%)",
-    },
-  ];
+    };
+  });
+
+  const englishDataList = schoolData?.list[2].map(item => {
+    return {
+      id: `${item.rating}등급`,
+      label: `${item.rating}등급`,
+      value: item.percentage,
+      color: "hsl(168, 70%, 50%)",
+    };
+  });
+
+  const historyDataList = schoolData?.list[3].map(item => {
+    return {
+      id: `${item.rating}등급`,
+      label: `${item.rating}등급`,
+      value: item.percentage,
+      color: "hsl(168, 70%, 50%)",
+    };
+  });
 
   return (
     <ClassSchoolRecordDiv>
@@ -73,79 +58,87 @@ const ClassSchoolRecord = () => {
       </div>
       <ChartWrap>
         <div>
-          <ResponsivePie
-            data={data}
-            width={200}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={0}
-            activeOuterRadiusOffset={8}
-            borderWidth={1}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.2]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-          />
+          {koreanDataList ? (
+            <ResponsivePie
+              data={koreanDataList}
+              width={200}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              innerRadius={0.5}
+              padAngle={0.7}
+              cornerRadius={0}
+              activeOuterRadiusOffset={8}
+              borderWidth={1}
+              borderColor={{
+                from: "color",
+                modifiers: [["darker", 0.2]],
+              }}
+              enableArcLinkLabels={false}
+              arcLinkLabelsSkipAngle={10}
+            />
+          ) : null}
           <span>국어</span>
         </div>
         <div>
-          <ResponsivePie
-            data={data}
-            width={200}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={0}
-            activeOuterRadiusOffset={8}
-            borderWidth={1}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.2]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-          />
+          {mathDataList ? (
+            <ResponsivePie
+              data={mathDataList}
+              width={200}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              innerRadius={0.5}
+              padAngle={0.7}
+              cornerRadius={0}
+              activeOuterRadiusOffset={8}
+              borderWidth={1}
+              borderColor={{
+                from: "color",
+                modifiers: [["darker", 0.2]],
+              }}
+              enableArcLinkLabels={false}
+              arcLinkLabelsSkipAngle={10}
+            />
+          ) : null}
           <span>수학</span>
         </div>
         <div>
-          <ResponsivePie
-            data={data}
-            width={200}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={0}
-            activeOuterRadiusOffset={8}
-            borderWidth={1}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.2]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-          />
+          {englishDataList ? (
+            <ResponsivePie
+              data={englishDataList}
+              width={200}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              innerRadius={0.5}
+              padAngle={0.7}
+              cornerRadius={0}
+              activeOuterRadiusOffset={8}
+              borderWidth={1}
+              borderColor={{
+                from: "color",
+                modifiers: [["darker", 0.2]],
+              }}
+              enableArcLinkLabels={false}
+              arcLinkLabelsSkipAngle={10}
+            />
+          ) : null}
           <span>영어</span>
         </div>
         <div>
-          <ResponsivePie
-            data={data}
-            width={200}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            innerRadius={0.5}
-            padAngle={0.7}
-            cornerRadius={0}
-            activeOuterRadiusOffset={8}
-            borderWidth={1}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.2]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-          />
+          {historyDataList ? (
+            <ResponsivePie
+              data={historyDataList}
+              width={200}
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+              innerRadius={0.5}
+              padAngle={0.7}
+              cornerRadius={0}
+              activeOuterRadiusOffset={8}
+              borderWidth={1}
+              borderColor={{
+                from: "color",
+                modifiers: [["darker", 0.2]],
+              }}
+              enableArcLinkLabels={false}
+              arcLinkLabelsSkipAngle={10}
+            />
+          ) : null}
           <span>한국사</span>
         </div>
       </ChartWrap>

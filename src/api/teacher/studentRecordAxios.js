@@ -20,7 +20,7 @@ export const getStudentMockRecord = async (
   setStudentMockRecordList,
 ) => {
   try {
-    const res = await client.get(`/api/teacher/mock/${studentId}`);
+    const res = await client.get(`/api/teacher/mockresult?userId=${studentId}`);
     const result = res.data;
     console.log(result);
     setStudentMockRecordList(result);

@@ -41,10 +41,10 @@ const MockRecordList = ({ studentMockRecordList }) => {
                 <input type="checkbox" className="mock-checkbox" />
               </li>
               <li>{item.year}</li>
-              <li>{item.mon}</li>
-              <li>{item.cateName}</li>
+              <li>{`${item.mon}월`}</li>
               <li>{item.nm}</li>
-              <li>{item.standardScore}</li>
+              <li>{item.detailNm}</li>
+              <li>{item.sc}</li>
               <li>{item.rating}</li>
               <li>{`${item.percent}%`}</li>
             </ul>

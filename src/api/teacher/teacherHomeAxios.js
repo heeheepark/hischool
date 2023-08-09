@@ -1,3 +1,4 @@
+import { async } from "q";
 import { client } from "../client";
 
 // 전교 학생 인원
@@ -29,6 +30,28 @@ export const getUnSignCount = async setUnSignCount => {
     const res = await client.get(`/api/teacher/apr-student?classid=${2}`);
     const result = res.data;
     setUnSignCount(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 내신 현황
+export const getSchoolData = async setSchoolData => {
+  try {
+    const res = await client.get(`/api/teacher/aca-graph`);
+    const result = res.data;
+    setSchoolData(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 모의고사 현황
+export const getMockData = async setMockData => {
+  try {
+    const res = await client.get(`/api/teacher/subject/mock-graph`);
+    const result = res.data;
+    setMockData(result);
   } catch (err) {
     console.log(err);
   }
