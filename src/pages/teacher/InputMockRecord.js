@@ -7,19 +7,21 @@ import {
   InputMockRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlusCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import TSubJectMock from "../../components/teacher/TSubjectMock";
 import {
   getMockMainSubData,
   getMockSubData,
 } from "../../api/teacher/inputMockRecordAxios";
 import { postMockData } from "../../api/teacher/inputMockRecordAxios";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const InputMockRecord = () => {
-  const [dropMonth, setDropMonth] = useState(""); 
+  // userId 전달
+  const { state } = useLocation();
+  console.log(state);
+
+  const [dropMonth, setDropMonth] = useState("");
   const [studentsData, setStudentsData] = useState([]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);

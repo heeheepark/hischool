@@ -5,7 +5,7 @@ import {
 } from "../../styles/teacher/StudentRecordStyle";
 import { MockRecordList } from "../../components/teacher/MockRecordList";
 // import { MockRecordFilter } from "../../components/student/Filter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { StudentRecordModal } from "../../components/Modal";
 import { getStudentData } from "../../api/teacher/studentListAxios";
@@ -16,6 +16,7 @@ import {
 import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 
 const StudentRecord = () => {
+  const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [studentListData, setStudentListData] = useState(null);
@@ -131,9 +132,16 @@ const StudentRecord = () => {
               <div className="btns">
                 <button>수정</button>
                 <button onClick={showModal}>삭제</button>
-                <Link to="/teacher/inputschoolrecord">
-                  <button className="add-school-record">내신 성적 추가</button>
-                </Link>
+                <button
+                  className="add-school-record"
+                  onClick={() => {
+                    navigate("/teacher/inputschoolrecord", {
+                      state: selectedId,
+                    });
+                  }}
+                >
+                  내신 성적 추가
+                </button>
               </div>
             </div>
             <SchoolRecordList
@@ -149,11 +157,16 @@ const StudentRecord = () => {
               <div className="btns">
                 <button>수정</button>
                 <button onClick={showModal}>삭제</button>
-                <Link to="/teacher/inputmockrecord">
-                  <button className="add-mock-record">
-                    모의고사 성적 추가
-                  </button>
-                </Link>
+                <button
+                  className="add-mock-record"
+                  onClick={() => {
+                    navigate("/teacher/inputmockrecord", {
+                      state: selectedId,
+                    });
+                  }}
+                >
+                  모의고사 성적 추가
+                </button>
               </div>
             </div>
             <MockRecordList studentMockRecordList={studentMockRecordList} />

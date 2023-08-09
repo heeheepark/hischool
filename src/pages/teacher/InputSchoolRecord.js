@@ -8,7 +8,7 @@ import {
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TSubJectSchool from "../../components/teacher/TSubJectSchool";
 import {
   getSchoolData,
@@ -19,6 +19,10 @@ import {
 } from "../../api/teacher/inputSchoolRecordAxios";
 
 const InputSchoolRecord = () => {
+  // userId 전달
+  const { state } = useLocation();
+  console.log(state);
+
   const [dropSemester, setDropSemester] = useState(""); // 학기
   const [dropTest, setDropTest] = useState(""); // 고사
   const [studentsData, setStudentsData] = useState([]);
@@ -34,8 +38,6 @@ const InputSchoolRecord = () => {
     setStudentsData(interimData);
     setLastSchoolSavedData(interimData);
   }, []);
-
-  
 
   // 새로운 데이터를 전달하는 함수
   const updateLastSavedData = (_id, newData) => {
