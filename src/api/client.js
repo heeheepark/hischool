@@ -35,7 +35,7 @@ client.interceptors.response.use(
     const { config, response } = error;
 
     const refreshToken = getCookie("refreshToken");
-
+    console.log(response.status);
     if (response.status === 401 && refreshToken) {
       console.log("토큰 만료! 갱신 시도");
       try {

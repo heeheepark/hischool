@@ -27,10 +27,15 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
   );
 };
 
-export const StudentRecordModal = ({ modalOpen, setModalOpen }) => {
+export const StudentRecordModal = ({
+  modalOpen,
+  setModalOpen,
+  setDeleteOk,
+}) => {
   const handleOk = () => {
-    setModalOpen(false);
+    setDeleteOk(true);
   };
+
   const closeModal = () => {
     setModalOpen(false);
   };

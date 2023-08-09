@@ -10,6 +10,7 @@ import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { StudentRecordModal } from "../../components/Modal";
 import { getStudentData } from "../../api/teacher/studentListAxios";
 import {
+  deleteStudentSchoolRecord,
   getStudentMockRecord,
   getStudentSchoolRecord,
 } from "../../api/teacher/studentRecordAxios";
@@ -21,34 +22,32 @@ const StudentRecord = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [studentListData, setStudentListData] = useState(null);
   const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
-  // console.log(studentSchoolRecordList);
   const [studentMockRecordList, setStudentMockRecordList] = useState(null);
+  const [resultIdList, setResultIdList] = useState([]);
+  const [deleteOk, setDeleteOk] = useState(false);
 
   const showModal = () => {
     setModalOpen(true);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
+  // 학생 선택
   const handleStudentList = e => {
     const allStudentList = document.querySelectorAll(".student-detail-list");
     allStudentList.forEach(item => item.classList.remove("active"));
     const clickList = e.currentTarget;
     clickList.classList.add("active");
     const studentId = parseInt(clickList.classList[0].slice(10));
+    setSelectedId(studentId);
     getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
     getStudentMockRecord(studentId, setStudentMockRecordList);
   };
 
+  // 초기 데이터 불러오기
   useEffect(() => {
     getStudentData(setStudentListData);
-
-    // const defaultSelectedId = document.querySelector("li.active");
-    // console.log(defaultSelectedId);
   }, []);
 
+  // 기본값으로 선택된 학생 데이터 불러오기
   useEffect(() => {
     if (studentListData) {
       const defaultSelectedId = document.querySelector("li.active");
@@ -59,10 +58,27 @@ const StudentRecord = () => {
     }
   }, [studentListData]);
 
+  // Modal 확인 클릭 시
+  useEffect(() => {
+    if (deleteOk) {
+      console.log("delete 실행");
+      resultIdList.forEach(item => console.log(item));
+      resultIdList.forEach(item => deleteStudentSchoolRecord(item));
+    }
+    setModalOpen(false);
+    getStudentSchoolRecord(selectedId, setStudentSchoolRecordList);
+    getStudentMockRecord(selectedId, setStudentMockRecordList);
+  }, [deleteOk]);
+
   return (
     <>
       {modalOpen && (
-        <StudentRecordModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        <StudentRecordModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          resultIdList={resultIdList}
+          setDeleteOk={setDeleteOk}
+        />
       )}
       <StudentRecordDiv>
         <h3>학생 성적 관리</h3>
@@ -90,7 +106,6 @@ const StudentRecord = () => {
                           : `studentNum${item.userId} student-detail-list`
                       }
                       onClick={e => handleStudentList(e)}
-                      // onLoad={e => handleStudentList(e)}
                       key={item.userId}
                     >
                       <ul>
@@ -146,6 +161,8 @@ const StudentRecord = () => {
             </div>
             <SchoolRecordList
               studentSchoolRecordList={studentSchoolRecordList}
+              setResultIdList={setResultIdList}
+              resultIdList={resultIdList}
             />
           </div>
           <div className="mock-record-wrap">

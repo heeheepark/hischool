@@ -1,33 +1,70 @@
 import { useEffect, useState } from "react";
 import { SchoolRecordListDiv } from "../../styles/teacher/StudentRecordStyle";
-import { getAllSchoolRecord } from "../../api/student/schoolRecordAxios";
 import {
   getAllStudentCount,
   getStudentCount,
 } from "../../api/teacher/teacherHomeAxios";
 
-const SchoolRecordList = ({ studentSchoolRecordList }) => {
+const SchoolRecordList = ({
+  studentSchoolRecordList,
+  setResultIdList,
+  resultIdList,
+}) => {
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
+  let resultIdArray = resultIdList;
 
+  // 전체 선택
   const handleAllCheck = e => {
     const allCheckBox = document.querySelectorAll(".school-checkbox");
+    resultIdArray = [];
     if (e.target.checked === true) {
-      allCheckBox.forEach(item => (item.checked = true));
+      allCheckBox.forEach(item => {
+        item.checked = true;
+        resultIdArray.push(parseInt(item.classList[1].slice(8)));
+      });
     } else {
-      allCheckBox.forEach(item => (item.checked = false));
+      allCheckBox.forEach(item => {
+        item.checked = false;
+      });
+      resultIdArray = [];
     }
+    setResultIdList(resultIdArray);
   };
 
+  // 개별 선택
+  const handleCheckBox = e => {
+    const clickList = e.currentTarget;
+    const resultId = parseInt(clickList.classList[1].slice(8));
+    if (e.target.checked === true) {
+      resultIdArray.push(resultId);
+    } else {
+      resultIdArray = resultIdArray.filter(item => item !== resultId);
+    }
+    setResultIdList(resultIdArray);
+  };
+
+  // 초기 데이터 불러오기
   useEffect(() => {
     getAllStudentCount(setAllStudentCount);
     getStudentCount(setStudentCount);
   }, []);
+
+  // 학생 선택 변경 시
+  useEffect(() => {
+    document.querySelector(".all-checkbox-btn").checked = false;
+    setResultIdList([]);
+  }, [studentSchoolRecordList]);
+
   return (
     <SchoolRecordListDiv>
       <ul className="category">
         <li className="category-th">
-          <input type="checkbox" onClick={e => handleAllCheck(e)} />
+          <input
+            type="checkbox"
+            onClick={e => handleAllCheck(e)}
+            className="all-checkbox-btn"
+          />
         </li>
         <li className="category-th">연도</li>
         <li className="category-th">학기</li>
@@ -44,7 +81,12 @@ const SchoolRecordList = ({ studentSchoolRecordList }) => {
           <li className="data-table" key={item.resultId}>
             <ul>
               <li>
-                <input type="checkbox" className="school-checkbox" />
+                <input
+                  type="checkbox"
+                  defaultChecked={false}
+                  className={`school-checkbox resultId${item.resultId}`}
+                  onClick={e => handleCheckBox(e)}
+                />
               </li>
               <li>{item.year}</li>
               <li>{item.semester}</li>

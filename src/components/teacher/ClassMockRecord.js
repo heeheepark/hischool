@@ -12,37 +12,37 @@ const ClassMockRecord = () => {
     {
       id: "1등급",
       label: "1등급",
-      value: 3,
+      value: 5,
       color: "hsl(168, 70%, 50%)",
     },
     {
       id: "2등급",
       label: "2등급",
-      value: 7,
+      value: 5,
       color: "hsl(49, 70%, 50%)",
     },
     {
       id: "3등급",
       label: "3등급",
-      value: 10,
+      value: 5,
       color: "hsl(122, 70%, 50%)",
     },
     {
       id: "4등급",
       label: "4등급",
-      value: 25,
+      value: 5,
       color: "hsl(327, 70%, 50%)",
     },
     {
       id: "5등급",
       label: "5등급",
-      value: 20,
+      value: 5,
       color: "hsl(165, 70%, 50%)",
     },
     {
       id: "6등급",
       label: "6등급",
-      value: 15,
+      value: 10,
       color: "hsl(168, 70%, 50%)",
     },
     {
@@ -54,7 +54,7 @@ const ClassMockRecord = () => {
     {
       id: "8등급",
       label: "8등급",
-      value: 5,
+      value: 10,
       color: "hsl(122, 70%, 50%)",
     },
     {
