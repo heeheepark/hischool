@@ -176,7 +176,7 @@ const StudentRecord = () => {
               <div className="btns">
                 <button
                   onClick={() => {
-                    navigate("/teacher/inputschoolrecord", {
+                    navigate("/teacher/editschoolrecord", {
                       state: [selectedId, schoolResultIdList],
                     });
                   }}
@@ -211,7 +211,7 @@ const StudentRecord = () => {
               <div className="btns">
                 <button
                   onClick={() => {
-                    navigate("/teacher/inputschoolrecord", {
+                    navigate("/teacher/editmockrecord", {
                       state: [selectedId, mockResultIdList],
                     });
                   }}

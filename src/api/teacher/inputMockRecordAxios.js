@@ -3,10 +3,11 @@ import { client } from "../client";
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
   try {
-    const response = await client.post("/api/teacher/subject/mock-ins", {
-      list: dataToSend,
-    });
-    console.log(response.data);
+    console.log(dataToSend)
+    // const response = await client.post("/api/teacher/subject/mock-ins", {
+    //   list: dataToSend,
+    // });
+    // console.log(response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
@@ -28,6 +29,19 @@ export const getMockSubData = async categoryid => {
   try {
     const res = await client.get(
       `/api/teacher/subject/mocksmall-list?categoryid=${categoryid}`,
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+// 모의 고사 수정할 과목 가져오기
+export const getMockEditData = async resultId => {
+  try {
+    const res = await client.get(
+      `/api/teacher/subject/mock-result?resultId=${resultId}`,
     );
     return res.data;
   } catch (err) {
