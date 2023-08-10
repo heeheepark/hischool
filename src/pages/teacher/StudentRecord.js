@@ -38,6 +38,7 @@ const StudentRecord = () => {
     const clickList = e.currentTarget;
     clickList.classList.add("active");
     const studentId = parseInt(clickList.classList[0].slice(10));
+    setSelectedId(studentId);
     getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
     getStudentMockRecord(studentId, setStudentMockRecordList);
   };
