@@ -10,6 +10,7 @@ export const ModalContain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(2px);
 `;
 
 export const ModalBody = styled.div`
@@ -51,6 +52,7 @@ export const StudentRecordModalDiv = styled.div`
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
     z-index: 9;
+    backdrop-filter: blur(2px);
   }
   .content-wrap {
     position: absolute;

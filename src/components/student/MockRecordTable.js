@@ -8,15 +8,26 @@ const MockRecordTable = () => {
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);
   const [allMockRecord, setAllMockRecord] = useState(null);
   const [year, setYear] = useState(null);
+  const [month, setMonth] = useState(null);
 
   useEffect(() => {
-    getAllMockRecord(setDefaultMockRecord, setAllMockRecord);
+    getAllMockRecord(setDefaultMockRecord, setAllMockRecord, year, month);
   }, []);
+
+  useEffect(() => {
+    getAllMockRecord(setDefaultMockRecord, setAllMockRecord, year, month);
+  }, [year, month]);
 
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
-    getAllMockRecord(setAllMockRecord, year);
+    // console.log(selectYear);
+    // getAllMockRecord("1", setAllMockRecord, year);
+  };
+
+  const handleMonthList = e => {
+    const selectMonth = e.target.value;
+    setMonth(selectMonth);
   };
 
   const yearList = defaultMockRecord => {
@@ -33,23 +44,25 @@ const MockRecordTable = () => {
     return newMonths.sort();
   };
 
-  // console.log(yearList);
-
   return (
     <>
       <div className="title">
         <h4>모의고사 성적 목록</h4>
         <SchoolRecordFilterDiv className="filter-wrap">
           <select name="year" id="year" onChange={e => handleYearList(e)}>
-            <option value="all">전체 연도</option>
+            <option value={""}>전체 연도</option>
             {yearList(defaultMockRecord).map((item, index) => (
               <option value={item} key={index}>
                 {`${item}년`}
               </option>
             ))}
           </select>
-          <select name="semester" id="semester">
-            <option value="all">전체 월</option>
+          <select
+            name="semester"
+            id="semester"
+            onChange={e => handleMonthList(e)}
+          >
+            <option value={""}>전체 월</option>
             {monthList(defaultMockRecord).map((item, index) => (
               <option value={item} key={index}>
                 {`${item}월`}
