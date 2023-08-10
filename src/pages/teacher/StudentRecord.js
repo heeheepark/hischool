@@ -3,13 +3,14 @@ import {
   StudentListDiv,
   StudentRecordDiv,
 } from "../../styles/teacher/StudentRecordStyle";
-import { MockRecordList } from "../../components/teacher/MockRecordList";
+import MockRecordList from "../../components/teacher/MockRecordList";
 // import { MockRecordFilter } from "../../components/student/Filter";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
-import { StudentRecordModal } from "../../components/Modal";
+import { MockRecordModal, SchoolRecordModal } from "../../components/Modal";
 import { getStudentData } from "../../api/teacher/studentListAxios";
 import {
+  deleteStudentMockRecord,
   deleteStudentSchoolRecord,
   getStudentMockRecord,
   getStudentSchoolRecord,
@@ -19,15 +20,22 @@ import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 const StudentRecord = () => {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [schoolModalOpen, setSchoolModalOpen] = useState(false);
+  const [mockModalOpen, setMockModalOpen] = useState(false);
   const [studentListData, setStudentListData] = useState(null);
   const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
+  const [schoolResultIdList, setSchoolResultIdList] = useState([]);
   const [studentMockRecordList, setStudentMockRecordList] = useState(null);
-  const [resultIdList, setResultIdList] = useState([]);
-  const [deleteOk, setDeleteOk] = useState(false);
+  const [mockResultIdList, setMockResultIdList] = useState([]);
+  const [schoolDeleteOk, setschoolDeleteOk] = useState(false);
+  const [mockDeleteOk, setmockDeleteOk] = useState(false);
 
-  const showModal = () => {
-    setModalOpen(true);
+  const showSchoolModal = () => {
+    setSchoolModalOpen(true);
+  };
+
+  const showMockModal = () => {
+    setMockModalOpen(true);
   };
 
   // 학생 선택
@@ -38,6 +46,11 @@ const StudentRecord = () => {
     clickList.classList.add("active");
     const studentId = parseInt(clickList.classList[0].slice(10));
     setSelectedId(studentId);
+    handleStudentRecordData(studentId);
+  };
+
+  // 선택한 학생 데이터 불러오기
+  const handleStudentRecordData = studentId => {
     getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
     getStudentMockRecord(studentId, setStudentMockRecordList);
   };
@@ -51,33 +64,48 @@ const StudentRecord = () => {
   useEffect(() => {
     if (studentListData) {
       const defaultSelectedId = document.querySelector("li.active");
-      const studentId = parseInt(defaultSelectedId.classList[0].slice(10));
+      const studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
       setSelectedId(studentId);
-      getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
-      getStudentMockRecord(studentId, setStudentMockRecordList);
+      handleStudentRecordData(studentId);
     }
   }, [studentListData]);
 
-  // Modal 확인 클릭 시
+  // School Record Modal 확인 클릭 시
   useEffect(() => {
-    if (deleteOk) {
-      console.log("delete 실행");
-      resultIdList.forEach(item => console.log(item));
-      resultIdList.forEach(item => deleteStudentSchoolRecord(item));
+    if (schoolResultIdList.length !== 0) {
+      schoolResultIdList.forEach(item => deleteStudentSchoolRecord(item));
     }
-    setModalOpen(false);
+    setSchoolModalOpen(false);
     getStudentSchoolRecord(selectedId, setStudentSchoolRecordList);
     getStudentMockRecord(selectedId, setStudentMockRecordList);
-  }, [deleteOk]);
+    setschoolDeleteOk(false);
+  }, [schoolDeleteOk]);
+
+  // Mock Record Modal 확인 클릭 시
+  useEffect(() => {
+    if (mockResultIdList.length !== 0) {
+      mockResultIdList.forEach(item => deleteStudentMockRecord(item));
+    }
+    setMockModalOpen(false);
+    getStudentSchoolRecord(selectedId, setStudentSchoolRecordList);
+    getStudentMockRecord(selectedId, setStudentMockRecordList);
+    setmockDeleteOk(false);
+  }, [mockDeleteOk]);
 
   return (
     <>
-      {modalOpen && (
-        <StudentRecordModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          resultIdList={resultIdList}
-          setDeleteOk={setDeleteOk}
+      {schoolModalOpen && (
+        <SchoolRecordModal
+          schoolModalOpen={schoolModalOpen}
+          setSchoolModalOpen={setSchoolModalOpen}
+          setschoolDeleteOk={setschoolDeleteOk}
+        />
+      )}
+      {mockModalOpen && (
+        <MockRecordModal
+          mockModalOpen={mockModalOpen}
+          setMockModalOpen={setMockModalOpen}
+          setmockDeleteOk={setmockDeleteOk}
         />
       )}
       <StudentRecordDiv>
@@ -145,8 +173,16 @@ const StudentRecord = () => {
                 </SchoolRecordFilterDiv>
               </div>
               <div className="btns">
-                <button>수정</button>
-                <button onClick={showModal}>삭제</button>
+                <button
+                  onClick={() => {
+                    navigate("/teacher/inputschoolrecord", {
+                      state: schoolResultIdList,
+                    });
+                  }}
+                >
+                  수정
+                </button>
+                <button onClick={showSchoolModal}>삭제</button>
                 <button
                   className="add-school-record"
                   onClick={() => {
@@ -161,8 +197,8 @@ const StudentRecord = () => {
             </div>
             <SchoolRecordList
               studentSchoolRecordList={studentSchoolRecordList}
-              setResultIdList={setResultIdList}
-              resultIdList={resultIdList}
+              setSchoolResultIdList={setSchoolResultIdList}
+              schoolResultIdList={schoolResultIdList}
             />
           </div>
           <div className="mock-record-wrap">
@@ -172,8 +208,16 @@ const StudentRecord = () => {
                 {/* <MockRecordFilter /> */}
               </div>
               <div className="btns">
-                <button>수정</button>
-                <button onClick={showModal}>삭제</button>
+                <button
+                  onClick={() => {
+                    navigate("/teacher/inputschoolrecord", {
+                      state: mockResultIdList,
+                    });
+                  }}
+                >
+                  수정
+                </button>
+                <button onClick={showMockModal}>삭제</button>
                 <button
                   className="add-mock-record"
                   onClick={() => {
@@ -186,7 +230,11 @@ const StudentRecord = () => {
                 </button>
               </div>
             </div>
-            <MockRecordList studentMockRecordList={studentMockRecordList} />
+            <MockRecordList
+              studentMockRecordList={studentMockRecordList}
+              setMockResultIdList={setMockResultIdList}
+              mockResultIdList={mockResultIdList}
+            />
           </div>
         </div>
       </StudentRecordDiv>

@@ -1,29 +1,60 @@
-import { useEffect, useState } from "react";
-import {
-  MockRecordListDiv,
-  SchoolRecordListDiv,
-  StudentListDiv,
-} from "../../styles/teacher/StudentRecordStyle";
-import { getStudentData } from "../../api/teacher/studentListAxios";
-import {
-  getStudentMockRecord,
-  getStudentSchoolRecord,
-} from "../../api/teacher/studentRecordAxios";
+import { useEffect } from "react";
+import { MockRecordListDiv } from "../../styles/teacher/StudentRecordStyle";
 
-const MockRecordList = ({ studentMockRecordList }) => {
+const MockRecordList = ({
+  studentMockRecordList,
+  setMockResultIdList,
+  mockResultIdList,
+}) => {
+  let resultIdArray = mockResultIdList;
+
+  // 전체 선택
   const handleAllCheck = e => {
     const allCheckBox = document.querySelectorAll(".mock-checkbox");
+    resultIdArray = [];
     if (e.target.checked === true) {
-      allCheckBox.forEach(item => (item.checked = true));
+      allCheckBox.forEach(item => {
+        item.checked = true;
+        resultIdArray.push(parseInt(item.classList[1].slice(9)));
+      });
     } else {
-      allCheckBox.forEach(item => (item.checked = false));
+      allCheckBox.forEach(item => {
+        item.checked = false;
+      });
+      resultIdArray = [];
     }
+    setMockResultIdList(resultIdArray);
   };
+
+  // 개별 선택
+  const handleCheckBox = e => {
+    const clickList = e.currentTarget;
+    const resultId = parseInt(clickList.classList[1].slice(9));
+    if (e.target.checked === true) {
+      resultIdArray.push(resultId);
+    } else {
+      resultIdArray = resultIdArray.filter(item => item !== resultId);
+    }
+    setMockResultIdList(resultIdArray);
+  };
+
+  useEffect(() => {
+    document.querySelector(".mock-all-checkbox-btn").checked = false;
+    document
+      .querySelectorAll(".mock-checkbox")
+      .forEach(item => (item.checked = false));
+    setMockResultIdList([]);
+  }, [studentMockRecordList]);
+
   return (
     <MockRecordListDiv>
       <ul className="category">
         <li className="category-th">
-          <input type="checkbox" onClick={e => handleAllCheck(e)} />
+          <input
+            type="checkbox"
+            onClick={e => handleAllCheck(e)}
+            className="mock-all-checkbox-btn"
+          />
         </li>
         <li className="category-th">연도</li>
         <li className="category-th">월</li>
@@ -38,7 +69,12 @@ const MockRecordList = ({ studentMockRecordList }) => {
           <li className="data-table" key={item.userId}>
             <ul>
               <li>
-                <input type="checkbox" className="mock-checkbox" />
+                <input
+                  type="checkbox"
+                  defaultChecked={false}
+                  className={`mock-checkbox resultId0${item.resultId}`}
+                  onClick={e => handleCheckBox(e)}
+                />
               </li>
               <li>{item.year}</li>
               <li>{`${item.mon}월`}</li>
@@ -55,4 +91,4 @@ const MockRecordList = ({ studentMockRecordList }) => {
   );
 };
 
-export { MockRecordList };
+export default MockRecordList;

@@ -21,8 +21,10 @@ import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
 
 const InputSchoolRecord = () => {
   const { state } = useLocation();
-  const [dropSemester, setDropSemester] = useState(""); 
-  const [dropTest, setDropTest] = useState(""); 
+  console.log(state);
+
+  const [dropSemester, setDropSemester] = useState("");
+  const [dropTest, setDropTest] = useState("");
   const [studentsData, setStudentsData] = useState([]);
   const [lastSchoolSavedData, setLastSchoolSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);

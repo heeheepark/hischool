@@ -27,22 +27,60 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
   );
 };
 
-export const StudentRecordModal = ({
-  modalOpen,
-  setModalOpen,
-  setDeleteOk,
+export const SchoolRecordModal = ({
+  schoolModalOpen,
+  setSchoolModalOpen,
+  setschoolDeleteOk,
 }) => {
   const handleOk = () => {
-    setDeleteOk(true);
+    setschoolDeleteOk(true);
   };
 
   const closeModal = () => {
-    setModalOpen(false);
+    setSchoolModalOpen(false);
   };
 
   return (
     <>
-      {modalOpen && (
+      {schoolModalOpen && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>해당 항목을 삭제하시겠습니까?</span>
+              <span>삭제한 항목은 영구 삭제되어 복구할 수 없습니다.</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
+              <button onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
+
+export const MockRecordModal = ({
+  mockModalOpen,
+  setMockModalOpen,
+  setmockDeleteOk,
+}) => {
+  const handleOk = () => {
+    setmockDeleteOk(true);
+  };
+
+  const closeModal = () => {
+    setMockModalOpen(false);
+  };
+
+  return (
+    <>
+      {mockModalOpen && (
         <StudentRecordModalDiv className="modal">
           <div className="dim"></div>
           <div className="content-wrap">
