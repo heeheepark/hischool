@@ -6,13 +6,13 @@ import {
 } from "../../api/teacher/teacherHomeAxios";
 
 const SchoolRecordList = ({
-  studentSchoolRecordList, //학생성정 data 목록 불러오는 state 
-  setResultIdList, //checkbox 항목에 있는 리절트 아이디 담는 state
-  resultIdList,
+  studentSchoolRecordList,
+  setSchoolResultIdList,
+  schoolResultIdList,
 }) => {
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
-  let resultIdArray = resultIdList;
+  let resultIdArray = schoolResultIdList;
 
   // 전체 선택
   const handleAllCheck = e => {
@@ -29,7 +29,7 @@ const SchoolRecordList = ({
       });
       resultIdArray = [];
     }
-    setResultIdList(resultIdArray);
+    setSchoolResultIdList(resultIdArray);
   };
 
   // 개별 선택
@@ -41,10 +41,10 @@ const SchoolRecordList = ({
     } else {
       resultIdArray = resultIdArray.filter(item => item !== resultId);
     }
-    setResultIdList(resultIdArray);
+    setSchoolResultIdList(resultIdArray);
   };
 
-  // 초기 데이터 불러오기
+  // 학급 정원, 전교생 수 불러오기
   useEffect(() => {
     getAllStudentCount(setAllStudentCount);
     getStudentCount(setStudentCount);
@@ -52,8 +52,11 @@ const SchoolRecordList = ({
 
   // 학생 선택 변경 시
   useEffect(() => {
-    document.querySelector(".all-checkbox-btn").checked = false;
-    setResultIdList([]);
+    document.querySelector(".school-all-checkbox-btn").checked = false;
+    document
+      .querySelectorAll(".school-checkbox")
+      .forEach(item => (item.checked = false));
+    setSchoolResultIdList([]);
   }, [studentSchoolRecordList]);
 
   return (
@@ -63,7 +66,7 @@ const SchoolRecordList = ({
           <input
             type="checkbox"
             onClick={e => handleAllCheck(e)}
-            className="all-checkbox-btn"
+            className="school-all-checkbox-btn"
           />
         </li>
         <li className="category-th">연도</li>

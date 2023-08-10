@@ -21,12 +21,14 @@ import { useState } from "react";
 import { logo } from "../assets/logo.png";
 
 const SideMenu = () => {
+  const [userImg, setUserImg] = useState(null);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
   const cookies = new Cookies();
+  console.log(userImg);
 
   const handleDeleteCookie = () => {
     cookies.remove("accessToken");
@@ -38,7 +40,7 @@ const SideMenu = () => {
   };
 
   useEffect(() => {
-    getUserInfo(setUserName, setUserEmail);
+    getUserInfo(setUserImg, setUserName, setUserEmail);
   }, []);
 
   return (
@@ -49,7 +51,7 @@ const SideMenu = () => {
           <span>Hi! School</span>
         </div>
         <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>
-          <span>사용자 사진</span>
+          <img src={`${userImg}`} alt="안녕" className="img-aaa" />
         </div>
         <p>
           <span className="user-icon">

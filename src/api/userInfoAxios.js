@@ -1,11 +1,19 @@
+import axios from "axios";
 import { client } from "./client";
 
-export const getUserInfo = async (setUserName, setUserEmail) => {
+export const getUserInfo = async (setUserImg, setUserName, setUserEmail) => {
   try {
-    const res = await client.get(`/api/mypage/user-mypage`);
+    const res = await client.get(`/api/side`);
+    // const resImg = await client.get(`/api/side`);
     const result = res.data;
-    const userName = result[0].unm;
-    const userEmail = result[0].email;
+    const userName = result.nm;
+    const userEmail = result.email;
+    // console.log(resImg.data);
+    const userImg = result.pic;
+    console.log(userImg);
+    // console.log(result.email);
+    // setUserImg(resImg.data);
+    setUserImg(userImg);
     setUserName(userName);
     setUserEmail(userEmail);
   } catch (err) {

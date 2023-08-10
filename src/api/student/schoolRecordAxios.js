@@ -21,27 +21,33 @@ export const getCurrentSchoolRecord = async setCurrentSchoolRecord => {
 };
 
 export const getAllSchoolRecord = async (
+  setDefaultSchoolRecord,
   setAllSchoolRecord,
   year,
   semester,
   testType,
 ) => {
-  const yearData = year;
-  const semesterData = semester;
-  let apiUrl;
-
-  if (yearData && semester && testType) {
-    apiUrl = `/api/student/aca-table?year=${year}&semester=${semester}&midFinal=${testType}`;
-  } else if (yearData && semesterData) {
-    apiUrl = `/api/student/aca-table?year=${year}&semester=${semester}`;
-  } else if (yearData) {
-    apiUrl = `/api/student/aca-table?year=${year}`;
-  } else {
-    apiUrl = `/api/student/aca-table`;
-  }
-
   try {
-    const res = await client.get(apiUrl);
+    let axiosUrl;
+    if (year && semester && testType) {
+      axiosUrl = `/api/student/aca-table?year=${year}&semester=${semester}&midFinal=${testType}`;
+    } else if (year && semester && !testType) {
+      axiosUrl = `/api/student/aca-table?year=${year}&semester=${semester}`;
+    } else if (year && !semester && !testType) {
+      axiosUrl = `/api/student/aca-table?year=${year}`;
+    } else if (!year && semester && !testType) {
+      axiosUrl = `/api/student/aca-table?semester=${semester}`;
+    } else if (!year && !semester && testType) {
+      axiosUrl = `/api/student/aca-table?midFinal=${testType}`;
+    } else if (!year && semester && testType) {
+      axiosUrl = `/api/student/aca-table?semester=${semester}&midFinal=${testType}`;
+    } else {
+      axiosUrl = `/api/student/aca-table`;
+      const res = await client.get(axiosUrl);
+      const result = res.data;
+      setDefaultSchoolRecord(result);
+    }
+    const res = await client.get(axiosUrl);
     const result = res.data;
     setAllSchoolRecord(result);
   } catch (err) {
