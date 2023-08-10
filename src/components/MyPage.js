@@ -35,18 +35,15 @@ const MyPage = () => {
     setCodeConFirm(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = e => {
+    e.preventDefault();
     setAuthModal(false);
+    setCodeConFirm(false);
   };
 
   const handleChangeAddress = e => {
     e.preventDefault();
     e.target.value = setHouseAddress();
-    // const { name, value } = e.target;
-    // setHouseAddress({
-    //   ...houseAddress,
-    //   [name]: value,
-    // });
   };
 
   const handleCancel = e => {
@@ -73,7 +70,6 @@ const MyPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("Updated Teacher:", userData);
   };
 
   const handlePatch = e => {

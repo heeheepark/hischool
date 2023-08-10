@@ -51,7 +51,7 @@ const StudentRecord = () => {
   useEffect(() => {
     if (studentListData) {
       const defaultSelectedId = document.querySelector("li.active");
-      const studentId = parseInt(defaultSelectedId.classList[0].slice(10));
+      const studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
       setSelectedId(studentId);
       getStudentSchoolRecord(studentId, setStudentSchoolRecordList);
       getStudentMockRecord(studentId, setStudentMockRecordList);

@@ -96,7 +96,9 @@ const SignUp = () => {
   };
 
   const handleModalClose = () => {
-    setAuthModal(false);
+    // e.preventDefault();
+    console.log("signup이야~~~");
+    setAddressModal(false);
     setCodeConFirm(false);
   };
 
@@ -325,7 +327,7 @@ const SignUp = () => {
                         onChange={e => setDetailAddress(e.target.value)}
                       />
                     </li>
-                    {userType === "teacher" ? (
+                    {userType === "TC" ? (
                       <li className="big-input">
                         <label>교원 인증 사진</label>
                         <input

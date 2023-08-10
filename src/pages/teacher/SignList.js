@@ -66,6 +66,7 @@ const SignList = () => {
     setModalOpen(false);
     getSignListData(setStudentListData);
     setStudentListData([]);
+    setAcceptOk(false);
   }, [acceptOk]);
 
   const handleOk = () => {

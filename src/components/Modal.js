@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   ModalContain,
   ModalBody,
@@ -9,16 +8,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 export const Modal = ({ isOpen, onRequestClose, children }) => {
-  const handleModalClose = () => {
+  const handleTestClose = () => {
+    // console.log("모달이야");
+    // e.preventDefault();
     onRequestClose();
   };
 
   return (
     <>
       {isOpen && (
-        <ModalContain onClick={handleModalClose}>
+        <ModalContain onClick={e => handleTestClose(e)}>
           <ModalBody onClick={e => e.stopPropagation()}>
-            <ModalCloseBtn onClick={handleModalClose}>✖</ModalCloseBtn>
+            <ModalCloseBtn onClick={e => handleTestClose(e)}>✖</ModalCloseBtn>
             {children}
           </ModalBody>
         </ModalContain>
@@ -105,10 +106,10 @@ export const StudentAcceptModal = ({
 export const StudentCancelModal = ({
   modalOpen,
   setModalOpen,
-  setAcceptOk,
+  setCancelOk,
 }) => {
   const handleOk = () => {
-    setAcceptOk(true);
+    setCancelOk(true);
   };
 
   const closeModal = () => {
@@ -138,4 +139,3 @@ export const StudentCancelModal = ({
     </>
   );
 };
-
