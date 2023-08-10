@@ -6,7 +6,7 @@ export const postMockData = async dataToSend => {
     const response = await client.post("/api/teacher/subject/mock-ins", {
       list: dataToSend,
     });
-    console.log("데이터 전송 성공 : ", response.data);
+    console.log(response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
@@ -29,6 +29,17 @@ export const getMockSubData = async categoryid => {
     const res = await client.get(
       `/api/teacher/subject/mocksmall-list?categoryid=${categoryid}`,
     );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+// 학생 이름 가져오기
+export const getStudentsNameData = async () => {
+  try {
+    const res = await client.get("/api/teacher/subject/stulist");
     return res.data;
   } catch (err) {
     console.log(err);

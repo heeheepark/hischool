@@ -4,7 +4,6 @@ import { getCookie, setCookie } from "./cookie";
 // axios 인스턴스 생성
 export const client = axios.create({
   baseURL: "http://localhost:3000",
-  timeout: 59000,
   headers: {
     "Content-Type": "application/json",
   },

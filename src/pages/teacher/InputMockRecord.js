@@ -12,19 +12,18 @@ import TSubJectMock from "../../components/teacher/TSubjectMock";
 import {
   getMockMainSubData,
   getMockSubData,
+  getStudentsNameData,
 } from "../../api/teacher/inputMockRecordAxios";
 import { postMockData } from "../../api/teacher/inputMockRecordAxios";
 import { useLocation, useNavigate } from "react-router";
 
 const InputMockRecord = () => {
-  // userId 전달
   const { state } = useLocation();
-  console.log(state);
-
   const [dropMonth, setDropMonth] = useState("");
   const [studentsData, setStudentsData] = useState([]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
+  const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const interimData = [{}];
@@ -32,7 +31,7 @@ const InputMockRecord = () => {
     setLastSavedData(interimData);
   }, []);
 
-  // 새로운 데이터를 전달하는 함수
+  // 라스트 데이터 전달
   const updateLastSavedData = (_id, newData) => {
     const updateData = lastSavedData.map((item, idx) => {
       if (idx === _id) {
@@ -42,15 +41,15 @@ const InputMockRecord = () => {
     });
     setLastSavedData(updateData);
   };
-  // 월 항목이 선택되었을 때 처리하는 함수
+  // 월 선택
   const handleMonth = event => {
     setDropMonth(event.target.value);
   };
-  // "저장" 버튼을 클릭할 때 학생 데이터를 저장하고 서버로 전송하는 함수
+  // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
       const dataToSend = lastSavedData.map(item => ({
-        userid: 40, //임시유저값
+        userid: state, //임시유저값
         subjectid: parseInt(item.subjectid) || 0,
         mon: parseInt(item.mon) || 0,
         standardscore: parseInt(item.standardscore) || 0,
@@ -60,7 +59,7 @@ const InputMockRecord = () => {
       postMockData(dataToSend);
     }
   };
-  // 항목 추가 버튼을 누를 때 호출되는 함수
+  // 항목 추가 버튼
   const handleAddButtonClick = () => {
     const newStudent = {
       rating: 0,
@@ -76,9 +75,9 @@ const InputMockRecord = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        // 주요과목 데이터 가져오기
+        // 주요과목 데이터
         const mainSubData = await getMockMainSubData();
-        // 하위과목 데이터 가져오기
+        // 하위과목 데이터
         const newSubjectData = await Promise.all(
           mainSubData.map(async mainSubject => {
             const subData = await getMockSubData(mainSubject.categoryid);
@@ -91,8 +90,6 @@ const InputMockRecord = () => {
             };
           }),
         );
-
-        // subjectData 상태 업데이트
         setSubjectData(newSubjectData);
       } catch (err) {
         console.log(err);
@@ -102,11 +99,27 @@ const InputMockRecord = () => {
 
     fetchData();
   }, []);
-
+  // 학생 이름
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getStudentsNameData();
+        setStudentNameData(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+  const matchingStudent = studentNameData.find(
+    student => student.userid === state,
+  );
   return (
     <InputMockRecordWrap>
       <ISRHeader>
-        <h3>2023 모의 고사 성적 입력(학생이름)</h3>
+        {matchingStudent && (
+          <h3>2023 모의 고사 성적 입력( {matchingStudent.nm} )</h3>
+        )}
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">월 선택</option>
           <option value="3월">3월</option>

@@ -31,24 +31,24 @@ const TSubJectSchool = ({
   const getDetailList = async _sid => {
     const result = await getSchoolSubData();
     const arr = result.filter(item => item.subjectid === parseInt(_sid));
-    setDetailList(arr); // 상세목록을 상태로 저장
+    setDetailList(arr);
   };
 
   useEffect(() => {
-    // 선택된 학생 데이터가 있을 경우, 수정 폼에 해당 학생 데이터를 불러옵니다.
+    // 선택된 데이터가 있을 경우, 수정 폼에 해당 데이터를 불러옵니다.
     if (selectedStudentIndex !== null) {
       setStudentData(studentsData[selectedStudentIndex]);
     } else {
-      // 선택된 학생 데이터가 없으면 초기화합니다.
+      // 선택된 데이터가 없으면 초기화
       setStudentData(initialStudentData);
     }
   }, [selectedStudentIndex, studentsData, dropSemester, dropTest]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    // 숫자만 필터링하여 숫자 이외의 문자는 제거
+    // 숫자만 필터링
     const filteredValue = value;
-    // score와 rating 입력 폼의 최댓값 설정
+    // score와 rating 입력 폼의 최댓값
     let updatedValue = filteredValue;
     if (name === "subject") {
       getDetailList(filteredValue);
@@ -61,7 +61,7 @@ const TSubJectSchool = ({
       ...prevData,
       [name]: updatedValue,
     }));
-    // 변경된 데이터를 바로 저장하는 로직 추가 (예시로 콘솔에 출력)
+    // 변경된 데이터를 바로 저장
     const updatedData = {
       ...studentData,
       [name]: updatedValue,
@@ -103,7 +103,7 @@ const TSubJectSchool = ({
           <input
             type="number"
             name="score"
-            value={studentData?.score || ""} // 선택적 렌더링을 사용하여 정의되지 않은 경우 빈 문자열("")로 처리합니다.
+            value={studentData?.score || ""}
             onChange={handleInputChange}
             placeholder="점수"
             max={100}

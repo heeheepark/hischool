@@ -1,17 +1,17 @@
 import { client } from "../client";
 
-// 서버로 datatoMock 데이터를 전송하는 함수
+// 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async SdataToSend => {
   try {
     const response = await client.post("/api/teacher/subject/aca-ins", {
       list: SdataToSend,
     });
-    console.log("데이터 전송 성공 : ", response.data);
+    console.log(response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
 };
-// 내신 등록 후 과목 계열 가져오기
+// 내신 등록 후 과목 계열
 export const getSchoolMainSubData = async () => {
   try {
     const res = await client.get("/api/teacher/subject/category/big");
@@ -22,7 +22,7 @@ export const getSchoolMainSubData = async () => {
   }
 };
 
-// 내신 등록 후 세부 과목 가져오기
+// 내신 등록 후 세부 과목
 export const getSchoolSubData = async () => {
   try {
     const res = await client.get("/api/teacher/subject/category/small");
@@ -33,6 +33,7 @@ export const getSchoolSubData = async () => {
   }
 };
 
+// 학교 전체 학생 인원 데이터
 export const getSchoolData = async () => {
   try {
     const res = await client.get("/api/subject/school-snum");
@@ -43,6 +44,7 @@ export const getSchoolData = async () => {
   }
 };
 
+// 반 학생 인원 데이터
 export const getSchoolclassData = async () => {
   try {
     const res = await client.get("/api/subject/class-num");
