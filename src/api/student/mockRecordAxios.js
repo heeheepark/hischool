@@ -26,23 +26,22 @@ export const getAllMockRecord = async (
   year,
   month,
 ) => {
-  console.log(year, month);
   try {
-    let endpoint;
+    let axiosUrl;
     if (year && month) {
-      endpoint = `/api/student/mock-table?year=${year}&mon=${month}`;
+      axiosUrl = `/api/student/mock-table?year=${year}&mon=${month}`;
     } else if (year && !month) {
-      endpoint = `/api/student/mock-table?year=${year}`;
+      axiosUrl = `/api/student/mock-table?year=${year}`;
     } else if (!year && month) {
       console.log("시도");
-      endpoint = `/api/student/mock-table?mon=${month}`;
+      axiosUrl = `/api/student/mock-table?mon=${month}`;
     } else {
-      endpoint = "/api/student/mock-table";
-      const res = await client.get(endpoint);
+      axiosUrl = "/api/student/mock-table";
+      const res = await client.get(axiosUrl);
       const result = res.data;
       setDefaultMockRecord(result);
     }
-    const res = await client.get(endpoint);
+    const res = await client.get(axiosUrl);
     const result = res.data;
     console.log(result);
     setAllMockRecord(result);

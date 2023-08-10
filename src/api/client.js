@@ -27,7 +27,7 @@ client.interceptors.request.use(
 // 응답 인터셉터 설정
 client.interceptors.response.use(
   response => {
-    console.log("결과내놔", response);
+    // console.log("결과내놔", response);
     return response;
   },
   async error => {
