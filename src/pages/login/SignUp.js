@@ -96,8 +96,6 @@ const SignUp = () => {
   };
 
   const handleModalClose = () => {
-    // e.preventDefault();
-    console.log("signup이야~~~");
     setAddressModal(false);
     setCodeConFirm(false);
   };
