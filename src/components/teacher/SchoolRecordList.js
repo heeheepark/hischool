@@ -6,8 +6,8 @@ import {
 } from "../../api/teacher/teacherHomeAxios";
 
 const SchoolRecordList = ({
-  studentSchoolRecordList,
-  setResultIdList,
+  studentSchoolRecordList, //학생성정 data 목록 불러오는 state 
+  setResultIdList, //checkbox 항목에 있는 리절트 아이디 담는 state
   resultIdList,
 }) => {
   const [allStudentCount, setAllStudentCount] = useState(null);

@@ -83,16 +83,6 @@ export const TcMyPageUserInfo = styled.ul`
         > div {
           display: flex;
           align-items: center;
-          button {
-            width: 80px;
-            height: 35px;
-            font-size: 15px;
-            color: #333;
-            border: 1px solid #bbb;
-            border-radius: 3px;
-            background: #ccc;
-            cursor: pointer;
-          }
         }
       }
     }

@@ -33,7 +33,7 @@ export const TimeTableDiv = styled.div`
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: auto;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;

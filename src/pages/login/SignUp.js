@@ -195,7 +195,7 @@ const SignUp = () => {
                 </div>
                 <input
                   type="file"
-                  accept="image/jpg, image/png, image/jpeg"
+                  accept="image/jpg, image/png, image/gif, image/jpeg"
                   onChange={handleChangeFile}
                 />
               </div>
@@ -225,6 +225,7 @@ const SignUp = () => {
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        autoComplete="on"
                       />
                     </li>
                     <li className="big-input">
@@ -232,6 +233,7 @@ const SignUp = () => {
                       <input
                         type="password"
                         onChange={e => setPasswordConfirm(e.target.value)}
+                        autoComplete="on"
                       />
                     </li>
                     <li className="big-input">

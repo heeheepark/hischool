@@ -18,7 +18,7 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
       {isOpen && (
         <ModalContain onClick={handleModalClose}>
           <ModalBody onClick={e => e.stopPropagation()}>
-            {/* <ModalCloseBtn onClick={handleModalClose}>✖</ModalCloseBtn> */}
+            <ModalCloseBtn onClick={handleModalClose}>✖</ModalCloseBtn>
             {children}
           </ModalBody>
         </ModalContain>
@@ -64,3 +64,78 @@ export const StudentRecordModal = ({
     </>
   );
 };
+
+export const StudentAcceptModal = ({
+  modalOpen,
+  setModalOpen,
+  setAcceptOk,
+}) => {
+  const handleOk = () => {
+    setAcceptOk(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  return (
+    <>
+      {modalOpen && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>해당 학생을 승인 하시겠습니까?</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
+              <button onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
+
+export const StudentCancelModal = ({
+  modalOpen,
+  setModalOpen,
+  setAcceptOk,
+}) => {
+  const handleOk = () => {
+    setAcceptOk(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  return (
+    <>
+      {modalOpen && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>해당 학생을 승인 취소 하시겠습니까?</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
+              <button onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
+
