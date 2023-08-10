@@ -28,44 +28,59 @@ const SchoolRecordTable = () => {
   const [testType, setTestType] = useState(null);
 
   useEffect(() => {
-    getAllSchoolRecord(setAllSchoolRecord);
+    getAllSchoolRecord(
+      setDefaultSchoolRecord,
+      setAllSchoolRecord,
+      year,
+      semester,
+      testType,
+    );
     getStudentCount(setStudentCount);
     getAllStudentCount(setAllStudentCount);
   }, []);
 
+  useEffect(() => {
+    getAllSchoolRecord(
+      setDefaultSchoolRecord,
+      setAllSchoolRecord,
+      year,
+      semester,
+      testType,
+    );
+  }, [year, semester, testType]);
+
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
-    getAllSchoolRecord(setAllSchoolRecord, year);
   };
+
   const handleSemesterList = e => {
     const selectSemester = e.target.value;
     setSemester(selectSemester);
-    getAllSchoolRecord(setAllSchoolRecord, year, semester);
   };
+
   const handleTestTypeList = e => {
     const selectTestType = e.target.value;
     setTestType(selectTestType);
-    getAllSchoolRecord(setAllSchoolRecord, year, semester, testType);
   };
 
-  const getUniqueYears = allSchoolRecord => {
+  const yearList = defaultSchoolRecord => {
     const years = new Set();
-    allSchoolRecord?.forEach(item => years.add(item.year));
+    defaultSchoolRecord?.forEach(item => years.add(item.year));
     const newYears = Array.from(years);
     return newYears.sort();
   };
 
-  const getUniqueSemester = allSchoolRecord => {
+  const semesterList = defaultSchoolRecord => {
     const semesters = new Set();
-    allSchoolRecord?.forEach(item => semesters.add(item.semester));
+    defaultSchoolRecord?.forEach(item => semesters.add(item.semester));
     const newSemesters = Array.from(semesters);
     return newSemesters.sort();
   };
 
-  const getUniqueTestType = allSchoolRecord => {
+  const testTypeList = defaultSchoolRecord => {
     const testTypes = new Set();
-    allSchoolRecord?.forEach(item => testTypes.add(item.semester));
+    defaultSchoolRecord?.forEach(item => testTypes.add(item.semester));
     const newTestTypes = Array.from(testTypes);
     return newTestTypes.sort();
   };
@@ -76,8 +91,8 @@ const SchoolRecordTable = () => {
         <h4>내신 성적 목록</h4>
         <SchoolRecordFilterDiv>
           <select name="year" id="year" onChange={e => handleYearList(e)}>
-            <option value="all">전체 연도</option>
-            {getUniqueYears(allSchoolRecord).map((item, index) => (
+            <option value="">전체 연도</option>
+            {yearList(defaultSchoolRecord).map((item, index) => (
               <option value={item} key={index}>
                 {`${item}년`}
               </option>
@@ -88,8 +103,8 @@ const SchoolRecordTable = () => {
             id="semester"
             onChange={e => handleSemesterList(e)}
           >
-            <option value="all">전체 학기</option>
-            {getUniqueSemester(allSchoolRecord).map((item, index) => (
+            <option value="">전체 학기</option>
+            {semesterList(defaultSchoolRecord).map((item, index) => (
               <option value={item} key={index}>
                 {`${item}학기`}
               </option>
@@ -100,8 +115,8 @@ const SchoolRecordTable = () => {
             id="test-category"
             onChange={e => handleTestTypeList(e)}
           >
-            <option value="all">전체 시험</option>
-            {getUniqueSemester(allSchoolRecord).map((item, index) => (
+            <option value="">전체 시험</option>
+            {testTypeList(defaultSchoolRecord).map((item, index) => (
               <option value={item} key={index}>
                 {item === 1 ? "중간 " : "기말"}
               </option>

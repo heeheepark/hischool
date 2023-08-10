@@ -28,3 +28,28 @@ export const getSignListData = async setStudentListData => {
     console.log(err);
   }
 };
+
+// 학생 가입 승인
+export const patchSignAccept = async userId => {
+  try {
+    console.log(userId);
+    const res = await client.patch(
+      `/api/teacher/accept-student?userId=${userId}`,
+    );
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 학생 승인 취소
+export const patchSignCancel = async userId => {
+  try {
+    const res = await client.patch(`/api/teacher/cancel-std?userId=${userId}`);
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};

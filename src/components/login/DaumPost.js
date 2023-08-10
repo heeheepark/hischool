@@ -30,7 +30,6 @@ const DaumPost = props => {
   };
 
   useEffect(() => {
-    // enroll_company 상태가 변경될 때마다 input에 값을 반영
     document.getElementById("address-input").value = props.company.address;
   }, [props.company.address]);
 

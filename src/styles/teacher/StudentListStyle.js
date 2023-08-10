@@ -30,31 +30,45 @@ export const StudentListTitle = styled.div`
 `;
 
 export const TimeTableDiv = styled.div`
+  position: relative;
+  height: 81.4vh;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  > ul {
+  overflow: auto;
+  .list-title {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    /* height: 100%; */
+    display: grid;
+    grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
+    grid-template-rows: 1fr;
+    li {
+      line-height: 42px;
+      background: #176b87;
+      color: #fff;
+      :not(:last-of-type) {
+        border-right: 1px solid #ccc;
+      }
+    }
+  }
+  .data-list {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(17, 42px);
     > li {
-      line-height: 42px;
+      /* line-height: 42px; */
       border-top: 1px solid #ccc;
-      :first-of-type {
-        background: #176b87;
-        color: #fff;
-        border-top: 0;
-      }
       :last-of-type {
         border-bottom: 1px solid #ccc;
       }
       > ul {
-        height: 100%;
+        /* height: 100%; */
         display: grid;
         grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
         > li {

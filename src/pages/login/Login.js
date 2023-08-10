@@ -51,6 +51,7 @@ const Login = () => {
               onChange={e => handlePassWord(e)}
               type="password"
               placeholder="PassWord"
+              autoComplete="on"
             />
           </div>
           <div className="link-button">

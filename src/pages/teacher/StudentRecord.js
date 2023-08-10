@@ -18,6 +18,7 @@ import {
 import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 
 const StudentRecord = () => {
+  const category = ["연번", "이름", "생년월일", "연락처", "이메일"];
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
   const [schoolModalOpen, setSchoolModalOpen] = useState(false);
@@ -119,11 +120,11 @@ const StudentRecord = () => {
             <div className="student-list">
               <StudentListDiv>
                 <ul className="category">
-                  <li className="category-th">연번</li>
-                  <li className="category-th">이름</li>
-                  <li className="category-th">생년월일</li>
-                  <li className="category-th">연락처</li>
-                  <li className="category-th">이메일</li>
+                  {category.map(item => (
+                    <li className="category-th" key={item}>
+                      {item}
+                    </li>
+                  ))}
                 </ul>
                 <ul className="list-wrap">
                   {studentListData?.map((item, index) => (

@@ -9,6 +9,10 @@ const SideMenuWrap = styled.div`
   );
   position: relative;
   height: 100vh;
+  .img-aaa {
+    width: 500px;
+    height: 500px;
+  }
   .user-info-wrap {
     position: relative;
     display: flex;
@@ -40,20 +44,21 @@ const SideMenuWrap = styled.div`
       }
     }
     .user-img {
-      border-radius: 50%;
-      border: 3px solid #fff;
-      overflow: hidden;
-      width: 160px;
-      height: 160px;
+      /* border-radius: 50%; */
+      /* border: 3px solid #fff; */
+      /* overflow: hidden; */
+      /* width: 160px; */
+      /* height: 160px; */
       cursor: pointer;
+
       span {
-        display: block;
-        width: 100%;
-        height: 100%;
-        font-size: 0;
-        background: url(${userImg}) no-repeat center;
-        background-size: cover;
-        background-position: 0 0;
+        /* display: block; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* font-size: 0; */
+        /* background: url(${userImg}) no-repeat center; */
+        /* background-size: cover; */
+        /* background-position: 0 0; */
       }
     }
     p {
