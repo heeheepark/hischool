@@ -6,22 +6,53 @@ import {
   TimeTableDiv,
 } from "../../styles/teacher/StudentListStyle";
 import { useNavigate } from "react-router";
-import { getStudentData } from "../../api/teacher/studentListAxios";
+import {
+  getStudentData,
+  patchSignCancel,
+} from "../../api/teacher/studentListAxios";
+import { StudentCancelModal } from "../../components/Modal";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);
+  const [cancelOk, setCancelOk] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [userPk, setUserPk] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     getStudentData(setStudentListData);
   }, []);
 
+  // Modal 확인 클릭 시
+  useEffect(() => {
+    console.log("patch 실행");
+    patchSignCancel(userPk);
+    getStudentData(setStudentListData);
+    setModalOpen(false);
+    setCancelOk(false);
+    console.log(modalOpen);
+  }, [cancelOk]);
+
   const handleSginClick = () => {
     navigate("/teacher/signlist");
   };
 
+  const handleOk = e => {
+    console.log(e.target.classList[0].slice(6));
+    const resultUserId = e.target.classList[0].slice(6);
+    setModalOpen(true);
+    setUserPk(resultUserId);
+  };
+
   return (
     <StudentListWrap>
+      {modalOpen && (
+        <StudentCancelModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setCancelOk={setCancelOk}
+        />
+      )}
       <StudentListTitle>
         <div>
           <h3>학생관리</h3>
@@ -31,18 +62,16 @@ const StudentList = () => {
         </div>
       </StudentListTitle>
       <TimeTableDiv>
-        <ul>
-          <li className="day-list">
-            <ul>
-              <li className="time-table-th">순번</li>
-              <li className="time-table-th">이름</li>
-              <li className="time-table-th">생년월일</li>
-              <li className="time-table-th">연락처</li>
-              <li className="time-table-th">이메일</li>
-              <li className="time-table-th">승인취소</li>
-            </ul>
-          </li>
-          {studentListData.map((item, index) => (
+        <ul className="list-title">
+          <li className="list-title-th">순번</li>
+          <li className="list-title-th">이름</li>
+          <li className="list-title-th">생년월일</li>
+          <li className="list-title-th">연락처</li>
+          <li className="list-title-th">이메일</li>
+          <li className="list-title-th">승인취소</li>
+        </ul>
+        <ul className="data-list">
+          {studentListData?.map((item, index) => (
             <li className="class" key={index}>
               <ul>
                 <li>{index + 1}</li>
@@ -51,7 +80,12 @@ const StudentList = () => {
                 <li>{item.phone}</li>
                 <li>{item.email}</li>
                 <li>
-                  <button>취소</button>
+                  <button
+                    className={`cancel${item.userId}`}
+                    onClick={e => handleOk(e)}
+                  >
+                    취소
+                  </button>
                 </li>
               </ul>
             </li>

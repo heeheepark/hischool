@@ -10,3 +10,26 @@ export const getUserData = async setUserData => {
     console.error(err);
   }
 };
+
+export const patchMyPageData = async () => {
+  try {
+    const res =await client.patch(`/api/mypage/userr-info-update`);
+    const result = res.data;
+    console.log(result)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteStudentSchoolRecord = async ()=> {
+  try {
+    const res = await client.delete(
+      // `/api/teacher/eli-aca?resultId=${}`,
+    );
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
