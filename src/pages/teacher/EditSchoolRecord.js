@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
   ISRButton,
-  ISRButtonWrapper,
   ISRHeader,
   ISRTitle,
   InputSchoolRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import TSubJectSchool from "../../components/teacher/TSubJectSchool";
 import {
   getSchoolData,
   getSchoolMainSubData,
@@ -17,6 +13,7 @@ import {
   postSchoolData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
+import TSubJectEditSchool from "../../components/teacher/TSubjectEditSchool";
 
 const InputSchoolRecord = () => {
   const { state } = useLocation();
@@ -56,11 +53,11 @@ const InputSchoolRecord = () => {
     setDropTest(event.target.value);
   };
 
-  // "저장" > 서버전송
+  // "수정" > 서버전송
   const handleSaveButtonClick = () => {
     if (lastSchoolSavedData) {
       const SdataToSend = lastSchoolSavedData.map(item => ({
-        userid: state, //임시 유저 아이디 추후 수정 필요
+        resultId: state[1], //임시 유저 아이디 추후 수정 필요
         subjectid: parseInt(item.subjectid) || 0,
         semester: parseInt(item.semester) || 0,
         midfinal: parseInt(item.midfinal) || 0,
@@ -71,21 +68,6 @@ const InputSchoolRecord = () => {
       }));
       postSchoolData(SdataToSend);
     }
-  };
-  // 항목 추가 버튼
-  const handleAddButtonClick = () => {
-    const newStudent = {
-      classrank: "0",
-      rating: 0,
-      wolerank: "0",
-      score: 0,
-      semester: dropSemester,
-      subjectid: null,
-      subject: null,
-      midfinal: dropTest,
-    };
-    setStudentsData(data => [...data, newStudent]);
-    setLastSchoolSavedData(data => [...data, newStudent]);
   };
 
   // 과목 정보
@@ -135,13 +117,13 @@ const InputSchoolRecord = () => {
     fetchData();
   }, []);
   const matchingStudent = studentNameData.find(
-    student => student.userid === state,
+    student => student.userid === state[0],
   );
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>
         {matchingStudent && (
-          <h3>2023 내신 고사 성적 입력( {matchingStudent.nm} )</h3>
+          <h3>2023 내신 고사 성적 수정( {matchingStudent.nm} )</h3>
         )}
         <select value={dropSemester} onChange={handleSemester}>
           <option value="">학기 선택</option>
@@ -155,10 +137,7 @@ const InputSchoolRecord = () => {
         </select>
       </ISRHeader>
       <ISRButton>
-        <Link to={`/teacher/inputsubject`}>
-          <button>과목 정보 입력</button>
-        </Link>
-        <button onClick={handleSaveButtonClick}>저장</button>
+        <button onClick={handleSaveButtonClick}>수정</button>
         <button onClick={() => navigate(-1)}>취소</button>
       </ISRButton>
       <ISRTitle>
@@ -171,7 +150,7 @@ const InputSchoolRecord = () => {
       </ISRTitle>
       <div>
         {studentsData.map((item, index) => (
-          <TSubJectSchool
+          <TSubJectEditSchool
             key={index}
             id={index}
             schoolData={schoolData}
@@ -185,12 +164,6 @@ const InputSchoolRecord = () => {
           />
         ))}
       </div>
-      <ISRButtonWrapper>
-        <button onClick={handleAddButtonClick}>
-          항목 추가
-          <FontAwesomeIcon icon={faPlusCircle} className="icon" />
-        </button>
-      </ISRButtonWrapper>
     </InputSchoolRecordWrap>
   );
 };

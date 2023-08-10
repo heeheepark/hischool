@@ -203,10 +203,69 @@ const IMRTitle = styled.div`
     font-weight: 400;
   }
 `;
+const IMREditTitle = styled.div`
+  width: 100%;
+  height: 40px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-size: 18px;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  background: #176b87;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  > p {
+    text-align: center;
+  }
+  > strong {
+    text-align: center;
+    font-weight: 400;
+  }
+`;
 
 const IMRinput = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+  > select {
+    margin: 0 auto;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    width: 9vw;
+    height: 25px;
+    text-align: center;
+  }
+  > input {
+    margin: 0 auto;
+    text-align: center;
+    width: 77px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    height: 25px;
+    text-align: center;
+    :nth-of-type(3) {
+      width: 85px;
+    }
+    :nth-of-type(4) {
+      width: 90px;
+    }
+  }
+`;
+const IMREdit = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -254,4 +313,6 @@ export {
   IMRinput,
   ISJinput,
   ISainput,
+  IMREdit,
+  IMREditTitle,
 };

@@ -17,6 +17,8 @@ import InputSubject from "./pages/teacher/InputSubject";
 import InputMockRecord from "./pages/teacher/InputMockRecord";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import EditSchoolRecord from "./pages/teacher/EditSchoolRecord";
+import EditMockRecord from "./pages/teacher/EditMockRecord";
 
 function App() {
   return (
@@ -43,11 +45,13 @@ function App() {
             path="/teacher/inputschoolrecord"
             element={<InputSchoolRecord />}
           />
+          <Route path="/teacher/editschoolrecord" element={<EditSchoolRecord />} />
           <Route path="/teacher/inputsubject" element={<InputSubject />} />
           <Route
             path="/teacher/inputmockrecord"
             element={<InputMockRecord />}
           />
+          <Route path="/teacher/editmockrecord" element={<EditMockRecord />} />
           <Route path="/teacher/about" element={<About />} />
         </Route>
       </Routes>
