@@ -21,8 +21,6 @@ const MockRecord = () => {
   const [currentMockRecord, setCurrentMockRecord] = useState(null);
   const [allMockRecordData, setAllMockRecordData] = useState(null);
 
-  console.log(currentMockRecord);
-
   useEffect(() => {
     getUserInfo(null, setUserName, null);
     getHighestMockRecord(setHighestMockRecord);
@@ -32,12 +30,6 @@ const MockRecord = () => {
 
   // 모의고사 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
-  const chartColor = [
-    "hsl(231, 100%, 59%)",
-    "hsl(45, 70%, 50%)",
-    "hsl(342, 70%, 50%)",
-    "hsl(213, 70%, 50%)",
-  ];
   const ratingList = allMockRecordData?.map(item => parseInt(item.rating));
   const highGrade = ratingList?.reduce((a, b) => {
     return Math.max(a, b);
@@ -54,7 +46,7 @@ const MockRecord = () => {
             y: parseInt(item.rating),
           };
         });
-      return { id: subject[index], color: chartColor[index], data };
+      return { id: subject[index], data };
     });
 
   return (

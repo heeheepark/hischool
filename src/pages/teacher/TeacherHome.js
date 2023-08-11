@@ -21,6 +21,8 @@ const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
   const [scheduleData, setScheduleData] = useState(null);
+  const [startDate, setStartDate] = useState(todayStartDate);
+  const [endDate, setEndDate] = useState(todayEndDate);
   const calRef = useRef(null);
 
   // 현재 기준 캘린더 날짜
@@ -35,12 +37,6 @@ const TeacherHome = () => {
     (todayMonth.length <= 1 ? "0" + todayMonth : todayMonth) +
     monthEndDate;
 
-  const [startDate, setStartDate] = useState(todayStartDate);
-  const [endDate, setEndDate] = useState(todayEndDate);
-
-  // const todayStartDate = now.getFullYear();
-  // console.log(todayStartDate);
-
   // 캘린더 월 변경
   const handleDatesSet = () => {
     if (calRef.current) {
@@ -48,7 +44,6 @@ const TeacherHome = () => {
       const currentYear = calApi.getDate().getYear() + 1900;
       const currentMonth = (calApi.getDate().getMonth() + 1).toString();
       const endDateDay = new Date(currentYear, currentMonth, 0).getDate();
-
       const startDate =
         currentYear +
         (currentMonth.length <= 1 ? "0" + currentMonth : currentMonth) +
@@ -66,10 +61,6 @@ const TeacherHome = () => {
   useEffect(() => {
     getStudentCount(setStudentCount);
     getUnSignCount(setUnSignCount);
-    getSchedule(setScheduleData, startDate, endDate);
-  }, []);
-
-  useEffect(() => {
     getSchedule(setScheduleData, startDate, endDate);
   }, [startDate, endDate]);
 
@@ -122,7 +113,6 @@ const TeacherHome = () => {
                 eventTextColor="#555"
                 dayMaxEvents={true}
                 datesSet={handleDatesSet}
-                // getDate={handleDatesSet}
                 moreLinkContent={args => {
                   return <span>{"+" + args.num}</span>;
                 }}

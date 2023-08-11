@@ -6,11 +6,11 @@ import { getMonthFood } from "../../api/student/foodMenuAxios";
 
 const FoodMenu = () => {
   const [foodMenuList, setFoodMenuList] = useState(null);
+  const eventData = foodMenuList;
+
   useEffect(() => {
     getMonthFood(setFoodMenuList);
   }, []);
-  //
-  const eventData = foodMenuList;
 
   return (
     <FoodMenuDiv>

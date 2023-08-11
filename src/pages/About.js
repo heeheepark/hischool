@@ -1,5 +1,4 @@
 import { AboutDiv } from "../styles/AboutStyle";
-// import userImg from "../assets/gangdongwon.jpeg";
 import canvaImg from "../assets/canva-logo.png";
 import githubImg from "../assets/github-logo.png";
 import notionImg from "../assets/Notion-logo.png";
