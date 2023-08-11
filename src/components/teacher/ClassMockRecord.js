@@ -10,12 +10,23 @@ import { getMockData } from "../../api/teacher/teacherHomeAxios";
 
 const ClassMockRecord = () => {
   const [mockData, setMockData] = useState(null);
+  const colorData = [
+    "#f9f68e",
+    "#ffbc66",
+    "#ff8682",
+    "#ddf5ae",
+    "#8ce5c8",
+    "#1ec2d1",
+    "#e4dfd1",
+    "#e6c9e1",
+    "#adc8d0",
+  ];
+  console.log(mockData);
   const koreanDataList = mockData?.koList.map(item => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.ratio.toFixed(1),
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
@@ -24,7 +35,6 @@ const ClassMockRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.ratio.toFixed(1),
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
@@ -33,7 +43,6 @@ const ClassMockRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.ratio.toFixed(1),
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
@@ -42,72 +51,12 @@ const ClassMockRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.ratio.toFixed(1),
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
   useEffect(() => {
     getMockData(setMockData);
   }, []);
-
-  // const data = [
-  //   {
-  //     id: "1등급",
-  //     label: "1등급",
-  //     value: 5,
-  //     color: "hsl(168, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "2등급",
-  //     label: "2등급",
-  //     value: 5,
-  //     color: "hsl(49, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "3등급",
-  //     label: "3등급",
-  //     value: 5,
-  //     color: "hsl(122, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "4등급",
-  //     label: "4등급",
-  //     value: 5,
-  //     color: "hsl(327, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "5등급",
-  //     label: "5등급",
-  //     value: 5,
-  //     color: "hsl(165, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "6등급",
-  //     label: "6등급",
-  //     value: 10,
-  //     color: "hsl(168, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "7등급",
-  //     label: "7등급",
-  //     value: 10,
-  //     color: "hsl(49, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "8등급",
-  //     label: "8등급",
-  //     value: 10,
-  //     color: "hsl(122, 70%, 50%)",
-  //   },
-  //   {
-  //     id: "9등급",
-  //     label: "9등급",
-  //     value: 5,
-  //     color: "hsl(327, 70%, 50%)",
-  //   },
-  // ];
-
-  // const data = koreanDataList ? koreanDataList : null;
 
   return (
     <ClassSchoolRecordDiv>
@@ -120,6 +69,7 @@ const ClassMockRecord = () => {
           {koreanDataList ? (
             <ResponsivePie
               data={koreanDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -141,6 +91,7 @@ const ClassMockRecord = () => {
           {mathDataList ? (
             <ResponsivePie
               data={mathDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -162,6 +113,7 @@ const ClassMockRecord = () => {
           {englishDataList ? (
             <ResponsivePie
               data={englishDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -183,6 +135,7 @@ const ClassMockRecord = () => {
           {historyDataList ? (
             <ResponsivePie
               data={historyDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -203,39 +156,39 @@ const ClassMockRecord = () => {
       </ChartWrap>
       <div className="subject-info-wrap">
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon korean" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade1" />
           1등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon math" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade2" />
           2등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon english" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade3" />
           3등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade4" />
           4등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon korean" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade5" />
           5등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon math" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade6" />
           6등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon english" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade7" />
           7등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade8" />
           8등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade9" />
           9등급
         </span>
       </div>

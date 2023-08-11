@@ -11,26 +11,28 @@ import { getSchoolData } from "../../api/teacher/teacherHomeAxios";
 const ClassSchoolRecord = () => {
   const [schoolData, setSchoolData] = useState(null);
   const colorData = [
-    "#ffb343",
+    "#f9f68e",
+    "#ffbc66",
     "#ff8682",
-    "#bad252",
+    "#ddf5ae",
     "#8ce5c8",
-    "#1e9faa",
-    "#d5ba99",
-    "#a8b9df",
-    "#ad7ca4",
+    "#1ec2d1",
+    "#e4dfd1",
+    "#e6c9e1",
+    "#adc8d0",
   ];
 
   useEffect(() => {
     getSchoolData(setSchoolData);
   }, []);
 
+  console.log(schoolData);
+
   const koreanDataList = schoolData?.list[0].map((item, index) => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: colorData[index],
     };
   });
 
@@ -39,7 +41,6 @@ const ClassSchoolRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: colorData[index],
     };
   });
 
@@ -48,7 +49,6 @@ const ClassSchoolRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
@@ -57,7 +57,6 @@ const ClassSchoolRecord = () => {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: "hsl(168, 70%, 50%)",
     };
   });
 
@@ -72,6 +71,7 @@ const ClassSchoolRecord = () => {
           {koreanDataList ? (
             <ResponsivePie
               data={koreanDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -79,7 +79,6 @@ const ClassSchoolRecord = () => {
               cornerRadius={0}
               activeOuterRadiusOffset={8}
               borderWidth={1}
-              colors={colorData}
               borderColor={{
                 from: "color",
                 modifiers: [["darker", 0.2]],
@@ -94,6 +93,7 @@ const ClassSchoolRecord = () => {
           {mathDataList ? (
             <ResponsivePie
               data={mathDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -115,6 +115,7 @@ const ClassSchoolRecord = () => {
           {englishDataList ? (
             <ResponsivePie
               data={englishDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}
@@ -136,6 +137,7 @@ const ClassSchoolRecord = () => {
           {historyDataList ? (
             <ResponsivePie
               data={historyDataList}
+              colors={colorData}
               width={200}
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
               innerRadius={0.5}

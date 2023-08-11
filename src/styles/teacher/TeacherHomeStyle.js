@@ -117,37 +117,36 @@ const ClassSchoolRecordDiv = styled.div`
     margin: 10px 0;
     span {
       margin-right: 20px;
-      .grade1 {
-        color: #ffc4a3;
-      }
     }
     .icon {
       margin-right: 5px;
     }
-
+    .grade1 {
+      color: #f9f68e;
+    }
     .grade2 {
-      color: #ffb343;
+      color: #ffbc66;
     }
     .grade3 {
       color: #ff8682;
     }
     .grade4 {
-      color: #bad252;
+      color: #ddf5ae;
     }
     .grade5 {
       color: #8ce5c8;
     }
     .grade6 {
-      color: #1e9faa;
+      color: #1ec2d1;
     }
     .grade7 {
-      color: #d5ba99;
+      color: #e4dfd1;
     }
     .grade8 {
-      color: #a8b9df;
+      color: #e6c9e1;
     }
     .grade9 {
-      color: #ad7ca4;
+      color: #adc8d0;
     }
   }
 `;

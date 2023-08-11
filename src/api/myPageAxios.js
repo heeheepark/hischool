@@ -23,9 +23,9 @@ export const patchMyPageData = async () => {
 
 export const deleteUser = async () => {
   try {
-    const res = await client.delete(`/api/mypage`);
-    const result = res.data;
-    console.log(result);
+    // const res = await client.delete(`/api/mypage`);
+    // const result = res.data;
+    // console.log(result);
   } catch (err) {
     console.log(err);
   }
