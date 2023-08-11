@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  IMRinput,
-} from "../../styles/teacher/InputSchoolRecordStyle";
+import { IMRinput } from "../../styles/teacher/InputSchoolRecordStyle";
 
 const TSubJectMock = ({
   id,
@@ -21,7 +19,6 @@ const TSubJectMock = ({
   };
 
   const [studentData, setStudentData] = useState(initialStudentData);
-
   useEffect(() => {
     // 선택된 학생 데이터가 있을 경우, 수정 폼에 해당 학생 데이터를 불러옵니다.
     if (selectedStudentIndex !== null) {
@@ -95,7 +92,7 @@ const TSubJectMock = ({
           <input
             type="number"
             name="standardscore"
-            value={studentData?.standardscore || ""} 
+            value={studentData?.standardscore || ""}
             onChange={handleInputChange}
             placeholder="점수"
             max={100}

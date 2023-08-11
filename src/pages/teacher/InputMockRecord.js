@@ -83,6 +83,7 @@ const InputMockRecord = () => {
             const subData = await getMockSubData(mainSubject.categoryid);
             return {
               mainsubject: mainSubject.nm,
+              mainsubjectId: mainSubject.categoryid,
               data: subData.map(subSubject => ({
                 subsubject: subSubject.nm,
                 subjectid: subSubject.subjectid,

@@ -5,6 +5,7 @@ const TSubJectEditMock = ({
   id,
   subjectData,
   studentsData,
+  studentDataList,
   updateLastSavedData,
 }) => {
   const initialStudentData = {
@@ -17,11 +18,22 @@ const TSubJectEditMock = ({
   };
   const [dropMonth, setDropMonth] = useState("");
   const [studentData, setStudentData] = useState(initialStudentData);
-  console.log(studentData);
+  const [dailData, setDailData] = useState(initialStudentData);
+  console.log("값내놩ㅇㅇ:", studentData);
+  console.log("값내놩ㅇㅇ2:", studentsData);
+  console.log("값내놩ㅇㅇ3:", studentDataList);
+  console.log("값내놩ㅇㅇ4:", dailData);
+
+  const selectDate = subjectData.map(item => {
+    console.log("값내놔", item.data[0]);
+  });
+  console.log("selectDate", selectDate);
 
   useEffect(() => {
     // 수정 폼에 해당 학생 데이터를 불러옵니다.
     setStudentData(studentsData, dropMonth);
+    // 수정 폼에 기본 정보 데이터를 불러옵니다.
+    setDailData(dropMonth);
   }, [studentsData, dropMonth]);
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -34,6 +46,7 @@ const TSubJectEditMock = ({
     } else if (name === "percent") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 100);
     }
+
     setStudentData(prevData => ({
       ...prevData,
       [name]: updatedValue,
@@ -53,35 +66,39 @@ const TSubJectEditMock = ({
   };
   // studentData.categoryId와 동일한 mainsubject를 저장할 배열
   const matchingMainsubjects = [];
-  let matchedSubsubject = null;
+  const matchMainSid = [];
+  let matchSubject = [];
 
   // subjectData 배열을 반복하여 처리
   subjectData.forEach(item => {
     if (item.mainsubjectId === studentData.categoryId) {
       matchingMainsubjects.push(item.mainsubject);
+      matchMainSid.push(item.mainsubjectId);
     }
   });
   subjectData.forEach(item => {
     if (item.mainsubjectId === studentData.subjectId) {
-      matchedSubsubject = item.data[0]?.subsubject;
+      matchSubject = item.data[0]?.subsubject;
     } else {
       const subsubjectMatch = item.data.find(
         subitem => subitem.subjectid === studentData.subjectId,
       );
       if (subsubjectMatch) {
-        matchedSubsubject = subsubjectMatch.subsubject;
+        matchSubject = subsubjectMatch.subsubject;
       }
     }
   });
-  if (matchedSubsubject) {
-    console.log("Matching subsubject:", matchedSubsubject);
+  if (matchSubject) {
+    console.log("Matching subsubject:", matchSubject);
   } else {
     console.log("No matching subsubject found.");
   }
 
   // matchingMainsubjects 배열에 저장된 mainsubject 출력 또는 사용
   console.log("Matching mainsubjects:", matchingMainsubjects);
-  console.log("dddddddddd", studentData);
+  console.log("dddddddddd", studentData, subjectData);
+  console.log("dddddd", studentData?.categoryId || "");
+  console.log("dddddd", dailData?.categoryId || "");
   return (
     <>
       <div>
@@ -98,14 +115,14 @@ const TSubJectEditMock = ({
             onChange={handleInputChange}
           >
             {matchingMainsubjects.map((mainSubject, index) => (
-              <option key={index} value={mainSubject.categoryId}>
+              <option key={index} value={matchMainSid}>
                 {mainSubject}
               </option>
             ))}
             {subjectData.map(mainSubject => (
               <option
                 key={mainSubject.mainsubject}
-                value={mainSubject.mainsubject}
+                value={mainSubject.mainsubjectId}
               >
                 {mainSubject.mainsubject}
               </option>
@@ -116,7 +133,7 @@ const TSubJectEditMock = ({
             value={studentData?.subjectid || ""}
             onChange={handleInputChange}
           >
-            <option value={studentData?.subjectid}></option>
+            <option value={studentData?.subjectid}>{matchSubject}</option>
             {studentData?.subjectid &&
               subjectData
                 .find(
