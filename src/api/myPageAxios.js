@@ -1,3 +1,4 @@
+import axios from "axios";
 import { client } from "../api/client";
 
 export const getUserData = async setUserData => {
@@ -5,15 +6,19 @@ export const getUserData = async setUserData => {
     const res = await client.get(`/api/mypage/user-mypage`);
     const result = res.data;
     console.log(result);
-    setUserData(result[0]);
+    setUserData(result);
   } catch (err) {
     console.error(err);
   }
 };
 
-export const patchMyPageData = async () => {
+export const putMyPageData = async formData => {
   try {
-    const res = await client.patch(`/api/mypage/userr-info-update`);
+    console.log(formData);
+
+    const res = await client.put(`/api/mypage/user-info-update`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
     const result = res.data;
     console.log(result);
   } catch (err) {
