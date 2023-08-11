@@ -3,7 +3,7 @@ import { client } from "../client";
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
   try {
-    console.log(dataToSend)
+    console.log(dataToSend);
     // const response = await client.post("/api/teacher/subject/mock-ins", {
     //   list: dataToSend,
     // });

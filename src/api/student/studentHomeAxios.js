@@ -1,6 +1,6 @@
 import { client } from "../client";
 
-// 내신 성적 현황
+// 내신 그래프
 const getAllSchoolRecord = async setAllSchoolRecordData => {
   try {
     const res = await client.get(`/api/student/aca-graph`);
@@ -11,6 +11,7 @@ const getAllSchoolRecord = async setAllSchoolRecordData => {
   }
 };
 
+// 최근 내신 성적
 const getRecentSchoolRecord = async (
   setRecentSchoolRecordData,
   setRecentTestTitle,
@@ -25,7 +26,7 @@ const getRecentSchoolRecord = async (
   }
 };
 
-// 모의고사 성적 현황
+// 모의고사 그래프
 const getAllMockRecord = async setAllMockRecordData => {
   try {
     const res = await client.get(`/api/student/mock-graph`);
@@ -36,6 +37,7 @@ const getAllMockRecord = async setAllMockRecordData => {
   }
 };
 
+// 최근 모의고사 성적
 const getRecentMockRecord = async (
   setRecentMockRecordData,
   setRecentTestTitle,

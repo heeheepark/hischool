@@ -80,7 +80,7 @@ const SchoolRecordTable = () => {
 
   const testTypeList = defaultSchoolRecord => {
     const testTypes = new Set();
-    defaultSchoolRecord?.forEach(item => testTypes.add(item.semester));
+    defaultSchoolRecord?.forEach(item => testTypes.add(item.testType));
     const newTestTypes = Array.from(testTypes);
     return newTestTypes.sort();
   };

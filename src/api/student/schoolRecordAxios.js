@@ -1,5 +1,6 @@
 import { client } from "../client";
 
+// 최고 내신 등급
 export const getHighestSchoolRecord = async setHighestSchoolRecord => {
   try {
     const res = await client.get(`/api/student/aca-highest`);
@@ -10,6 +11,7 @@ export const getHighestSchoolRecord = async setHighestSchoolRecord => {
   }
 };
 
+// 최근 내신 등급
 export const getCurrentSchoolRecord = async setCurrentSchoolRecord => {
   try {
     const res = await client.get(`/api/student/aca-latest`);

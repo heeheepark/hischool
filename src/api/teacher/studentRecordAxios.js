@@ -9,32 +9,26 @@ export const getStudentSchoolRecord = async (
   testType,
 ) => {
   try {
-    console.log(studentId, year, semester, testType);
+    console.log(year, semester, testType);
     let axiosUrl;
     if (year && semester && testType) {
-      console.log("1번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}&mf=${testType}`;
     } else if (year && semester && !testType) {
-      console.log("2번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}`;
     } else if (year && !semester && !testType) {
-      console.log("3번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}`;
     } else if (!year && semester && !testType) {
-      console.log("4번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}`;
     } else if (!year && !semester && testType) {
-      console.log("5번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&mf=${testType}`;
     } else if (!year && semester && testType) {
-      console.log("6번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}&mf=${testType}`;
+    } else if (year && !semester && testType) {
+      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&mf=${testType}`;
     } else {
-      console.log("7번 실행");
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}`;
       const res = await client.get(axiosUrl);
       const result = res.data;
-      // console.log(result);
       setDefaultSchoolRecord(result);
     }
     const res = await client.get(axiosUrl);
@@ -47,11 +41,31 @@ export const getStudentSchoolRecord = async (
 
 export const getStudentMockRecord = async (
   studentId,
+  setDefaultMockRecord,
   setStudentMockRecordList,
+  year,
+  month,
 ) => {
   try {
-    const res = await client.get(`/api/teacher/mockresult?userId=${studentId}`);
+    // console.log("여기지롱~~");
+    let axiosUrl;
+    if (year && month) {
+      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&year=${year}&mon=${month}`;
+    } else if (year && !month) {
+      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&year=${year}`;
+    } else if (!year && month) {
+      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&mon=${month}`;
+    } else {
+      axiosUrl = `/api/teacher/mockresult?userId=${studentId}`;
+      const res = await client.get(axiosUrl);
+      const result = res.data;
+      // console.log(result);
+      setDefaultMockRecord(result);
+    }
+    // console.log("안녕");
+    const res = await client.get(axiosUrl);
     const result = res.data;
+    console.log(result);
     setStudentMockRecordList(result);
   } catch (err) {
     console.log(err);

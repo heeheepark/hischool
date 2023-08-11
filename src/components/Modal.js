@@ -67,10 +67,11 @@ export const SchoolRecordModal = ({
 export const MockRecordModal = ({
   mockModalOpen,
   setMockModalOpen,
-  setmockDeleteOk,
+  setMockDeleteOk,
 }) => {
   const handleOk = () => {
-    setmockDeleteOk(true);
+    console.log("handleOk 실행");
+    setMockDeleteOk(true);
   };
 
   const closeModal = () => {

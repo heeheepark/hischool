@@ -10,6 +10,7 @@ import { getMockData } from "../../api/teacher/teacherHomeAxios";
 
 const ClassMockRecord = () => {
   const [mockData, setMockData] = useState(null);
+  const gradeList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const colorData = [
     "#f9f68e",
     "#ffbc66",
@@ -21,7 +22,7 @@ const ClassMockRecord = () => {
     "#e6c9e1",
     "#adc8d0",
   ];
-  console.log(mockData);
+  // console.log(mockData);
   const koreanDataList = mockData?.koList.map(item => {
     return {
       id: `${item.rating}등급`,
@@ -155,42 +156,12 @@ const ClassMockRecord = () => {
         </div>
       </ChartWrap>
       <div className="subject-info-wrap">
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade1" />
-          1등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade2" />
-          2등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade3" />
-          3등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade4" />
-          4등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade5" />
-          5등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade6" />
-          6등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade7" />
-          7등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade8" />
-          8등급
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faCircle} className="icon grade9" />
-          9등급
-        </span>
+        {gradeList.map((item, index) => (
+          <span key={index}>
+            <FontAwesomeIcon icon={faCircle} className={`icon grade${item}`} />
+            {item}등급
+          </span>
+        ))}
       </div>
     </ClassSchoolRecordDiv>
   );

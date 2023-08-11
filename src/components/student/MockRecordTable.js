@@ -21,8 +21,6 @@ const MockRecordTable = () => {
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
-    // console.log(selectYear);
-    // getAllMockRecord("1", setAllMockRecord, year);
   };
 
   const handleMonthList = e => {

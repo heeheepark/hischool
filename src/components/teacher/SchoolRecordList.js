@@ -93,7 +93,7 @@ const SchoolRecordList = ({
               </li>
               <li>{item.year}</li>
               <li>{item.semester}</li>
-              <li>{item.midFinal === 1 ? "중간" : "기말"}</li>
+              <li>{item.mf === 1 ? "중간" : "기말"}</li>
               <li>{item.nm}</li>
               <li>{item.detailNm}</li>
               <li>{item.score}</li>
