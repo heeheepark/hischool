@@ -30,7 +30,12 @@ export const LoginContain = styled.div`
       width: 100%;
       height: 60px;
       border-radius: 20px;
-      margin: 20px 0;
+      margin-top: 20px;
+    }
+    .err-message {
+      padding-left: 10px;
+      font-size: 16px;
+      color: crimson;
     }
   }
   .login-email {

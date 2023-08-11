@@ -26,6 +26,7 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
   );
 };
 
+// 내신 성적 삭제 모달
 export const SchoolRecordModal = ({
   schoolModalOpen,
   setSchoolModalOpen,
@@ -64,6 +65,7 @@ export const SchoolRecordModal = ({
   );
 };
 
+// 모의고사 성적 삭제 모달
 export const MockRecordModal = ({
   mockModalOpen,
   setMockModalOpen,

@@ -10,15 +10,12 @@ import {
   faCircleInfo,
   faHouseChimney,
   faUser,
-  faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-// import { fetchLogout } from "../api/client";
 import Cookies from "universal-cookie";
 import { getUserInfo } from "../api/userInfoAxios";
 import { useState } from "react";
-// import { logo } from "../assets/logo.png";
 
 const SideMenu = () => {
   const [userImg, setUserImg] = useState(null);
@@ -28,14 +25,12 @@ const SideMenu = () => {
   const location = useLocation();
   const user = location.pathname.split("/")[1];
   const cookies = new Cookies();
-  console.log(userImg);
 
   const handleDeleteCookie = () => {
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
     setTimeout(() => {
       navigate("/");
-      // fetchLogout();
     }, 500);
   };
 
@@ -208,9 +203,6 @@ const SideMenu = () => {
             <FontAwesomeIcon icon={faRightFromBracket} className="logout" />
             <span onClick={handleDeleteCookie}> 로그아웃</span>
           </Link>
-          {/* <div>
-            <FontAwesomeIcon icon={faCircleInfo} className="info" />
-          </div> */}
         </div>
       </div>
     </SideMenuWrap>

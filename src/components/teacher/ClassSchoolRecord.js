@@ -27,9 +27,7 @@ const ClassSchoolRecord = () => {
     getSchoolData(setSchoolData);
   }, []);
 
-  // console.log(schoolData);
-
-  const koreanDataList = schoolData?.list[0].map((item, index) => {
+  const koreanDataList = schoolData?.list[0].map(item => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
@@ -37,7 +35,7 @@ const ClassSchoolRecord = () => {
     };
   });
 
-  const mathDataList = schoolData?.list[1].map((item, index) => {
+  const mathDataList = schoolData?.list[1].map(item => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,

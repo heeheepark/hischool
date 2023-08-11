@@ -162,6 +162,8 @@ export const TcButtons = styled.div`
     cursor: pointer;
   }
   div {
+    width: 100%;
+    text-align: end;
     button {
       :first-of-type {
         margin-right: 10px;

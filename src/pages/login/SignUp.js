@@ -39,7 +39,6 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const birthFormatter = num => {
-    console.log(birth);
     try {
       num = num.replace(/\s/gi, "");
       if (num.length === 8) {
@@ -58,7 +57,6 @@ const SignUp = () => {
   };
 
   const phoneFormatter = num => {
-    console.log(phone);
     try {
       num = num.replace(/\s/gi, "");
 

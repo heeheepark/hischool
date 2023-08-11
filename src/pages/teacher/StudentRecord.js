@@ -67,6 +67,7 @@ const StudentRecord = () => {
 
   // 초기 데이터 불러오기
   useEffect(() => {
+    
     getStudentData(setStudentListData);
   }, []);
 

@@ -25,7 +25,7 @@ const SchoolRecordHeader = ({
     setSchoolModalOpen(true);
   };
 
-  // School Record Modal 확인 클릭 시
+  // 내신 삭제 모달 확인 클릭 시
   useEffect(() => {
     if (schoolResultIdList.length !== 0 && schoolDeleteOk === true) {
       schoolResultIdList.forEach(item => deleteStudentSchoolRecord(item));
@@ -67,8 +67,6 @@ const SchoolRecordHeader = ({
     const newSemesters = Array.from(semesters);
     return newSemesters.sort();
   };
-
-  // console.log(defaultSchoolRecord);
 
   const testTypeList = defaultSchoolRecord => {
     const testTypes = new Set();

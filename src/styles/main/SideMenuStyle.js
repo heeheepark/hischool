@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-// import userImg from "../../assets/gangdongwon.jpeg";
 
 const SideMenuWrap = styled.div`
   background: linear-gradient(
@@ -30,7 +29,6 @@ const SideMenuWrap = styled.div`
       font-weight: 900;
       height: 36px;
       cursor: pointer;
-      /* line-height: 2; */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -40,26 +38,10 @@ const SideMenuWrap = styled.div`
         margin-bottom: 10px;
       } */
       span {
-        /* margin-left: 10px; */
       }
     }
     .user-img {
-      /* border-radius: 50%; */
-      /* border: 3px solid #fff; */
-      /* overflow: hidden; */
-      /* width: 160px; */
-      /* height: 160px; */
       cursor: pointer;
-
-      span {
-        /* display: block; */
-        /* width: 100%; */
-        /* height: 100%; */
-        /* font-size: 0; */
-
-        /* background-size: cover; */
-        /* background-position: 0 0; */
-      }
     }
     p {
       text-align: center;
@@ -113,8 +95,6 @@ const SideMenuWrap = styled.div`
             .icon {
               margin-right: 20px;
             }
-            > span {
-            }
             .arrow {
               position: absolute;
               right: 20px;
@@ -139,8 +119,6 @@ const SideMenuWrap = styled.div`
             cursor: pointer;
             .icon {
               margin-right: 20px;
-            }
-            > span {
             }
             .arrow {
               position: absolute;

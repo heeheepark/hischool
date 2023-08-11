@@ -26,11 +26,9 @@ const MockRecordHeader = ({
     setMockModalOpen(true);
   };
 
-  // Mock Record Modal 확인 클릭 시
+  // 모의고사 삭제 모달 확인 클릭 시
   useEffect(() => {
-    // console.log("여기까지 옴");
     if (mockResultIdList.length !== 0 && mockDeleteOk === true) {
-      // console.log("uesEffect 실행");
       mockResultIdList.forEach(item => deleteStudentMockRecord(item));
       getStudentMockRecord(
         selectedId,

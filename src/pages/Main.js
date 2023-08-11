@@ -4,14 +4,34 @@ import { Aside, Content, Header, MainDiv } from "../styles/main/MainStyle";
 import SideMenu from "../components/SideMenu";
 import { useEffect } from "react";
 import { getSchoolInfo, getSchoolLogo } from "../api/userInfoAxios";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../components/Loading";
+import { client } from "../api/client";
+import { finishLoading, startLoading } from "../reducers/loadingSlice";
 
 const Main = () => {
   const [schoolLogo, setSchoolLogo] = useState(null);
   const [schoolName, setSchoolName] = useState(null);
   const [grade, setGrade] = useState(null);
   const [classNum, setClassNum] = useState(null);
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    client.interceptors.request.use(function (config) {
+      // 로딩 호출
+      dispatch({
+        type: startLoading,
+      });
+      return config;
+    });
+    client.interceptors.response.use(config => {
+      // 완료 시 로딩창 종료
+      dispatch({
+        type: finishLoading,
+      });
+      return config;
+    });
     getSchoolInfo(setSchoolName, setGrade, setClassNum);
     getSchoolLogo(setSchoolLogo);
   }, []);
@@ -34,6 +54,7 @@ const Main = () => {
             </div>
           </Header>
           <Content>
+            {loading ? <Loading /> : null}
             <div className="content-wrap">
               <Outlet />
             </div>

@@ -24,7 +24,7 @@ const SignList = () => {
     getSignListData(setStudentListData);
   }, []);
 
-  // 전체 선택
+  // 전체 체크박스 선택
   const handleAllCheck = e => {
     const allCheckBox = document.querySelectorAll(".school-checkbox");
     resultIdArray = [];
@@ -42,7 +42,7 @@ const SignList = () => {
     setSaveCheckBox(resultIdArray);
   };
 
-  // 개별 선택
+  // 개별 체크박스 선택
   const handleCheckBox = e => {
     const clickList = e.currentTarget;
     const userId = parseInt(clickList.classList[1].slice(6));
@@ -51,15 +51,12 @@ const SignList = () => {
     } else {
       resultIdArray = resultIdArray.filter(item => item !== userId);
     }
-    console.log(resultIdArray);
     setSaveCheckBox(resultIdArray);
   };
 
   // Modal 확인 클릭 시
   useEffect(() => {
     if (acceptOk) {
-      console.log("patch 실행");
-      console.log(resultIdArray);
       resultIdArray.forEach(item => console.log(item));
       resultIdArray.forEach(item => patchSignAccept(item));
     }

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-// import schoolLogo from "../../assets/hamji.png";
 
 const MainDiv = styled.div`
   position: relative;
@@ -58,7 +57,7 @@ const Content = styled.div`
   padding: 15px;
   height: calc(100vh - 60px);
   .content-wrap {
-    /* background: #f7f7f7; */
+    position: relative;
     width: 100%;
     height: 100%;
     border-radius: 5px;
