@@ -13,10 +13,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
+  // 유저 선택 및 로그인 버튼 함수
   const handleSubmit = async e => {
     e.preventDefault();
     const role = await fetchLogin(email, password);
-    // setRole(role);
     if (role === "ROLE_TC") {
       navigate("/teacher/home");
     } else if (role === "ROLE_STD") {

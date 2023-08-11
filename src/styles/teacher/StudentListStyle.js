@@ -10,7 +10,6 @@ export const StudentListWrap = styled.div`
 `;
 export const StudentListTitle = styled.div`
   display: flex;
-  /* justify-content: space-between; */
   gap: 20px;
   align-items: center;
   padding: 15px 0 15px 0;
@@ -43,7 +42,6 @@ export const TimeTableDiv = styled.div`
     position: sticky;
     top: 0;
     width: 100%;
-    /* height: 100%; */
     display: grid;
     grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
     grid-template-rows: 1fr;
@@ -62,13 +60,11 @@ export const TimeTableDiv = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: repeat(17, 42px);
     > li {
-      /* line-height: 42px; */
       border-top: 1px solid #ccc;
       :last-of-type {
         border-bottom: 1px solid #ccc;
       }
       > ul {
-        /* height: 100%; */
         display: grid;
         grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
         > li {

@@ -176,22 +176,18 @@ export const StudentCancelModal = ({
   );
 };
 
-export const DeleteUserModal = ({
-  schoolModalOpen,
-  setSchoolModalOpen,
-  setschoolDeleteOk,
-}) => {
+export const DeleteUserModal = ({ modalOpen, setModalOpen, setCancelOk }) => {
   const handleOk = () => {
-    setschoolDeleteOk(true);
+    setCancelOk(true);
   };
 
   const closeModal = () => {
-    setSchoolModalOpen(false);
+    setModalOpen(false);
   };
 
   return (
     <>
-      {schoolModalOpen && (
+      {modalOpen && (
         <StudentRecordModalDiv className="modal">
           <div className="dim"></div>
           <div className="content-wrap">

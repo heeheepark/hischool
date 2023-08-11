@@ -5,7 +5,11 @@ import {
   TcMyPageUserInfo,
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
-import { deleteUser, getUserData, patchMyPageData } from "../api/myPageAxios";
+import {
+  deleteUser,
+  getUserData,
+  putMyPageData,
+} from "../api/myPageAxios";
 import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useNavigate } from "react-router";
@@ -20,7 +24,6 @@ const MyPage = () => {
   });
   const [detailAddress, setDetailAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [authModal, setAuthModal] = useState(false);
   const [addressModal, setAddressModal] = useState(false);
   const [codeConFirm, setCodeConFirm] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
@@ -28,9 +31,9 @@ const MyPage = () => {
 
   const [cancelOk, setCancelOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [userPk, setUserPk] = useState(null);
   const navigate = useNavigate();
 
+  // get axios 담는 함수
   useEffect(() => {
     getUserData(setUserData);
   }, []);
@@ -45,99 +48,83 @@ const MyPage = () => {
   };
 
   const handleChangeAddress = e => {
-    e.preventDefault();
-    e.target.value = setHouseAddress();
+    setHouseAddress(e.target.value);
   };
 
-  const handleCancel = e => {
-    e.preventDefault();
+  const handleCancel = () => {
     navigate(-1);
   };
 
   const handleChangePass = e => {
-    e.preventDefault();
-    setPassword();
-  };
-  const handleChangeConfPass = e => {
-    e.preventDefault();
-    setPasswordConfirm();
-  };
-  const handleChangePhone = e => {
-    e.preventDefault();
-    setPhone();
-  };
-  const handleChangeDetailAddr = e => {
-    e.preventDefault();
-    setDetailAddress();
+    setPassword(e.target.value);
   };
 
+  const handleChangeConfPass = e => {
+    setPasswordConfirm(e.target.value);
+  };
+
+  const handleChangePhone = e => {
+    setPhone(e.target.value);
+  };
+
+  const handleChangeDetailAddr = e => {
+    setDetailAddress(e.target.value);
+  };
+
+  // 이벤트 방지 함수
   const handleSubmit = e => {
     e.preventDefault();
   };
 
+  // 회원정보 수정 함수
   const handlePatch = e => {
     e.preventDefault();
     e.persist();
 
-    const userPatchData = {
-      nm: name,
-      phone,
-      address: houseAddress.address,
-      detailAddr: detailAddress,
-      pw: password,
-      confirmPw: passwordConfirm,
-      pic: selectFile,
+    const userPdata = {
+      phone: phone || userData.phone,
+      address: houseAddress.address || userData.address,
+      detailAddr: detailAddress || userData.detailAddr,
+      pw: password || userData.pw,
     };
 
     let formData = new FormData();
-    formData.append("pic", selectFile);
-    formData.append("data", JSON.stringify(userPatchData));
+    selectFile && formData.append("pic", selectFile);
+    formData.append("p", JSON.stringify(userPdata));
 
-    patchMyPageData();
-    navigate("/myapge");
+    putMyPageData(formData);
+    // navigate("/myapge");
   };
 
+  // 이미지 미리보기 함수
   const handleChangeFile = e => {
     const file = e.target.files[0];
     setSelectFile(file);
-    setUserPic(URL.createObjectURL(file));
+    setUserPic(file ? URL.createObjectURL(file) : null);
   };
 
-  // Modal 확인 클릭 시
+  // Modal에 확인 버튼 클릭시 유저 삭제
   useEffect(() => {
-    console.log("patch 실행");
-    deleteUser();
-    getUserData(setUserData);
-    setModalOpen(false);
-    setCancelOk(false);
-    console.log(modalOpen);
+    if (cancelOk === true) {
+      setModalOpen(false);
+      setCancelOk(false);
+      deleteUser();
+    }
   }, [cancelOk]);
 
-  const handleOk = e => {
-    // console.log(e.target.classList[0].slice(6));
-    // const resultUserId = e.target.classList[0].slice(6);
+  // 유저 삭제 모달 오픈 함수
+  const handleDeleteModalOpen = () => {
     setModalOpen(true);
-  };
-
-  const handleDelete = () => {
-    deleteUser();
   };
 
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
-      {modalOpen && (
-        <DeleteUserModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          setCancelOk={setCancelOk}
-        />
-      )}
       <div className="mypage-top">
         <div className="user-info">
           <div className="user-info-wrap">
             <div className="user-picture-wrap">
               <div className="picture-img">
-                {<img src={userData.pic} alt="pic" />}
+                <img src={userPic || userData.pic} alt="pic" />
               </div>
               <input
                 type="file"
@@ -152,7 +139,7 @@ const MyPage = () => {
                   <input
                     type="email"
                     name="email"
-                    defaultValue={userData.email}
+                    value={userData.email}
                     readOnly
                   />
                 </li>
@@ -277,18 +264,21 @@ const MyPage = () => {
       </div>
       <div className="mypage-bottom">
         <TcButtons>
-          <button
-            type="button"
-            className="withdraw-btn"
-            onClick={e => handleDelete(e)}
-          >
+          {modalOpen && (
+            <DeleteUserModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              setCancelOk={setCancelOk}
+            />
+          )}
+          <button className="withdraw-btn" onClick={handleDeleteModalOpen}>
             회원탈퇴
           </button>
           <div>
             <button type="submit" onClick={handlePatch}>
               수정
             </button>
-            <button type="button" className="cancel-btn" onClick={handleOk}>
+            <button type="button" className="cancel-btn" onClick={handleCancel}>
               취소
             </button>
           </div>
