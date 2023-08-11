@@ -9,6 +9,10 @@ import { deleteUser, getUserData, putMyPageData } from "../api/myPageAxios";
 import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useNavigate } from "react-router";
+import Loading from "./Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../api/client";
+import { finishLoading, startLoading } from "../reducers/loadingSlice";
 
 const MyPage = () => {
   const [userData, setUserData] = useState([]);

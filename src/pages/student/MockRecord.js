@@ -50,87 +50,89 @@ const MockRecord = () => {
     });
 
   return (
-    <MockRecordDiv>
-      <h3>모의고사 성적 관리</h3>
-      <ChartWrap>
-        <div className="chart">
-          {allMockRecordData ? (
-            <ResponsiveLine
-              data={newMockRecordData}
-              margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
-              xScale={{ type: "point" }}
-              yScale={{
-                type: "linear",
-                min: "1",
-                max: highGrade,
-                stacked: false,
-                reverse: true,
-              }}
-              axisLeft={{ tickValues: gradeArray }}
-              gridYValues={gradeArray}
-              colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
-              lineWidth={3}
-              pointSize={5}
-              pointColor={{ theme: "background" }}
-              pointBorderWidth={3}
-              pointBorderColor={{ from: "serieColor" }}
-              useMesh={true}
-              legends={[
-                {
-                  anchor: "bottom",
-                  direction: "row",
-                  justify: false,
-                  translateX: 0,
-                  translateY: 55,
-                  itemDirection: "left-to-right",
-                  itemWidth: 70,
-                  itemHeight: 20,
-                  itemOpacity: 1,
-                  symbolSize: 12,
-                  symbolShape: "circle",
-                },
-              ]}
-            />
-          ) : null}
-        </div>
-        <div className="record-text">
-          <p>
-            <span className="user-name">{userName}</span>
-            <span>님의</span>
-            <span>주요 과목 등급</span>
-          </p>
-          <div>
-            <div className="high-record-text">
-              <span>모의고사 최고 등급</span>
-              <div>
-                {highestMockRecord?.map((item, index) => (
-                  <p key={index}>
-                    <span className="subject-title">{item.nm}</span>
-                    <span className="grade-num">{item.rating}</span>
-                    <span>등급</span>
-                  </p>
-                ))}
+    <>
+      <MockRecordDiv>
+        <h3>모의고사 성적 관리</h3>
+        <ChartWrap>
+          <div className="chart">
+            {allMockRecordData ? (
+              <ResponsiveLine
+                data={newMockRecordData}
+                margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
+                xScale={{ type: "point" }}
+                yScale={{
+                  type: "linear",
+                  min: "1",
+                  max: highGrade,
+                  stacked: false,
+                  reverse: true,
+                }}
+                axisLeft={{ tickValues: gradeArray }}
+                gridYValues={gradeArray}
+                colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
+                lineWidth={3}
+                pointSize={5}
+                pointColor={{ theme: "background" }}
+                pointBorderWidth={3}
+                pointBorderColor={{ from: "serieColor" }}
+                useMesh={true}
+                legends={[
+                  {
+                    anchor: "bottom",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: 55,
+                    itemDirection: "left-to-right",
+                    itemWidth: 70,
+                    itemHeight: 20,
+                    itemOpacity: 1,
+                    symbolSize: 12,
+                    symbolShape: "circle",
+                  },
+                ]}
+              />
+            ) : null}
+          </div>
+          <div className="record-text">
+            <p>
+              <span className="user-name">{userName}</span>
+              <span>님의</span>
+              <span>주요 과목 등급</span>
+            </p>
+            <div>
+              <div className="high-record-text">
+                <span>모의고사 최고 등급</span>
+                <div>
+                  {highestMockRecord?.map((item, index) => (
+                    <p key={index}>
+                      <span className="subject-title">{item.nm}</span>
+                      <span className="grade-num">{item.rating}</span>
+                      <span>등급</span>
+                    </p>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="current-record-text">
-              <span>현재 모의고사 등급</span>
-              <div>
-                {currentMockRecord?.list.map((item, index) => (
-                  <p key={index}>
-                    <span className="subject-title">{item.nm}</span>
-                    <span className="grade-num">{item.rating}</span>
-                    <span>등급</span>
-                  </p>
-                ))}
+              <div className="current-record-text">
+                <span>현재 모의고사 등급</span>
+                <div>
+                  {currentMockRecord?.list.map((item, index) => (
+                    <p key={index}>
+                      <span className="subject-title">{item.nm}</span>
+                      <span className="grade-num">{item.rating}</span>
+                      <span>등급</span>
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </ChartWrap>
-      <RecordTableWrap>
-        <MockRecordTable />
-      </RecordTableWrap>
-    </MockRecordDiv>
+        </ChartWrap>
+        <RecordTableWrap>
+          <MockRecordTable />
+        </RecordTableWrap>
+      </MockRecordDiv>
+    </>
   );
 };
 
