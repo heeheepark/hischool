@@ -20,6 +20,7 @@ const EditMockRecord = () => {
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
+  const [studentDataList, setstudentDataList] = useState([]);
   const navigate = useNavigate();
   console.log(state);
 
@@ -48,6 +49,9 @@ const EditMockRecord = () => {
     // 화면에서 그려질때 배열의 총 개수를 파악함.
     total = state[1].length;
     getMockWhile();
+    const interimDataS = [{}];
+    setstudentDataList(interimDataS);
+    setLastSavedData(interimDataS);
   }, []);
 
   // 라스트 데이터 전달
@@ -144,6 +148,7 @@ const EditMockRecord = () => {
             id={index}
             subjectData={subjectData}
             studentsData={item}
+            studentDataList={studentDataList[index]}
             setStudentsData={setStudentsData}
             updateLastSavedData={updateLastSavedData}
           />
