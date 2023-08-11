@@ -70,6 +70,7 @@ const InputSchoolRecord = () => {
         wholerank: parseInt(item.wholerank) || 0,
       }));
       postSchoolData(SdataToSend);
+      navigate(-1)
     }
   };
   // 항목 추가 버튼

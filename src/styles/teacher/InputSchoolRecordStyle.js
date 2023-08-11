@@ -92,10 +92,62 @@ const ISRTitle = styled.div`
     font-weight: 400;
   }
 `;
+const ISTitle = styled.div`
+  width: 100%;
+  height: 40px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  font-size: 18px;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  background: #176b87;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  > p {
+    text-align: center;
+  }
+  > strong {
+    text-align: center;
+    font-weight: 400;
+  }
+`;
 
 const ISRinput = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  > select {
+    margin: 0 auto;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    width: 10vw;
+    height: 25px;
+    text-align: center;
+  }
+  > input {
+    margin: 0 auto;
+    text-align: center;
+    width: 77px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    height: 25px;
+    text-align: center;
+  }
+`;
+const ISinput = styled.div`
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -315,4 +367,6 @@ export {
   ISainput,
   IMREdit,
   IMREditTitle,
+  ISTitle,
+  ISinput,
 };

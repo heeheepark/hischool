@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { ISRinput, ISainput } from "../../styles/teacher/InputSchoolRecordStyle";
+import {
+  ISainput,
+  ISinput,
+} from "../../styles/teacher/InputSchoolRecordStyle";
 import { getSchoolSubData } from "../../api/teacher/inputSchoolRecordAxios";
 
 const TSubJectEditSchool = ({
   id,
   subjectData,
-  dropSemester,
-  dropTest,
   studentsData,
   updateLastSavedData,
   selectedStudentIndex,
@@ -20,13 +21,16 @@ const TSubJectEditSchool = ({
     rating: "",
     classrank: "",
     wholerank: "",
-    semester: dropSemester,
-    midfinal: dropTest,
+    semester: "",
+    midfinal: "",
   };
-
-  const [studentData, setStudentData] = useState(initialStudentData);
+  console.log("studentsData", studentsData)
+  const [dropSemester, setDropSemester] = useState("");
+  const [dropTest, setDropTest] = useState("");
   const [detailList, setDetailList] = useState([]);
+  const [studentData, setStudentData] = useState(initialStudentData);
 
+  
   // 세부항목 호출
   const getDetailList = async _sid => {
     const result = await getSchoolSubData();
@@ -42,8 +46,7 @@ const TSubJectEditSchool = ({
       // 선택된 데이터가 없으면 초기화
       setStudentData(initialStudentData);
     }
-  }, [selectedStudentIndex, studentsData, dropSemester, dropTest]);
-
+  }, [selectedStudentIndex, studentsData]);
   const handleInputChange = e => {
     const { name, value } = e.target;
     // 숫자만 필터링
@@ -71,11 +74,31 @@ const TSubJectEditSchool = ({
     // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
     updateLastSavedData(id, updatedData);
   };
-
+  const handleSemester = event => {
+    const selectedSemester = event.target.value;
+    setDropSemester(selectedSemester);
+  };
+  const handleTest = event => {
+    const selectedTest = event.target.value;
+    setDropTest(selectedTest);
+  };
+  const midfinalName = (e) => {
+    (studentsData?.midfinal === 1) 
+  }
   return (
     <>
       <div>
-        <ISRinput>
+        <ISinput>
+          <select value={dropSemester} onChange={handleSemester}>
+            <option value={studentsData?.semester}>{studentsData?.semester}학기</option>
+            <option value="1학기">1학기</option>
+            <option value="2학기">2학기</option>
+          </select>
+          <select value={dropTest} onChange={handleTest}>
+            <option value={studentsData?.midfinal}>시험 구분</option>
+            <option value="1">중간고사</option>
+            <option value="2">기말고사</option>
+          </select>
           <select
             name="subject"
             value={studentData?.subject || ""}
@@ -136,7 +159,7 @@ const TSubJectEditSchool = ({
             />
             <span> / {schoolData}</span>
           </ISainput>
-        </ISRinput>
+        </ISinput>
       </div>
     </>
   );

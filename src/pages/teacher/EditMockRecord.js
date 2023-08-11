@@ -10,6 +10,7 @@ import {
   getMockMainSubData,
   getMockSubData,
   getStudentsNameData,
+  patchMockData,
 } from "../../api/teacher/inputMockRecordAxios";
 import { useLocation, useNavigate } from "react-router";
 import TSubJectEditMock from "../../components/teacher/TSubjectEditMock";
@@ -20,10 +21,7 @@ const EditMockRecord = () => {
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
-  const [studentDataList, setstudentDataList] = useState([]);
   const navigate = useNavigate();
-  console.log(state);
-
   // 처음에 화면이 만들어지면 호출을 한다.
   // 과목의 총 개수를 파악한다.
   let total = 0;
@@ -49,9 +47,6 @@ const EditMockRecord = () => {
     // 화면에서 그려질때 배열의 총 개수를 파악함.
     total = state[1].length;
     getMockWhile();
-    const interimDataS = [{}];
-    setstudentDataList(interimDataS);
-    setLastSavedData(interimDataS);
   }, []);
 
   // 라스트 데이터 전달
@@ -67,16 +62,17 @@ const EditMockRecord = () => {
   // "수정" > 서버전송
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
-      const dataToSend = lastSavedData.map(item => ({
-        resultId: state[1],
-        year: 2023, //임시값
+      const dataToSend = lastSavedData.map((item, index) => ({
+        resultId: state[1][index],
+        subjectId: parseInt(item.subjectid),
+        year: "2023", //임시값
         mon: parseInt(item.mon) || 0,
-        standardscore: parseInt(item.standardScore) || 0,
+        standardScore: parseInt(item.standardScore) || 0,
         rating: parseInt(item.rating) || 0,
         percent: parseInt(item.percent) || 0,
-        pa: item.categoryId
       }));
-      console.log(dataToSend);
+      dataToSend.forEach(item => patchMockData(item));
+      navigate(-1)
     }
   };
   useEffect(() => {
@@ -148,7 +144,6 @@ const EditMockRecord = () => {
             id={index}
             subjectData={subjectData}
             studentsData={item}
-            studentDataList={studentDataList[index]}
             setStudentsData={setStudentsData}
             updateLastSavedData={updateLastSavedData}
           />
