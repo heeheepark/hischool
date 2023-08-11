@@ -10,25 +10,36 @@ import { getSchoolData } from "../../api/teacher/teacherHomeAxios";
 
 const ClassSchoolRecord = () => {
   const [schoolData, setSchoolData] = useState(null);
+  const colorData = [
+    "#ffb343",
+    "#ff8682",
+    "#bad252",
+    "#8ce5c8",
+    "#1e9faa",
+    "#d5ba99",
+    "#a8b9df",
+    "#ad7ca4",
+  ];
+
   useEffect(() => {
     getSchoolData(setSchoolData);
   }, []);
 
-  const koreanDataList = schoolData?.list[0].map(item => {
+  const koreanDataList = schoolData?.list[0].map((item, index) => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: "hsl(168, 70%, 50%)",
+      color: colorData[index],
     };
   });
 
-  const mathDataList = schoolData?.list[1].map(item => {
+  const mathDataList = schoolData?.list[1].map((item, index) => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
       value: item.percentage,
-      color: "hsl(168, 70%, 50%)",
+      color: colorData[index],
     };
   });
 
@@ -68,6 +79,7 @@ const ClassSchoolRecord = () => {
               cornerRadius={0}
               activeOuterRadiusOffset={8}
               borderWidth={1}
+              colors={colorData}
               borderColor={{
                 from: "color",
                 modifiers: [["darker", 0.2]],
@@ -144,39 +156,39 @@ const ClassSchoolRecord = () => {
       </ChartWrap>
       <div className="subject-info-wrap">
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon korean" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade1" />
           1등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon math" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade2" />
           2등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon english" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade3" />
           3등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade4" />
           4등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon korean" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade5" />
           5등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon math" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade6" />
           6등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon english" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade7" />
           7등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade8" />
           8등급
         </span>
         <span>
-          <FontAwesomeIcon icon={faCircle} className="icon history" />
+          <FontAwesomeIcon icon={faCircle} className="icon grade9" />
           9등급
         </span>
       </div>

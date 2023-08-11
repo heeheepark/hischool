@@ -23,7 +23,7 @@ const SchoolRecord = () => {
   const [allSchoolRecordData, setAllSchoolRecordData] = useState(null);
 
   useEffect(() => {
-    getUserInfo(setUserName);
+    getUserInfo(null, setUserName, null);
     getHighestSchoolRecord(setHighestSchoolRecord);
     getCurrentSchoolRecord(setCurrentSchoolRecord);
     getAllSchoolRecord(setAllSchoolRecordData);

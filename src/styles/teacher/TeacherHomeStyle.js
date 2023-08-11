@@ -117,21 +117,37 @@ const ClassSchoolRecordDiv = styled.div`
     margin: 10px 0;
     span {
       margin-right: 20px;
+      .grade1 {
+        color: #ffc4a3;
+      }
     }
     .icon {
       margin-right: 5px;
     }
-    .korean {
-      color: rgba(197, 22, 5, 1);
+
+    .grade2 {
+      color: #ffb343;
     }
-    .math {
-      color: rgba(253, 141, 20, 1);
+    .grade3 {
+      color: #ff8682;
     }
-    .english {
-      color: rgba(250, 194, 19, 1);
+    .grade4 {
+      color: #bad252;
     }
-    .history {
-      color: rgba(111, 105, 172, 1);
+    .grade5 {
+      color: #8ce5c8;
+    }
+    .grade6 {
+      color: #1e9faa;
+    }
+    .grade7 {
+      color: #d5ba99;
+    }
+    .grade8 {
+      color: #a8b9df;
+    }
+    .grade9 {
+      color: #ad7ca4;
     }
   }
 `;

@@ -12,10 +12,16 @@ export const getUserInfo = async (setUserImg, setUserName, setUserEmail) => {
     const userImg = result.pic;
     console.log(userImg);
     // console.log(result.email);
+    if (setUserImg) {
+      setUserImg(userImg);
+    }
+    if (setUserName) {
+      setUserName(userName);
+    }
+    if (setUserEmail) {
+      setUserEmail(userEmail);
+    }
     // setUserImg(resImg.data);
-    setUserImg(userImg);
-    setUserName(userName);
-    setUserEmail(userEmail);
   } catch (err) {
     console.log(err);
   }
