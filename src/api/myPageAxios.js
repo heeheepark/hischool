@@ -13,19 +13,7 @@ export const getUserData = async setUserData => {
 
 export const patchMyPageData = async () => {
   try {
-    const res =await client.patch(`/api/mypage/userr-info-update`);
-    const result = res.data;
-    console.log(result)
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const deleteStudentSchoolRecord = async ()=> {
-  try {
-    const res = await client.delete(
-      // `/api/teacher/eli-aca?resultId=${}`,
-    );
+    const res = await client.patch(`/api/mypage/userr-info-update`);
     const result = res.data;
     console.log(result);
   } catch (err) {
@@ -33,3 +21,12 @@ export const deleteStudentSchoolRecord = async ()=> {
   }
 };
 
+export const deleteUser = async () => {
+  try {
+    const res = await client.delete(`/api/mypage`);
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -5,8 +5,8 @@ import {
   TcMyPageUserInfo,
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
-import { getUserData, patchMyPageData } from "../api/myPageAxios";
-import { Modal } from "./Modal";
+import { deleteUser, getUserData, patchMyPageData } from "../api/myPageAxios";
+import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useNavigate } from "react-router";
 
@@ -25,6 +25,10 @@ const MyPage = () => {
   const [codeConFirm, setCodeConFirm] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
   const [userPic, setUserPic] = useState("");
+
+  const [cancelOk, setCancelOk] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [userPk, setUserPk] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,9 +39,8 @@ const MyPage = () => {
     setCodeConFirm(true);
   };
 
-  const handleModalClose = e => {
-    e.preventDefault();
-    setAuthModal(false);
+  const handleModalClose = () => {
+    setAddressModal(false);
     setCodeConFirm(false);
   };
 
@@ -100,8 +103,35 @@ const MyPage = () => {
     setUserPic(URL.createObjectURL(file));
   };
 
+  // Modal 확인 클릭 시
+  useEffect(() => {
+    console.log("patch 실행");
+    deleteUser();
+    getUserData(setUserData);
+    setModalOpen(false);
+    setCancelOk(false);
+    console.log(modalOpen);
+  }, [cancelOk]);
+
+  const handleOk = e => {
+    // console.log(e.target.classList[0].slice(6));
+    // const resultUserId = e.target.classList[0].slice(6);
+    setModalOpen(true);
+  };
+
+  const handleDelete = () => {
+    deleteUser();
+  };
+
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
+      {modalOpen && (
+        <DeleteUserModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setCancelOk={setCancelOk}
+        />
+      )}
       <div className="mypage-top">
         <div className="user-info">
           <div className="user-info-wrap">
@@ -247,14 +277,18 @@ const MyPage = () => {
       </div>
       <div className="mypage-bottom">
         <TcButtons>
-          <button type="button" className="withdraw-btn">
+          <button
+            type="button"
+            className="withdraw-btn"
+            onClick={e => handleDelete(e)}
+          >
             회원탈퇴
           </button>
           <div>
             <button type="submit" onClick={handlePatch}>
               수정
             </button>
-            <button type="button" className="cancel-btn" onClick={handleCancel}>
+            <button type="button" className="cancel-btn" onClick={handleOk}>
               취소
             </button>
           </div>
