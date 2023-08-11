@@ -19,26 +19,25 @@ const StudentList = () => {
   const [userPk, setUserPk] = useState(null);
   const navigate = useNavigate();
 
+  // axios.get 보관
   useEffect(() => {
     getStudentData(setStudentListData);
   }, []);
 
   // Modal 확인 클릭 시
   useEffect(() => {
-    console.log("patch 실행");
     patchSignCancel(userPk);
     getStudentData(setStudentListData);
     setModalOpen(false);
     setCancelOk(false);
-    console.log(modalOpen);
   }, [cancelOk]);
 
   const handleSginClick = () => {
     navigate("/teacher/signlist");
   };
 
+  // 승인 취소
   const handleOk = e => {
-    console.log(e.target.classList[0].slice(6));
     const resultUserId = e.target.classList[0].slice(6);
     setModalOpen(true);
     setUserPk(resultUserId);

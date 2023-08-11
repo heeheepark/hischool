@@ -9,7 +9,6 @@ export const getStudentData = async (setStudentListData, setIsLoading) => {
       a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
     );
     setStudentListData(listSortData);
-    // setIsLoading(true);
   } catch (err) {
     console.error(err);
   }
@@ -32,7 +31,6 @@ export const getSignListData = async setStudentListData => {
 // 학생 가입 승인
 export const patchSignAccept = async userId => {
   try {
-    console.log(userId);
     const res = await client.patch(
       `/api/teacher/accept-student?userId=${userId}`,
     );

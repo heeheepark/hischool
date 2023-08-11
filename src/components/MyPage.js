@@ -8,11 +8,7 @@ import {
 import { deleteUser, getUserData, putMyPageData } from "../api/myPageAxios";
 import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
-import { useNavigate } from "react-router";
-import Loading from "./Loading";
-import { useDispatch, useSelector } from "react-redux";
-import { client } from "../api/client";
-import { finishLoading, startLoading } from "../reducers/loadingSlice";
+import { useLocation, useNavigate } from "react-router";
 
 const MyPage = () => {
   const [userData, setUserData] = useState([]);
@@ -32,7 +28,9 @@ const MyPage = () => {
   const [cancelOk, setCancelOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const userRole = location.pathname.split("/")[1];
   // get axios 담는 함수
   useEffect(() => {
     getUserData(setUserData);
@@ -93,7 +91,10 @@ const MyPage = () => {
     formData.append("p", JSON.stringify(userPdata));
 
     putMyPageData(formData);
-    // navigate("/myapge");
+
+    userRole === "teacher"
+      ? navigate("/teacher/home")
+      : navigate("student/home");
   };
 
   // 이미지 미리보기 함수
@@ -109,6 +110,7 @@ const MyPage = () => {
       setModalOpen(false);
       setCancelOk(false);
       deleteUser();
+      navigate("/");
     }
   }, [cancelOk]);
 
@@ -271,9 +273,11 @@ const MyPage = () => {
               setCancelOk={setCancelOk}
             />
           )}
-          <button className="withdraw-btn" onClick={handleDeleteModalOpen}>
-            회원탈퇴
-          </button>
+          {userRole === "student" && (
+            <button className="withdraw-btn" onClick={handleDeleteModalOpen}>
+              회원탈퇴
+            </button>
+          )}
           <div>
             <button type="submit" onClick={handlePatch}>
               수정
