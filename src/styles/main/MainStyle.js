@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import schoolLogo from "../../assets/hamji.png";
+// import schoolLogo from "../../assets/hamji.png";
 
 const MainDiv = styled.div`
   position: relative;
@@ -29,7 +29,6 @@ const Header = styled.div`
       width: 30px;
       height: 30px;
       font-size: 0;
-      /* background: url(${schoolLogo}) no-repeat center; */
       background-position: 3px 1.4px;
       background-size: 24px;
       background-color: #fff;

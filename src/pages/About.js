@@ -1,5 +1,5 @@
 import { AboutDiv } from "../styles/AboutStyle";
-import userImg from "../assets/gangdongwon.jpeg";
+// import userImg from "../assets/gangdongwon.jpeg";
 import canvaImg from "../assets/canva-logo.png";
 import githubImg from "../assets/github-logo.png";
 import notionImg from "../assets/Notion-logo.png";
@@ -60,7 +60,7 @@ const About = () => {
         <div className="front-wrap">
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="박주희 이미지" />
+              {/* <img src={userImg} alt="박주희 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">박주희</span>
@@ -84,7 +84,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="견기성 이미지" />
+              {/* <img src={userImg} alt="견기성 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">견기성</span>
@@ -111,7 +111,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="박호진 이미지" />
+              {/* <img src={userImg} alt="박호진 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">박호진</span>
@@ -138,7 +138,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="신지호 이미지" />
+              {/* <img src={userImg} alt="신지호 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">신지호</span>
@@ -155,7 +155,7 @@ const About = () => {
         <div className="back-wrap">
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="성수천 이미지" />
+              {/* <img src={userImg} alt="성수천 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">성수천</span>
@@ -182,7 +182,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="남규진 이미지" />
+              {/* <img src={userImg} alt="남규진 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">남규진</span>
@@ -209,7 +209,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="노정민 이미지" />
+              {/* <img src={userImg} alt="노정민 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">노정민</span>
@@ -232,7 +232,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              <img src={userImg} alt="석민경 이미지" />
+              {/* <img src={userImg} alt="석민경 이미지" /> */}
               <div>
                 <div>
                   <span className="member-name">석민경</span>

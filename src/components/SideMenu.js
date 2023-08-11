@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import Cookies from "universal-cookie";
 import { getUserInfo } from "../api/userInfoAxios";
 import { useState } from "react";
-import { logo } from "../assets/logo.png";
+// import { logo } from "../assets/logo.png";
 
 const SideMenu = () => {
   const [userImg, setUserImg] = useState(null);

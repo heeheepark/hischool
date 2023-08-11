@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import userImg from "../../assets/gangdongwon.jpeg";
+// import userImg from "../../assets/gangdongwon.jpeg";
 
 const SideMenuWrap = styled.div`
   background: linear-gradient(
@@ -56,7 +56,7 @@ const SideMenuWrap = styled.div`
         /* width: 100%; */
         /* height: 100%; */
         /* font-size: 0; */
-        /* background: url(${userImg}) no-repeat center; */
+
         /* background-size: cover; */
         /* background-position: 0 0; */
       }
