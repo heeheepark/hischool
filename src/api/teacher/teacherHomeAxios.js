@@ -1,4 +1,3 @@
-import { async } from "q";
 import { client } from "../client";
 
 // 전교 학생 인원

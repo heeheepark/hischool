@@ -22,6 +22,7 @@ export const getCurrentSchoolRecord = async setCurrentSchoolRecord => {
   }
 };
 
+// 내신 그래프
 export const getAllSchoolRecord = async (
   setDefaultSchoolRecord,
   setAllSchoolRecord,

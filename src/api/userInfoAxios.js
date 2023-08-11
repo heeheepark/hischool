@@ -3,14 +3,10 @@ import { client } from "./client";
 export const getUserInfo = async (setUserImg, setUserName, setUserEmail) => {
   try {
     const res = await client.get(`/api/side`);
-    // const resImg = await client.get(`/api/side`);
     const result = res.data;
     const userName = result.nm;
     const userEmail = result.email;
-    // console.log(resImg.data);
     const userImg = result.pic;
-    console.log(userImg);
-    // console.log(result.email);
     if (setUserImg) {
       setUserImg(userImg);
     }
@@ -20,7 +16,6 @@ export const getUserInfo = async (setUserImg, setUserName, setUserEmail) => {
     if (setUserEmail) {
       setUserEmail(userEmail);
     }
-    // setUserImg(resImg.data);
   } catch (err) {
     console.log(err);
   }

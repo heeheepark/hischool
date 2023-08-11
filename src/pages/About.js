@@ -104,7 +104,7 @@ const About = () => {
                 </div>
                 <span className="roles">
                   스토리보드 / 로그인 / 회원가입 / <br />
-                  마이페이지 / 학생 관리
+                  마이페이지 / 학생 관리/ 가입 승인리스트
                 </span>
               </div>
             </div>

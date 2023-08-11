@@ -22,7 +22,7 @@ const ClassMockRecord = () => {
     "#e6c9e1",
     "#adc8d0",
   ];
-  // console.log(mockData);
+
   const koreanDataList = mockData?.koList.map(item => {
     return {
       id: `${item.rating}등급`,

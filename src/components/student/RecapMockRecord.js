@@ -3,11 +3,11 @@ import { RecordDiv } from "../../styles/student/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
 import {
   getAllMockRecord,
-  getAllSchoolRecord,
   getRecentMockRecord,
 } from "../../api/student/studentHomeAxios";
 
 const RecapSchoolRecord = () => {
+  const colorData = ["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"];
   const [allMockRecordData, setAllMockRecordData] = useState(null);
   const [recentMockRecordData, setRecentMockRecordData] = useState(null);
   const [recentTestTitle, setRecentTestTitle] = useState(null);
@@ -23,12 +23,6 @@ const RecapSchoolRecord = () => {
 
   // 모의고사 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
-  const chartColor = [
-    "hsl(231, 100%, 59%)",
-    "hsl(45, 70%, 50%)",
-    "hsl(342, 70%, 50%)",
-    "hsl(213, 70%, 50%)",
-  ];
   const ratingList = allMockRecordData?.map(item => parseInt(item.rating));
   const highGrade = ratingList?.reduce((a, b) => {
     return Math.max(a, b);
@@ -45,7 +39,7 @@ const RecapSchoolRecord = () => {
             y: parseInt(item.rating),
           };
         });
-      return { id: subject[index], color: chartColor[index], data };
+      return { id: subject[index], data };
     });
 
   return (
@@ -65,7 +59,7 @@ const RecapSchoolRecord = () => {
             }}
             axisLeft={{ tickValues: gradeArray }}
             gridYValues={gradeArray}
-            colors={["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"]}
+            colors={colorData}
             lineWidth={3}
             pointSize={5}
             pointColor={{ theme: "background" }}

@@ -37,16 +37,6 @@ const SchoolRecordTable = () => {
     );
     getStudentCount(setStudentCount);
     getAllStudentCount(setAllStudentCount);
-  }, []);
-
-  useEffect(() => {
-    getAllSchoolRecord(
-      setDefaultSchoolRecord,
-      setAllSchoolRecord,
-      year,
-      semester,
-      testType,
-    );
   }, [year, semester, testType]);
 
   const handleYearList = e => {
