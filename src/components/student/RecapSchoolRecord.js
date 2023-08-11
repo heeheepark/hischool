@@ -95,8 +95,8 @@ const RecapSchoolRecord = () => {
           <span>주요 과목 등급</span>
         </div>
         <div className="subject-grade">
-          {recentSchoolRecordData?.map(item => (
-            <p key={item.nm}>
+          {recentSchoolRecordData?.map((item, index) => (
+            <p key={`key${index}`}>
               <span className="subject-title korean">{item.nm}</span>
               <span className="grade-num korean">{item.rating}</span>
               <span>등급</span>

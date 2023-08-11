@@ -37,9 +37,9 @@ export const getSchoolInfo = async (setSchoolName, setGrade, setClassNum) => {
   try {
     const res = await client.get(`/api/header/school-info`);
     const result = res.data;
-    const userSchool = result[0].nm;
-    const userGrade = result[0].grade;
-    const userClass = result[0].van;
+    const userSchool = result.nm;
+    const userGrade = result.grade;
+    const userClass = result.van;
     setSchoolName(userSchool);
     setGrade(userGrade);
     setClassNum(userClass);

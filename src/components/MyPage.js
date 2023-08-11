@@ -5,11 +5,7 @@ import {
   TcMyPageUserInfo,
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
-import {
-  deleteUser,
-  getUserData,
-  putMyPageData,
-} from "../api/myPageAxios";
+import { deleteUser, getUserData, putMyPageData } from "../api/myPageAxios";
 import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useNavigate } from "react-router";

@@ -92,8 +92,8 @@ const RecapSchoolRecord = () => {
           <span>주요 과목 등급</span>
         </div>
         <div className="subject-grade">
-          {recentMockRecordData?.map(item => (
-            <p key={item.nm}>
+          {recentMockRecordData?.map((item, index) => (
+            <p key={`0${index}`}>
               <span className="subject-title">{item.nm}</span>
               <span className="grade-num">{item.rating}</span>
               <span>등급</span>
