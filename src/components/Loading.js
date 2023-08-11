@@ -1,5 +1,6 @@
 import { FadeLoader } from "react-spinners";
 import { LoadingWrap } from "../styles/LoadingStyle";
+import { useSelector } from "react-redux";
 
 const Loading = () => {
   return (

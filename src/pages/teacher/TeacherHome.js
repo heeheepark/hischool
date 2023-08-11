@@ -15,12 +15,11 @@ import {
   getUnSignCount,
 } from "../../api/teacher/teacherHomeAxios";
 import { getSchedule } from "../../api/teacher/teacherHomeAxios";
-import { Calendar } from "@fullcalendar/core";
 
 const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
-  const [scheduleData, setScheduleData] = useState(null);
+  const [scheduleData, setScheduleData] = useState([]);
   const calRef = useRef(null);
 
   // 현재 기준 캘린더 날짜
@@ -38,9 +37,6 @@ const TeacherHome = () => {
   const [startDate, setStartDate] = useState(todayStartDate);
   const [endDate, setEndDate] = useState(todayEndDate);
 
-  // const todayStartDate = now.getFullYear();
-  // console.log(todayStartDate);
-
   // 캘린더 월 변경
   const handleDatesSet = () => {
     if (calRef.current) {
@@ -48,7 +44,6 @@ const TeacherHome = () => {
       const currentYear = calApi.getDate().getYear() + 1900;
       const currentMonth = (calApi.getDate().getMonth() + 1).toString();
       const endDateDay = new Date(currentYear, currentMonth, 0).getDate();
-
       const startDate =
         currentYear +
         (currentMonth.length <= 1 ? "0" + currentMonth : currentMonth) +
@@ -117,7 +112,7 @@ const TeacherHome = () => {
                 initialView="dayGridMonth"
                 locale="ko"
                 dayCellContent={day => day.dayNumberText.replace("일", "")}
-                events={scheduleData ? scheduleData : null}
+                events={scheduleData}
                 eventColor="transparent"
                 eventTextColor="#555"
                 dayMaxEvents={true}
@@ -131,7 +126,6 @@ const TeacherHome = () => {
                   center: "title",
                   end: "next today",
                 }}
-                event
               />
             </FullCalendarDiv>
           </div>

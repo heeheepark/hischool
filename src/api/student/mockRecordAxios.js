@@ -36,7 +36,6 @@ export const getAllMockRecord = async (
     } else if (year && !month) {
       axiosUrl = `/api/student/mock-table?year=${year}`;
     } else if (!year && month) {
-      console.log("시도");
       axiosUrl = `/api/student/mock-table?mon=${month}`;
     } else {
       axiosUrl = "/api/student/mock-table";
@@ -46,7 +45,6 @@ export const getAllMockRecord = async (
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    console.log(result);
     setAllMockRecord(result);
   } catch (err) {
     console.log(err);

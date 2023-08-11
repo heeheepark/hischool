@@ -148,7 +148,6 @@ const SchoolRecordTableDiv = styled.div`
     position: sticky;
     top: 0;
     width: 100%;
-    /* height: 100%; */
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr;

@@ -40,7 +40,6 @@ export const ModalCloseBtn = styled.button`
 `;
 
 export const StudentRecordModalDiv = styled.div`
-  /* display: none; */
   position: absolute;
   width: 100%;
   height: 100%;
