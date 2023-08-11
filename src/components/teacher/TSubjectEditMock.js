@@ -5,7 +5,6 @@ const TSubJectEditMock = ({
   id,
   subjectData,
   studentsData,
-  studentDataList,
   updateLastSavedData,
 }) => {
   const initialStudentData = {
@@ -18,26 +17,18 @@ const TSubJectEditMock = ({
   };
   const [dropMonth, setDropMonth] = useState("");
   const [studentData, setStudentData] = useState(initialStudentData);
-  const [dailData, setDailData] = useState(initialStudentData);
-  console.log("값내놩ㅇㅇ:", studentData);
-  console.log("값내놩ㅇㅇ2:", studentsData);
-  console.log("값내놩ㅇㅇ3:", studentDataList);
-  console.log("값내놩ㅇㅇ4:", dailData);
-
-  const selectDate = subjectData.map(item => {
-    console.log("값내놔", item.data[0]);
-  });
-  console.log("selectDate", selectDate);
 
   useEffect(() => {
     // 수정 폼에 해당 학생 데이터를 불러옵니다.
     setStudentData(studentsData, dropMonth);
-    // 수정 폼에 기본 정보 데이터를 불러옵니다.
-    setDailData(dropMonth);
   }, [studentsData, dropMonth]);
+
+  // const [세부과목목록, 세부과목목록업데이트] = useState(배열)
+  const [detailSubject, setDetailSubject] = useState([]);
   const handleInputChange = e => {
     const { name, value } = e.target;
     // 숫자만 필터링하여 숫자 이외의 문자는 제거
+    // 카테고리 ID  : studentData 의 categoryId
     const filteredValue = value;
     // score와 grade 입력 폼의 최댓값 설정
     let updatedValue = filteredValue;
@@ -45,6 +36,12 @@ const TSubJectEditMock = ({
       updatedValue = Math.min(parseInt(filteredValue, 10), 9);
     } else if (name === "percent") {
       updatedValue = Math.min(parseInt(filteredValue, 10), 100);
+    } else if (name === "categoryId") {
+      // 과목 계열 카테고리가 변경된 경우에 대한 처리
+      const obj = subjectData.filter(
+        item => item.mainsubjectId === parseInt(filteredValue),
+      );
+      setDetailSubject(obj[0].data);
     }
 
     setStudentData(prevData => ({
@@ -52,10 +49,11 @@ const TSubJectEditMock = ({
       [name]: updatedValue,
     }));
 
+    // ["categoryId"] : 10
+
     const updatedData = {
       ...studentData,
       [name]: updatedValue,
-      mon: dropMonth,
     };
     // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
     updateLastSavedData(id, updatedData);
@@ -67,7 +65,8 @@ const TSubJectEditMock = ({
   // studentData.categoryId와 동일한 mainsubject를 저장할 배열
   const matchingMainsubjects = [];
   const matchMainSid = [];
-  let matchSubject = [];
+  const subjectIds = [];
+  const subsubjects = [];
 
   // subjectData 배열을 반복하여 처리
   subjectData.forEach(item => {
@@ -78,33 +77,35 @@ const TSubJectEditMock = ({
   });
   subjectData.forEach(item => {
     if (item.mainsubjectId === studentData.subjectId) {
-      matchSubject = item.data[0]?.subsubject;
+      subjectIds.push(studentData.subjectId); // Assuming you want to push the main subject's ID
     } else {
       const subsubjectMatch = item.data.find(
         subitem => subitem.subjectid === studentData.subjectId,
       );
       if (subsubjectMatch) {
-        matchSubject = subsubjectMatch.subsubject;
+        subjectIds.push(studentData.subjectId); // Change this line if you want to push subsubjectMatch.subjectid
       }
     }
   });
-  if (matchSubject) {
-    console.log("Matching subsubject:", matchSubject);
-  } else {
-    console.log("No matching subsubject found.");
-  }
-
-  // matchingMainsubjects 배열에 저장된 mainsubject 출력 또는 사용
-  console.log("Matching mainsubjects:", matchingMainsubjects);
-  console.log("dddddddddd", studentData, subjectData);
-  console.log("dddddd", studentData?.categoryId || "");
-  console.log("dddddd", dailData?.categoryId || "");
+  console.log(studentData, "studentData");
+  subjectData.forEach(item => {
+    if (item.mainsubjectId === studentData.subjectId) {
+      subsubjects.push(item.data[0]?.subsubject);
+    } else {
+      const subsubjectMatch = item.data.find(
+        subitem => subitem.subjectid === studentData.subjectId,
+      );
+      if (subsubjectMatch) {
+        subsubjects.push(subsubjectMatch.subsubject);
+      }
+    }
+  });
   return (
     <>
       <div>
         <IMREdit>
           <select value={dropMonth} onChange={handleMonth}>
-            <option value={studentData?.mon}>{studentData?.mon}월</option>
+            <option value={studentData?.mon || ""}>{studentData?.mon}월</option>
             <option value="3">3월</option>
             <option value="6">6월</option>
             <option value="9">9월</option>
@@ -114,11 +115,14 @@ const TSubJectEditMock = ({
             value={studentData?.categoryId || ""}
             onChange={handleInputChange}
           >
-            {matchingMainsubjects.map((mainSubject, index) => (
-              <option key={index} value={matchMainSid}>
-                {mainSubject}
-              </option>
-            ))}
+            {matchingMainsubjects.map((mainSubject, index) => {
+              console.log("matchingMainsubjects ",mainSubject);
+              return (
+                <option key={index} value={matchMainSid}>
+                  {mainSubject}
+                </option>
+              );
+            })}
             {subjectData.map(mainSubject => (
               <option
                 key={mainSubject.mainsubject}
@@ -133,18 +137,12 @@ const TSubJectEditMock = ({
             value={studentData?.subjectid || ""}
             onChange={handleInputChange}
           >
-            <option value={studentData?.subjectid}>{matchSubject}</option>
-            {studentData?.subjectid &&
-              subjectData
-                .find(
-                  mainSubject =>
-                    mainSubject.mainsubject === studentData.subjectid,
-                )
-                .data.map((subSubject, index) => (
-                  <option key={index} value={subSubject.subjectid}>
-                    {subSubject.subsubject}
-                  </option>
-                ))}
+            <option value={subjectIds}>{subsubjects}</option>
+            {detailSubject.map((subSubject, index) => (
+              <option key={index} value={subSubject.subjectid}>
+                {subSubject.subsubject}
+              </option>
+            ))}
           </select>
           <input
             type="number"

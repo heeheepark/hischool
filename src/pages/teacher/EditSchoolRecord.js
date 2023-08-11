@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import {
   ISRButton,
   ISRHeader,
-  ISRTitle,
+  ISTitle,
   InputSchoolRecordWrap,
 } from "../../styles/teacher/InputSchoolRecordStyle";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getSchoolData,
+  getSchoolEditData,
   getSchoolMainSubData,
   getSchoolclassData,
-  postSchoolData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
 import TSubJectEditSchool from "../../components/teacher/TSubjectEditSchool";
 
-const InputSchoolRecord = () => {
+const EditSchoolRecord = () => {
   const { state } = useLocation();
-  const [dropSemester, setDropSemester] = useState("");
-  const [dropTest, setDropTest] = useState("");
   const [studentsData, setStudentsData] = useState([]);
   const [lastSchoolSavedData, setLastSchoolSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
@@ -26,10 +24,31 @@ const InputSchoolRecord = () => {
   const [schoolClassData, setSchoolClassData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const interimData = [{}];
+  console.log("state",state);
+
+  let total = 0;
+
+  const getMockWhile = async () => {
+    // 과목 정보를 담아줄 임시 배열
+    let interimData = [];
+    // state 의 인덱스 [1] 에 과목 PK 있습니다.
+    // state 의 인덱스 [1] 에 담긴 과목은 최소 1종목 이상입니다.
+    console.log("담겨진 과목배열 : ", state[1]);
+    // 과목 배열의 0번부터 처리합니다.
+    for (let i = 0; i < total; i++) {
+      const result = await getSchoolEditData(state[1][i]);
+      // console.log("getMockEditData 과목 호출 결과 :", result);
+      interimData.push(result[0]);
+    }
+    console.log("interimData", interimData);
     setStudentsData(interimData);
     setLastSchoolSavedData(interimData);
+  };
+
+  useEffect(() => {
+    // 화면에서 그려질때 배열의 총 개수를 파악함.
+    total = state[1].length;
+    getMockWhile();
   }, []);
 
   // 새로운 데이터를 전달하는 함수
@@ -42,15 +61,6 @@ const InputSchoolRecord = () => {
     });
 
     setLastSchoolSavedData(updateData);
-  };
-  // 학기 항목
-  const handleSemester = event => {
-    setDropSemester(event.target.value);
-  };
-
-  // 고사 항목
-  const handleDropTest = event => {
-    setDropTest(event.target.value);
   };
 
   // "수정" > 서버전송
@@ -66,7 +76,7 @@ const InputSchoolRecord = () => {
         classrank: parseInt(item.classrank) || 0,
         wholerank: parseInt(item.wholerank) || 0,
       }));
-      postSchoolData(SdataToSend);
+      console.log(SdataToSend);
     }
   };
 
@@ -125,29 +135,21 @@ const InputSchoolRecord = () => {
         {matchingStudent && (
           <h3>2023 내신 고사 성적 수정( {matchingStudent.nm} )</h3>
         )}
-        <select value={dropSemester} onChange={handleSemester}>
-          <option value="">학기 선택</option>
-          <option value="1학기">1학기</option>
-          <option value="2학기">2학기</option>
-        </select>
-        <select value={dropTest} onChange={handleDropTest}>
-          <option value="">시험 구분</option>
-          <option value="1">중간고사</option>
-          <option value="2">기말고사</option>
-        </select>
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>수정</button>
         <button onClick={() => navigate(-1)}>취소</button>
       </ISRButton>
-      <ISRTitle>
+      <ISTitle>
+        <p>학기</p>
+        <p>고사</p>
         <p>과목 계열</p>
         <p>세부 과목</p>
         <strong>점수</strong>
         <strong>등급</strong>
         <strong>반 석차</strong>
         <strong>전교 석차</strong>
-      </ISRTitle>
+      </ISTitle>
       <div>
         {studentsData.map((item, index) => (
           <TSubJectEditSchool
@@ -156,10 +158,7 @@ const InputSchoolRecord = () => {
             schoolData={schoolData}
             schoolClassData={schoolClassData}
             subjectData={subjectData}
-            dropSemester={dropSemester}
-            dropTest={dropTest}
             studentsData={studentsData[index]}
-            setStudentsData={setStudentsData}
             updateLastSavedData={updateLastSavedData}
           />
         ))}
@@ -168,4 +167,4 @@ const InputSchoolRecord = () => {
   );
 };
 
-export default InputSchoolRecord;
+export default EditSchoolRecord;

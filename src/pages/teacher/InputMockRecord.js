@@ -57,6 +57,7 @@ const InputMockRecord = () => {
         percent: parseInt(item.percent) || 0,
       }));
       postMockData(dataToSend);
+      navigate(-1)
     }
   };
   // 항목 추가 버튼

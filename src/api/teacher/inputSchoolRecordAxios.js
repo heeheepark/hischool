@@ -32,6 +32,17 @@ export const getSchoolSubData = async () => {
     return [];
   }
 };
+export const getSchoolEditData = async resultId => {
+  try {
+    const res = await client.get(
+      `/api/teacher/subject/aca-result?resultId=${resultId}`,
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
 
 // 학교 전체 학생 인원 데이터
 export const getSchoolData = async () => {

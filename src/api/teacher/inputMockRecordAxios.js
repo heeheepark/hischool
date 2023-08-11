@@ -3,11 +3,19 @@ import { client } from "../client";
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
   try {
+    const response = await client.post("/api/teacher/subject/mock-ins", {
+      list: dataToSend,
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error("데이터 전송 오류:", error);
+  }
+};
+export const patchMockData = async dataToSend => {
+  try {
     console.log(dataToSend);
-    // const response = await client.post("/api/teacher/subject/mock-ins", {
-    //   list: dataToSend,
-    // });
-    // console.log(response.data);
+    const response = await client.patch("/api/teacher/update-mock", dataToSend);
+    console.log(response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
