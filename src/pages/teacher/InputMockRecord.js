@@ -19,17 +19,36 @@ import { useLocation, useNavigate } from "react-router";
 
 const InputMockRecord = () => {
   const { state } = useLocation();
+  // console.log(state);
   const [dropMonth, setDropMonth] = useState("");
-  const [studentsData, setStudentsData] = useState([]);
+  const initialRecord = {
+    rating: 0,
+    standardscore: 0,
+    percent: "0",
+    mon: dropMonth,
+    subSubject: null,
+    subject: null,
+  };
+  const [studentsData, setStudentsData] = useState([initialRecord]);
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const interimData = [{}];
-    setStudentsData(interimData);
-    setLastSavedData(interimData);
-  }, []);
+
+  // 모의고사 과목 리스트
+  const [initSubCate, setInitSubCate] = useState(null);
+  const [selectedSubCate, setSelectedSubCate] = useState(null);
+  const [initDetailSub, setInitDetailSub] = useState(null);
+
+  const [schoolRecordData, setSchoolRecordData] = useState(null);
+
+  // console.log(schoolRecordData);
+  // console.log(initDetailSub);
+  // console.log(studentsData);
+  // console.log(lastSavedData);
+  // console.log(dropMonth);
+  // console.log(studentNameData);
+  // console.log(state);
 
   // 라스트 데이터 전달
   const updateLastSavedData = (_id, newData) => {
@@ -41,38 +60,55 @@ const InputMockRecord = () => {
     });
     setLastSavedData(updateData);
   };
+
   // 월 선택
   const handleMonth = event => {
     setDropMonth(event.target.value);
   };
+
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
-      const dataToSend = lastSavedData.map(item => ({
-        userid: state, //임시유저값
-        subjectid: parseInt(item.subjectid) || 0,
-        mon: parseInt(item.mon) || 0,
-        standardscore: parseInt(item.standardscore) || 0,
-        rating: parseInt(item.rating) || 0,
-        percent: parseInt(item.percent) || 0,
-      }));
+      const dataToSend = lastSavedData.map(item => {
+        // console.log(item.mon);
+        // console.log(parseInt(item.mon));
+        return {
+          userid: state, //임시유저값
+          subjectid: parseInt(item.subjectid) || 0,
+          mon: parseInt(item.mon) || 0,
+          standardscore: parseInt(item.standardscore) || 0,
+          rating: parseInt(item.rating) || 0,
+          percent: parseInt(item.percent) || 0,
+        };
+      });
       postMockData(dataToSend);
-      navigate(-1)
+      navigate(-1);
     }
   };
+
   // 항목 추가 버튼
   const handleAddButtonClick = () => {
-    const newStudent = {
-      rating: 0,
-      standardscore: 0,
-      percent: "0",
-      mon: dropMonth,
-      subSubject: null,
-      subject: null,
-    };
-    setStudentsData(data => [...data, newStudent]);
-    setLastSavedData(data => [...data, newStudent]);
+    // const newStudent = {
+    //   rating: 0,
+    //   standardscore: 0,
+    //   percent: "0",
+    //   mon: dropMonth,
+    //   subSubject: null,
+    //   subject: null,
+    // };
+    setStudentsData([...studentsData, initialRecord]);
+    // setLastSavedData([...lastSavedData, newStudent]);
   };
+
+  useEffect(() => {
+    getMockMainSubData(setInitSubCate);
+    getMockSubData(selectedSubCate, setInitDetailSub);
+    getStudentsNameData(state, setStudentNameData);
+    // const interimData = [{}];
+    // setStudentsData(interimData);
+    // setLastSavedData(interimData);
+  }, [selectedSubCate]);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -95,38 +131,35 @@ const InputMockRecord = () => {
         setSubjectData(newSubjectData);
       } catch (err) {
         console.log(err);
-        setSubjectData([]);
+        // setSubjectData([]);
       }
     }
 
     fetchData();
   }, []);
-  // 학생 이름
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getStudentsNameData();
-        setStudentNameData(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-  const matchingStudent = studentNameData.find(
-    student => student.userid === state,
-  );
+
+  // // 학생 이름
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await getStudentsNameData();
+  //       setStudentNameData(data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
   return (
     <InputMockRecordWrap>
       <ISRHeader>
-        {matchingStudent && (
-          <h3>2023 모의 고사 성적 입력( {matchingStudent.nm} )</h3>
-        )}
+        <h3>{`2023 모의 고사 성적 입력( ${studentNameData.nm} )`}</h3>
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">월 선택</option>
-          <option value="3월">3월</option>
-          <option value="6월">6월</option>
-          <option value="9월">9월</option>
+          <option value="3">3월</option>
+          <option value="6">6월 </option>
+          <option value="9">9월</option>
         </select>
       </ISRHeader>
       <ISRButton>
@@ -141,17 +174,31 @@ const InputMockRecord = () => {
         <strong>백분위</strong>
       </IMRTitle>
       <div>
-        {studentsData.map((item, index) => (
-          <TSubJectMock
-            key={index}
-            id={index}
-            subjectData={subjectData}
-            dropMonth={dropMonth}
-            studentsData={studentsData[index]}
-            setStudentsData={setStudentsData}
-            updateLastSavedData={updateLastSavedData}
-          />
-        ))}
+        {/* <TSubJectMock
+          subjectData={subjectData}
+          dropMonth={dropMonth}
+          studentsData={studentsData}
+          setStudentsData={setStudentsData}
+          updateLastSavedData={updateLastSavedData}
+        /> */}
+        {studentsData.map((item, index) => {
+          // console.log(item);
+          return (
+            <TSubJectMock
+              initSubCate={initSubCate}
+              setSelectedSubCate={setSelectedSubCate}
+              initDetailSub={initDetailSub}
+              setSchoolRecordData={setSchoolRecordData}
+              key={index}
+              id={index}
+              subjectData={subjectData}
+              dropMonth={dropMonth}
+              studentsData={item}
+              setStudentsData={setStudentsData}
+              updateLastSavedData={updateLastSavedData}
+            />
+          );
+        })}
       </div>
       <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>

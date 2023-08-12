@@ -21,7 +21,6 @@ const MockRecord = () => {
   const [currentMockRecord, setCurrentMockRecord] = useState(null);
   const [allMockRecordData, setAllMockRecordData] = useState(null);
 
-  console.log(currentMockRecord);
   useEffect(() => {
     getUserInfo(null, setUserName, null);
     getHighestMockRecord(setHighestMockRecord);

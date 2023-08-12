@@ -29,11 +29,10 @@ const InputSchoolRecord = () => {
   const [schoolClassData, setSchoolClassData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const interimData = [{}];
-    setStudentsData(interimData);
-    setLastSchoolSavedData(interimData);
-  }, []);
+
+  const matchingStudent = studentNameData.find(
+    student => student.userid === state,
+  );
 
   // 새로운 데이터를 전달하는 함수
   const updateLastSavedData = (_id, newData) => {
@@ -43,9 +42,9 @@ const InputSchoolRecord = () => {
       }
       return item;
     });
-
     setLastSchoolSavedData(updateData);
   };
+
   // 학기 항목
   const handleSemester = event => {
     setDropSemester(event.target.value);
@@ -70,9 +69,10 @@ const InputSchoolRecord = () => {
         wholerank: parseInt(item.wholerank) || 0,
       }));
       postSchoolData(SdataToSend);
-      navigate(-1)
+      navigate(-1);
     }
   };
+
   // 항목 추가 버튼
   const handleAddButtonClick = () => {
     const newStudent = {
@@ -89,6 +89,12 @@ const InputSchoolRecord = () => {
     setLastSchoolSavedData(data => [...data, newStudent]);
   };
 
+  useEffect(() => {
+    const interimData = [{}];
+    setStudentsData(interimData);
+    setLastSchoolSavedData(interimData);
+  }, []);
+
   // 과목 정보
   useEffect(() => {
     async function fetchData() {
@@ -101,9 +107,9 @@ const InputSchoolRecord = () => {
         setSubjectData([]);
       }
     }
-
     fetchData();
   }, []);
+
   // 학생 숫자 데이터
   useEffect(() => {
     async function personnelData() {
@@ -120,9 +126,9 @@ const InputSchoolRecord = () => {
         setSchoolClassData([]);
       }
     }
-
     personnelData();
   }, []);
+
   // 학생 이름
   useEffect(() => {
     const fetchData = async () => {
@@ -135,9 +141,7 @@ const InputSchoolRecord = () => {
     };
     fetchData();
   }, []);
-  const matchingStudent = studentNameData.find(
-    student => student.userid === state,
-  );
+
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>

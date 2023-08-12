@@ -103,6 +103,7 @@ const EditMockRecord = () => {
 
     fetchData();
   }, []);
+  
   // 학생 이름
   useEffect(() => {
     const fetchData = async () => {
@@ -115,6 +116,7 @@ const EditMockRecord = () => {
     };
     fetchData();
   }, []);
+
   const matchingStudent = studentNameData.find(
     student => student.userid === state[0],
   );

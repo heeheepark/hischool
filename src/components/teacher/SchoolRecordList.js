@@ -10,7 +10,6 @@ const SchoolRecordList = ({
   setSchoolResultIdList,
   schoolResultIdList,
 }) => {
-  console.log(studentSchoolRecordList);
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
   let resultIdArray = schoolResultIdList;
