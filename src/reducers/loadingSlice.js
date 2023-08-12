@@ -8,10 +8,10 @@ const loadingSlice = createSlice({
   name: "loadingSlice",
   initialState,
   reducers: {
-    startLoading: (state, action) => {
+    startLoading: state => {
       state.loading = true;
     },
-    finishLoading: (state, action) => {
+    finishLoading: state => {
       state.loading = false;
     },
   },

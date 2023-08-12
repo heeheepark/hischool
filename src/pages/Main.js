@@ -20,12 +20,12 @@ const Main = () => {
   useEffect(() => {
     client.interceptors.request.use(function (config) {
       // 로딩 호출
-      dispatch(startLoading());
+      dispatch(startLoading({}));
       return config;
     });
     client.interceptors.response.use(config => {
       // 완료 시 로딩창 종료
-      dispatch(finishLoading());
+      dispatch(finishLoading({}));
       return config;
     });
     getSchoolInfo(setSchoolName, setGrade, setClassNum);
