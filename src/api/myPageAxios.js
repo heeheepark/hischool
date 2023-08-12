@@ -12,11 +12,10 @@ export const getUserData = async setUserData => {
 
 export const putMyPageData = async formData => {
   try {
-    console.log(formData);
-
     const res = await client.put(`/api/mypage/user-info-update`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    console.log(res);
     const result = res.data;
     console.log(result);
   } catch (err) {

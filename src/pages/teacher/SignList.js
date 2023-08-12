@@ -60,10 +60,10 @@ const SignList = () => {
       resultIdArray.forEach(item => console.log(item));
       resultIdArray.forEach(item => patchSignAccept(item));
     }
+    // getSignListData(setStudentListData);
     setModalOpen(false);
-    getSignListData(setStudentListData);
-    setStudentListData([]);
     setAcceptOk(false);
+    setStudentListData([]);
   }, [acceptOk]);
 
   const handleOk = () => {
@@ -99,11 +99,6 @@ const SignList = () => {
         <ul>
           <li className="day-list">
             <ul>
-              <li className="time-table-th">순번</li>
-              <li className="time-table-th">이름</li>
-              <li className="time-table-th">생년월일</li>
-              <li className="time-table-th">연락처</li>
-              <li className="time-table-th">이메일</li>
               <li className="time-table-th">
                 <input
                   type="checkbox"
@@ -111,16 +106,16 @@ const SignList = () => {
                   className="all-checkbox-btn"
                 />
               </li>
+              <li className="time-table-th">번호</li>
+              <li className="time-table-th">이름</li>
+              <li className="time-table-th">생년월일</li>
+              <li className="time-table-th">연락처</li>
+              <li className="time-table-th">이메일</li>
             </ul>
           </li>
           {studentListData.map((item, index) => (
             <li className="class" key={index}>
               <ul>
-                <li>{index + 1}</li>
-                <li>{item.snm}</li>
-                <li>{item.birth}</li>
-                <li>{item.phone}</li>
-                <li>{item.email}</li>
                 <li>
                   <input
                     type="checkbox"
@@ -129,6 +124,11 @@ const SignList = () => {
                     onClick={e => handleCheckBox(e)}
                   />
                 </li>
+                <li>{index + 1}</li>
+                <li>{item.snm}</li>
+                <li>{item.birth}</li>
+                <li>{item.phone}</li>
+                <li>{item.email}</li>
               </ul>
             </li>
           ))}
