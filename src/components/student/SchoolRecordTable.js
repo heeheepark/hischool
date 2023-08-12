@@ -124,23 +124,27 @@ const SchoolRecordTable = () => {
             ))}
           </ul>
           <ul className="record-data">
-            {allSchoolRecord?.map((item, index) => (
-              <li className="data-table" key={index}>
-                <ul>
-                  <li>{item.year}</li>
-                  <li>{item.semester}</li>
-                  <li>{item.midFinal === 1 ? "중간" : "기말"}</li>
-                  <li>{item.cateName}</li>
-                  <li>{item.nm}</li>
-                  <li>{item.score}</li>
-                  <li>{item.rating}</li>
-                  <li>{`${item.classRank}/${
-                    studentCount ? studentCount : null
-                  }`}</li>
-                  <li>{`${item.wholeRank}/${allStudentCount}`}</li>
-                </ul>
-              </li>
-            ))}
+            {allSchoolRecord ? (
+              allSchoolRecord.map((item, index) => (
+                <li className="data-table" key={index}>
+                  <ul>
+                    <li>{item.year}</li>
+                    <li>{item.semester}</li>
+                    <li>{item.midFinal === 1 ? "중간" : "기말"}</li>
+                    <li>{item.cateName}</li>
+                    <li>{item.nm}</li>
+                    <li>{item.score}</li>
+                    <li>{item.rating}</li>
+                    <li>{`${item.classRank}/${
+                      studentCount ? studentCount : null
+                    }`}</li>
+                    <li>{`${item.wholeRank}/${allStudentCount}`}</li>
+                  </ul>
+                </li>
+              ))
+            ) : (
+              <p className="err-message">내신 성적 데이터가 없습니다.</p>
+            )}
           </ul>
         </SchoolRecordTableDiv>
       </div>

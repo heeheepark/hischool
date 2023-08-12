@@ -48,6 +48,12 @@ const MockRecordTableDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(13, 1fr);
+    .err-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     > li {
       border-bottom: 1px solid #ccc;
       > ul {

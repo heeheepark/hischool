@@ -5,7 +5,9 @@ const getAllSchoolRecord = async setAllSchoolRecordData => {
   try {
     const res = await client.get(`/api/student/aca-graph`);
     const result = res.data;
-    setAllSchoolRecordData(result);
+    if (result.length !== 0) {
+      setAllSchoolRecordData(result);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -19,8 +21,10 @@ const getRecentSchoolRecord = async (
   try {
     const res = await client.get(`/api/student/aca-latest`);
     const result = res.data;
-    setRecentSchoolRecordData(result.list);
-    setRecentTestTitle(result.date.split("-"));
+    if (result.length !== 0) {
+      setRecentSchoolRecordData(result.list);
+      setRecentTestTitle(result.date.split("-"));
+    }
   } catch (err) {
     console.log(err);
   }
@@ -31,7 +35,9 @@ const getAllMockRecord = async setAllMockRecordData => {
   try {
     const res = await client.get(`/api/student/mock-graph`);
     const result = res.data;
-    setAllMockRecordData(result);
+    if (result.length !== 0) {
+      setAllMockRecordData(result);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -45,8 +51,10 @@ const getRecentMockRecord = async (
   try {
     const res = await client.get(`/api/student/mock-currentrating`);
     const result = res.data;
-    setRecentMockRecordData(result.list);
-    setRecentTestTitle(result.date.split("-"));
+    if (result.length !== 0) {
+      setRecentMockRecordData(result.list);
+      setRecentTestTitle(result.date.split("-"));
+    }
   } catch (err) {
     console.log(err);
   }

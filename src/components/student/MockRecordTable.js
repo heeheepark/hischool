@@ -5,6 +5,15 @@ import { getAllMockRecord } from "../../api/student/mockRecordAxios";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 
 const MockRecordTable = () => {
+  const cateList = [
+    "연도",
+    "월",
+    "과목 계열",
+    "과목명",
+    "표준점수",
+    "등급",
+    "백분위",
+  ];
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);
   const [allMockRecord, setAllMockRecord] = useState(null);
   const [year, setYear] = useState(null);
@@ -68,28 +77,30 @@ const MockRecordTable = () => {
       <div className="record-table">
         <MockRecordTableDiv>
           <ul className="category">
-            <li className="category-th">연도</li>
-            <li className="category-th">월</li>
-            <li className="category-th">과목 계열</li>
-            <li className="category-th">과목명</li>
-            <li className="category-th">표준점수</li>
-            <li className="category-th">등급</li>
-            <li className="category-th">백분위</li>
-          </ul>
-          <ul className="record-data">
-            {allMockRecord?.map((item, index) => (
-              <li className="data-table" key={index}>
-                <ul>
-                  <li>{item.year}</li>
-                  <li>{`${item.mon}월`}</li>
-                  <li>{item.cateName}</li>
-                  <li>{item.nm}</li>
-                  <li>{item.standardScore}</li>
-                  <li>{item.rating}</li>
-                  <li>{`${item.percent}%`}</li>
-                </ul>
+            {cateList.map((item, index) => (
+              <li className="category-th" key={index}>
+                {item}
               </li>
             ))}
+          </ul>
+          <ul className="record-data">
+            {allMockRecord ? (
+              allMockRecord.map((item, index) => (
+                <li className="data-table" key={index}>
+                  <ul>
+                    <li>{item.year}</li>
+                    <li>{`${item.mon}월`}</li>
+                    <li>{item.cateName}</li>
+                    <li>{item.nm}</li>
+                    <li>{item.standardScore}</li>
+                    <li>{item.rating}</li>
+                    <li>{`${item.percent}%`}</li>
+                  </ul>
+                </li>
+              ))
+            ) : (
+              <p className="err-message">모의고사 성적 데이터가 없습니다.</p>
+            )}
           </ul>
         </MockRecordTableDiv>
       </div>

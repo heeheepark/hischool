@@ -21,6 +21,7 @@ const MockRecord = () => {
   const [currentMockRecord, setCurrentMockRecord] = useState(null);
   const [allMockRecordData, setAllMockRecordData] = useState(null);
 
+  console.log(currentMockRecord);
   useEffect(() => {
     getUserInfo(null, setUserName, null);
     getHighestMockRecord(setHighestMockRecord);
@@ -92,7 +93,9 @@ const MockRecord = () => {
                   },
                 ]}
               />
-            ) : null}
+            ) : (
+              <p className="err-message">모의고사 성적 데이터가 없습니다.</p>
+            )}
           </div>
           <div className="record-text">
             <p>
@@ -116,7 +119,7 @@ const MockRecord = () => {
               <div className="current-record-text">
                 <span>현재 모의고사 등급</span>
                 <div>
-                  {currentMockRecord?.list.map((item, index) => (
+                  {currentMockRecord?.map((item, index) => (
                     <p key={index}>
                       <span className="subject-title">{item.nm}</span>
                       <span className="grade-num">{item.rating}</span>

@@ -47,63 +47,69 @@ const RecapSchoolRecord = () => {
 
   return (
     <RecordDiv>
-      <div className="chart">
-        {allSchoolRecordData ? (
-          <ResponsiveLine
-            data={newSchoolRecordData}
-            margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "1",
-              max: highGrade,
-              stacked: false,
-              reverse: true,
-            }}
-            axisLeft={{ tickValues: gradeArray }}
-            gridYValues={gradeArray}
-            colors={colorData}
-            lineWidth={3}
-            pointSize={5}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={3}
-            pointBorderColor={{ from: "serieColor" }}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 55,
-                itemDirection: "left-to-right",
-                itemWidth: 70,
-                itemHeight: 20,
-                itemOpacity: 1,
-                symbolSize: 12,
-                symbolShape: "circle",
-              },
-            ]}
-          />
-        ) : null}
-      </div>
-      <div className="record-text">
-        <div className="exam-title-wrap">
-          <span className="exam-title">
-            {testYear}학년도 {testSemester}학기 {testType}고사
-          </span>
-          <span>주요 과목 등급</span>
-        </div>
-        <div className="subject-grade">
-          {recentSchoolRecordData?.map((item, index) => (
-            <p key={`key${index}`}>
-              <span className="subject-title korean">{item.nm}</span>
-              <span className="grade-num korean">{item.rating}</span>
-              <span>등급</span>
-            </p>
-          ))}
-        </div>
-      </div>
+      {allSchoolRecordData ? (
+        <>
+          <div className="chart">
+            {allSchoolRecordData ? (
+              <ResponsiveLine
+                data={newSchoolRecordData}
+                margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
+                xScale={{ type: "point" }}
+                yScale={{
+                  type: "linear",
+                  min: "1",
+                  max: highGrade,
+                  stacked: false,
+                  reverse: true,
+                }}
+                axisLeft={{ tickValues: gradeArray }}
+                gridYValues={gradeArray}
+                colors={colorData}
+                lineWidth={3}
+                pointSize={5}
+                pointColor={{ theme: "background" }}
+                pointBorderWidth={3}
+                pointBorderColor={{ from: "serieColor" }}
+                useMesh={true}
+                legends={[
+                  {
+                    anchor: "bottom",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: 55,
+                    itemDirection: "left-to-right",
+                    itemWidth: 70,
+                    itemHeight: 20,
+                    itemOpacity: 1,
+                    symbolSize: 12,
+                    symbolShape: "circle",
+                  },
+                ]}
+              />
+            ) : null}
+          </div>
+          <div className="record-text">
+            <div className="exam-title-wrap">
+              <span className="exam-title">
+                {testYear}학년도 {testSemester}학기 {testType}고사
+              </span>
+              <span>주요 과목 등급</span>
+            </div>
+            <div className="subject-grade">
+              {recentSchoolRecordData?.map((item, index) => (
+                <p key={`key${index}`}>
+                  <span className="subject-title korean">{item.nm}</span>
+                  <span className="grade-num korean">{item.rating}</span>
+                  <span>등급</span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <p className="err-message">내신 성적 데이터가 없습니다.</p>
+      )}
     </RecordDiv>
   );
 };

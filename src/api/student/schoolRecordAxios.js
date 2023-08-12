@@ -48,11 +48,13 @@ export const getAllSchoolRecord = async (
       axiosUrl = `/api/student/aca-table`;
       const res = await client.get(axiosUrl);
       const result = res.data;
-      setDefaultSchoolRecord(result);
+      if (result.length !== 0) {
+        setDefaultSchoolRecord(result);
+      }
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    setAllSchoolRecord(result);
+    if (result.length !== 0) setAllSchoolRecord(result);
   } catch (err) {
     console.log(err);
   }
