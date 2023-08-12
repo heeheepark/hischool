@@ -26,10 +26,12 @@ const StudentList = () => {
 
   // Modal 확인 클릭 시
   useEffect(() => {
-    patchSignCancel(userPk);
-    getStudentData(setStudentListData);
-    setModalOpen(false);
-    setCancelOk(false);
+    if (cancelOk) {
+      setModalOpen(false);
+      patchSignCancel(userPk);
+      getStudentData(setStudentListData);
+      setCancelOk(false);
+    }
   }, [cancelOk]);
 
   const handleSginClick = () => {
