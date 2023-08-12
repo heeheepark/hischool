@@ -101,7 +101,6 @@ const MyPage = () => {
     let formData = new FormData();
     selectFile && formData.append("pic", selectFile);
     formData.append("p", JSON.stringify(userPdata));
-
     putMyPageData(formData);
 
     userRole === "teacher"

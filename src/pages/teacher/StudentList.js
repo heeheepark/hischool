@@ -19,19 +19,14 @@ const StudentList = () => {
   const [userPk, setUserPk] = useState(null);
   const navigate = useNavigate();
 
-  // axios.get 보관
-  useEffect(() => {
-    getStudentData(setStudentListData);
-  }, []);
-
   // Modal 확인 클릭 시
   useEffect(() => {
     if (cancelOk) {
       setModalOpen(false);
       patchSignCancel(userPk);
-      getStudentData(setStudentListData);
       setCancelOk(false);
     }
+    getStudentData(setStudentListData);
   }, [cancelOk]);
 
   const handleSginClick = () => {
