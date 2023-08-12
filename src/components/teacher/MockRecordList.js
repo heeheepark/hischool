@@ -65,27 +65,31 @@ const MockRecordList = ({
         <li className="category-th">백분위</li>
       </ul>
       <ul className="record-data">
-        {studentMockRecordList?.map(item => (
-          <li className="data-table" key={item.userId}>
-            <ul>
-              <li>
-                <input
-                  type="checkbox"
-                  defaultChecked={false}
-                  className={`mock-checkbox resultId0${item.resultId}`}
-                  onClick={e => handleCheckBox(e)}
-                />
-              </li>
-              <li>{item.year}</li>
-              <li>{`${item.mon}월`}</li>
-              <li>{item.nm}</li>
-              <li>{item.detailNm}</li>
-              <li>{item.sc}</li>
-              <li>{item.rating}</li>
-              <li>{`${item.percent}%`}</li>
-            </ul>
-          </li>
-        ))}
+        {studentMockRecordList ? (
+          studentMockRecordList.map(item => (
+            <li className="data-table" key={item.userId}>
+              <ul>
+                <li>
+                  <input
+                    type="checkbox"
+                    defaultChecked={false}
+                    className={`mock-checkbox resultId0${item.resultId}`}
+                    onClick={e => handleCheckBox(e)}
+                  />
+                </li>
+                <li>{item.year}</li>
+                <li>{`${item.mon}월`}</li>
+                <li>{item.nm}</li>
+                <li>{item.detailNm}</li>
+                <li>{item.sc}</li>
+                <li>{item.rating}</li>
+                <li>{`${item.percent}%`}</li>
+              </ul>
+            </li>
+          ))
+        ) : (
+          <p className="err-message">모의고사 성적 데이터가 없습니다.</p>
+        )}
       </ul>
     </MockRecordListDiv>
   );
