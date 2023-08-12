@@ -13,6 +13,7 @@ const StudentHomeDiv = styled.div`
   }
   .record {
     width: 100%;
+    height: 100%;
     margin-bottom: 15px;
     border-radius: 5px;
     background: #f7f7f7;
@@ -22,6 +23,7 @@ const StudentHomeDiv = styled.div`
     justify-content: space-between;
     gap: 20px;
     > div {
+      position: relative;
       width: 100%;
       .icon-arrow {
         font-size: 18px;
@@ -62,7 +64,14 @@ const StudentHomeDiv = styled.div`
 
 const RecordDiv = styled.div`
   height: 100%;
+  .err-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .chart {
+    position: relative;
     width: 100%;
     height: 30vh;
     background: #fff;
@@ -74,6 +83,7 @@ const RecordDiv = styled.div`
     width: 100%;
     font-size: 25px;
     text-align: center;
+    margin-top: 20px;
     h4 {
       font-size: 24px;
     }

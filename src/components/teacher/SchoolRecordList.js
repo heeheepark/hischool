@@ -10,6 +10,7 @@ const SchoolRecordList = ({
   setSchoolResultIdList,
   schoolResultIdList,
 }) => {
+  console.log(studentSchoolRecordList);
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
   let resultIdArray = schoolResultIdList;
@@ -80,33 +81,37 @@ const SchoolRecordList = ({
         <li className="category-th">전교석차</li>
       </ul>
       <ul className="record-data">
-        {studentSchoolRecordList?.map(item => (
-          <li className="data-table" key={item.resultId}>
-            <ul>
-              <li>
-                <input
-                  type="checkbox"
-                  defaultChecked={false}
-                  className={`school-checkbox resultId${item.resultId}`}
-                  onClick={e => handleCheckBox(e)}
-                />
-              </li>
-              <li>{item.year}</li>
-              <li>{item.semester}</li>
-              <li>{item.mf === 1 ? "중간" : "기말"}</li>
-              <li>{item.nm}</li>
-              <li>{item.detailNm}</li>
-              <li>{item.score}</li>
-              <li>{item.rating}</li>
-              <li>
-                {item.cr}/{studentCount}
-              </li>
-              <li>
-                {item.wr}/{allStudentCount}
-              </li>
-            </ul>
-          </li>
-        ))}
+        {studentSchoolRecordList ? (
+          studentSchoolRecordList.map(item => (
+            <li className="data-table" key={item.resultId}>
+              <ul>
+                <li>
+                  <input
+                    type="checkbox"
+                    defaultChecked={false}
+                    className={`school-checkbox resultId${item.resultId}`}
+                    onClick={e => handleCheckBox(e)}
+                  />
+                </li>
+                <li>{item.year}</li>
+                <li>{item.semester}</li>
+                <li>{item.mf === 1 ? "중간" : "기말"}</li>
+                <li>{item.nm}</li>
+                <li>{item.detailNm}</li>
+                <li>{item.score}</li>
+                <li>{item.rating}</li>
+                <li>
+                  {item.cr}/{studentCount}
+                </li>
+                <li>
+                  {item.wr}/{allStudentCount}
+                </li>
+              </ul>
+            </li>
+          ))
+        ) : (
+          <p className="err-message">내신 성적 데이터가 없습니다.</p>
+        )}
       </ul>
     </SchoolRecordListDiv>
   );

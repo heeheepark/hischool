@@ -186,6 +186,12 @@ const SchoolRecordListDiv = styled.div`
   line-height: 2.1;
   text-align: center;
   overflow: auto;
+  .err-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .category {
     position: sticky;
     top: 0;
@@ -193,6 +199,7 @@ const SchoolRecordListDiv = styled.div`
     display: grid;
     grid-template-columns: 0.1fr repeat(9, 0.5fr);
     grid-template-rows: 1fr;
+
     li {
       input {
         cursor: pointer;
@@ -239,6 +246,12 @@ const MockRecordListDiv = styled.div`
   line-height: 2.1;
   text-align: center;
   overflow: auto;
+  .err-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .category {
     position: sticky;
     top: 0;

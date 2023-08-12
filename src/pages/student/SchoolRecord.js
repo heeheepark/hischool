@@ -91,7 +91,9 @@ const SchoolRecord = () => {
                 },
               ]}
             />
-          ) : null}
+          ) : (
+            <p className="err-message">내신 성적 데이터가 없습니다.</p>
+          )}
         </div>
         <div className="record-text">
           <p>

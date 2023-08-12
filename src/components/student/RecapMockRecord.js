@@ -44,63 +44,69 @@ const RecapSchoolRecord = () => {
 
   return (
     <RecordDiv>
-      <div className="chart">
-        {allMockRecordData ? (
-          <ResponsiveLine
-            data={newMockRecordData}
-            margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "1",
-              max: highGrade,
-              stacked: false,
-              reverse: true,
-            }}
-            axisLeft={{ tickValues: gradeArray }}
-            gridYValues={gradeArray}
-            colors={colorData}
-            lineWidth={3}
-            pointSize={5}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={3}
-            pointBorderColor={{ from: "serieColor" }}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom",
-                direction: "row",
-                justify: false,
-                translateX: 0,
-                translateY: 55,
-                itemDirection: "left-to-right",
-                itemWidth: 70,
-                itemHeight: 20,
-                itemOpacity: 1,
-                symbolSize: 12,
-                symbolShape: "circle",
-              },
-            ]}
-          />
-        ) : null}
-      </div>
-      <div className="record-text">
-        <div className="exam-title-wrap">
-          <span className="exam-title">
-            {testYear}년 {testMonth}월 모의고사
-          </span>
-          <span>주요 과목 등급</span>
-        </div>
-        <div className="subject-grade">
-          {recentMockRecordData?.map((item, index) => (
-            <p key={`0${index}`}>
-              <span className="subject-title">{item.nm}</span>
-              <span className="grade-num">{item.rating}</span>
-              <span>등급</span>
-            </p>
-          ))}
-        </div>
-      </div>
+      {allMockRecordData ? (
+        <>
+          <div className="chart">
+            {allMockRecordData ? (
+              <ResponsiveLine
+                data={newMockRecordData}
+                margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
+                xScale={{ type: "point" }}
+                yScale={{
+                  type: "linear",
+                  min: "1",
+                  max: highGrade,
+                  stacked: false,
+                  reverse: true,
+                }}
+                axisLeft={{ tickValues: gradeArray }}
+                gridYValues={gradeArray}
+                colors={colorData}
+                lineWidth={3}
+                pointSize={5}
+                pointColor={{ theme: "background" }}
+                pointBorderWidth={3}
+                pointBorderColor={{ from: "serieColor" }}
+                useMesh={true}
+                legends={[
+                  {
+                    anchor: "bottom",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: 55,
+                    itemDirection: "left-to-right",
+                    itemWidth: 70,
+                    itemHeight: 20,
+                    itemOpacity: 1,
+                    symbolSize: 12,
+                    symbolShape: "circle",
+                  },
+                ]}
+              />
+            ) : null}
+          </div>
+          <div className="record-text">
+            <div className="exam-title-wrap">
+              <span className="exam-title">
+                {testYear}년 {testMonth}월 모의고사
+              </span>
+              <span>주요 과목 등급</span>
+            </div>
+            <div className="subject-grade">
+              {recentMockRecordData?.map((item, index) => (
+                <p key={`0${index}`}>
+                  <span className="subject-title">{item.nm}</span>
+                  <span className="grade-num">{item.rating}</span>
+                  <span>등급</span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <p className="err-message">모의고사 성적 데이터가 없습니다.</p>
+      )}
     </RecordDiv>
   );
 };

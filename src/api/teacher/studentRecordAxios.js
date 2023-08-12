@@ -29,11 +29,11 @@ export const getStudentSchoolRecord = async (
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}`;
       const res = await client.get(axiosUrl);
       const result = res.data;
-      setDefaultSchoolRecord(result);
+      if (result.length !== 0) setDefaultSchoolRecord(result);
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    setStudentSchoolRecordList(result);
+    if (result.length !== 0) setStudentSchoolRecordList(result);
   } catch (err) {
     console.log(err);
   }
@@ -59,11 +59,11 @@ export const getStudentMockRecord = async (
       axiosUrl = `/api/teacher/mockresult?userId=${studentId}`;
       const res = await client.get(axiosUrl);
       const result = res.data;
-      setDefaultMockRecord(result);
+      if (result.length !== 0) setDefaultMockRecord(result);
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    setStudentMockRecordList(result);
+    if (result.length !== 0) setStudentMockRecordList(result);
   } catch (err) {
     console.log(err);
   }

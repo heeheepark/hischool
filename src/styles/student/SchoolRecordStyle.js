@@ -17,7 +17,14 @@ const ChartWrap = styled.div`
   align-items: center;
   gap: 30px;
   margin-bottom: 40px;
+  .err-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
   .chart {
+    position: relative;
     width: 100%;
     height: 30vh;
     background: #fff;
@@ -160,10 +167,17 @@ const SchoolRecordTableDiv = styled.div`
     }
   }
   .record-data {
+    position: relative;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(13, 1fr);
+    .err-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     > li {
       border-bottom: 1px solid #ccc;
       > ul {
