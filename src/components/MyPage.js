@@ -9,6 +9,7 @@ import { deleteUser, getUserData, putMyPageData } from "../api/myPageAxios";
 import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useLocation, useNavigate } from "react-router";
+import { Cookies } from "react-cookie";
 
 const MyPage = () => {
   const [userData, setUserData] = useState([]);
@@ -29,6 +30,17 @@ const MyPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const cookies = new Cookies();
+
+  const handleDeleteCookie = () => {
+    console.log("to......");
+    cookies.remove("accessToken");
+    cookies.remove("refreshToken");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  };
 
   const userRole = location.pathname.split("/")[1];
   // get axios 담는 함수
@@ -94,7 +106,7 @@ const MyPage = () => {
 
     userRole === "teacher"
       ? navigate("/teacher/home")
-      : navigate("student/home");
+      : navigate("/student/home");
   };
 
   // 이미지 미리보기 함수
@@ -109,8 +121,8 @@ const MyPage = () => {
     if (cancelOk === true) {
       setModalOpen(false);
       setCancelOk(false);
+      handleDeleteCookie();
       deleteUser();
-      navigate("/");
     }
   }, [cancelOk]);
 

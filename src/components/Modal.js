@@ -9,13 +9,13 @@ import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleTestClose = () => {
-    onRequestClose();
+    onRequestClose;
   };
 
   return (
     <>
       {isOpen && (
-        <ModalContain onClick={e => handleTestClose(e)}>
+        <ModalContain>
           <ModalBody onClick={e => e.stopPropagation()}>
             <ModalCloseBtn onClick={e => handleTestClose(e)}>✖</ModalCloseBtn>
             {children}
