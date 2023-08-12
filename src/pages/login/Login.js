@@ -33,13 +33,13 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const role = await fetchLogin(email, password);
-    if (errEmail && errPassword) {
-      if (role === "ROLE_TC") {
-        navigate("/teacher/home");
-      } else if (role === "ROLE_STD") {
-        navigate("/student/home");
-      }
+    // if (errEmail && errPassword) {
+    if (role === "ROLE_TC") {
+      navigate("/teacher/home");
+    } else if (role === "ROLE_STD") {
+      navigate("/student/home");
     }
+    // }
   };
 
   const handleEmail = e => {
