@@ -25,16 +25,25 @@ const Header = styled.div`
     justify-content: end;
     padding: 15px 50px 0 0;
     .school-logo {
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       font-size: 0;
       background-position: 3px 1.4px;
       background-size: 24px;
       background-color: #fff;
       border-radius: 50%;
       margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
       img {
-        background: #ccc;
+        object-fit: cover;
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 2.1px;
+        margin-right: 2px;
       }
     }
     span {

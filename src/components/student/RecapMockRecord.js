@@ -12,11 +12,6 @@ const RecapSchoolRecord = () => {
   const [recentMockRecordData, setRecentMockRecordData] = useState(null);
   const [recentTestTitle, setRecentTestTitle] = useState(null);
 
-  useState(() => {
-    getAllMockRecord(setAllMockRecordData);
-    getRecentMockRecord(setRecentMockRecordData, setRecentTestTitle);
-  }, []);
-
   // 모의고사 성적 현황 텍스트
   const testYear = recentTestTitle ? recentTestTitle[0] : null;
   const testMonth = recentTestTitle ? recentTestTitle[1] : null;
@@ -41,6 +36,11 @@ const RecapSchoolRecord = () => {
         });
       return { id: subject[index], data };
     });
+
+  useState(() => {
+    getAllMockRecord(setAllMockRecordData);
+    getRecentMockRecord(setRecentMockRecordData, setRecentTestTitle);
+  }, []);
 
   return (
     <RecordDiv>

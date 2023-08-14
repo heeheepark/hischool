@@ -41,13 +41,21 @@ const About = () => {
         <h3>서비스를 만든 사람들</h3>
         <div className="team-info">
           <p>
-            <a href="">
+            <a
+              href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4"
+              rel="noreferrer"
+              target="_blank"
+            >
               <span>
                 <img src={notionImg} alt="노션 아이콘" />
               </span>
               <span>팀 노션</span>
             </a>
-            <a href="">
+            <a
+              href="https://www.canva.com/design/DAFq6ul3FIQ/FWsmdrQ-RLDoM2DY87YasA/view?utm_content=DAFq6ul3FIQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"
+              rel="noreferrer"
+              target="_blank"
+            >
               <span>
                 <img src={canvaImg} alt="캔바 아이콘" />
               </span>
@@ -64,7 +72,11 @@ const About = () => {
                 <div>
                   <span className="member-name">박주희</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
+                    <a
+                      href="https://github.com/heeheepark"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       <img
                         src={githubImg}
                         alt="깃허브 바로가기"
@@ -213,7 +225,11 @@ const About = () => {
                 <div>
                   <span className="member-name">노정민</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
+                    <a
+                      href="https://github.com/Junggggggggmin"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       <img
                         src={githubImg}
                         alt="깃허브 바로가기"
@@ -236,7 +252,11 @@ const About = () => {
                 <div>
                   <span className="member-name">석민경</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
+                    <a
+                      href="https://github.com/Kimsukkyung0"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       <img
                         src={githubImg}
                         alt="깃허브 바로가기"

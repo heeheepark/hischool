@@ -8,9 +8,16 @@ const SideMenuWrap = styled.div`
   );
   position: relative;
   height: 100vh;
-  .img-wrap {
+  .user-img {
     width: 200px;
     height: 200px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    overflow: hidden;
+    .img-wrap {
+      width: 200px;
+      height: 200px;
+    }
   }
   .user-info-wrap {
     position: relative;
@@ -32,11 +39,6 @@ const SideMenuWrap = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      /* img {
-        width: 30px;
-        height: 30px;
-        margin-bottom: 10px;
-      } */
       span {
       }
     }

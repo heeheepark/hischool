@@ -42,7 +42,6 @@ const SideMenu = () => {
     <SideMenuWrap>
       <div className="user-info-wrap">
         <div className="main-logo" onClick={() => navigate(`/${user}/home`)}>
-          {/* <img src={logo} alt="로고" /> */}
           <span>Hi! School</span>
         </div>
         <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>

@@ -33,7 +33,7 @@ export const getStudentSchoolRecord = async (
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    if (result.length !== 0) setStudentSchoolRecordList(result);
+    setStudentSchoolRecordList(result);
   } catch (err) {
     console.log(err);
   }
@@ -63,7 +63,7 @@ export const getStudentMockRecord = async (
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    if (result.length !== 0) setStudentMockRecordList(result);
+    setStudentMockRecordList(result);
   } catch (err) {
     console.log(err);
   }
