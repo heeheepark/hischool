@@ -8,6 +8,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   getSchoolEditData,
+  patchSchoolData,
   postSchoolData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
@@ -24,19 +25,23 @@ const EditSchoolRecord = () => {
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
-      studentsData?.map(item => {
+      const nowArr = studentsData.map((item, index) => {
+        item[0].resultId = state[1][index];
+        return item[0];
+      });
+      nowArr.map(item => {
         const postDataList = {
-          resultId: state[1],
-          subjectId: item.subjectid,
+          resultId: item.resultId,
+          subjectId: item.subjectId,
           year: "2023", //임시
           semester: item.semester,
           mf: item.midfinal,
           score: item.score,
           rating: item.rating,
-          classRank: item.classrank,
-          wholeRank: item.wholerank,
+          classRank: item.classRank,
+          wholeRank: item.wholeRank,
         };
-        console.log(postDataList);
+        patchSchoolData(postDataList);
       });
       navigate(-1);
     }
@@ -84,7 +89,7 @@ const EditSchoolRecord = () => {
           <TSubJectEditSchool
             key={index}
             id={item.id}
-            scoreList={item}
+            scoreList={item[0]}
             studentsData={studentsData}
             setStudentsData={setStudentsData}
           />

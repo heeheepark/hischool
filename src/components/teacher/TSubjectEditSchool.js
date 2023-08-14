@@ -14,10 +14,11 @@ const TSubJectEditSchool = ({
   studentsData,
   setStudentsData,
 }) => {
+  console.log("scoreListscoreListscoreList", scoreList)
   const [initSubCate, setInitSubCate] = useState(null);
-  const [selectedSubCate, setSelectedSubCate] = useState(scoreList.categoryId);
+  const [selectedSubCate, setSelectedSubCate] = useState(scoreList.subjectId);
   const [initDetailSub, setInitDetailSub] = useState(null);
-  const [defaultSubject, setDefaultSubject] = useState(scoreList.categoryId);
+  const [defaultSubject, setDefaultSubject] = useState(scoreList.subjectId);
   const [defaultDetailSub, setDefaultDetailSub] = useState(scoreList.subjectId);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
@@ -46,7 +47,6 @@ const TSubJectEditSchool = ({
     });
     setStudentsData(submitList);
   };
-  console.log("studentsData", studentsData);
   // 시험유형(중간/기말) 변경
   const handleDropTest = e => {
     const submitList = studentsData?.map(item => {
@@ -103,20 +103,16 @@ const TSubJectEditSchool = ({
   };
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
-    getSchoolSubData(setInitDetailSub);
+    if (selectedSubCate) getSchoolSubData(setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   }, []);
-  console.log("scoreList", scoreList);
-  console.log("initSubCate", initSubCate);
-  console.log("initDetailSub", initDetailSub);
-  console.log("selectedSubCate", selectedSubCate);
   return (
     <>
       <div>
         <ISinput>
           <select defaultValue={scoreList.semester} onChange={handleSemester}>
-            <option value="">학기</option>
+            <option value={scoreList.semester}>{scoreList.semester}학기</option>
             <option value="1학기">1학기</option>
             <option value="2학기">2학기</option>
           </select>

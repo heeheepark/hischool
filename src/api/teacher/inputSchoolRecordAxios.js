@@ -9,6 +9,15 @@ export const postSchoolData = async SdataToSend => {
     console.error("데이터 전송 오류:", error);
   }
 };
+export const patchSchoolData = async dataToSend => {
+  try {
+    const res = await client.patch("/api/teacher/update-aca", dataToSend);
+    const result = res.data;
+    console.log("데이터 전송 성공")
+  } catch (error) {
+    console.error("데이터 전송 오류:", error);
+  }
+};
 // 내신 등록 후 과목 계열
 export const getSchoolMainSubData = async setInitSubCate => {
   try {
@@ -26,7 +35,6 @@ export const getSchoolSubData = async setInitDetailSub => {
     const res = await client.get("/api/teacher/subject/category/small");
     const result = res.data;
     setInitDetailSub(result);
-    console.log("result tlqkf", result)
   } catch (err) {
     console.log(err);
     return [];
