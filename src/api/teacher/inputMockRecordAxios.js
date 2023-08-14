@@ -3,11 +3,9 @@ import { client } from "../client";
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
   try {
-    console.log(dataToSend);
-    // const response = await client.post("/api/teacher/subject/mock-ins", {
-    //   list: dataToSend,
-    // });
-    // console.log(response.data);
+    const response = await client.post("/api/teacher/subject/mock-ins", {
+      list: [dataToSend],
+    });
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
@@ -28,6 +26,7 @@ export const getMockMainSubData = async setInitSubCate => {
     const res = await client.get("/api/teacher/subject/mockbig-list");
     const result = res.data;
     setInitSubCate(result);
+    // getMockSubData(result, setInitDetailSub);
   } catch (err) {
     console.log(err);
     return [];

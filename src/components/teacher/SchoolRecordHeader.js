@@ -136,6 +136,7 @@ const SchoolRecordHeader = ({
           <button
             className="add-school-record"
             onClick={() => {
+              console.log(selectedId);
               navigate("/teacher/inputschoolrecord", {
                 state: selectedId,
               });

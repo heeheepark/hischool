@@ -1,103 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { IMRinput } from "../../styles/teacher/InputSchoolRecordStyle";
+import {
+  getMockMainSubData,
+  getMockSubData,
+} from "../../api/teacher/inputMockRecordAxios";
 
-const TSubJectMock = ({
-  initSubCate,
-  setSelectedSubCate,
-  initDetailSub,
-  setSchoolRecordData,
-  id,
-  subjectData,
-  dropMonth,
-  studentsData,
-  updateLastSavedData,
-  // selectedStudentIndex,
-}) => {
-  // console.log(initSubCate);
-  const [subCategory, setSubCategory] = useState(null);
-  const [detailSub, setDetailSub] = useState(null);
-  const [standardScore, setStandardScore] = useState(null);
-  const [rating, setRating] = useState(null);
-  const [percentage, setPercentage] = useState(null);
+const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
+  const [initSubCate, setInitSubCate] = useState(null);
+  const [selectedSubCate, setSelectedSubCate] = useState(null);
+  const [initDetailSub, setInitDetailSub] = useState(null);
 
-  const submitData = {
-    subject: subCategory,
-    subjectid: detailSub,
-    standardscore: standardScore,
-    rating: rating,
-    percent: percentage,
-    mon: dropMonth,
-  };
-  // setSchoolRecordData(submitData);
-
-  // console.log(submitData);
+  useEffect(() => {
+    getMockMainSubData(setInitSubCate);
+    getMockSubData(selectedSubCate, setInitDetailSub);
+  }, [selectedSubCate]);
 
   const handleSubCate = e => {
-    setSubCategory(e.target.value);
     setSelectedSubCate(e.target.value);
   };
 
   const handleDetailSub = e => {
-    setDetailSub(e.target.value);
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.subjectid = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setStudentsData(submitList);
   };
 
   const handleStandardScore = e => {
-    setStandardScore(e.target.value);
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.standardscore = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setStudentsData(submitList);
   };
 
   const handleRating = e => {
-    setRating(e.target.value);
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.rating = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setStudentsData(submitList);
   };
 
   const handlePercentage = e => {
-    setPercentage(e.target.value);
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.percent = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setStudentsData(submitList);
   };
-
-  // console.log(studentData);
-
-  // useEffect(() => {
-  //   // 선택된 학생 데이터가 있을 경우, 수정 폼에 해당 학생 데이터를 불러옵니다.
-  //   if (selectedStudentIndex !== null) {
-  //     setStudentData(studentsData[selectedStudentIndex]);
-  //   } else {
-  //     // 선택된 학생 데이터가 없으면 초기화합니다.
-  //     // setStudentData(initialStudentData);
-  //   }
-  // }, [selectedStudentIndex]);
-
-  // const handleInputChange = e => {
-  //   const { name, value } = e.target;
-  //   // 숫자만 필터링하여 숫자 이외의 문자는 제거
-  //   const filteredValue = value;
-  //   // score와 grade 입력 폼의 최댓값 설정
-  //   let updatedValue = filteredValue;
-  //   if (name === "rating") {
-  //     updatedValue = Math.min(parseInt(filteredValue, 10), 9);
-  //   } else if (name === "percent") {
-  //     updatedValue = Math.min(parseInt(filteredValue, 10), 100);
-  //   }
-  //   setStudentData(prevData => ({
-  //     ...prevData,
-  //     [name]: updatedValue,
-  //   }));
-
-  // const updatedData = {
-  //   ...studentData,
-  //   [name]: updatedValue,
-  //   // mon: dropMonth,
-  // };
-  // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
-  // updateLastSavedData(id, updatedData);
 
   return (
     <>
       <div>
         <IMRinput>
-          <select
-            name="subCategory"
-            value={subCategory}
-            onChange={handleSubCate}
-          >
+          <select name="subCategory" onChange={e => handleSubCate(e)}>
             <option value="">과목 계열 선택</option>
             {initSubCate?.map((subCate, index) => (
               <option key={index} value={subCate.categoryid}>
@@ -105,7 +71,7 @@ const TSubJectMock = ({
               </option>
             ))}
           </select>
-          <select name="detailSub" value={detailSub} onChange={handleDetailSub}>
+          <select name="detailSub" onChange={e => handleDetailSub(e)}>
             <option value="">세부 과목 선택</option>
             {initDetailSub?.map((detailSub, index) => (
               <option key={index} value={detailSub.categoryid}>
@@ -116,24 +82,21 @@ const TSubJectMock = ({
           <input
             type="number"
             name="standardscore"
-            value={standardScore}
-            onChange={handleStandardScore}
+            onChange={e => handleStandardScore(e)}
             placeholder="표준 점수"
             min={0}
           />
           <input
             type="number"
             name="rating"
-            value={rating}
-            onChange={handleRating}
+            onChange={e => handleRating(e)}
             placeholder="등급"
             max={9}
           />
           <input
             type="number"
             name="percent"
-            value={percentage}
-            onChange={handlePercentage}
+            onChange={e => handlePercentage(e)}
             placeholder="백분위"
             max={100}
           />
