@@ -1,5 +1,4 @@
 import { client } from "../client";
-
 // 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async SdataToSend => {
   try {
@@ -21,22 +20,18 @@ export const getSchoolMainSubData = async setInitSubCate => {
     return [];
   }
 };
-
 // 내신 등록 후 세부 과목
-export const getSchoolSubData = async (selectedSubCate, setInitDetailSub) => {
+export const getSchoolSubData = async setInitDetailSub => {
   try {
-    const res = await client.get(
-      `/api/teacher/subject/category/small?categoryid=${selectedSubCate}`,
-    );
+    const res = await client.get("/api/teacher/subject/category/small");
     const result = res.data;
-    console.log(result);
     setInitDetailSub(result);
+    console.log("result tlqkf", result)
   } catch (err) {
     console.log(err);
     return [];
   }
 };
-
 export const getSchoolEditData = async resultId => {
   try {
     const res = await client.get(
@@ -48,7 +43,6 @@ export const getSchoolEditData = async resultId => {
     return [];
   }
 };
-
 // 학교 전체 학생 인원 데이터
 export const getSchoolData = async setWholeCount => {
   try {
@@ -60,7 +54,6 @@ export const getSchoolData = async setWholeCount => {
     return [];
   }
 };
-
 // 반 학생 인원 데이터
 export const getSchoolclassData = async setClassCount => {
   try {

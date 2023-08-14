@@ -9,26 +9,18 @@ import {
   getSchoolSubData,
   getSchoolclassData,
 } from "../../api/teacher/inputSchoolRecordAxios";
-
 const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [initSubCate, setInitSubCate] = useState(null);
-  const [selectedSubCate, setSelectedSubCate] = useState(null);
   const [initDetailSub, setInitDetailSub] = useState(null);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
-
-  console.log(selectedSubCate);
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
-    getSchoolSubData(selectedSubCate, setInitDetailSub);
+    getSchoolSubData(setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
-  }, [selectedSubCate]);
-
-  const handleSubCate = e => {
-    setSelectedSubCate(e.target.value);
-  };
-
+  }, []);
+  const handleSubCate = e => {};
   const handleDetailSub = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -38,7 +30,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-
   const handleScore = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -48,7 +39,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-
   const handleRating = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -58,7 +48,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-
   const handleClassRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -68,7 +57,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-
   const handleWholeRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -78,7 +66,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-
   return (
     <>
       <div>
@@ -139,5 +126,4 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     </>
   );
 };
-
 export default TSubJectSchool;

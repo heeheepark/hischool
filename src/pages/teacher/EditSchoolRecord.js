@@ -17,44 +17,10 @@ const EditSchoolRecord = () => {
   const { state } = useLocation();
   const today = new Date();
   const currentYear = today.getFullYear();
-  const initialRecord = {
-    id: Date.now(),
-    userid: state[0],
-    subjectid: 0,
-    semester: 0,
-    midfinal: 0,
-    score: 0,
-    rating: 0,
-    classrank: 0,
-    wholerank: 0,
-  };
-  const [studentsData, setStudentsData] = useState([initialRecord]);
+  const [studentsData, setStudentsData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
 
-  let total = 0;
-  const [schoolEditData, setSchoolEditData] = useState([]);
-
-
-  const getSchoolWhile = async () => {
-    // 과목 정보를 담아줄 임시 배열
-    let interimData = [];
-    // state 의 인덱스 [1] 에 과목 PK 있습니다.
-    // state 의 인덱스 [1] 에 담긴 과목은 최소 1종목 이상입니다.
-    console.log("담겨진 과목배열 : ", state[1]);
-    // 과목 배열의 0번부터 처리합니다.
-    for (let i = 0; i < total; i++) {
-      const result = await getSchoolEditData(state[1][i]);
-      // console.log("getMockEditData 과목 호출 결과 :", result);
-      interimData.push(result[0]);
-    }
-    setSchoolEditData(interimData);
-  };
-  useEffect(() => {
-    // 화면에서 그려질때 배열의 총 개수를 파악함.
-    total = state[1].length;
-    getSchoolWhile();
-  }, []);
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
@@ -75,6 +41,21 @@ const EditSchoolRecord = () => {
       navigate(-1);
     }
   };
+  useEffect(() => {
+    getStudentsNameData(state[0], setStudentNameData);
+    Promise.all(
+      state[1].map(async item => {
+        return await getSchoolEditData(item);
+      }),
+    )
+      .then(recordList => {
+        const newStudentsData = [...studentsData, ...recordList];
+        setStudentsData(newStudentsData);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     getStudentsNameData(state[0], setStudentNameData);
@@ -99,11 +80,11 @@ const EditSchoolRecord = () => {
         <strong>전교 석차</strong>
       </ISTitle>
       <div>
-        {schoolEditData.map((item, index) => (
+        {studentsData.map((item, index) => (
           <TSubJectEditSchool
             key={index}
-            id={studentsData.id}
-            schoolEditData={schoolEditData[index]}
+            id={item.id}
+            scoreList={item}
             studentsData={studentsData}
             setStudentsData={setStudentsData}
           />
