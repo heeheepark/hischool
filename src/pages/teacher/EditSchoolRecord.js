@@ -33,7 +33,7 @@ const EditSchoolRecord = () => {
     let interimData = [];
     // state 의 인덱스 [1] 에 과목 PK 있습니다.
     // state 의 인덱스 [1] 에 담긴 과목은 최소 1종목 이상입니다.
-    console.log("담겨진 과목배열 : ", state[1]);
+    // console.log("담겨진 과목배열 : ", state[1]);
     // 과목 배열의 0번부터 처리합니다.
     for (let i = 0; i < total; i++) {
       const result = await getSchoolEditData(state[1][i]);
@@ -66,8 +66,8 @@ const EditSchoolRecord = () => {
   // "수정" > 서버전송
   const handleSaveButtonClick = () => {
     if (lastSchoolSavedData) {
-      const SdataToSend = lastSchoolSavedData.map(item => ({
-        resultId: state[1], //임시 유저 아이디 추후 수정 필요
+      const SdataToSend = lastSchoolSavedData.map((item, index) => ({
+        resultId: state[1][index], //임시 유저 아이디 추후 수정 필요
         subjectid: parseInt(item.subjectid) || 0,
         semester: parseInt(item.semester) || 0,
         midfinal: parseInt(item.midfinal) || 0,
