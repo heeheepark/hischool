@@ -19,10 +19,6 @@ const MockRecordTable = () => {
   const [year, setYear] = useState(null);
   const [month, setMonth] = useState(null);
 
-  useEffect(() => {
-    getAllMockRecord(setDefaultMockRecord, setAllMockRecord, year, month);
-  }, [year, month]);
-
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
@@ -46,6 +42,10 @@ const MockRecordTable = () => {
     const newMonths = Array.from(months);
     return newMonths.sort();
   };
+
+  useEffect(() => {
+    getAllMockRecord(setDefaultMockRecord, setAllMockRecord, year, month);
+  }, [year, month]);
 
   return (
     <>

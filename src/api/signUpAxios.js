@@ -3,14 +3,12 @@ import { client } from "./client";
 
 export const postSignUp = async formData => {
   try {
-    console.log(formData);
-    console.log("시도");
     const res = await axios.post("/api/sign-up", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log("성공했니?:", res.data);
-  } catch (error) {
-    console.error("실패니..?", error);
+    console.log(res.data);
+  } catch (err) {
+    console.error(err);
   }
 };
 

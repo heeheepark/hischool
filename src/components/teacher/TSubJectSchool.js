@@ -14,13 +14,16 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [initDetailSub, setInitDetailSub] = useState(null);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
+
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
     getSchoolSubData(setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   }, []);
+
   const handleSubCate = e => {};
+
   const handleDetailSub = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {

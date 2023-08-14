@@ -5,10 +5,6 @@ import { getTimeTable } from "../../api/student/studentHomeAxios";
 const TimeTable = () => {
   const [timeTable, setTimeTable] = useState(null);
 
-  useEffect(() => {
-    getTimeTable(setTimeTable);
-  }, []);
-
   {
     Array(5)
       .fill()
@@ -24,6 +20,10 @@ const TimeTable = () => {
         );
       });
   }
+
+  useEffect(() => {
+    getTimeTable(setTimeTable);
+  }, []);
 
   return (
     <TimeTableDiv>

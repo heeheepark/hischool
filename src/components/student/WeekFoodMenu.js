@@ -93,12 +93,7 @@ const WeekFoodMenu = () => {
                   <li className="menu" key={item.date}>
                     <span className="menu-type">석식</span>
                     <p>
-                      <span>잡곡밥</span>
-                      <span>근대국</span>
-                      <span>순살간장찜닭</span>
-                      <span>숙주나물무침</span>
-                      <span>야채비빔만두</span>
-                      <span>포기김치</span>
+                      <span>-</span>
                     </p>
                   </li>
                 );

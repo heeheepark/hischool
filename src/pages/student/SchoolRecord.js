@@ -21,13 +21,6 @@ const SchoolRecord = () => {
   const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
   const [allSchoolRecordData, setAllSchoolRecordData] = useState(null);
 
-  useEffect(() => {
-    getUserInfo(null, setUserName, null);
-    getHighestSchoolRecord(setHighestSchoolRecord);
-    getCurrentSchoolRecord(setCurrentSchoolRecord);
-    getAllSchoolRecord(setAllSchoolRecordData);
-  }, []);
-
   // 내신 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
   const ratingList = allSchoolRecordData?.map(item => parseInt(item.rating));
@@ -48,6 +41,13 @@ const SchoolRecord = () => {
         });
       return { id: subject[index], data };
     });
+
+  useEffect(() => {
+    getUserInfo(null, setUserName, null);
+    getHighestSchoolRecord(setHighestSchoolRecord);
+    getCurrentSchoolRecord(setCurrentSchoolRecord);
+    getAllSchoolRecord(setAllSchoolRecordData);
+  }, []);
 
   return (
     <SchoolRecordDiv>

@@ -16,13 +16,9 @@ const SignList = () => {
   const [acceptOk, setAcceptOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [saveCheckBox, setSaveCheckBox] = useState([]);
-
+  console.log(studentListData);
   const navigate = useNavigate();
   let resultIdArray = saveCheckBox;
-
-  useEffect(() => {
-    getSignListData(setStudentListData);
-  }, []);
 
   // 전체 체크박스 선택
   const handleAllCheck = e => {
@@ -46,6 +42,7 @@ const SignList = () => {
   const handleCheckBox = e => {
     const clickList = e.currentTarget;
     const userId = parseInt(clickList.classList[1].slice(6));
+    console.log(userId);
     if (e.target.checked === true) {
       resultIdArray.push(userId);
     } else {
@@ -56,14 +53,12 @@ const SignList = () => {
 
   // Modal 확인 클릭 시
   useEffect(() => {
+    getSignListData(setStudentListData);
     if (acceptOk) {
-      resultIdArray.forEach(item => console.log(item));
       resultIdArray.forEach(item => patchSignAccept(item));
     }
-    // getSignListData(setStudentListData);
-    setModalOpen(false);
     setAcceptOk(false);
-    setStudentListData([]);
+    setModalOpen(false);
   }, [acceptOk]);
 
   const handleOk = () => {

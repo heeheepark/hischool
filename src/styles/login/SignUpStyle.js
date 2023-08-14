@@ -69,17 +69,14 @@ export const SignUpContain = styled.div`
     gap: 20px;
   }
   .image-upload {
-    width: 200px;
-    height: 200px;
     margin-top: 13px;
     border: solid 1px #176b87;
-    border-radius: 8px;
     > div {
-      width: 200px;
-      height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 200px;
+      height: 200px;
       span {
         font-size: 20px;
       }

@@ -31,7 +31,6 @@ const InputMockRecord = () => {
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
 
-  console.log(studentsData);
   // 월 선택
   const handleMonth = e => {
     setDropMonth(e.target.value);
