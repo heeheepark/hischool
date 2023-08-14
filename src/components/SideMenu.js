@@ -46,7 +46,7 @@ const SideMenu = () => {
           <span>Hi! School</span>
         </div>
         <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>
-          <img src={userImg} alt="안녕" className="img-aaa" />
+          <img src={userImg} alt="안녕" className="img-wrap" />
         </div>
         <p>
           <span className="user-icon">

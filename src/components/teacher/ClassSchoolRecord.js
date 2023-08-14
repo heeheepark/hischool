@@ -27,11 +27,13 @@ const ClassSchoolRecord = () => {
     getSchoolData(setSchoolData);
   }, []);
 
+  console.log(schoolData);
+
   const koreanDataList = schoolData?.list[0].map(item => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
-      value: item.percentage,
+      value: item.percentage.toFixed(1),
     };
   });
 
@@ -39,7 +41,7 @@ const ClassSchoolRecord = () => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
-      value: item.percentage,
+      value: item.percentage.toFixed(1),
     };
   });
 
@@ -47,7 +49,7 @@ const ClassSchoolRecord = () => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
-      value: item.percentage,
+      value: item.percentage.toFixed(1),
     };
   });
 
@@ -55,7 +57,7 @@ const ClassSchoolRecord = () => {
     return {
       id: `${item.rating}등급`,
       label: `${item.rating}등급`,
-      value: item.percentage,
+      value: item.percentage.toFixed(1),
     };
   });
 

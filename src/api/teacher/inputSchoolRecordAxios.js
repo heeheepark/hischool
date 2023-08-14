@@ -23,16 +23,20 @@ export const getSchoolMainSubData = async setInitSubCate => {
 };
 
 // 내신 등록 후 세부 과목
-export const getSchoolSubData = async setInitDetailSub => {
+export const getSchoolSubData = async (selectedSubCate, setInitDetailSub) => {
   try {
-    const res = await client.get("/api/teacher/subject/category/small");
+    const res = await client.get(
+      `/api/teacher/subject/category/small?categoryid=${selectedSubCate}`,
+    );
     const result = res.data;
+    console.log(result);
     setInitDetailSub(result);
   } catch (err) {
     console.log(err);
     return [];
   }
 };
+
 export const getSchoolEditData = async resultId => {
   try {
     const res = await client.get(

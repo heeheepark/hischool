@@ -8,9 +8,9 @@ const SideMenuWrap = styled.div`
   );
   position: relative;
   height: 100vh;
-  .img-aaa {
-    width: 500px;
-    height: 500px;
+  .img-wrap {
+    width: 200px;
+    height: 200px;
   }
   .user-info-wrap {
     position: relative;

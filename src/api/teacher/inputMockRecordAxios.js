@@ -10,30 +10,30 @@ export const postMockData = async dataToSend => {
     console.error("데이터 전송 오류:", error);
   }
 };
+
+// 모의고사 수정 내용 전송
 export const patchMockData = async dataToSend => {
   try {
-    console.log(dataToSend);
-    const response = await client.patch("/api/teacher/update-mock", dataToSend);
-    console.log(response.data);
+    const res = await client.patch("/api/teacher/update-mock", dataToSend);
+    const result = res.data;
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
 };
 
-// 모의 고사 과목 계열 가져오기
+// 모의고사 과목 계열 가져오기
 export const getMockMainSubData = async setInitSubCate => {
   try {
     const res = await client.get("/api/teacher/subject/mockbig-list");
     const result = res.data;
     setInitSubCate(result);
-    // getMockSubData(result, setInitDetailSub);
   } catch (err) {
     console.log(err);
     return [];
   }
 };
 
-// 모의 고사 세부 과목 가져오기
+// 모의고사 세부 과목 가져오기
 export const getMockSubData = async (categoryid, setInitDetailSub) => {
   try {
     const res = await client.get(
@@ -47,13 +47,14 @@ export const getMockSubData = async (categoryid, setInitDetailSub) => {
   }
 };
 
-// 모의 고사 수정할 과목 가져오기
+// 모의고사 수정할 과목 가져오기
 export const getMockEditData = async resultId => {
   try {
     const res = await client.get(
       `/api/teacher/subject/mock-result?resultId=${resultId}`,
     );
-    return res.data;
+    const result = { ...res.data[0], id: Date.now(), resultId: resultId };
+    return result;
   } catch (err) {
     console.log(err);
     return [];

@@ -74,7 +74,7 @@ const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
           <select name="detailSub" onChange={e => handleDetailSub(e)}>
             <option value="">세부 과목 선택</option>
             {initDetailSub?.map((detailSub, index) => (
-              <option key={index} value={detailSub.categoryid}>
+              <option key={index} value={detailSub.subjectid}>
                 {detailSub.nm}
               </option>
             ))}

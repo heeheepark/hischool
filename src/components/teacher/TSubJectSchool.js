@@ -10,24 +10,23 @@ import {
   getSchoolclassData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 
-const TSubJectSchool = ({
-  id,
-  studentsData,
-  setStudentsData,
-}) => {
+const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [initSubCate, setInitSubCate] = useState(null);
+  const [selectedSubCate, setSelectedSubCate] = useState(null);
   const [initDetailSub, setInitDetailSub] = useState(null);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
 
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
-    getSchoolSubData(setInitDetailSub);
+    getSchoolSubData(selectedSubCate, setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   }, []);
 
-  const handleSubCate = e => {};
+  const handleSubCate = e => {
+    setSelectedSubCate(e.target.value);
+  };
 
   const handleDetailSub = e => {
     const submitList = studentsData.map(item => {
