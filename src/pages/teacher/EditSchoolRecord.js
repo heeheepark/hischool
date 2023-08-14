@@ -7,134 +7,82 @@ import {
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  getSchoolData,
   getSchoolEditData,
-  getSchoolMainSubData,
-  getSchoolclassData,
+  postSchoolData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
 import TSubJectEditSchool from "../../components/teacher/TSubjectEditSchool";
 
 const EditSchoolRecord = () => {
   const { state } = useLocation();
-  const [studentsData, setStudentsData] = useState([]);
-  const [lastSchoolSavedData, setLastSchoolSavedData] = useState([]);
-  const [subjectData, setSubjectData] = useState([]);
-  const [schoolData, setSchoolData] = useState([]);
-  const [schoolClassData, setSchoolClassData] = useState([]);
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const initialRecord = {
+    id: Date.now(),
+    userid: state[0],
+    subjectid: 0,
+    semester: 0,
+    midfinal: 0,
+    score: 0,
+    rating: 0,
+    classrank: 0,
+    wholerank: 0,
+  };
+  const [studentsData, setStudentsData] = useState([initialRecord]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
-  console.log("state",state);
 
   let total = 0;
+  const [schoolEditData, setSchoolEditData] = useState([]);
 
-  const getMockWhile = async () => {
+
+  const getSchoolWhile = async () => {
     // 과목 정보를 담아줄 임시 배열
     let interimData = [];
     // state 의 인덱스 [1] 에 과목 PK 있습니다.
     // state 의 인덱스 [1] 에 담긴 과목은 최소 1종목 이상입니다.
-    // console.log("담겨진 과목배열 : ", state[1]);
+    console.log("담겨진 과목배열 : ", state[1]);
     // 과목 배열의 0번부터 처리합니다.
     for (let i = 0; i < total; i++) {
       const result = await getSchoolEditData(state[1][i]);
       // console.log("getMockEditData 과목 호출 결과 :", result);
       interimData.push(result[0]);
     }
-    console.log("interimData", interimData);
-    setStudentsData(interimData);
-    setLastSchoolSavedData(interimData);
+    setSchoolEditData(interimData);
   };
-
   useEffect(() => {
     // 화면에서 그려질때 배열의 총 개수를 파악함.
     total = state[1].length;
-    getMockWhile();
+    getSchoolWhile();
   }, []);
-
-  // 새로운 데이터를 전달하는 함수
-  const updateLastSavedData = (_id, newData) => {
-    const updateData = lastSchoolSavedData.map((item, idx) => {
-      if (idx === _id) {
-        item = newData;
-      }
-      return item;
-    });
-
-    setLastSchoolSavedData(updateData);
-  };
-
-  // "수정" > 서버전송
+  // "저장" > 서버전송
   const handleSaveButtonClick = () => {
-    if (lastSchoolSavedData) {
-      const SdataToSend = lastSchoolSavedData.map((item, index) => ({
-        resultId: state[1][index], //임시 유저 아이디 추후 수정 필요
-        subjectid: parseInt(item.subjectid) || 0,
-        semester: parseInt(item.semester) || 0,
-        midfinal: parseInt(item.midfinal) || 0,
-        score: parseInt(item.score) || 0,
-        rating: parseInt(item.rating) || 0,
-        classrank: parseInt(item.classrank) || 0,
-        wholerank: parseInt(item.wholerank) || 0,
-      }));
-      console.log(SdataToSend);
+    if (studentsData) {
+      studentsData?.map(item => {
+        const postDataList = {
+          resultId: state[1],
+          subjectId: item.subjectid,
+          year: "2023", //임시
+          semester: item.semester,
+          mf: item.midfinal,
+          score: item.score,
+          rating: item.rating,
+          classRank: item.classrank,
+          wholeRank: item.wholerank,
+        };
+        console.log(postDataList);
+      });
+      navigate(-1);
     }
   };
 
-  // 과목 정보
   useEffect(() => {
-    async function fetchData() {
-      try {
-        // 주요과목 데이터
-        const mainSubData = await getSchoolMainSubData();
-        setSubjectData(mainSubData);
-      } catch (err) {
-        console.log(err);
-        setSubjectData([]);
-      }
-    }
-
-    fetchData();
+    getStudentsNameData(state[0], setStudentNameData);
   }, []);
-  // 학생 숫자 데이터
-  useEffect(() => {
-    async function personnelData() {
-      try {
-        // 전교 인원
-        const schoolData = await getSchoolData();
-        // 반 인원
-        const schoolclassData = await getSchoolclassData();
-        setSchoolData(schoolData);
-        setSchoolClassData(schoolclassData);
-      } catch (err) {
-        console.log(err);
-        setSchoolData([]);
-        setSchoolClassData([]);
-      }
-    }
-
-    personnelData();
-  }, []);
-  // 학생 이름
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getStudentsNameData();
-        setStudentNameData(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-  const matchingStudent = studentNameData.find(
-    student => student.userid === state[0],
-  );
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>
-        {matchingStudent && (
-          <h3>2023 내신 고사 성적 수정( {matchingStudent.nm} )</h3>
-        )}
+        <h3>{`${currentYear} 내신 성적 입력( ${studentNameData?.nm} )`}</h3>
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>수정</button>
@@ -151,15 +99,13 @@ const EditSchoolRecord = () => {
         <strong>전교 석차</strong>
       </ISTitle>
       <div>
-        {studentsData.map((item, index) => (
+        {schoolEditData.map((item, index) => (
           <TSubJectEditSchool
             key={index}
-            id={index}
-            schoolData={schoolData}
-            schoolClassData={schoolClassData}
-            subjectData={subjectData}
-            studentsData={studentsData[index]}
-            updateLastSavedData={updateLastSavedData}
+            id={studentsData.id}
+            schoolEditData={schoolEditData[index]}
+            studentsData={studentsData}
+            setStudentsData={setStudentsData}
           />
         ))}
       </div>
