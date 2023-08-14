@@ -58,7 +58,7 @@ export const TimeTableDiv = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(17, 42px);
+    grid-template-rows: repeat(42px);
     > li {
       border-top: 1px solid #ccc;
       :last-of-type {

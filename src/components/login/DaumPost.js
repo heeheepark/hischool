@@ -26,7 +26,7 @@ const DaumPost = props => {
       ...props.company,
       address: fullAddress,
     });
-    props.onComplete(); // 주소 선택이 완료되면 호출하여 모달을 닫습니다.
+    props.onComplete();
   };
 
   useEffect(() => {

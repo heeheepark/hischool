@@ -36,11 +36,13 @@ export const TcMyPageWrap = styled.div`
           align-items: start;
           margin-right: 20px;
           .picture-img {
-            width: 300px;
-            height: 300px;
             border: 1px solid gray;
             background: gray;
             margin-bottom: 10px;
+            img {
+              width: 300px;
+              height: 300px;
+            }
           }
         }
       }

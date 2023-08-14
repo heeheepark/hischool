@@ -36,7 +36,7 @@ const SignUp = () => {
     classNum: "",
     birth: "",
     phone: "",
-    // address: "",
+    address: houseAddress.address,
     role: "STD",
     detailAddress: "",
   });
@@ -102,13 +102,6 @@ const SignUp = () => {
     setPayload({ ...payload, pw: e.target.value });
   };
 
-  // useEffect(() => {
-  //   const addressInput = document.getElementById("address-input");
-  //   if (addressInput) {
-  //     addressInput.value = payload.address;
-  //   }
-  // }, [payload.address]);
-
   useEffect(() => {
     const addressInput = document.getElementById("address-input");
     if (addressInput) {
@@ -137,10 +130,6 @@ const SignUp = () => {
     });
   };
 
-  // const handleInput = e => {
-  //   setPayload({ ...payload, address: e.target.value });
-  // };
-
   const handleUserTypeChange = e => {
     setPayload({ ...payload, role: e.target.value });
   };
@@ -155,7 +144,33 @@ const SignUp = () => {
 
     let formData = new FormData();
     formData.append("pic", selectFile);
+    formData.append("aprPic", aprPic);
     formData.append("p", JSON.stringify(payload));
+
+    if (!payload.email || errEmail) {
+      alert("유효한 이메일 주소를 입력하세요.");
+      return;
+    }
+
+    if (!payload.pw || errPassword) {
+      alert("비밀번호를 확인하세요.");
+      return;
+    }
+
+    if (payload.pw !== passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!houseAddress.address) {
+      alert("주소를 입력하세요.");
+      return;
+    }
+
+    if (Object.values(payload).some(value => !value)) {
+      alert("모든 항목을 입력 해주세요.");
+      return;
+    }
 
     postSignUp(formData);
     navigate("/");
@@ -165,6 +180,13 @@ const SignUp = () => {
     const file = e.target.files[0];
     setSelectFile(file);
     setUserPic(URL.createObjectURL(file));
+  };
+
+  const handleChangeApr = e => {
+    const file = e.target.files[0];
+    console.log(file);
+    setAprPic(file);
+    setAprPic(file?.name || "");
   };
 
   const handleImageUploadClick = () => {
@@ -265,6 +287,7 @@ const SignUp = () => {
                         type="password"
                         onChange={e => setPasswordConfirm(e.target.value)}
                         autoComplete="on"
+                        onBlur={checkPass}
                       />
                     </li>
                     <li className="big-input">
@@ -326,7 +349,7 @@ const SignUp = () => {
                             <input
                               type="file"
                               id="file"
-                              onChange={e => setAprPic(e.target.value)}
+                              onChange={handleChangeApr}
                             ></input>
                           </div>
                         </div>
