@@ -17,12 +17,13 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
 
+  console.log(selectedSubCate);
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
     getSchoolSubData(selectedSubCate, setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
-  }, []);
+  }, [selectedSubCate]);
 
   const handleSubCate = e => {
     setSelectedSubCate(e.target.value);

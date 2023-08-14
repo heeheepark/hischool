@@ -14,20 +14,8 @@ const Main = () => {
   const [schoolName, setSchoolName] = useState(null);
   const [grade, setGrade] = useState(null);
   const [classNum, setClassNum] = useState(null);
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    client.interceptors.request.use(function (config) {
-      // 로딩 호출
-      dispatch(startLoading({}));
-      return config;
-    });
-    client.interceptors.response.use(config => {
-      // 완료 시 로딩창 종료
-      dispatch(finishLoading({}));
-      return config;
-    });
     getSchoolInfo(setSchoolName, setGrade, setClassNum);
     getSchoolLogo(setSchoolLogo);
   }, []);
@@ -50,7 +38,6 @@ const Main = () => {
             </div>
           </Header>
           <Content>
-            {loading ? <Loading /> : null}
             <div className="content-wrap">
               <Outlet />
             </div>
