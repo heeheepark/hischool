@@ -6,10 +6,12 @@ import {
 } from "../styles/ModalStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { postEmailCodeConFirm } from "../api/signUpAxios";
+import { useState } from "react";
 
 export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleTestClose = () => {
-    onRequestClose;
+    onRequestClose();
   };
 
   return (
@@ -17,10 +19,65 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
       {isOpen && (
         <ModalContain>
           <ModalBody onClick={e => e.stopPropagation()}>
-            <ModalCloseBtn onClick={e => handleTestClose(e)}>✖</ModalCloseBtn>
+            <ModalCloseBtn onClick={handleTestClose}>✖</ModalCloseBtn>
             {children}
           </ModalBody>
         </ModalContain>
+      )}
+    </>
+  );
+};
+
+// 이메일 인증 확인 모달
+export const EmailConFirmModal = ({ authModal, setAuthModal }) => {
+  const [emailConFirm, setEmailConFirm] = useState("");
+
+  const handleCodeConfirm = e => {
+    e.preventDefault();
+    postEmailCodeConFirm(emailConFirm);
+    setAuthModal(false);
+  };
+
+  const handleCancel = e => {
+    e.preventDefault();
+    setAuthModal(false);
+  };
+
+  const handleConfirmInput = e => {
+    setEmailConFirm(e.target.value);
+  };
+
+  return (
+    <>
+      {authModal && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+            </div>
+            <div className="content">
+              <label>이메일 인증번호</label>
+              <input
+                type="text"
+                placeholder="인증번호 6자리를 입력해주세요"
+                name="email-check"
+                value={emailConFirm}
+                onChange={e => handleConfirmInput(e)}
+              />
+            </div>
+            <div className="btns">
+              <button
+                onClick={e => {
+                  handleCodeConfirm(e);
+                }}
+              >
+                인증확인
+              </button>
+              <button onClick={e => handleCancel(e)}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
       )}
     </>
   );
@@ -105,6 +162,7 @@ export const MockRecordModal = ({
   );
 };
 
+// 학생 승인 확인 모달
 export const StudentAcceptModal = ({
   modalOpen,
   setModalOpen,
@@ -142,6 +200,7 @@ export const StudentAcceptModal = ({
   );
 };
 
+// 학생 승인 취소 모달
 export const StudentCancelModal = ({
   modalOpen,
   setModalOpen,
@@ -179,6 +238,7 @@ export const StudentCancelModal = ({
   );
 };
 
+// 회원 탈퇴 모달
 export const DeleteUserModal = ({ modalOpen, setModalOpen, setCancelOk }) => {
   const handleOk = () => {
     setCancelOk(true);

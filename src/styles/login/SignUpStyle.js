@@ -68,7 +68,16 @@ export const SignUpContain = styled.div`
     width: 200px;
     height: 200px;
     margin-top: 13px;
-    background: #176b87;
+    /* background: #176b87; */
+    border: solid 2px #176b87;
+    border-radius: 8px;
+  }
+  .picture-img {
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+    }
   }
 `;
 
@@ -84,6 +93,9 @@ export const SignUpUl = styled.ul`
       padding-left: 10px;
       margin-right: 5px;
       font-size: 18px;
+    }
+    .confirm-input {
+      display: inline-block;
     }
   }
   span {

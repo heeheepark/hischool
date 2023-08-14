@@ -12,8 +12,7 @@ import { useNavigate } from "react-router";
 import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
 import { postSignUp, postEmail } from "../../api/signUpAxios";
-import { Modal } from "../../components/Modal";
-import ConFirm from "../../components/login/ConFirm";
+import { EmailConFirmModal, Modal } from "../../components/Modal";
 
 const SignUp = () => {
   const [userType, setUserType] = useState("STD");
@@ -34,8 +33,8 @@ const SignUp = () => {
   const [detailAddress, setDetailAddress] = useState("");
   const [authModal, setAuthModal] = useState(false);
   const [addressModal, setAddressModal] = useState(false);
-  const [codeConFirm, setCodeConFirm] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
+  const [waitPic, setWaitPic] = useState(false);
   const navigate = useNavigate();
 
   const birthFormatter = num => {
@@ -90,12 +89,11 @@ const SignUp = () => {
   };
 
   const handleModalOpen = () => {
-    setCodeConFirm(true);
+    setAddressModal(true);
   };
 
   const handleModalClose = () => {
     setAddressModal(false);
-    setCodeConFirm(false);
   };
 
   const handleInput = e => {
@@ -155,6 +153,10 @@ const SignUp = () => {
     setUserPic(URL.createObjectURL(file));
   };
 
+  const handleImageUploadClick = () => {
+    const realUpload = document.querySelector(".real-upload");
+    realUpload.click();
+  };
   return (
     <SignUpWrap>
       <IntroImage>
@@ -188,13 +190,17 @@ const SignUp = () => {
           <SignUpContain>
             <form className="input-form">
               <div className="image-upload">
-                <div className="picture-img">
+                <div className="picture-img" onClick={handleImageUploadClick}>
                   {userPic && <img src={userPic} alt="pic" />}
                 </div>
                 <input
+                  className="real-upload"
                   type="file"
-                  accept="image/jpg, image/png, image/gif, image/jpeg"
+                  accept="image/*"
+                  required
+                  multiple
                   onChange={handleChangeFile}
+                  style={{ display: "none" }}
                 />
               </div>
               <SignUpUl>
@@ -204,17 +210,18 @@ const SignUp = () => {
                       <label>이메일</label>
                       <div>
                         <input
+                          className="confirm-input"
                           type="email"
-                          style={{ display: "inline-block" }}
                           value={idEmail}
                           onChange={e => setIdEmail(e.target.value)}
                         ></input>
                         <span onClick={handleEmailConfirm}>인증</span>
                       </div>
                       {authModal && (
-                        <Modal isOpen={authModal} setAuthModal={setAuthModal}>
-                          <ConFirm setAuthModal={setAuthModal} />
-                        </Modal>
+                        <EmailConFirmModal
+                          authModal={authModal}
+                          setAuthModal={setAuthModal}
+                        />
                       )}
                     </li>
                     <li className="big-input">
