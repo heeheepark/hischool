@@ -14,13 +14,14 @@ import {
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Cookies from "universal-cookie";
-import { getUserInfo } from "../api/userInfoAxios";
+import { getSchoolLogo, getUserInfo } from "../api/userInfoAxios";
 import { useState } from "react";
 
 const SideMenu = () => {
   const [userImg, setUserImg] = useState(null);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [schoolLogo, setSchoolLogo] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
@@ -36,13 +37,13 @@ const SideMenu = () => {
 
   useEffect(() => {
     getUserInfo(setUserImg, setUserName, setUserEmail);
+    getSchoolLogo(setSchoolLogo);
   }, []);
 
   return (
     <SideMenuWrap>
       <div className="user-info-wrap">
         <div className="main-logo" onClick={() => navigate(`/${user}/home`)}>
-          {/* <img src={logo} alt="로고" /> */}
           <span>Hi! School</span>
         </div>
         <div className="user-img" onClick={() => navigate(`/${user}/mypage`)}>

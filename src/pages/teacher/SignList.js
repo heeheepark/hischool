@@ -60,7 +60,7 @@ const SignList = () => {
       resultIdArray.forEach(item => console.log(item));
       resultIdArray.forEach(item => patchSignAccept(item));
     }
-    // getSignListData(setStudentListData);
+    getSignListData(setStudentListData);
     setModalOpen(false);
     setAcceptOk(false);
     setStudentListData([]);

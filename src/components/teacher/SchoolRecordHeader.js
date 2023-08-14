@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { useNavigate } from "react-router";
-import { SchoolRecordModal } from "../Modal";
+import { DeleteErrorModal, EditErrorModal, SchoolRecordModal } from "../Modal";
 import {
   deleteStudentSchoolRecord,
   getStudentSchoolRecord,
@@ -20,9 +20,23 @@ const SchoolRecordHeader = ({
   const navigate = useNavigate();
   const [schoolModalOpen, setSchoolModalOpen] = useState(false);
   const [schoolDeleteOk, setschoolDeleteOk] = useState(false);
+  const [editErrModalOpen, setEditErrModalOpen] = useState(false);
+  const [deleteErrModalOpen, setDeleteErrModalOpen] = useState(false);
 
   const showSchoolModal = () => {
-    setSchoolModalOpen(true);
+    if (schoolResultIdList.length > 0) {
+      setSchoolModalOpen(true);
+    } else {
+      showDeleteErrModal();
+    }
+  };
+
+  const showEditErrModal = () => {
+    setEditErrModalOpen(true);
+  };
+
+  const showDeleteErrModal = () => {
+    setDeleteErrModalOpen(true);
   };
 
   // 내신 삭제 모달 확인 클릭 시
@@ -54,6 +68,16 @@ const SchoolRecordHeader = ({
     setTestType(selectTestType);
   };
 
+  const handleEdit = e => {
+    if (schoolResultIdList.length > 0) {
+      navigate("/teacher/editschoolrecord", {
+        state: [selectedId, schoolResultIdList],
+      });
+    } else {
+      showEditErrModal();
+    }
+  };
+
   const yearList = defaultSchoolRecord => {
     const years = new Set();
     defaultSchoolRecord?.forEach(item => years.add(item.year));
@@ -77,11 +101,23 @@ const SchoolRecordHeader = ({
 
   return (
     <>
+      {editErrModalOpen && (
+        <EditErrorModal
+          editErrModalOpen={editErrModalOpen}
+          setEditErrModalOpen={setEditErrModalOpen}
+        />
+      )}
       {schoolModalOpen && (
         <SchoolRecordModal
           schoolModalOpen={schoolModalOpen}
           setSchoolModalOpen={setSchoolModalOpen}
           setschoolDeleteOk={setschoolDeleteOk}
+        />
+      )}
+      {deleteErrModalOpen && (
+        <DeleteErrorModal
+          showDeleteErrModal={showDeleteErrModal}
+          setDeleteErrModalOpen={setDeleteErrModalOpen}
         />
       )}
       <div className="school-record-header">
@@ -123,20 +159,11 @@ const SchoolRecordHeader = ({
           </SchoolRecordFilterDiv>
         </div>
         <div className="btns">
-          <button
-            onClick={() => {
-              navigate("/teacher/editschoolrecord", {
-                state: [selectedId, schoolResultIdList],
-              });
-            }}
-          >
-            수정
-          </button>
+          <button onClick={handleEdit}>수정</button>
           <button onClick={showSchoolModal}>삭제</button>
           <button
             className="add-school-record"
             onClick={() => {
-              console.log(selectedId);
               navigate("/teacher/inputschoolrecord", {
                 state: selectedId,
               });

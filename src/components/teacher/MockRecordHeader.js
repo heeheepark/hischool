@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { MockRecordModal } from "../Modal";
+import { DeleteErrorModal, EditErrorModal, MockRecordModal } from "../Modal";
 import {
   deleteStudentMockRecord,
   getStudentMockRecord,
@@ -19,11 +19,25 @@ const MockRecordHeader = ({
   const navigate = useNavigate();
   const [mockModalOpen, setMockModalOpen] = useState(false);
   const [mockDeleteOk, setMockDeleteOk] = useState(false);
+  const [editErrModalOpen, setEditErrModalOpen] = useState(false);
+  const [deleteErrModalOpen, setDeleteErrModalOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
 
   const showMockModal = () => {
-    setMockModalOpen(true);
+    if (mockResultIdList.length > 0) {
+      setMockModalOpen(true);
+    } else {
+      showDeleteErrModal();
+    }
+  };
+
+  const showEditErrModal = () => {
+    setEditErrModalOpen(true);
+  };
+
+  const showDeleteErrModal = () => {
+    setDeleteErrModalOpen(true);
   };
 
   // 모의고사 삭제 모달 확인 클릭 시
@@ -52,6 +66,16 @@ const MockRecordHeader = ({
     setMonth(selectMonth);
   };
 
+  const handleEdit = e => {
+    if (mockResultIdList.length > 0) {
+      navigate("/teacher/editmockrecord", {
+        state: [selectedId, mockResultIdList],
+      });
+    } else {
+      showEditErrModal();
+    }
+  };
+
   const yearList = defaultMockRecord => {
     const years = new Set();
     defaultMockRecord?.forEach(item => years.add(item.year));
@@ -67,11 +91,23 @@ const MockRecordHeader = ({
   };
   return (
     <>
+      {editErrModalOpen && (
+        <EditErrorModal
+          editErrModalOpen={editErrModalOpen}
+          setEditErrModalOpen={setEditErrModalOpen}
+        />
+      )}
       {mockModalOpen && (
         <MockRecordModal
           mockModalOpen={mockModalOpen}
           setMockModalOpen={setMockModalOpen}
           setMockDeleteOk={setMockDeleteOk}
+        />
+      )}
+      {deleteErrModalOpen && (
+        <DeleteErrorModal
+          showDeleteErrModal={showDeleteErrModal}
+          setDeleteErrModalOpen={setDeleteErrModalOpen}
         />
       )}
       <div className="mock-record-header">
@@ -113,15 +149,7 @@ const MockRecordHeader = ({
           </SchoolRecordFilterDiv>
         </div>
         <div className="btns">
-          <button
-            onClick={() => {
-              navigate("/teacher/editmockrecord", {
-                state: [selectedId, mockResultIdList],
-              });
-            }}
-          >
-            수정
-          </button>
+          <button onClick={handleEdit}>수정</button>
           <button onClick={showMockModal}>삭제</button>
           <button
             className="add-mock-record"

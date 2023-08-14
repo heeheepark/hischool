@@ -46,14 +46,16 @@ const TSubjectPlus = ({
           onChange={handleInputChange}
         >
           <option value="">과목 계열 선택</option>
-          {subjectData.map(mainSubject => (
-            <option
-              key={mainSubject.mainsubject}
-              value={mainSubject.mainsubject}
-            >
-              {mainSubject.mainsubject}
-            </option>
-          ))}
+          {subjectData.map(mainSubject => {
+            return (
+              <option
+                key={mainSubject.mainsubject}
+                value={mainSubject.mainsubject}
+              >
+                {mainSubject.mainsubject}
+              </option>
+            );
+          })}
         </select>
         <select
           name="subjectid"

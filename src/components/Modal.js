@@ -129,7 +129,6 @@ export const MockRecordModal = ({
   setMockDeleteOk,
 }) => {
   const handleOk = () => {
-    console.log("handleOk 실행");
     setMockDeleteOk(true);
   };
 
@@ -154,6 +153,69 @@ export const MockRecordModal = ({
             <div className="btns">
               <button onClick={handleOk}>확인</button>
               <button onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
+
+// 성적 수정 오류 모달
+export const EditErrorModal = ({ editErrModalOpen, setEditErrModalOpen }) => {
+  const handleOk = () => {
+    setEditErrModalOpen(false);
+  };
+
+  return (
+    <>
+      {editErrModalOpen && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>선택된 항목이 없습니다.</span>
+              <span>수정할 항목을 선택해주세요.</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
+
+// 성적 삭제 오류 모달
+export const DeleteErrorModal = ({
+  showDeleteErrModal,
+  setDeleteErrModalOpen,
+}) => {
+  const handleOk = () => {
+    setDeleteErrModalOpen(false);
+  };
+
+  return (
+    <>
+      {showDeleteErrModal && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>선택된 항목이 없습니다.</span>
+              <span>삭제할 항목을 선택해주세요.</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
             </div>
           </div>
         </StudentRecordModalDiv>

@@ -4,10 +4,6 @@ import { Aside, Content, Header, MainDiv } from "../styles/main/MainStyle";
 import SideMenu from "../components/SideMenu";
 import { useEffect } from "react";
 import { getSchoolInfo, getSchoolLogo } from "../api/userInfoAxios";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "../components/Loading";
-import { client } from "../api/client";
-import { finishLoading, startLoading } from "../reducers/loadingSlice";
 
 const Main = () => {
   const [schoolLogo, setSchoolLogo] = useState(null);

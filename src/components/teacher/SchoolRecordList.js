@@ -80,7 +80,7 @@ const SchoolRecordList = ({
         <li className="category-th">전교석차</li>
       </ul>
       <ul className="record-data">
-        {studentSchoolRecordList ? (
+        {studentSchoolRecordList?.length > 0 ? (
           studentSchoolRecordList.map(item => (
             <li className="data-table" key={item.resultId}>
               <ul>
