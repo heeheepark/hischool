@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  ISainput,
-  ISinput,
-} from "../../styles/teacher/InputSchoolRecordStyle";
+import { ISainput, ISinput } from "../../styles/teacher/InputSchoolRecordStyle";
 import { getSchoolSubData } from "../../api/teacher/inputSchoolRecordAxios";
 
 const TSubJectEditSchool = ({
@@ -24,20 +21,18 @@ const TSubJectEditSchool = ({
     semester: "",
     midfinal: "",
   };
-  console.log("studentsData", studentsData)
+  console.log("studentsData", studentsData);
   const [dropSemester, setDropSemester] = useState("");
   const [dropTest, setDropTest] = useState("");
   const [detailList, setDetailList] = useState([]);
   const [studentData, setStudentData] = useState(initialStudentData);
 
-  
   // 세부항목 호출
   const getDetailList = async _sid => {
     const result = await getSchoolSubData();
     const arr = result.filter(item => item.subjectid === parseInt(_sid));
     setDetailList(arr);
   };
-
   useEffect(() => {
     // 선택된 데이터가 있을 경우, 수정 폼에 해당 데이터를 불러옵니다.
     if (selectedStudentIndex !== null) {
@@ -82,20 +77,18 @@ const TSubJectEditSchool = ({
     const selectedTest = event.target.value;
     setDropTest(selectedTest);
   };
-  const midfinalName = (e) => {
-    (studentsData?.midfinal === 1) 
-  }
+
   return (
     <>
       <div>
         <ISinput>
           <select value={dropSemester} onChange={handleSemester}>
-            <option value={studentsData?.semester}>{studentsData?.semester}학기</option>
+            <option value="">학기 선택</option>
             <option value="1학기">1학기</option>
             <option value="2학기">2학기</option>
           </select>
           <select value={dropTest} onChange={handleTest}>
-            <option value={studentsData?.midfinal}>시험 구분</option>
+            <option value="">시험 구분</option>
             <option value="1">중간고사</option>
             <option value="2">기말고사</option>
           </select>

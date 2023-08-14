@@ -150,7 +150,6 @@ const TSubJectEditMock = ({
             value={studentData?.standardScore || ""}
             onChange={handleInputChange}
             placeholder="점수"
-            max={100}
           />
           <input
             type="number"
