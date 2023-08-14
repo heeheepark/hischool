@@ -24,7 +24,7 @@ const Login = () => {
 
   // const checkPass = () => {
   //   const regex =
-  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
   //   const isValid = regex.test(password);
   //   setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
   // };

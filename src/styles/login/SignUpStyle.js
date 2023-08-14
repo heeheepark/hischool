@@ -40,17 +40,21 @@ export const SignUpInner = styled.div`
   .signup-submit {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 31.5%;
     margin-top: 20px;
-    button {
-      width: 80px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      background: #176b87;
-      color: #fff;
+    .buttons {
+      display: flex;
+      gap: 10px;
+      button {
+        width: 80px;
+        height: 30px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background: #176b87;
+        color: #fff;
+      }
     }
   }
 `;
@@ -68,15 +72,25 @@ export const SignUpContain = styled.div`
     width: 200px;
     height: 200px;
     margin-top: 13px;
-    /* background: #176b87; */
-    border: solid 2px #176b87;
+    border: solid 1px #176b87;
     border-radius: 8px;
-  }
-  .picture-img {
-    img {
+    > div {
       width: 200px;
       height: 200px;
-      object-fit: contain;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        font-size: 20px;
+      }
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+    }
+    > input {
+      display: none;
     }
   }
 `;
@@ -129,7 +143,50 @@ export const SignUpUl = styled.ul`
   }
 `;
 
-export const LeftForm = styled.li``;
+export const LeftForm = styled.li`
+  .err-message {
+    padding-left: 10px;
+    font-size: 16px;
+    color: crimson;
+  }
+  .apr-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .upload-name {
+      display: inline-block;
+      height: 35px;
+      line-height: 35px;
+      padding: 0 10px;
+      border: 1px solid #bbb;
+      border-radius: 5px;
+      width: 21vw;
+      color: #999999;
+      font-size: 18px;
+      margin-right: 5px;
+    }
+    label {
+      display: inline-block;
+      text-align: center;
+      width: 50px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 20px;
+      color: #fff;
+      border-radius: 4px;
+      background: #176b87;
+      cursor: pointer;
+    }
+    input[type="file"] {
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+    }
+  }
+`;
 export const RightForm = styled.li`
   margin-left: 30px;
 `;

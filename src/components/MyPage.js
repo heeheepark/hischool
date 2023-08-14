@@ -130,19 +130,27 @@ const MyPage = () => {
     setModalOpen(true);
   };
 
+  const handleImageUploadClick = () => {
+    const realUpload = document.querySelector(".real-upload");
+    realUpload.click();
+  };
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
       <div className="mypage-top">
         <div className="user-info">
           <div className="user-info-wrap">
-            <div className="user-picture-wrap">
+            <div className="user-picture-wrap" onClick={handleImageUploadClick}>
               <div className="picture-img">
                 <img src={userPic || userData.pic} alt="pic" />
               </div>
               <input
+                className="real-upload"
                 type="file"
                 accept="image/jpg, image/png, image/gif, image/jpeg"
+                required
+                multiple
                 onChange={handleChangeFile}
+                style={{ display: "none" }}
               />
             </div>
             <div className="school-info">

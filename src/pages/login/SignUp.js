@@ -15,27 +15,31 @@ import { postSignUp, postEmail } from "../../api/signUpAxios";
 import { EmailConFirmModal, Modal } from "../../components/Modal";
 
 const SignUp = () => {
-  const [userType, setUserType] = useState("STD");
-  const [idEmail, setIdEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [name, setName] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [grade, setGrade] = useState("");
-  const [classNumber, setClassNumber] = useState("");
-  const [birth, setBirth] = useState("");
-  const [phone, setPhone] = useState("");
   const [userPic, setUserPic] = useState("");
   const [aprPic, setAprPic] = useState("");
-  const [houseAddress, setHouseAddress] = useState({
-    address: "",
-  });
-  const [detailAddress, setDetailAddress] = useState("");
   const [authModal, setAuthModal] = useState(false);
   const [addressModal, setAddressModal] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
-  const [waitPic, setWaitPic] = useState(false);
+  const [errEmail, setErrEmail] = useState("");
+  const [errPassword, setErrPassword] = useState("");
+  const [houseAddress, setHouseAddress] = useState({
+    address: "",
+  });
   const navigate = useNavigate();
+  const [payload, setPayload] = useState({
+    email: "",
+    pw: "",
+    nm: "",
+    schoolNm: "",
+    grade: "",
+    classNum: "",
+    birth: "",
+    phone: "",
+    // address: "",
+    role: "STD",
+    detailAddress: "",
+  });
 
   const birthFormatter = num => {
     try {
@@ -49,8 +53,8 @@ const SignUp = () => {
       } else {
         return num;
       }
-    } catch (error) {
-      console.error("Error formatting birth:", error);
+    } catch (err) {
+      console.err("Error formatting birth:", err);
       return num;
     }
   };
@@ -68,13 +72,42 @@ const SignUp = () => {
       } else {
         return num;
       }
-    } catch (e) {
+    } catch (err) {
       return num;
     }
   };
 
-  const formattedBirth = birthFormatter(birth);
-  const formattedPhone = phoneFormatter(phone);
+  const formattedBirth = birthFormatter(payload.birth);
+  const formattedPhone = phoneFormatter(payload.phone);
+
+  const checkEmail = () => {
+    const regex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const isValid = regex.test(payload.email);
+    setErrEmail(isValid ? "" : "유효한 이메일 주소를 입력 해주세요.");
+  };
+
+  const checkPass = () => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
+    const isValid = regex.test(payload.pw);
+    setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
+  };
+
+  const handleEmail = e => {
+    setPayload({ ...payload, email: e.target.value });
+  };
+
+  const handlePassWord = e => {
+    setPayload({ ...payload, pw: e.target.value });
+  };
+
+  // useEffect(() => {
+  //   const addressInput = document.getElementById("address-input");
+  //   if (addressInput) {
+  //     addressInput.value = payload.address;
+  //   }
+  // }, [payload.address]);
 
   useEffect(() => {
     const addressInput = document.getElementById("address-input");
@@ -85,7 +118,7 @@ const SignUp = () => {
 
   const handleEmailConfirm = () => {
     setAuthModal(true);
-    postEmail(idEmail);
+    postEmail(payload.email);
   };
 
   const handleModalOpen = () => {
@@ -104,8 +137,12 @@ const SignUp = () => {
     });
   };
 
+  // const handleInput = e => {
+  //   setPayload({ ...payload, address: e.target.value });
+  // };
+
   const handleUserTypeChange = e => {
-    setUserType(e.target.value);
+    setPayload({ ...payload, role: e.target.value });
   };
 
   const handleCancel = () => {
@@ -116,32 +153,9 @@ const SignUp = () => {
     e.preventDefault();
     e.persist();
 
-    if (!userType || !idEmail || !password || !passwordConfirm) {
-      alert("모든 필드를 입력해주세요.");
-      return;
-    }
-
-    if (password !== passwordConfirm) {
-      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-      return;
-    }
-
-    const collectUserData = {
-      email: idEmail,
-      pw: password,
-      nm: name,
-      schoolNm: schoolName,
-      grade,
-      classNum: classNumber,
-      birth,
-      phone,
-      address: houseAddress.address,
-      role: userType,
-      detailAddress,
-    };
     let formData = new FormData();
     formData.append("pic", selectFile);
-    formData.append("p", JSON.stringify(collectUserData));
+    formData.append("p", JSON.stringify(payload));
 
     postSignUp(formData);
     navigate("/");
@@ -157,6 +171,7 @@ const SignUp = () => {
     const realUpload = document.querySelector(".real-upload");
     realUpload.click();
   };
+
   return (
     <SignUpWrap>
       <IntroImage>
@@ -170,18 +185,18 @@ const SignUp = () => {
               <input
                 type="radio"
                 id="teacher"
-                name="userType"
+                name="role"
                 value="TC"
-                checked={userType === "TC"}
+                checked={payload.role === "TC"}
                 onChange={handleUserTypeChange}
               />
               <label htmlFor="teacher">선생님</label>
               <input
                 type="radio"
                 id="student"
-                name="userType"
+                name="role"
                 value="STD"
-                checked={userType === "STD"}
+                checked={payload.role === "STD"}
                 onChange={handleUserTypeChange}
               />
               <label htmlFor="student">학생</label>
@@ -189,19 +204,22 @@ const SignUp = () => {
           </div>
           <SignUpContain>
             <form className="input-form">
-              <div className="image-upload">
-                <div className="picture-img" onClick={handleImageUploadClick}>
-                  {userPic && <img src={userPic} alt="pic" />}
+              <div className="picture-img">
+                <span>프로필사진</span>
+                <div className="image-upload" onClick={handleImageUploadClick}>
+                  <div>
+                    {userPic && <img src={userPic} alt="pic" />}
+                    {!userPic ? <span>사진을 업로드 해주세요.</span> : null}
+                  </div>
+                  <input
+                    className="real-upload"
+                    type="file"
+                    accept="image/*"
+                    required
+                    multiple
+                    onChange={handleChangeFile}
+                  />
                 </div>
-                <input
-                  className="real-upload"
-                  type="file"
-                  accept="image/*"
-                  required
-                  multiple
-                  onChange={handleChangeFile}
-                  style={{ display: "none" }}
-                />
               </div>
               <SignUpUl>
                 <LeftForm>
@@ -212,9 +230,12 @@ const SignUp = () => {
                         <input
                           className="confirm-input"
                           type="email"
-                          value={idEmail}
-                          onChange={e => setIdEmail(e.target.value)}
-                        ></input>
+                          placeholder="ex) aaa@gmail.com"
+                          value={payload.email}
+                          onChange={e => handleEmail(e)}
+                          onBlur={checkEmail}
+                        />
+                        {errEmail && <p className="err-message">{errEmail}</p>}
                         <span onClick={handleEmailConfirm}>인증</span>
                       </div>
                       {authModal && (
@@ -228,10 +249,15 @@ const SignUp = () => {
                       <label>비밀번호</label>
                       <input
                         type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        placeholder="8~16자리로 입력해주세요."
+                        value={payload.pw}
+                        onChange={e => handlePassWord(e)}
                         autoComplete="on"
+                        onBlur={checkPass}
                       />
+                      {errPassword && (
+                        <p className="err-message">{errPassword}</p>
+                      )}
                     </li>
                     <li className="big-input">
                       <label>비밀번호 확인</label>
@@ -245,8 +271,14 @@ const SignUp = () => {
                       <label>학교</label>
                       <input
                         type="text"
-                        value={schoolName}
-                        onChange={e => setSchoolName(e.target.value)}
+                        placeholder="ex) 함지고등학교"
+                        value={payload.schoolNm}
+                        onChange={e => {
+                          setPayload(payload => ({
+                            ...payload,
+                            schoolNm: e.target.value,
+                          }));
+                        }}
                       />
                     </li>
                     <li className="small-input">
@@ -254,18 +286,51 @@ const SignUp = () => {
                         <label>학년</label>
                         <input
                           type="text"
-                          value={grade}
-                          onChange={e => setGrade(e.target.value)}
+                          placeholder="ex) 3 "
+                          value={payload.grade}
+                          onChange={e => {
+                            setPayload(payload => ({
+                              ...payload,
+                              grade: e.target.value,
+                            }));
+                          }}
                         />
                       </div>
                       <div>
                         <label>반</label>
                         <input
                           type="text"
-                          value={classNumber}
-                          onChange={e => setClassNumber(e.target.value)}
+                          placeholder="ex) 1 "
+                          value={payload.classNum}
+                          onChange={e => {
+                            setPayload(payload => ({
+                              ...payload,
+                              classNum: e.target.value,
+                            }));
+                          }}
                         />
                       </div>
+                    </li>
+                    <li>
+                      {payload.role === "TC" ? (
+                        <div>
+                          <p>교원인증사진</p>
+                          <div className="apr-input">
+                            <input
+                              className="upload-name"
+                              value={aprPic}
+                              placeholder="첨부파일"
+                              readOnly
+                            />
+                            <label htmlFor="file">선택</label>
+                            <input
+                              type="file"
+                              id="file"
+                              onChange={e => setAprPic(e.target.value)}
+                            ></input>
+                          </div>
+                        </div>
+                      ) : null}
                     </li>
                   </ul>
                 </LeftForm>
@@ -275,8 +340,13 @@ const SignUp = () => {
                       <label>이름</label>
                       <input
                         type="text"
-                        value={name}
-                        onChange={e => setName(e.target.value)}
+                        value={payload.nm}
+                        onChange={e => {
+                          setPayload(payload => ({
+                            ...payload,
+                            nm: e.target.value,
+                          }));
+                        }}
                       />
                     </li>
                     <li className="big-input">
@@ -284,7 +354,12 @@ const SignUp = () => {
                       <input
                         type="text"
                         value={formattedBirth}
-                        onChange={e => setBirth(e.target.value)}
+                        onChange={e => {
+                          setPayload(payload => ({
+                            ...payload,
+                            birth: e.target.value,
+                          }));
+                        }}
                       />
                     </li>
                     <li className="big-input">
@@ -292,7 +367,12 @@ const SignUp = () => {
                       <input
                         type="text"
                         value={formattedPhone}
-                        onChange={e => setPhone(e.target.value)}
+                        onChange={e => {
+                          setPayload(payload => ({
+                            ...payload,
+                            phone: e.target.value,
+                          }));
+                        }}
                       />
                     </li>
                     <li className="big-input">
@@ -326,30 +406,27 @@ const SignUp = () => {
                       <label>상세주소</label>
                       <input
                         type="text"
-                        value={detailAddress}
-                        onChange={e => setDetailAddress(e.target.value)}
+                        value={payload.detailAddress}
+                        onChange={e => {
+                          setPayload(payload => ({
+                            ...payload,
+                            detailAddress: e.target.value,
+                          }));
+                        }}
                       />
                     </li>
-                    {userType === "TC" ? (
-                      <li className="big-input">
-                        <label>교원 인증 사진</label>
-                        <input
-                          type="file"
-                          value={aprPic}
-                          onChange={e => setAprPic(e.target.value)}
-                        />
-                      </li>
-                    ) : null}
                   </ul>
                 </RightForm>
               </SignUpUl>
             </form>
           </SignUpContain>
           <div className="signup-submit">
-            <button type="submit" onClick={handleSignUp}>
-              회원가입
-            </button>
-            <button onClick={handleCancel}>취소</button>
+            <div className="buttons">
+              <button type="submit" onClick={handleSignUp}>
+                회원가입
+              </button>
+              <button onClick={handleCancel}>취소</button>
+            </div>
           </div>
         </div>
       </SignUpInner>
