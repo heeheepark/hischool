@@ -10,148 +10,80 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import TSubJectSchool from "../../components/teacher/TSubJectSchool";
-import {
-  getSchoolData,
-  getSchoolMainSubData,
-  getSchoolclassData,
-  postSchoolData,
-} from "../../api/teacher/inputSchoolRecordAxios";
+import { postSchoolData } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
 
 const InputSchoolRecord = () => {
   const { state } = useLocation();
-  const [dropSemester, setDropSemester] = useState("");
-  const [dropTest, setDropTest] = useState("");
-  const [studentsData, setStudentsData] = useState([]);
-  const [lastSchoolSavedData, setLastSchoolSavedData] = useState([]);
-  const [subjectData, setSubjectData] = useState([]);
-  const [schoolData, setSchoolData] = useState([]);
-  const [schoolClassData, setSchoolClassData] = useState([]);
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const [dropSemester, setDropSemester] = useState(null);
+  const [dropTest, setDropTest] = useState(null);
+
+  const initialRecord = {
+    id: Date.now(),
+    userid: state,
+    subjectid: 0,
+    semester: dropSemester,
+    midfinal: dropTest,
+    score: 0,
+    rating: 0,
+    classrank: 0,
+    wholerank: 0,
+  };
+  const [studentsData, setStudentsData] = useState([initialRecord]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
 
-  const matchingStudent = studentNameData.find(
-    student => student.userid === state,
-  );
-
-  // 새로운 데이터를 전달하는 함수
-  const updateLastSavedData = (_id, newData) => {
-    const updateData = lastSchoolSavedData.map((item, idx) => {
-      if (idx === _id) {
-        item = newData;
-      }
-      return item;
-    });
-    setLastSchoolSavedData(updateData);
+  // 학기 변경
+  const handleSemester = e => {
+    setDropSemester(e.target.value);
+    studentsData.map(item => (item.semester = parseInt(e.target.value)));
   };
 
-  // 학기 항목
-  const handleSemester = event => {
-    setDropSemester(event.target.value);
-  };
-
-  // 고사 항목
-  const handleDropTest = event => {
-    setDropTest(event.target.value);
+  // 시험유형(중간/기말) 변경
+  const handleDropTest = e => {
+    setDropTest(e.target.value);
+    studentsData.map(item => (item.midfinal = parseInt(e.target.value)));
   };
 
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
-    if (lastSchoolSavedData) {
-      const SdataToSend = lastSchoolSavedData.map(item => ({
-        userid: state, //임시 유저 아이디 추후 수정 필요
-        subjectid: parseInt(item.subjectid) || 0,
-        semester: parseInt(item.semester) || 0,
-        midfinal: parseInt(item.midfinal) || 0,
-        score: parseInt(item.score) || 0,
-        rating: parseInt(item.rating) || 0,
-        classrank: parseInt(item.classrank) || 0,
-        wholerank: parseInt(item.wholerank) || 0,
-      }));
-      postSchoolData(SdataToSend);
+    if (studentsData) {
+      studentsData?.map(item => {
+        const postDataList = {
+          userid: item.userid,
+          subjectid: item.subjectid,
+          semester: item.semester,
+          midfinal: item.midfinal,
+          score: item.score,
+          rating: item.rating,
+          classrank: item.classrank,
+          wholerank: item.wholerank,
+        };
+        postSchoolData(postDataList);
+      });
       navigate(-1);
     }
   };
 
   // 항목 추가 버튼
   const handleAddButtonClick = () => {
-    const newStudent = {
-      classrank: "0",
-      rating: 0,
-      wolerank: "0",
-      score: 0,
-      semester: dropSemester,
-      subjectid: null,
-      subject: null,
-      midfinal: dropTest,
-    };
-    setStudentsData(data => [...data, newStudent]);
-    setLastSchoolSavedData(data => [...data, newStudent]);
+    setStudentsData([...studentsData, initialRecord]);
   };
 
   useEffect(() => {
-    const interimData = [{}];
-    setStudentsData(interimData);
-    setLastSchoolSavedData(interimData);
-  }, []);
-
-  // 과목 정보
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        // 주요과목 데이터
-        const mainSubData = await getSchoolMainSubData();
-        setSubjectData(mainSubData);
-      } catch (err) {
-        console.log(err);
-        setSubjectData([]);
-      }
-    }
-    fetchData();
-  }, []);
-
-  // 학생 숫자 데이터
-  useEffect(() => {
-    async function personnelData() {
-      try {
-        // 전교 인원
-        const schoolData = await getSchoolData();
-        // 반 인원
-        const schoolclassData = await getSchoolclassData();
-        setSchoolData(schoolData);
-        setSchoolClassData(schoolclassData);
-      } catch (err) {
-        console.log(err);
-        setSchoolData([]);
-        setSchoolClassData([]);
-      }
-    }
-    personnelData();
-  }, []);
-
-  // 학생 이름
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getStudentsNameData();
-        setStudentNameData(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
+    getStudentsNameData(state, setStudentNameData);
   }, []);
 
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>
-        {matchingStudent && (
-          <h3>2023 내신 고사 성적 입력( {matchingStudent.nm} )</h3>
-        )}
+        <h3>{`${currentYear} 내신 성적 입력( ${studentNameData?.nm} )`}</h3>
         <select value={dropSemester} onChange={handleSemester}>
           <option value="">학기 선택</option>
-          <option value="1학기">1학기</option>
-          <option value="2학기">2학기</option>
+          <option value="1">1학기</option>
+          <option value="2">2학기</option>
         </select>
         <select value={dropTest} onChange={handleDropTest}>
           <option value="">시험 구분</option>
@@ -178,15 +110,9 @@ const InputSchoolRecord = () => {
         {studentsData.map((item, index) => (
           <TSubJectSchool
             key={index}
-            id={index}
-            schoolData={schoolData}
-            schoolClassData={schoolClassData}
-            subjectData={subjectData}
-            dropSemester={dropSemester}
-            dropTest={dropTest}
-            studentsData={studentsData[index]}
+            id={item.id}
+            studentsData={studentsData}
             setStudentsData={setStudentsData}
-            updateLastSavedData={updateLastSavedData}
           />
         ))}
       </div>

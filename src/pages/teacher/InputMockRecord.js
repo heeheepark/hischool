@@ -15,6 +15,8 @@ import { useLocation, useNavigate } from "react-router";
 
 const InputMockRecord = () => {
   const { state } = useLocation();
+  const today = new Date();
+  const currentYear = today.getFullYear();
   const [dropMonth, setDropMonth] = useState("");
   const initialRecord = {
     id: Date.now(),
@@ -26,20 +28,8 @@ const InputMockRecord = () => {
     percent: 0,
   };
   const [studentsData, setStudentsData] = useState([initialRecord]);
-  const [lastSavedData, setLastSavedData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
-
-  // 라스트 데이터 전달
-  const updateLastSavedData = (_id, newData) => {
-    const updateData = lastSavedData.map((item, idx) => {
-      if (idx === _id) {
-        item = newData;
-      }
-      return item;
-    });
-    setLastSavedData(updateData);
-  };
 
   // 월 선택
   const handleMonth = e => {
@@ -75,7 +65,7 @@ const InputMockRecord = () => {
   return (
     <InputMockRecordWrap>
       <ISRHeader>
-        <h3>{`2023 모의 고사 성적 입력( ${studentNameData?.nm} )`}</h3>
+        <h3>{`${currentYear} 모의고사 성적 입력( ${studentNameData?.nm} )`}</h3>
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">월 선택</option>
           {Array(12)
