@@ -40,20 +40,6 @@ const MockRecordHeader = ({
     setDeleteErrModalOpen(true);
   };
 
-  // 모의고사 삭제 모달 확인 클릭 시
-  useEffect(() => {
-    if (mockResultIdList.length !== 0 && mockDeleteOk === true) {
-      mockResultIdList.forEach(item => deleteStudentMockRecord(item));
-      getStudentMockRecord(
-        selectedId,
-        setDefaultMockRecord,
-        setStudentMockRecordList,
-      );
-      setMockModalOpen(false);
-      setMockDeleteOk(false);
-    }
-  }, [mockDeleteOk]);
-
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
@@ -89,6 +75,21 @@ const MockRecordHeader = ({
     const newMonths = Array.from(months);
     return newMonths.sort();
   };
+
+  // 모의고사 삭제 모달 확인 클릭 시
+  useEffect(() => {
+    if (mockResultIdList.length !== 0 && mockDeleteOk === true) {
+      mockResultIdList.forEach(item => deleteStudentMockRecord(item));
+      getStudentMockRecord(
+        selectedId,
+        setDefaultMockRecord,
+        setStudentMockRecordList,
+      );
+      setMockModalOpen(false);
+      setMockDeleteOk(false);
+    }
+  }, [mockDeleteOk]);
+
   return (
     <>
       {editErrModalOpen && (

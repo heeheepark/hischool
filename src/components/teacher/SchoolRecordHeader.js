@@ -39,20 +39,6 @@ const SchoolRecordHeader = ({
     setDeleteErrModalOpen(true);
   };
 
-  // 내신 삭제 모달 확인 클릭 시
-  useEffect(() => {
-    if (schoolResultIdList.length !== 0 && schoolDeleteOk === true) {
-      schoolResultIdList.forEach(item => deleteStudentSchoolRecord(item));
-      getStudentSchoolRecord(
-        selectedId,
-        setDefaultSchoolRecord,
-        setStudentSchoolRecordList,
-      );
-      setSchoolModalOpen(false);
-      setschoolDeleteOk(false);
-    }
-  }, [schoolDeleteOk]);
-
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
@@ -98,6 +84,20 @@ const SchoolRecordHeader = ({
     const newTestTypes = Array.from(testTypes);
     return newTestTypes.sort();
   };
+
+  // 내신 삭제 모달 확인 클릭 시
+  useEffect(() => {
+    if (schoolResultIdList.length !== 0 && schoolDeleteOk === true) {
+      schoolResultIdList.forEach(item => deleteStudentSchoolRecord(item));
+      getStudentSchoolRecord(
+        selectedId,
+        setDefaultSchoolRecord,
+        setStudentSchoolRecordList,
+      );
+      setSchoolModalOpen(false);
+      setschoolDeleteOk(false);
+    }
+  }, [schoolDeleteOk]);
 
   return (
     <>

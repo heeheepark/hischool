@@ -12,11 +12,6 @@ const RecapSchoolRecord = () => {
   const [recentSchoolRecordData, setRecentSchoolRecordData] = useState(null);
   const [recentTestTitle, setRecentTestTitle] = useState(null);
 
-  useState(() => {
-    getAllSchoolRecord(setAllSchoolRecordData);
-    getRecentSchoolRecord(setRecentSchoolRecordData, setRecentTestTitle);
-  }, []);
-
   // 내신 성적 현황 텍스트
   const testYear = recentTestTitle ? recentTestTitle[0] : null;
   const testSemester = recentTestTitle
@@ -44,6 +39,11 @@ const RecapSchoolRecord = () => {
         });
       return { id: subject[index], data };
     });
+
+  useState(() => {
+    getAllSchoolRecord(setAllSchoolRecordData);
+    getRecentSchoolRecord(setRecentSchoolRecordData, setRecentTestTitle);
+  }, []);
 
   return (
     <RecordDiv>

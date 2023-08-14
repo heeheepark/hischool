@@ -27,18 +27,6 @@ const SchoolRecordTable = () => {
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
 
-  useEffect(() => {
-    getAllSchoolRecord(
-      setDefaultSchoolRecord,
-      setAllSchoolRecord,
-      year,
-      semester,
-      testType,
-    );
-    getStudentCount(setStudentCount);
-    getAllStudentCount(setAllStudentCount);
-  }, [year, semester, testType]);
-
   const handleYearList = e => {
     const selectYear = e.target.value;
     setYear(selectYear);
@@ -74,6 +62,18 @@ const SchoolRecordTable = () => {
     const newTestTypes = Array.from(testTypes);
     return newTestTypes.sort();
   };
+
+  useEffect(() => {
+    getAllSchoolRecord(
+      setDefaultSchoolRecord,
+      setAllSchoolRecord,
+      year,
+      semester,
+      testType,
+    );
+    getStudentCount(setStudentCount);
+    getAllStudentCount(setAllStudentCount);
+  }, [year, semester, testType]);
 
   return (
     <>

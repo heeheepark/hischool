@@ -252,7 +252,11 @@ const About = () => {
                 <div>
                   <span className="member-name">석민경</span>
                   <div className="icons">
-                    <a href="" rel="noreferrer" target="_blank">
+                    <a
+                      href="https://github.com/Kimsukkyung0"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       <img
                         src={githubImg}
                         alt="깃허브 바로가기"

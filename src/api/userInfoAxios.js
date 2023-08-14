@@ -25,7 +25,6 @@ export const getSchoolLogo = async setSchoolLogo => {
   try {
     const res = await client.get(`/api/header/school-logo`);
     const result = res.data.logo;
-    // console.log(result.logo);
     setSchoolLogo(result);
   } catch (err) {
     console.log(err);

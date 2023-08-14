@@ -9,6 +9,7 @@ import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { postEmailCodeConFirm } from "../api/signUpAxios";
 import { useState } from "react";
 
+// 회원가입, 마이페이지 모달
 export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleTestClose = () => {
     onRequestClose();
