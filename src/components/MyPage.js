@@ -25,11 +25,18 @@ const MyPage = () => {
   const [codeConFirm, setCodeConFirm] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
   const [userPic, setUserPic] = useState("");
-
   const [cancelOk, setCancelOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [errPassword, setErrPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkPass = () => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
+    const isValid = regex.test(password);
+    setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
+  };
 
   const cookies = new Cookies();
 
@@ -101,6 +108,12 @@ const MyPage = () => {
     let formData = new FormData();
     selectFile && formData.append("pic", selectFile);
     formData.append("p", JSON.stringify(userPdata));
+
+    if (password !== passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
     putMyPageData(formData);
 
     userRole === "teacher"
@@ -172,7 +185,9 @@ const MyPage = () => {
                     defaultValue={userData.password}
                     onChange={handleChangePass}
                     autoComplete="on"
+                    onBlur={checkPass}
                   />
+                  {errPassword && <p className="err-message">{errPassword}</p>}
                 </li>
                 <li>
                   <label>비밀번호 확인</label>
@@ -182,6 +197,7 @@ const MyPage = () => {
                     defaultValue={userData.confirmPassword}
                     onChange={handleChangeConfPass}
                     autoComplete="on"
+                    onBlur={checkPass}
                   />
                 </li>
                 <li>
