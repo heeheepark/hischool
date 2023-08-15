@@ -16,7 +16,7 @@
 <h4>
     <a href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4">Notion</a>
   <span> · </span>
-    <a href="https://www.canva.com/design/DAFi-ZergiY/qP3h7yflt8xPcTJT3mydTQ/view?utm_content=DAFi-ZergiY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">발표자료</a>
+    <a href="https://www.canva.com/design/DAFq6ul3FIQ/FWsmdrQ-RLDoM2DY87YasA/view?utm_content=DAFq6ul3FIQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">발표자료</a>
   </h4>
 </div>
 
@@ -57,9 +57,14 @@
 
 <!-- Getting Started -->
 
-### 협업 도구
+### 기술 스택 및 협업 도구
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /> <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" /> <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=flat&logo=Sourcetree&logoColor=white" /> <img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" /> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /> 
+
+<img src="https://img.shields.io/badge/Styled_component-DB7093?style=flat&logo=styledcomponents&logoColor=white" /> <img src="https://img.shields.io/badge/fontawesome-528DD7?style=flat&logo=fontawesome&logoColor=white" /> 
+
+
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" /> <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=flat&logo=Sourcetree&logoColor=white" /> <img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" /> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />  <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white" /> 
 <br><br>
 
 <!-- Features -->
