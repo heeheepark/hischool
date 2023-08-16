@@ -21,12 +21,13 @@ export const postEmail = async idEmail => {
   }
 };
 
-export const postEmailCodeConFirm = async emailConFirm => {
+export const postEmailCodeConFirm = async (emailConFirm, setEmailCheck) => {
   try {
     const res = await client.post(`/api/code-confirm?code=${emailConFirm}`);
     console.log(res.data);
     if (res.data === 1) {
       alert("이메일 인증이 완료되었습니다");
+      setEmailCheck(true);
     } else {
       alert("코드가 틀렸습니다.");
     }

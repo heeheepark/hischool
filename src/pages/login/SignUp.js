@@ -20,6 +20,7 @@ const SignUp = () => {
   const [aprPic, setAprPic] = useState("");
   const [authModal, setAuthModal] = useState(false);
   const [addressModal, setAddressModal] = useState(false);
+  const [emailCheck, setEmailCheck] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
   const [errEmail, setErrEmail] = useState("");
   const [errPassword, setErrPassword] = useState("");
@@ -40,6 +41,7 @@ const SignUp = () => {
     role: "STD",
     detailAddress: "",
   });
+  console.log(payload);
 
   const birthFormatter = num => {
     try {
@@ -84,14 +86,14 @@ const SignUp = () => {
     const regex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const isValid = regex.test(payload.email);
-    setErrEmail(isValid ? "" : "유효한 이메일 주소를 입력 해주세요.");
+    setErrEmail(isValid ? "" : "유효한 이메일 주소를 입력해주세요.");
   };
 
   const checkPass = () => {
     const regex =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
     const isValid = regex.test(payload.pw);
-    setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
+    setErrPassword(isValid ? "" : "비밀번호를 확인해주세요.");
   };
 
   const handleEmail = e => {
@@ -106,6 +108,7 @@ const SignUp = () => {
     const addressInput = document.getElementById("address-input");
     if (addressInput) {
       addressInput.value = houseAddress.address;
+      setPayload({ ...payload, address: houseAddress.address });
     }
   }, [houseAddress.address]);
 
@@ -152,6 +155,11 @@ const SignUp = () => {
       return;
     }
 
+    if (!emailCheck) {
+      alert("이메일 인증이 완료되지 않았습니다. 이메일 인증을 진행해주세요.");
+      return;
+    }
+
     if (!payload.pw || errPassword) {
       alert("비밀번호를 확인하세요.");
       return;
@@ -173,7 +181,7 @@ const SignUp = () => {
     }
 
     postSignUp(formData);
-    navigate("/");
+    // navigate("/");
   };
 
   const handleChangeFile = e => {
@@ -247,39 +255,42 @@ const SignUp = () => {
                 <LeftForm>
                   <ul>
                     <li className="big-input">
-                      <label>이메일</label>
                       <div>
-                        <input
-                          className="confirm-input"
-                          type="email"
-                          placeholder="ex) aaa@gmail.com"
-                          value={payload.email}
-                          onChange={e => handleEmail(e)}
-                          onBlur={checkEmail}
-                        />
+                        <label>이메일</label>
                         {errEmail && <p className="err-message">{errEmail}</p>}
-                        <span onClick={handleEmailConfirm}>인증</span>
                       </div>
+                      <input
+                        className="confirm-input"
+                        type="email"
+                        placeholder="ex) aaa@gmail.com"
+                        value={payload.email}
+                        onChange={e => handleEmail(e)}
+                        onBlur={checkEmail}
+                      />
+                      <span onClick={handleEmailConfirm}>인증</span>
                       {authModal && (
                         <EmailConFirmModal
                           authModal={authModal}
                           setAuthModal={setAuthModal}
+                          setEmailCheck={setEmailCheck}
                         />
                       )}
                     </li>
                     <li className="big-input">
-                      <label>비밀번호</label>
+                      <div>
+                        <label>비밀번호</label>
+                        {errPassword && (
+                          <p className="err-message">{errPassword}</p>
+                        )}
+                      </div>
                       <input
                         type="password"
-                        placeholder="8~16자리로 입력해주세요."
+                        placeholder="영문, 숫자, 특수문자 포함 8~16자리"
                         value={payload.pw}
                         onChange={e => handlePassWord(e)}
                         autoComplete="on"
                         onBlur={checkPass}
                       />
-                      {errPassword && (
-                        <p className="err-message">{errPassword}</p>
-                      )}
                     </li>
                     <li className="big-input">
                       <label>비밀번호 확인</label>

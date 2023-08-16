@@ -30,12 +30,16 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
 };
 
 // 이메일 인증 확인 모달
-export const EmailConFirmModal = ({ authModal, setAuthModal }) => {
+export const EmailConFirmModal = ({
+  authModal,
+  setAuthModal,
+  setEmailCheck,
+}) => {
   const [emailConFirm, setEmailConFirm] = useState("");
 
   const handleCodeConfirm = e => {
     e.preventDefault();
-    postEmailCodeConFirm(emailConFirm);
+    postEmailCodeConFirm(emailConFirm, setEmailCheck);
     setAuthModal(false);
   };
 

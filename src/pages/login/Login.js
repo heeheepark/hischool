@@ -13,6 +13,7 @@ const Login = () => {
   const [errEmail, setErrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errPassword, setErrPassword] = useState("");
+  const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const navigate = useNavigate();
 
   const checkEmail = () => {
@@ -27,20 +28,20 @@ const Login = () => {
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
     const isValid = regex.test(password);
     setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
+    setIsLoginDisabled(!isValid);
   };
 
   // // 유저 선택 및 로그인 버튼 함수
   const handleSubmit = async e => {
     e.preventDefault();
-    const role = await fetchLogin(email, password);
-    // if()
-    // if (errEmail && errPassword) {
-    if (role === "ROLE_TC") {
-      navigate("/teacher/home");
-    } else if (role === "ROLE_STD") {
-      navigate("/student/home");
+    if (!isLoginDisabled) {
+      const role = await fetchLogin(email, password);
+      if (role === "ROLE_TC") {
+        navigate("/teacher/home");
+      } else if (role === "ROLE_STD") {
+        navigate("/student/home");
+      }
     }
-    // }
   };
 
   const handleEmail = e => {

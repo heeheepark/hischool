@@ -142,6 +142,7 @@ export const SignUpUl = styled.ul`
 
 export const LeftForm = styled.li`
   .err-message {
+    display: inline-block;
     padding-left: 10px;
     font-size: 16px;
     color: crimson;
