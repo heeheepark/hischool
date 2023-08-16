@@ -27,10 +27,13 @@
 ## :space_invader: About Team Member
 
 <a href="https://github.com/heeheepark">
-  <img src="images/readme1.png" />
+  <img src="/src/assets/developer1.png" width="120px" height="120px"/>
 </a>
-<a href="https://github.com/oh-yeongji">
-<img src="images/readme2.png" width="120px" height="120px">
+<a href="https://github.com/gyeongisung">
+<img src="/src/assets/developer2.png" width="120px" height="120px">
+</a>
+<a href="https://github.com/devicepac">
+<img src="/src/assets/developer3.png" width="120px" height="120px">
 </a>
 
 - 박주희(Team Leader)
