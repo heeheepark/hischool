@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   TcButtons,
-  TcMyPageRightInfo,
   TcMyPageUserInfo,
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
@@ -41,7 +40,6 @@ const MyPage = () => {
   const cookies = new Cookies();
 
   const handleDeleteCookie = () => {
-    console.log("to......");
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
     setTimeout(() => {
@@ -117,8 +115,8 @@ const MyPage = () => {
     putMyPageData(formData);
 
     userRole === "teacher"
-      ? navigate("/teacher/home")
-      : navigate("/student/home");
+      ? window.location.replace("/teacher/home")
+      : window.location.replace("/student/home");
   };
 
   // 이미지 미리보기 함수
@@ -178,15 +176,17 @@ const MyPage = () => {
                   />
                 </li>
                 <li>
-                  <label>비밀번호</label>
-                  <input
-                    type="password"
-                    name="password"
-                    defaultValue={userData.password}
-                    onChange={handleChangePass}
-                    autoComplete="on"
-                    onBlur={checkPass}
-                  />
+                  <div>
+                    <label>비밀번호</label>
+                    <input
+                      type="password"
+                      name="password"
+                      defaultValue={userData.password}
+                      onChange={handleChangePass}
+                      autoComplete="on"
+                      onBlur={checkPass}
+                    />
+                  </div>
                   {errPassword && <p className="err-message">{errPassword}</p>}
                 </li>
                 <li>
@@ -200,6 +200,7 @@ const MyPage = () => {
                     onBlur={checkPass}
                   />
                 </li>
+
                 <li>
                   <label>이름</label>
                   <input
@@ -290,11 +291,7 @@ const MyPage = () => {
                     </div>
                   </div>
                 </li>
-                <li></li>
               </TcMyPageUserInfo>
-              <TcMyPageRightInfo>
-                <ul></ul>
-              </TcMyPageRightInfo>
             </div>
           </div>
         </div>

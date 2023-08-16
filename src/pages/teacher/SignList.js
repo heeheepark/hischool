@@ -42,7 +42,6 @@ const SignList = () => {
   const handleCheckBox = e => {
     const clickList = e.currentTarget;
     const userId = parseInt(clickList.classList[1].slice(6));
-    console.log(userId);
     if (e.target.checked === true) {
       resultIdArray.push(userId);
     } else {
@@ -60,6 +59,14 @@ const SignList = () => {
     setAcceptOk(false);
     setModalOpen(false);
   }, [acceptOk]);
+
+  useEffect(() => {
+    document.querySelector(".all-checkbox-btn").checked = false;
+    document
+      .querySelectorAll(".school-checkbox")
+      .forEach(item => (item.checked = false));
+      setSaveCheckBox([]);
+  }, [studentListData]);
 
   const handleOk = () => {
     setModalOpen(true);

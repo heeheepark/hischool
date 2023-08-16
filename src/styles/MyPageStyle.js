@@ -4,7 +4,7 @@ export const MypageDiv = styled.div`
   width: 100%;
   height: 100%;
   background: #f7f7f7;
-  padding: 60px 300px;
+  padding: 60px 370px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column nowrap;
@@ -29,18 +29,17 @@ export const TcMyPageWrap = styled.div`
       height: 100%;
       .user-info-wrap {
         display: flex;
-        justify-content: space-between;
+        gap: 80px;
         .user-picture-wrap {
           display: flex;
           flex-flow: column;
           align-items: start;
-          margin-right: 20px;
           .picture-img {
             border: 1px solid gray;
             background: gray;
             margin-bottom: 10px;
             img {
-              width: 300px;
+              width: 250px;
               height: 300px;
             }
           }
@@ -75,6 +74,15 @@ export const TcMyPageUserInfo = styled.ul`
       margin-right: 5px;
       font-size: 18px;
     }
+    .err-message {
+      vertical-align: middle;
+      font-size: 14px;
+      color: crimson;
+    }
+    :nth-of-type(2) {
+      display: flex;
+      flex-direction: column;
+    }
     :nth-of-type(7) {
       align-items: start;
       .address-wrap {
@@ -99,52 +107,6 @@ export const TcMyPageUserInfo = styled.ul`
           }
         }
       }
-    }
-  }
-`;
-
-export const TcMyPageSchoolInfo = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 20px;
-  font-size: 21px;
-  font-weight: 500;
-  li {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    label {
-      display: inline-block;
-      width: 100px;
-    }
-    input {
-      width: 12vw;
-      height: 35px;
-      border: 1px solid #bbb;
-      border-radius: 3px;
-      padding-left: 10px;
-      margin-right: 5px;
-      font-size: 18px;
-    }
-  }
-`;
-
-export const TcMyPageRightInfo = styled.div`
-  margin-right: 30%;
-  font-size: 20px;
-  font-weight: 800;
-  li {
-    padding-bottom: 10px;
-    input {
-      display: block;
-      border-radius: 20px;
-      font-size: 18px;
-      height: 30px;
-      width: 300px;
-      padding: 0 10px;
-      margin: 5px 0;
     }
   }
 `;
