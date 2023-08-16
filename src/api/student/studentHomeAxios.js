@@ -63,7 +63,7 @@ const getRecentMockRecord = async (
 // 주간 급식표
 const getWeekFood = async setWeekMenuData => {
   try {
-    const res = await client.get(`/api/meal/main?sdSchulCode=${7240273}`);
+    const res = await client.get(`/api/meal/main`);
     const result = res.data.list;
     const menuList = result.map(item => {
       item.menuOftheDay = item.menuOftheDay.split(",");

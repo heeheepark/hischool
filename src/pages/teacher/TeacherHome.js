@@ -52,7 +52,6 @@ const TeacherHome = () => {
         currentYear +
         (currentMonth.length <= 1 ? "0" + currentMonth : currentMonth) +
         endDateDay;
-      console.log(startDate, endDate);
       setStartDate(startDate);
       setEndDate(endDate);
     }

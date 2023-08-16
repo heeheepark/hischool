@@ -13,7 +13,6 @@ export const LoadingWrap = styled.div`
     transform: translate(-50%, -50%);
     .spinner {
       display: block !important;
-      /* position: initial !important; */
       top: 50% !important;
       left: 50% !important;
       transform: translate(-30%, -50%) !important;

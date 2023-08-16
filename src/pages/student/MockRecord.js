@@ -24,10 +24,10 @@ const MockRecord = () => {
   // 모의고사 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
   const ratingList = allMockRecordData?.map(item => parseInt(item.rating));
-  const gradeArray = Array.from({ length: highGrade }, (_, index) => index + 1);
   const highGrade = ratingList?.reduce((a, b) => {
     return Math.max(a, b);
   });
+  const gradeArray = Array.from({ length: highGrade }, (_, index) => index + 1);
   const newMockRecordData = Array(4)
     .fill()
     .map((_, index) => {

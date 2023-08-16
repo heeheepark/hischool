@@ -15,7 +15,7 @@ export const getAllStudentCount = async setAllStudentCount => {
 // 학급 총원
 export const getStudentCount = async setStudentCount => {
   try {
-    const res = await client.get(`/api/subject/class-num`);
+    const res = await client.get(`/api/teacher/class-student`);
     const result = res.data;
     setStudentCount(result);
   } catch (err) {
@@ -26,7 +26,7 @@ export const getStudentCount = async setStudentCount => {
 // 가입 대기 인원
 export const getUnSignCount = async setUnSignCount => {
   try {
-    const res = await client.get(`/api/teacher/apr-student?classid=${2}`);
+    const res = await client.get(`/api/teacher/apr-student`);
     const result = res.data;
     setUnSignCount(result);
   } catch (err) {
