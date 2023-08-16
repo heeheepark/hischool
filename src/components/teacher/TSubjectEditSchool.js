@@ -133,8 +133,8 @@ const TSubJectEditSchool = ({
             <option value="2학기">2학기</option>
           </select>
           <select defaultValue={scoreList.midfinal} onChange={handleDropTest}>
-            <option value="1">중간고사</option>
-            <option value="2">기말고사</option>
+            <option value={1}>중간고사</option>
+            <option value={2}>기말고사</option>
           </select>
           <select
             name="subject"

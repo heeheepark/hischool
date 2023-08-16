@@ -68,13 +68,9 @@ const InputMockRecord = () => {
         <h3>{`${currentYear} 모의고사 성적 입력( ${studentNameData?.nm} )`}</h3>
         <select value={dropMonth} onChange={handleMonth}>
           <option value="">월 선택</option>
-          {Array(12)
-            .fill()
-            .map((item, index) => (
-              <option value={index + 1} key={index}>
-                {`${index + 1}월`}
-              </option>
-            ))}
+          <option value={3}>3월</option>
+          <option value={6}>6월</option>
+          <option value={9}>9월</option>
         </select>
       </ISRHeader>
       <ISRButton>

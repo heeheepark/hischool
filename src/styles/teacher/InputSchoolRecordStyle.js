@@ -161,7 +161,7 @@ const ISinput = styled.div`
     margin: 0 auto;
     border: 1px solid #bbb;
     border-radius: 3px;
-    width: 10vw;
+    width: 7vw;
     height: 25px;
     text-align: center;
   }
