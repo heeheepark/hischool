@@ -4,15 +4,15 @@ export const AboutDiv = styled.div`
   width: 100%;
   height: 100%;
   background: #f7f7f7;
-  padding: 55px 30px;
+  padding: 1.5% 30px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column nowrap;
-  gap: 80px;
+  gap: 3%;
   h3 {
     color: #176b87;
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 1.3%;
   }
   .service-info-wrap {
     width: 100%;
@@ -34,7 +34,7 @@ export const AboutDiv = styled.div`
     }
     > div {
       :first-of-type {
-        margin-bottom: 30px;
+        margin-bottom: 1.5%;
         > p {
           font-size: 18px;
           a {
@@ -57,7 +57,7 @@ export const AboutDiv = styled.div`
         justify-content: space-between;
       }
       :nth-of-type(2) {
-        margin-bottom: 50px;
+        margin-bottom: 2%;
       }
       > div {
         width: 100%;

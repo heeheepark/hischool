@@ -4,7 +4,7 @@ const SchoolRecordDiv = styled.div`
   width: 100%;
   height: 100%;
   background: #f7f7f7;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   h3 {
     font-size: 30px;
@@ -142,7 +142,7 @@ const RecordTableWrap = styled.div`
 const SchoolRecordTableDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 97%;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -158,6 +158,7 @@ const SchoolRecordTableDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: 1fr;
+    z-index: 9;
     li {
       background: #176b87;
       color: #fff;

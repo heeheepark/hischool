@@ -4,13 +4,13 @@ const StudentRecordDiv = styled.div`
   width: 100%;
   height: 100%;
   background: #f7f7f7;
-  padding: 15px;
+  padding: 9px 15px 15px 15px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column;
   h3 {
     font-size: 27px;
-    margin-bottom: 20px;
+    margin-bottom: 0.5%;
   }
   .record-wrap {
     height: 100%;
@@ -18,7 +18,7 @@ const StudentRecordDiv = styled.div`
     flex-flow: column;
     .student-list-wrap {
       height: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 1.1%;
       form {
         margin-bottom: 5px;
         > input {
@@ -42,7 +42,7 @@ const StudentRecordDiv = styled.div`
     }
     .school-record-wrap {
       height: 100%;
-      margin-bottom: 35px;
+      margin-bottom: 1.1%;
       .school-record-header {
         display: flex;
         justify-content: space-between;
@@ -79,7 +79,6 @@ const StudentRecordDiv = styled.div`
     }
     .mock-record-wrap {
       height: 100%;
-      margin-bottom: 8px;
       .mock-record-header {
         display: flex;
         justify-content: space-between;
@@ -120,7 +119,7 @@ const StudentRecordDiv = styled.div`
 const StudentListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 12vh;
+  height: 13.7vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;

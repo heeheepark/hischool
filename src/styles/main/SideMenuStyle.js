@@ -25,7 +25,7 @@ const SideMenuWrap = styled.div`
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
-    height: 36vh;
+    height: 42%;
     color: #fff;
     padding: 20px 30px;
     .main-logo {
@@ -71,7 +71,7 @@ const SideMenuWrap = styled.div`
     }
   }
   .gnb-wrap {
-    height: 64vh;
+    height: 58%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;

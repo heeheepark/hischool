@@ -12,7 +12,7 @@ export const StudentListTitle = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 15px 0 15px 0;
+  padding: 0 0 0.5% 0 ;
   h3 {
     font-size: 30px;
   }
