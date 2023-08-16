@@ -56,7 +56,7 @@ export const EmailConFirmModal = ({
       {authModal && (
         <StudentRecordModalDiv className="modal">
           <div className="dim"></div>
-          <div className="content-wrap">
+          <div className="content-wrap" style={{height:"230px"}}>
             <div className="header">
               <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
             </div>
@@ -68,6 +68,7 @@ export const EmailConFirmModal = ({
                 name="email-check"
                 value={emailConFirm}
                 onChange={e => handleConfirmInput(e)}
+                style={{width:"100%"}}
               />
             </div>
             <div className="btns">
