@@ -72,20 +72,16 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
     getMockMainSubData(setInitSubCate);
     if (selectedSubCate) getMockSubData(selectedSubCate, setInitDetailSub);
   }, [selectedSubCate]);
-  
+
   return (
     <>
       <div>
         <IMREdit>
           <select defaultValue={scoreList.mon} onChange={handleMonth}>
-            <option value="">월</option>
-            {Array(12)
-              .fill()
-              .map((item, index) => (
-                <option key={index} value={index + 1}>
-                  {index + 1}월
-                </option>
-              ))}
+            <option value="">월 선택</option>
+            <option value={3}>3월</option>
+            <option value={6}>6월</option>
+            <option value={9}>9월</option>
           </select>
           <select
             name="categoryId"
