@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h1>고등학교 성적 관리 서비스 Hi! School</h1>
+  <br><br><br>
+  
+  
+<!-- Badges -->
+<!-- Screenshots -->
 
-## Available Scripts
+<div align="center"> 
+  <img src="assets/1.시안.png" alt="screenshot" />
+</div>
 
-In the project directory, you can run:
+<br><br>
 
-### `yarn start`
+<h4>
+    <a href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4">Notion</a>
+  <span> · </span>
+    <a href="https://www.canva.com/design/DAFq6ul3FIQ/FWsmdrQ-RLDoM2DY87YasA/view?utm_content=DAFq6ul3FIQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">발표자료</a>
+  </h4>
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br /><br><br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- TechStack -->
 
-### `yarn test`
+## :space_invader: About Team Member
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<a href="https://github.com/heeheepark">
+  <img src="images/readme1.png" />
+</a>
+<a href="https://github.com/oh-yeongji">
+<img src="images/readme2.png" width="120px" height="120px">
+</a>
 
-### `yarn build`
+- 박주희(Team Leader)
+- 견기성(Team Member)
+- 박호진(Team Member)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 담당 영역 및 역할
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 박주희: 프로젝트 총괄, 회의록 작성 / 헤더·사이드 메뉴, (학생) 메인, 내신 점수, 모의고사 점수, 급식표, (선생님) 메인, 성적 관리
+- 견기성: 스토리보드 작성 / 로그인, 회원가입, 마이페이지, (선생님) 학생 관리
+- 박호진: Figma 작업 / (선생님) 내신 성적 입력, 모의고사 성적 입력, 과목 정보 입력
 
-### `yarn eject`
+<br>
+<!-- About the Project -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## :star2: About the Project
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 작업기간
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2023-07-14 ~ 2023-08-16(33일)
+<br><br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- Getting Started -->
 
-## Learn More
+### 기술 스택 및 협업 도구
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" /> <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /> 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="https://img.shields.io/badge/Styled_component-DB7093?style=flat&logo=styledcomponents&logoColor=white" /> <img src="https://img.shields.io/badge/fontawesome-528DD7?style=flat&logo=fontawesome&logoColor=white" /> 
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" /> <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=flat&logo=Sourcetree&logoColor=white" /> <img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" /> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />  <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white" /> 
+<br><br>
 
-### Analyzing the Bundle Size
+<!-- Features -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 서비스 대상
 
-### Making a Progressive Web App
+대구광역시에 위치한 일반고 및 자율고 구성원(고등학생, 담임선생님)
+  <br><br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 서비스 특징
 
-### Advanced Configuration
+- 내신 성적과 모의고사 성적을 간편하게 관리할 수 있는 서비스
+- 공교육과 연계하여 교사와 학생간의 원활한 대입 상담 및 학업 설계 지도 가능
+- 사용자 인증 시스템을 통한 신뢰성 있는 데이터 제공
+  <br><br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 주요 기능
+1. 학생별 개인 성적 현황 제공
+   - 학생: 주요 과목 최고 등급, 현재 등급, 최근 응시 시험 등급
+   - 선생님: 최근 응시 시험 학급 성적 현황(내신, 모의고사)
+2. 학급 별 시간표 제공: 학기별 시간표
+3. (학생) 급식표 제공: 주간, 월간 급식표
+4. (선생님) 학사 일정 제공: 해당 년도 학사 일정
+  <br>
 
-### Deployment
+## :handshake: Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 박주희(Joohee Park, Team leader) : 📨 pjh9641@gmail.com / 🔗 https://github.com/heeheepark
+- 견기성(GiSung Gyeon, Team member) : 📨 gisung.gyeon@gmail.com / 🔗 https://github.com/gyeongisung
+- 박호진(HoJin Park, Team member) : 📨 bardichedevice@gmail.com / 🔗 https://github.com/devicepac
