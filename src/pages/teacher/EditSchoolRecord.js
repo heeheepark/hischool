@@ -26,7 +26,7 @@ const EditSchoolRecord = () => {
         const postDataList = {
           resultId: item.resultId,
           subjectId: item.subjectId,
-          year: "2023", //임시
+          year: "2023",
           semester: item.semester,
           mf: item.midfinal,
           score: item.score,
@@ -39,6 +39,7 @@ const EditSchoolRecord = () => {
       navigate(-1);
     }
   };
+
   useEffect(() => {
     getStudentsNameData(state[0], setStudentNameData);
     Promise.all(
@@ -50,14 +51,15 @@ const EditSchoolRecord = () => {
         const newStudentsData = [...studentsData, ...recordList];
         setStudentsData(newStudentsData);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
       });
   }, []);
 
   useEffect(() => {
     getStudentsNameData(state[0], setStudentNameData);
   }, []);
+  
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>

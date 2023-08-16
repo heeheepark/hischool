@@ -33,6 +33,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
+
   const handleScore = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -42,6 +43,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
+
   const handleRating = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -51,6 +53,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
+
   const handleClassRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -60,6 +63,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
+
   const handleWholeRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -69,6 +73,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
+  
   return (
     <>
       <div>

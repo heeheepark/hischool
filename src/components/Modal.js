@@ -14,7 +14,6 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleTestClose = () => {
     onRequestClose();
   };
-
   return (
     <>
       {isOpen && (
@@ -36,7 +35,7 @@ export const EmailConFirmModal = ({
   setEmailCheck,
 }) => {
   const [emailConFirm, setEmailConFirm] = useState("");
-
+  
   const handleCodeConfirm = e => {
     e.preventDefault();
     postEmailCodeConFirm(emailConFirm, setEmailCheck);

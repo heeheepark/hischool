@@ -13,15 +13,13 @@ const TSubjectPlus = ({
     subjectid: "",
   };
   const [studentData, setStudentData] = useState(initialStudentData);
+
   useEffect(() => {
-    // 선택된 학생 데이터가 있을 경우, 수정 폼에 해당 학생 데이터를 불러옵니다.
     if (selectedStudentIndex !== null) {
       setStudentData(studentsData[selectedStudentIndex]);
-    } else {
-      // 선택된 학생 데이터가 없으면 초기화합니다.
-      // setStudentData(initialStudentData);
     }
   }, [selectedStudentIndex, studentsData]);
+
   const handleInputChange = e => {
     const { name, value } = e.target;
     const updatedValue = value;
@@ -34,8 +32,8 @@ const TSubjectPlus = ({
       ...studentData,
       [name]: updatedValue,
     };
-    // 변경된 데이터를 InputSchoolRecord 컴포넌트로 전달
     updateLastSavedData(id, updatedData);
+
   };
   return (
     <div>

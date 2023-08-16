@@ -35,7 +35,6 @@ export const patchSignAccept = async userId => {
       `/api/teacher/accept-student?userId=${userId}`,
     );
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }
@@ -46,7 +45,6 @@ export const patchSignCancel = async userId => {
   try {
     const res = await client.patch(`/api/teacher/cancel-std?userId=${userId}`);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }

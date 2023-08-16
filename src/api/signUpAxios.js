@@ -6,7 +6,6 @@ export const postSignUp = async formData => {
     const res = await axios.post("/api/sign-up", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(res.data);
   } catch (err) {
     console.error(err);
   }
@@ -15,7 +14,6 @@ export const postSignUp = async formData => {
 export const postEmail = async idEmail => {
   try {
     const res = await client.post(`/api/mail-confirm?email=${idEmail}`);
-    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
@@ -24,7 +22,6 @@ export const postEmail = async idEmail => {
 export const postEmailCodeConFirm = async (emailConFirm, setEmailCheck) => {
   try {
     const res = await client.post(`/api/code-confirm?code=${emailConFirm}`);
-    console.log(res.data);
     if (res.data === 1) {
       alert("이메일 인증이 완료되었습니다");
       setEmailCheck(true);

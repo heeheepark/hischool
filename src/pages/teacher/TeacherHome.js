@@ -116,7 +116,6 @@ const TeacherHome = () => {
                 eventTextColor="#555"
                 dayMaxEvents={true}
                 datesSet={handleDatesSet}
-                // getDate={handleDatesSet}
                 moreLinkContent={args => {
                   return <span>{"+" + args.num}</span>;
                 }}

@@ -15,9 +15,7 @@ export const putMyPageData = async formData => {
     const res = await client.put(`/api/mypage/user-info-update`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(res);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }
@@ -27,7 +25,6 @@ export const deleteUser = async () => {
   try {
     const res = await client.delete(`/api/mypage`);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }

@@ -23,12 +23,13 @@ const InputSubject = () => {
   const [lastSavedData, setLastSavedData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const interimData = [{}];
     setStudentsData(interimData);
     setLastSavedData(interimData);
   }, []);
-  // 새로운 데이터를 전달하는 함수
+
   const updateLastSavedData = (_id, newData) => {
     const updateData = lastSavedData.map((item, idx) => {
       if (idx === _id) {
@@ -38,6 +39,7 @@ const InputSubject = () => {
     });
     setLastSavedData(updateData);
   };
+
   const handleSaveButtonClick = () => {
     if (lastSavedData) {
       const dataToSend = lastSavedData.map(item => ({
@@ -47,6 +49,7 @@ const InputSubject = () => {
       navigate(-1);
     }
   };
+
   const handleAddButtonClick = () => {
     const newStudent = {
       subSubject: null,
@@ -55,12 +58,13 @@ const InputSubject = () => {
     setStudentsData(data => [...data, newStudent]);
     setLastSavedData(data => [...data, newStudent]);
   };
+
   useEffect(() => {
     async function fetchData() {
       try {
-        // 주요과목 데이터 가져오기
+        // 과목 계열 가져오기
         const mainSubData = await getALLMainSubData();
-        // 하위과목 데이터 가져오기
+        // 세부 과목 가져오기
         const newSubjectData = await Promise.all(
           mainSubData.map(async mainSubject => {
             const subData = await getALLSubData(mainSubject.categoryid);
@@ -73,17 +77,15 @@ const InputSubject = () => {
             };
           }),
         );
-
-        // subjectData 상태 업데이트
         setSubjectData(newSubjectData);
       } catch (err) {
         console.log(err);
         setSubjectData([]);
       }
     }
-
     fetchData();
   }, []);
+  
   return (
     <InputSubJectWrap>
       <SJHeader>

@@ -16,7 +16,6 @@ const SignList = () => {
   const [acceptOk, setAcceptOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [saveCheckBox, setSaveCheckBox] = useState([]);
-  console.log(studentListData);
   const navigate = useNavigate();
   let resultIdArray = saveCheckBox;
 

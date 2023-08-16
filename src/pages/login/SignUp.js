@@ -41,7 +41,6 @@ const SignUp = () => {
     role: "STD",
     detailAddress: "",
   });
-  console.log(payload);
 
   const birthFormatter = num => {
     try {
@@ -181,7 +180,7 @@ const SignUp = () => {
     }
 
     postSignUp(formData);
-    // navigate("/");
+    navigate("/");
   };
 
   const handleChangeFile = e => {
@@ -192,7 +191,6 @@ const SignUp = () => {
 
   const handleChangeApr = e => {
     const file = e.target.files[0];
-    console.log(file);
     setAprPic(file);
     setAprPic(file?.name || "");
   };

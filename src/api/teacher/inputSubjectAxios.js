@@ -6,7 +6,6 @@ export const postALLData = async dataToSend => {
     const response = await client.post("/api/teacher/subject", {
       list: dataToSend,
     });
-    console.log(response.data);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }

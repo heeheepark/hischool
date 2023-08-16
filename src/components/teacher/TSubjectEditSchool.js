@@ -41,6 +41,7 @@ const TSubJectEditSchool = ({
     );
     setSubInitDetailSubList(arr);
   };
+
   // 학기 변경
   const handleSemester = e => {
     const submitList = studentsData.map(item => {
@@ -51,6 +52,7 @@ const TSubJectEditSchool = ({
     });
     setStudentsData(submitList);
   };
+
   // 시험유형(중간/기말) 변경
   const handleDropTest = e => {
     const submitList = studentsData.map(item => {
@@ -105,6 +107,7 @@ const TSubJectEditSchool = ({
     });
     setStudentsData(submitList);
   };
+
   const getAllData = async () => {
     await getSchoolMainSubData(setInitSubCate);
     if (selectedSubCate) {
@@ -115,11 +118,11 @@ const TSubJectEditSchool = ({
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   };
+  
   useEffect(() => {
     getAllData();
   }, []);
-  console.log(scoreList, "scoreList")
-  console.log(studentsData, "studentsData")
+
   return (
     <>
       <div>
