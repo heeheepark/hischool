@@ -42,8 +42,6 @@ const Header = styled.div`
         background: transparent;
         width: 100%;
         height: 100%;
-        margin-bottom: 2.1px;
-        margin-right: 2px;
       }
     }
     span {

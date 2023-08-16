@@ -2,6 +2,10 @@ import { AboutDiv } from "../styles/AboutStyle";
 import canvaImg from "../assets/canva-logo.png";
 import githubImg from "../assets/github-logo.png";
 import notionImg from "../assets/Notion-logo.png";
+import developer1 from "../assets/developer1.png";
+import developer2 from "../assets/developer2.png";
+import developer3 from "../assets/developer3.png";
+import developer7 from "../assets/developer7.png";
 
 const About = () => {
   return (
@@ -42,7 +46,7 @@ const About = () => {
         <div className="team-info">
           <p>
             <a
-              href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4"
+              href="https://faithful-creature-4f3.notion.site/team_c-bda01938369343ef83967c966a44a6c9"
               rel="noreferrer"
               target="_blank"
             >
@@ -67,7 +71,7 @@ const About = () => {
         <div className="front-wrap">
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="박주희 이미지" /> */}
+              <img src={developer1} alt="박주희 이미지" />
               <div>
                 <div>
                   <span className="member-name">박주희</span>
@@ -95,7 +99,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="견기성 이미지" /> */}
+              <img src={developer2} alt="견기성 이미지" />
               <div>
                 <div>
                   <span className="member-name">견기성</span>
@@ -122,7 +126,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="박호진 이미지" /> */}
+              <img src={developer3} alt="박호진 이미지" />
               <div>
                 <div>
                   <span className="member-name">박호진</span>
@@ -147,20 +151,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="신지호 이미지" /> */}
-              <div>
-                <div>
-                  <span className="member-name">신지호</span>
-                </div>
-                <span className="roles">
-                  내신 점수 / 모의고사 점수 / <br />
-                  급식표 초안 작업
-                </span>
-              </div>
-            </div>
-          </div>
+          <div></div>
         </div>
         <h4>Back-end</h4>
         <div className="back-wrap">
@@ -247,7 +238,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="석민경 이미지" /> */}
+              <img src={developer7} alt="석민경 이미지" />
               <div>
                 <div>
                   <span className="member-name">석민경</span>
