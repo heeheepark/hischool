@@ -13,7 +13,7 @@ export const patchSchoolData = async dataToSend => {
   try {
     const res = await client.patch("/api/teacher/update-aca", dataToSend);
     const result = res.data;
-    console.log("데이터 전송 성공")
+    console.log("데이터 전송 성공", dataToSend)
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
@@ -35,6 +35,7 @@ export const getSchoolSubData = async setInitDetailSub => {
     const res = await client.get("/api/teacher/subject/category/small");
     const result = res.data;
     setInitDetailSub(result);
+    return result;
   } catch (err) {
     console.log(err);
     return [];
