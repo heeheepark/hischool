@@ -5,6 +5,9 @@ import notionImg from "../assets/Notion-logo.png";
 import developer1 from "../assets/developer1.png";
 import developer2 from "../assets/developer2.png";
 import developer3 from "../assets/developer3.png";
+import developer4 from "../assets/developer4.png";
+import developer5 from "../assets/developer5.png";
+import developer6 from "../assets/developer6.png";
 import developer7 from "../assets/developer7.png";
 
 const About = () => {
@@ -157,7 +160,7 @@ const About = () => {
         <div className="back-wrap">
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="성수천 이미지" /> */}
+              <img src={developer4} alt="성수천 이미지" />
               <div>
                 <div>
                   <span className="member-name">성수천</span>
@@ -184,7 +187,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="남규진 이미지" /> */}
+              <img src={developer5} alt="남규진 이미지" />
               <div>
                 <div>
                   <span className="member-name">남규진</span>
@@ -211,7 +214,7 @@ const About = () => {
           </div>
           <div>
             <div className="member-detail-wrap">
-              {/* <img src={userImg} alt="노정민 이미지" /> */}
+              <img src={developer6} alt="노정민 이미지" />
               <div>
                 <div>
                   <span className="member-name">노정민</span>

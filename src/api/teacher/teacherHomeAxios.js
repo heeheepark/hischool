@@ -3,8 +3,7 @@ import { client } from "../client";
 // 전교 학생 인원
 export const getAllStudentCount = async setAllStudentCount => {
   try {
-    const res = await client.get(`/api/subject/school-snum
-    `);
+    const res = await client.get(`/api/subject/school-snum`);
     const result = res.data;
     setAllStudentCount(result);
   } catch (err) {
@@ -15,7 +14,7 @@ export const getAllStudentCount = async setAllStudentCount => {
 // 학급 총원
 export const getStudentCount = async setStudentCount => {
   try {
-    const res = await client.get(`/api/teacher/class-student`);
+    const res = await client.get(`/api/subject/class-num`);
     const result = res.data;
     setStudentCount(result);
   } catch (err) {
