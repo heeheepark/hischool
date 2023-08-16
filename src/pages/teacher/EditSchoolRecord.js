@@ -9,15 +9,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   getSchoolEditData,
   patchSchoolData,
-  postSchoolData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
 import TSubJectEditSchool from "../../components/teacher/TSubjectEditSchool";
 
 const EditSchoolRecord = () => {
   const { state } = useLocation();
-  const today = new Date();
-  const currentYear = today.getFullYear();
   const [studentsData, setStudentsData] = useState([]);
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
@@ -25,11 +22,7 @@ const EditSchoolRecord = () => {
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
-      const nowArr = studentsData.map((item, index) => {
-        item[0].resultId = state[1][index];
-        return item[0];
-      });
-      nowArr.map(item => {
+      studentsData.map(item => {
         const postDataList = {
           resultId: item.resultId,
           subjectId: item.subjectId,
@@ -68,7 +61,7 @@ const EditSchoolRecord = () => {
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>
-        <h3>{`${currentYear} 내신 성적 입력( ${studentNameData?.nm} )`}</h3>
+        <h3>{`내신 성적 수정( ${studentNameData?.nm} )`}</h3>
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>수정</button>

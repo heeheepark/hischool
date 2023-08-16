@@ -72,7 +72,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
     getMockMainSubData(setInitSubCate);
     if (selectedSubCate) getMockSubData(selectedSubCate, setInitDetailSub);
   }, [selectedSubCate]);
-  console.log("initSubCate", initSubCate)
+  
   return (
     <>
       <div>
