@@ -40,12 +40,12 @@ const InputSubject = () => {
     setLastSavedData(updateData);
   };
 
-  const handleSaveButtonClick = () => {
+  const handleSaveButtonClick = async () => {
     if (lastSavedData) {
       const dataToSend = lastSavedData.map(item => ({
         subjectid: parseInt(item.subjectid) || 0,
       }));
-      postALLData(dataToSend);
+      await postALLData(dataToSend);
       navigate(-1);
     }
   };
