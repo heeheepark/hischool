@@ -22,9 +22,10 @@ const EditSchoolRecord = () => {
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
-      studentsData.map(item => {
+      studentsData.map((item, index) => {
+        // console.log("item: ", item)
         const postDataList = {
-          resultId: item.resultId,
+          resultId: state[1][index],
           subjectId: item.subjectId,
           year: "2023",
           semester: item.semester,
@@ -48,8 +49,16 @@ const EditSchoolRecord = () => {
       }),
     )
       .then(recordList => {
-        const newStudentsData = [...studentsData, ...recordList];
-        setStudentsData(newStudentsData);
+        const newData = recordList;
+        const newDataItems = [];
+        newData.forEach((item, index) => {
+          item[0].id = state[1][index];
+          newDataItems.push(item[0])
+        });
+
+
+        setStudentsData(newDataItems);
+
       })
       .catch(err => {
         console.log(err);
@@ -59,7 +68,7 @@ const EditSchoolRecord = () => {
   useEffect(() => {
     getStudentsNameData(state[0], setStudentNameData);
   }, []);
-  
+
   return (
     <InputSchoolRecordWrap>
       <ISRHeader>
@@ -84,7 +93,7 @@ const EditSchoolRecord = () => {
           <TSubJectEditSchool
             key={index}
             id={item.id}
-            scoreList={item[0]}
+            scoreList={item}
             studentsData={studentsData}
             setStudentsData={setStudentsData}
           />

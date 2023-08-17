@@ -34,6 +34,14 @@ const TSubJectEditSchool = ({
   };
   
   const handleSubject = e => {
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.subjectId = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setStudentsData(submitList);
+
     setSelectedSubCate(e.target.value);
     setDefaultSubject(e.target.value);
     const arr = initDetailSub.filter(
@@ -90,7 +98,7 @@ const TSubJectEditSchool = ({
   const handleClassRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
-        item.classrank = parseInt(e.target.value);
+        item.classRank = parseInt(e.target.value);
       }
       return item;
     });
@@ -101,7 +109,7 @@ const TSubJectEditSchool = ({
   const handleWholeRank = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
-        item.wholerank = parseInt(e.target.value);
+        item.wholeRank = parseInt(e.target.value);
       }
       return item;
     });

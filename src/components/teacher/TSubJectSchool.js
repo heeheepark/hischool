@@ -15,11 +15,15 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
 
+  const getAllData = async () => {
+    await getSchoolMainSubData(setInitSubCate);
+    await getSchoolSubData(setInitDetailSub);
+    await getSchoolclassData(setClassCount);
+    await getSchoolData(setWholeCount);
+  }
+
   useEffect(() => {
-    getSchoolMainSubData(setInitSubCate);
-    getSchoolSubData(setInitDetailSub);
-    getSchoolclassData(setClassCount);
-    getSchoolData(setWholeCount);
+    getAllData();
   }, []);
 
   const handleSubCate = e => {};
