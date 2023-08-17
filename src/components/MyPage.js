@@ -115,8 +115,8 @@ const MyPage = () => {
     putMyPageData(formData);
 
     userRole === "teacher"
-      ? window.location.replace("/teacher/home")
-      : window.location.replace("/student/home");
+      ? navigate("/teacher/home")
+      : navigate("/student/home");
   };
 
   // 이미지 미리보기 함수

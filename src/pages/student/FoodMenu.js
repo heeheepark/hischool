@@ -6,15 +6,18 @@ import { getMonthFood } from "../../api/student/foodMenuAxios";
 
 const FoodMenu = () => {
   const [foodMenuList, setFoodMenuList] = useState(null);
+  const [date, setDate] = useState(null);
+  const year = date?.slice(0,4)
+  const month = date?.slice(4, 5) === "0" ? date?.slice(5) : date?.slice(4)
   const eventData = foodMenuList;
 
   useEffect(() => {
-    getMonthFood(setFoodMenuList);
+    getMonthFood(setFoodMenuList, setDate);
   }, []);
 
   return (
     <FoodMenuDiv>
-      <h3>{`${2023}년 ${6}월 급식표`}</h3>
+      <h3>{`${year}년 ${month}월 급식표`}</h3>
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
@@ -22,7 +25,6 @@ const FoodMenu = () => {
         height="90%"
         headerToolbar={false}
         dayCellContent={day => day.dayNumberText.replace("일", "")}
-        initialDate={"2023-06-01"}
         events={eventData}
         eventBackgroundColor="transparent"
         eventBorderColor="transparent"

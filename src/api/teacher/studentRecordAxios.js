@@ -63,6 +63,7 @@ export const getStudentMockRecord = async (
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
+    console.log(result)
     setStudentMockRecordList(result);
   } catch (err) {
     console.log(err);
