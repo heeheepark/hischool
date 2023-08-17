@@ -68,6 +68,9 @@ export const StudentRecordModalDiv = styled.div`
     justify-content: space-between;
     padding: 36px;
     z-index: 99;
+    >div{
+      text-align: center;
+    }
     .header {
       .warning-icon {
         color: #ff5e5e;

@@ -111,12 +111,16 @@ const MyPage = () => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
+    
+    if (!password && !passwordConfirm){
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
 
     putMyPageData(formData);
 
     userRole === "teacher"
-      ? window.location.replace("/teacher/home")
-      : window.location.replace("/student/home");
+    ? navigate("/teacher/home") : navigate("/student/home")
   };
 
   // 이미지 미리보기 함수
