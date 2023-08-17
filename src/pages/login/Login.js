@@ -14,32 +14,36 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errPassword, setErrPassword] = useState("");
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
+  const [errConfirm, setErrConfirm] = useState(false);
   const navigate = useNavigate();
 
   const checkEmail = () => {
     const regex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const isValid = regex.test(email);
-    setErrEmail(isValid ? "" : "유효한 이메일 주소를 입력 해주세요.");
+    setErrEmail(isValid ? "" : "이메일 주소가 형식에 맞지 않습니다.");
   };
 
   const checkPass = () => {
     const regex =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/g;
     const isValid = regex.test(password);
-    setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
+    setErrPassword(isValid ? "" : "비밀번호가 형식에 맞지 않습니다.");
     setIsLoginDisabled(!isValid);
   };
+
 
   // // 유저 선택 및 로그인 버튼 함수
   const handleSubmit = async e => {
     e.preventDefault();
     if (!isLoginDisabled) {
-      const role = await fetchLogin(email, password);
+      const role = await fetchLogin(email, password, setErrConfirm);
       if (role === "ROLE_TC") {
         navigate("/teacher/home");
       } else if (role === "ROLE_STD") {
         navigate("/student/home");
+      }else{
+        setErrConfirm(true)
       }
     }
   };
@@ -73,11 +77,12 @@ const Login = () => {
               className="login-password"
               onChange={e => handlePassWord(e)}
               type="password"
-              placeholder="PassWord"
+              placeholder="Password"
               autoComplete="on"
               onBlur={checkPass}
             />
             {errPassword && <p className="err-message">{errPassword}</p>}
+          {errConfirm && <p className="err-message">이메일과 비밀번호를 확인 해주세요.</p>}
           </div>
           <div className="link-button">
             <Link to="#">Email/PW 찾기</Link>

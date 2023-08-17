@@ -54,11 +54,11 @@ client.interceptors.response.use(
 );
 
 // 로그인 함수
-export const fetchLogin = async (email, pw) => {
+export const fetchLogin = async (email, password) => {
   try {
     const res = await client.post(`/api/sign-in`, {
       email: email,
-      pw: pw,
+      pw: password,
     });
     const result = await res.data;
     const role = result.role;
@@ -77,6 +77,5 @@ export const fetchLogin = async (email, pw) => {
     return role;
   } catch (error) {
     console.log(error);
-    return null;
   }
 };
