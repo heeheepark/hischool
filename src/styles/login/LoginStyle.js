@@ -7,7 +7,7 @@ export const LoginWrap = styled.div`
 
 export const IntroImage = styled.div`
   width: 100vw;
-  height: 50vh;
+  height: 42vh;
   img {
     width: 100%;
     height: 100%;

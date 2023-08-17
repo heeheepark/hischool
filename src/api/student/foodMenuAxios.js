@@ -1,7 +1,7 @@
 import { client } from "../client";
 
 // 급식표
-const getMonthFood = async setFoodMenuList => {
+const getMonthFood = async (setFoodMenuList, setDate) => {
   try {
     const res = await client.get(`/api/meal`);
     const result = res.data;
@@ -16,6 +16,7 @@ const getMonthFood = async setFoodMenuList => {
       return newList;
     });
     setFoodMenuList(newFoodMenuList);
+    setDate(result.strYearMonth)
   } catch (err) {
     console.log(err);
   }
