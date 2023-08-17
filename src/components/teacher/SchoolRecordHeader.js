@@ -17,6 +17,7 @@ const SchoolRecordHeader = ({
   setSemester,
   setTestType,
 }) => {
+  console.log(defaultSchoolRecord)
   const navigate = useNavigate();
   const [schoolModalOpen, setSchoolModalOpen] = useState(false);
   const [schoolDeleteOk, setschoolDeleteOk] = useState(false);
@@ -50,7 +51,7 @@ const SchoolRecordHeader = ({
   };
 
   const handleTestTypeList = e => {
-    const selectTestType = e.target.value;
+    const selectTestType = parseInt(e.target.value);
     setTestType(selectTestType);
   };
 
@@ -80,7 +81,7 @@ const SchoolRecordHeader = ({
 
   const testTypeList = defaultSchoolRecord => {
     const testTypes = new Set();
-    defaultSchoolRecord?.forEach(item => testTypes.add(item.mf));
+    defaultSchoolRecord?.forEach(item => testTypes.add(item.midFinal));
     const newTestTypes = Array.from(testTypes);
     return newTestTypes.sort();
   };

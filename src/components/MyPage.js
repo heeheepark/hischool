@@ -190,8 +190,8 @@ const MyPage = () => {
                       autoComplete="on"
                       onBlur={checkPass}
                     />
-                  </div>
                   {errPassword && <p className="err-message">{errPassword}</p>}
+                  </div>
                 </li>
                 <li>
                   <label>비밀번호 확인</label>

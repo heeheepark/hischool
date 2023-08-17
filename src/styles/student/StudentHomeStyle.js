@@ -73,7 +73,7 @@ const RecordDiv = styled.div`
   .chart {
     position: relative;
     width: 100%;
-    height: 30vh;
+    height: 28.8vh;
     background: #fff;
     margin-bottom: 20px;
     border-radius: 5px;

@@ -94,16 +94,16 @@ const SchoolRecordList = ({
                 </li>
                 <li>{item.year}</li>
                 <li>{item.semester}</li>
-                <li>{item.mf === 1 ? "중간" : "기말"}</li>
+                <li>{item.midFinal === 1 ? "중간" : "기말"}</li>
+                <li>{item.cateName}</li>
                 <li>{item.nm}</li>
-                <li>{item.detailNm}</li>
                 <li>{item.score}</li>
                 <li>{item.rating}</li>
                 <li>
-                  {item.cr}/{studentCount}
+                  {item.classRank}/{studentCount}
                 </li>
                 <li>
-                  {item.wr}/{allStudentCount}
+                  {item.wholeRank}/{allStudentCount}
                 </li>
               </ul>
             </li>

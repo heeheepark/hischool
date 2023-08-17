@@ -19,7 +19,7 @@ const MockRecordDiv = styled.div`
 const MockRecordTableDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 95%;
+  height: 97%;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;

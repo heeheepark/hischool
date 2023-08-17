@@ -11,8 +11,10 @@ export const getStudentSchoolRecord = async (
 ) => {
   try {
     let axiosUrl;
+    console.log(typeof(year))
+    console.log(year, semester, testType)
     if (year && semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}&mf=${testType}`;
+      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}&midFinal=${testType}`;
     } else if (year && semester && !testType) {
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}`;
     } else if (year && !semester && !testType) {
@@ -20,11 +22,11 @@ export const getStudentSchoolRecord = async (
     } else if (!year && semester && !testType) {
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}`;
     } else if (!year && !semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&mf=${testType}`;
+      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&midFinal=${testType}`;
     } else if (!year && semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}&mf=${testType}`;
+      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}&midFinal=${testType}`;
     } else if (year && !semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&mf=${testType}`;
+      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&midFinal=${testType}`;
     } else {
       axiosUrl = `/api/teacher/acaresult?userId=${studentId}`;
       const res = await client.get(axiosUrl);
@@ -63,7 +65,6 @@ export const getStudentMockRecord = async (
     }
     const res = await client.get(axiosUrl);
     const result = res.data;
-    console.log(result)
     setStudentMockRecordList(result);
   } catch (err) {
     console.log(err);

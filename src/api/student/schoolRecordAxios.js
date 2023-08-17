@@ -32,6 +32,7 @@ export const getAllSchoolRecord = async (
 ) => {
   try {
     let axiosUrl;
+    console.log(year, semester, testType)
     if (year && semester && testType) {
       axiosUrl = `/api/student/aca-table?year=${year}&semester=${semester}&midFinal=${testType}`;
     } else if (year && semester && !testType) {
@@ -44,7 +45,10 @@ export const getAllSchoolRecord = async (
       axiosUrl = `/api/student/aca-table?midFinal=${testType}`;
     } else if (!year && semester && testType) {
       axiosUrl = `/api/student/aca-table?semester=${semester}&midFinal=${testType}`;
-    } else {
+    } else if (year && !semester && testType) {
+      axiosUrl = `/api/student/aca-table?year=${year}&midFinal=${testType}`;
+    } 
+    else {
       axiosUrl = `/api/student/aca-table`;
       const res = await client.get(axiosUrl);
       const result = res.data;
