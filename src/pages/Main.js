@@ -34,7 +34,7 @@ const Main = () => {
             </div>
           </Header>
           <Content>
-            <div className="content-wrap">
+            <div className="main-content-wrap">
               <Outlet />
             </div>
           </Content>

@@ -3,7 +3,8 @@ import { getCookie, setCookie } from "./cookie";
 
 // axios 인스턴스 생성
 export const client = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://192.168.0.144:5003/",
+  // baseURL: "http://localhost:3001/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -54,11 +55,11 @@ client.interceptors.response.use(
 );
 
 // 로그인 함수
-export const fetchLogin = async (email, pw) => {
+export const fetchLogin = async (email, password) => {
   try {
     const res = await client.post(`/api/sign-in`, {
       email: email,
-      pw: pw,
+      pw: password,
     });
     const result = await res.data;
     const role = result.role;
@@ -77,6 +78,5 @@ export const fetchLogin = async (email, pw) => {
     return role;
   } catch (error) {
     console.log(error);
-    return null;
   }
 };

@@ -63,7 +63,7 @@ const Content = styled.div`
   width: 100%;
   padding: 15px;
   height: calc(100vh - 60px);
-  .content-wrap {
+  .main-content-wrap {
     height: 100%;
     border-radius: 5px;
   }

@@ -55,8 +55,8 @@ export const StudentRecordModalDiv = styled.div`
   }
   .content-wrap {
     position: absolute;
-    width: 27%;
-    height: 20vh;
+    width: 23%;
+    height: 20%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
