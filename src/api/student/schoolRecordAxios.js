@@ -32,7 +32,6 @@ export const getAllSchoolRecord = async (
 ) => {
   try {
     let axiosUrl;
-    console.log(year, semester, testType)
     if (year && semester && testType) {
       axiosUrl = `/api/student/aca-table?year=${year}&semester=${semester}&midFinal=${testType}`;
     } else if (year && semester && !testType) {

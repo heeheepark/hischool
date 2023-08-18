@@ -23,7 +23,6 @@ const EditSchoolRecord = () => {
   const handleSaveButtonClick = () => {
     if (studentsData) {
       studentsData.map((item, index) => {
-        // console.log("item: ", item)
         const postDataList = {
           resultId: state[1][index],
           subjectId: item.subjectId,

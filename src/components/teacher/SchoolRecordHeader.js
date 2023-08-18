@@ -17,7 +17,6 @@ const SchoolRecordHeader = ({
   setSemester,
   setTestType,
 }) => {
-  console.log(defaultSchoolRecord)
   const navigate = useNavigate();
   const [schoolModalOpen, setSchoolModalOpen] = useState(false);
   const [schoolDeleteOk, setschoolDeleteOk] = useState(false);
