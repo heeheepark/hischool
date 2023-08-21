@@ -119,8 +119,7 @@ const MyPage = () => {
 
     putMyPageData(formData);
 
-    userRole === "teacher"
-    ? navigate("/teacher/home") : navigate("/student/home")
+    userRole === "teacher" ? navigate("/teacher/home") : navigate("/student/home")
   };
 
   // 이미지 미리보기 함수
