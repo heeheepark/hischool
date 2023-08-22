@@ -3,8 +3,8 @@ import { getCookie, setCookie } from "./cookie";
 
 // axios 인스턴스 생성
 export const client = axios.create({
-  baseURL: "http://192.168.0.144:5003/",
-  // baseURL: "http://localhost:3000/",
+  // baseURL: "http://192.168.0.144:5003/",
+  baseURL: "http://localhost:3000/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -45,7 +45,6 @@ client.interceptors.response.use(
         // 토큰 갱신 후 재시도
         const retryResponse = await client(config);
         return retryResponse;
-
       } catch (error) {
         console.log(error);
       }

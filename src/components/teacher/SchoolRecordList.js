@@ -10,9 +10,11 @@ const SchoolRecordList = ({
   setSchoolResultIdList,
   schoolResultIdList,
 }) => {
+  const today = new Date();
+  const todayYear = today.getFullYear().toString();
+  let resultIdArray = schoolResultIdList;
   const [allStudentCount, setAllStudentCount] = useState(null);
   const [studentCount, setStudentCount] = useState(null);
-  let resultIdArray = schoolResultIdList;
 
   // 전체 선택
   const handleAllCheck = e => {
@@ -85,12 +87,16 @@ const SchoolRecordList = ({
             <li className="data-table" key={item.resultId}>
               <ul>
                 <li>
-                  <input
-                    type="checkbox"
-                    defaultChecked={false}
-                    className={`school-checkbox resultId${item.resultId}`}
-                    onClick={e => handleCheckBox(e)}
-                  />
+                  {item.year === todayYear ? (
+                    <input
+                      type="checkbox"
+                      defaultChecked={false}
+                      className={`school-checkbox resultId${item.resultId} year${item.year}`}
+                      onClick={e => handleCheckBox(e)}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </li>
                 <li>{item.year}</li>
                 <li>{item.semester}</li>

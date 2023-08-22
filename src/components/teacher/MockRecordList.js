@@ -6,6 +6,8 @@ const MockRecordList = ({
   setMockResultIdList,
   mockResultIdList,
 }) => {
+  const today = new Date();
+  const todayYear = today.getFullYear().toString();
   let resultIdArray = mockResultIdList;
 
   // 전체 선택
@@ -70,12 +72,16 @@ const MockRecordList = ({
             <li className="data-table" key={item.userId}>
               <ul>
                 <li>
-                  <input
-                    type="checkbox"
-                    defaultChecked={false}
-                    className={`mock-checkbox resultId0${item.resultId}`}
-                    onClick={e => handleCheckBox(e)}
-                  />
+                  {item.year === todayYear ? (
+                    <input
+                      type="checkbox"
+                      defaultChecked={false}
+                      className={`mock-checkbox resultId0${item.resultId}`}
+                      onClick={e => handleCheckBox(e)}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </li>
                 <li>{item.year}</li>
                 <li>{`${item.mon}월`}</li>

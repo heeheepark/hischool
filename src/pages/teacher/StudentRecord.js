@@ -18,6 +18,7 @@ const StudentRecord = () => {
   const [studentListData, setStudentListData] = useState(null);
   const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
   const [schoolResultIdList, setSchoolResultIdList] = useState([]);
+  const [yearList, setYearList] = useState([]);
   const [studentMockRecordList, setStudentMockRecordList] = useState(null);
   const [mockResultIdList, setMockResultIdList] = useState([]);
   const [schoolYear, setSchoolYear] = useState(null);
@@ -112,6 +113,8 @@ const StudentRecord = () => {
               studentSchoolRecordList={studentSchoolRecordList}
               setSchoolResultIdList={setSchoolResultIdList}
               schoolResultIdList={schoolResultIdList}
+              yearList={yearList}
+              setYearList={setYearList}
             />
           </div>
           <div className="mock-record-wrap">
