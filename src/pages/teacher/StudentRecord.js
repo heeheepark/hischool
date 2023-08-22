@@ -18,7 +18,6 @@ const StudentRecord = () => {
   const [studentListData, setStudentListData] = useState(null);
   const [studentSchoolRecordList, setStudentSchoolRecordList] = useState(null);
   const [schoolResultIdList, setSchoolResultIdList] = useState([]);
-  const [yearList, setYearList] = useState([]);
   const [studentMockRecordList, setStudentMockRecordList] = useState(null);
   const [mockResultIdList, setMockResultIdList] = useState([]);
   const [schoolYear, setSchoolYear] = useState(null);
@@ -92,46 +91,46 @@ const StudentRecord = () => {
     <>
       <StudentRecordDiv>
         <h3>학생 성적 관리</h3>
-        <div className="record-wrap">
+        <div className="wrap">
           <SearchStudent
             studentListData={studentListData}
             setSelectedId={setSelectedId}
             handleStudentRecordData={handleStudentRecordData}
           />
-          <div className="school-record-wrap">
-            <SchoolRecordHeader
-              defaultSchoolRecord={defaultSchoolRecord}
-              setDefaultSchoolRecord={setDefaultSchoolRecord}
-              selectedId={selectedId}
-              schoolResultIdList={schoolResultIdList}
-              setStudentSchoolRecordList={setStudentSchoolRecordList}
-              setYear={setSchoolYear}
-              setSemester={setSemester}
-              setTestType={setTestType}
-            />
-            <SchoolRecordList
-              studentSchoolRecordList={studentSchoolRecordList}
-              setSchoolResultIdList={setSchoolResultIdList}
-              schoolResultIdList={schoolResultIdList}
-              yearList={yearList}
-              setYearList={setYearList}
-            />
-          </div>
-          <div className="mock-record-wrap">
-            <MockRecordHeader
-              defaultMockRecord={defaultMockRecord}
-              setDefaultMockRecord={setDefaultMockRecord}
-              selectedId={selectedId}
-              mockResultIdList={mockResultIdList}
-              setStudentMockRecordList={setStudentMockRecordList}
-              setYear={setMockYear}
-              setMonth={setMonth}
-            />
-            <MockRecordList
-              studentMockRecordList={studentMockRecordList}
-              setMockResultIdList={setMockResultIdList}
-              mockResultIdList={mockResultIdList}
-            />
+          <div className="record-wrap">
+            <div className="school-record-wrap">
+              <SchoolRecordHeader
+                defaultSchoolRecord={defaultSchoolRecord}
+                setDefaultSchoolRecord={setDefaultSchoolRecord}
+                selectedId={selectedId}
+                schoolResultIdList={schoolResultIdList}
+                setStudentSchoolRecordList={setStudentSchoolRecordList}
+                setYear={setSchoolYear}
+                setSemester={setSemester}
+                setTestType={setTestType}
+              />
+              <SchoolRecordList
+                studentSchoolRecordList={studentSchoolRecordList}
+                setSchoolResultIdList={setSchoolResultIdList}
+                schoolResultIdList={schoolResultIdList}
+              />
+            </div>
+            <div className="mock-record-wrap">
+              <MockRecordHeader
+                defaultMockRecord={defaultMockRecord}
+                setDefaultMockRecord={setDefaultMockRecord}
+                selectedId={selectedId}
+                mockResultIdList={mockResultIdList}
+                setStudentMockRecordList={setStudentMockRecordList}
+                setYear={setMockYear}
+                setMonth={setMonth}
+              />
+              <MockRecordList
+                studentMockRecordList={studentMockRecordList}
+                setMockResultIdList={setMockResultIdList}
+                mockResultIdList={mockResultIdList}
+              />
+            </div>
           </div>
         </div>
       </StudentRecordDiv>

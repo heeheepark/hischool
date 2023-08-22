@@ -41,6 +41,7 @@ const SchoolRecordHeader = ({
 
   const handleYearList = e => {
     const selectYear = e.target.value;
+    console.log(selectYear);
     setYear(selectYear);
   };
 
@@ -97,7 +98,20 @@ const SchoolRecordHeader = ({
       setSchoolModalOpen(false);
       setschoolDeleteOk(false);
     }
-  }, [schoolDeleteOk]);
+
+    // 데이터 갱신 시 필터링 초기화
+    const yearSelect = document.getElementById("school-year");
+    yearSelect.value = "";
+    setYear("");
+
+    const semesterSelect = document.getElementById("semester");
+    semesterSelect.value = "";
+    setSemester("");
+
+    const testCategorySelect = document.getElementById("test-category");
+    testCategorySelect.value = "";
+    setTestType("");
+  }, [schoolDeleteOk, defaultSchoolRecord]);
 
   return (
     <>
@@ -122,9 +136,13 @@ const SchoolRecordHeader = ({
       )}
       <div className="school-record-header">
         <div className="header-left">
-          <h4>내신 성적 관리</h4>
+          <h4>내신 성적</h4>
           <SchoolRecordFilterDiv>
-            <select name="year" id="year" onChange={e => handleYearList(e)}>
+            <select
+              name="school-year"
+              id="school-year"
+              onChange={e => handleYearList(e)}
+            >
               <option value="">전체 연도</option>
               {yearList(defaultSchoolRecord).map((item, index) => (
                 <option value={item} key={index}>

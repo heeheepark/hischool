@@ -88,7 +88,15 @@ const MockRecordHeader = ({
       setMockModalOpen(false);
       setMockDeleteOk(false);
     }
-  }, [mockDeleteOk]);
+    // 데이터 갱신 시 필터링 초기화
+    const yearSelect = document.getElementById("mock-year");
+    yearSelect.value = "";
+    setYear("");
+
+    const monthSelect = document.getElementById("month");
+    monthSelect.value = "";
+    setMonth("");
+  }, [mockDeleteOk, defaultMockRecord]);
 
   return (
     <>
@@ -113,34 +121,22 @@ const MockRecordHeader = ({
       )}
       <div className="mock-record-header">
         <div className="header-left">
-          <h4>모의고사 성적 관리</h4>
+          <h4>모의고사 성적</h4>
           <SchoolRecordFilterDiv className="filter-wrap">
-            {defaultMockRecord ? (
-              <select
-                name="year"
-                id="year"
-                value={selectedYear}
-                onChange={e => handleYearList(e)}
-              >
-                <option value={""} selected>
-                  전체 연도
-                </option>
-                {yearList(defaultMockRecord).map((item, index) => (
-                  <option value={item} key={index}>
-                    {`${item}년`}
-                  </option>
-                ))}
-              </select>
-            ) : null}
             <select
-              name="semester"
-              id="semester"
-              value={selectedMonth}
-              onChange={e => handleMonthList(e)}
+              name="mock-year"
+              id="mock-year"
+              onChange={e => handleYearList(e)}
             >
-              <option value={""} selected>
-                전체 월
-              </option>
+              <option value="">전체 연도</option>
+              {yearList(defaultMockRecord).map((item, index) => (
+                <option value={item} key={index}>
+                  {`${item}년`}
+                </option>
+              ))}
+            </select>
+            <select name="month" id="month" onChange={e => handleMonthList(e)}>
+              <option value="">전체 월</option>
               {monthList(defaultMockRecord).map((item, index) => (
                 <option value={item} key={index}>
                   {`${item}월`}

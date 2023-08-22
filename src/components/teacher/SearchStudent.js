@@ -6,7 +6,7 @@ const SearchStudent = ({
   setSelectedId,
   handleStudentRecordData,
 }) => {
-  const category = ["번호", "이름", "생년월일", "연락처", "이메일"];
+  const category = ["이름", "생년월일"];
 
   // 학생 선택
   const handleStudentList = e => {
@@ -46,11 +46,9 @@ const SearchStudent = ({
                 key={item.userId}
               >
                 <ul>
-                  <li>{index + 1}</li>
+                  {/* <li>{index + 1}</li> */}
                   <li>{item.snm}</li>
                   <li>{item.birth}</li>
-                  <li>{item.phone}</li>
-                  <li>{item.email}</li>
                 </ul>
               </li>
             ))}

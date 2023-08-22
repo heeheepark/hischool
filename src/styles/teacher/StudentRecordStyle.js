@@ -8,23 +8,27 @@ const StudentRecordDiv = styled.div`
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column;
+
   h3 {
     font-size: 27px;
     margin-bottom: 0.5%;
   }
-  .record-wrap {
+  .wrap {
     height: 100%;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+    gap: 15px;
     .student-list-wrap {
+      width: 15%;
       height: 100%;
-      margin-bottom: 1.1%;
+      margin-top: 5px;
+      /* margin-bottom: 1.1%; */
       form {
-        margin-bottom: 5px;
+        margin-bottom: 12px;
         > input {
           border: 1px solid #bbb;
           border-radius: 3px;
-          width: 10vw;
+          width: 77%;
           height: 24px;
           padding-left: 5px;
           margin-right: 5px;
@@ -39,75 +43,84 @@ const StudentRecordDiv = styled.div`
           cursor: pointer;
         }
       }
+      .student-list {
+        height: 91.6%;
+      }
     }
-    .school-record-wrap {
-      height: 100%;
-      margin-bottom: 1.1%;
-      .school-record-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        .header-left {
+    .record-wrap {
+      width: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      /* justify-content: space-between; */
+      .school-record-wrap {
+        height: 100%;
+        margin-bottom: 1.1%;
+        .school-record-header {
           display: flex;
+          justify-content: space-between;
           align-items: center;
-          h4 {
-            font-size: 22px;
-            margin-right: 10px;
+          margin-bottom: 10px;
+          .header-left {
+            display: flex;
+            align-items: center;
+            h4 {
+              font-size: 22px;
+              margin-right: 10px;
+            }
           }
-        }
-        .btns {
-          button {
-            width: 45px;
-            height: 24px;
-            background: #fff;
-            border: 1px solid #bbb;
-            border-radius: 3px;
-            margin-right: 5px;
-            line-height: 1;
-            cursor: pointer;
-            &.add-school-record {
-              width: 110px;
-              margin-right: 0;
-              background: #64ccc5;
-              color: #fff;
-              border: #64cbb2;
+          .btns {
+            button {
+              width: 45px;
+              height: 24px;
+              background: #fff;
+              border: 1px solid #bbb;
+              border-radius: 3px;
+              margin-right: 5px;
+              line-height: 1;
+              cursor: pointer;
+              &.add-school-record {
+                width: 110px;
+                margin-right: 0;
+                background: #64ccc5;
+                color: #fff;
+                border: #64cbb2;
+              }
             }
           }
         }
       }
-    }
-    .mock-record-wrap {
-      height: 100%;
-      .mock-record-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        .header-left {
+      .mock-record-wrap {
+        height: 100%;
+        .mock-record-header {
           display: flex;
+          justify-content: space-between;
           align-items: center;
-          h4 {
-            font-size: 22px;
-            margin-right: 10px;
+          margin-bottom: 10px;
+          .header-left {
+            display: flex;
+            align-items: center;
+            h4 {
+              font-size: 22px;
+              margin-right: 10px;
+            }
           }
-        }
-        .btns {
-          button {
-            width: 45px;
-            height: 24px;
-            background: #fff;
-            border: 1px solid #bbb;
-            border-radius: 3px;
-            margin-right: 5px;
-            line-height: 1;
-            cursor: pointer;
-            &.add-mock-record {
-              width: 8vw;
-              margin-right: 0;
-              background: #64ccc5;
-              color: #fff;
-              border: #64cbb2;
+          .btns {
+            button {
+              width: 45px;
+              height: 24px;
+              background: #fff;
+              border: 1px solid #bbb;
+              border-radius: 3px;
+              margin-right: 5px;
+              line-height: 1;
+              cursor: pointer;
+              &.add-mock-record {
+                width: 8vw;
+                margin-right: 0;
+                background: #64ccc5;
+                color: #fff;
+                border: #64cbb2;
+              }
             }
           }
         }
@@ -119,7 +132,7 @@ const StudentRecordDiv = styled.div`
 const StudentListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 13.7vh;
+  height: 100%;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -133,7 +146,7 @@ const StudentListDiv = styled.div`
     top: 0;
     width: 100%;
     display: grid;
-    grid-template-columns: 0.1fr 0.5fr 0.6fr 1fr 1fr;
+    grid-template-columns: 0.4fr 0.6fr;
     grid-template-rows: 1fr;
     li {
       input {
@@ -156,7 +169,7 @@ const StudentListDiv = styled.div`
       cursor: pointer;
       > ul {
         display: grid;
-        grid-template-columns: 0.1fr 0.5fr 0.6fr 1fr 1fr;
+        grid-template-columns: 0.4fr 0.6fr;
         > li {
           input {
             cursor: pointer;
@@ -176,7 +189,7 @@ const StudentListDiv = styled.div`
 const SchoolRecordListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 27vh;
+  height: 34vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -196,7 +209,7 @@ const SchoolRecordListDiv = styled.div`
     top: 0;
     width: 100%;
     display: grid;
-    grid-template-columns: 0.1fr repeat(9, 0.5fr);
+    grid-template-columns: 0.03fr repeat(3, 0.1fr) 0.17fr 0.2fr repeat(4, 0.1fr);
     grid-template-rows: 1fr;
 
     li {
@@ -219,7 +232,10 @@ const SchoolRecordListDiv = styled.div`
       border-bottom: 1px solid #ccc;
       > ul {
         display: grid;
-        grid-template-columns: 0.1fr repeat(9, 0.5fr);
+        grid-template-columns: 0.03fr repeat(3, 0.1fr) 0.17fr 0.2fr repeat(
+            4,
+            0.1fr
+          );
         > li {
           input {
             cursor: pointer;
@@ -236,7 +252,7 @@ const SchoolRecordListDiv = styled.div`
 const MockRecordListDiv = styled.div`
   position: relative;
   width: 100%;
-  height: 27vh;
+  height: 34vh;
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
