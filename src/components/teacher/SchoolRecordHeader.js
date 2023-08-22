@@ -41,7 +41,6 @@ const SchoolRecordHeader = ({
 
   const handleYearList = e => {
     const selectYear = e.target.value;
-    console.log(selectYear);
     setYear(selectYear);
   };
 
@@ -69,21 +68,21 @@ const SchoolRecordHeader = ({
     const years = new Set();
     defaultSchoolRecord?.forEach(item => years.add(item.year));
     const newYears = Array.from(years);
-    return newYears.sort();
+    return newYears.sort((a, b) => b - a);
   };
 
   const semesterList = defaultSchoolRecord => {
     const semesters = new Set();
     defaultSchoolRecord?.forEach(item => semesters.add(item.semester));
     const newSemesters = Array.from(semesters);
-    return newSemesters.sort();
+    return newSemesters.sort((a, b) => b - a);
   };
 
   const testTypeList = defaultSchoolRecord => {
     const testTypes = new Set();
     defaultSchoolRecord?.forEach(item => testTypes.add(item.midFinal));
     const newTestTypes = Array.from(testTypes);
-    return newTestTypes.sort();
+    return newTestTypes.sort((a, b) => b - a);
   };
 
   // 내신 삭제 모달 확인 클릭 시
