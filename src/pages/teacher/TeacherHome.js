@@ -70,18 +70,24 @@ const TeacherHome = () => {
   return (
     <TeacherHomeDiv>
       <div className="student-count">
-        <h3>학급 현황</h3>
-        <div className="class-status">
-          <span>총 인원:</span>
-          <Link to="/teacher/studentlist">
-            <span className="student-num">{studentCount}</span>
-          </Link>
-          <span>명</span>
-          <span>(가입 대기 인원:</span>
-          <Link to="/teacher/signlist">
-            <span className="student-num">{unSignCount}</span>
-          </Link>
-          <span>명)</span>
+        <div className="class-status-wrap">
+          <h3>학급 현황</h3>
+          <div className="class-status">
+            <span>총 인원:</span>
+            <Link to="/teacher/studentlist">
+              <span className="student-num">{studentCount}</span>
+            </Link>
+            <span>명</span>
+            <span>(가입 대기 인원:</span>
+            <Link to="/teacher/signlist">
+              <span className="student-num">{unSignCount}</span>
+            </Link>
+            <span>명)</span>
+          </div>
+        </div>
+        <div className="notice-wrap">
+          <h3>공지사항</h3>
+          <div className=""></div>
         </div>
       </div>
       <div className="teacher-home-bottom">

@@ -14,36 +14,55 @@ const TeacherHomeDiv = styled.div`
   }
   .student-count {
     display: flex;
+    gap: 90px;
     height: 50px;
     background: #f7f7f7;
     box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
     padding: 8px 15px;
     border-radius: 3px;
-    h3 {
-      width: 6.3%;
-      font-size: 21px;
-      border-right: 1px solid #ccc;
-      margin-right: 15px;
-      margin-bottom: 0;
-      padding-right: 15px;
-    }
-    .class-status {
+    .class-status-wrap {
       width: 100%;
-      height: 100%;
-      font-size: 21px;
-      font-weight: 600;
-      color: #176b87;
-      > span {
-        display: inline-block;
-        &:nth-of-type(3) {
-          margin-right: 0;
+      display: flex;
+      align-items: center;
+      h3 {
+        width: 14%;
+        font-size: 21px;
+        border-right: 1px solid #ccc;
+        margin-right: 15px;
+        margin-bottom: 0;
+        padding-right: 15px;
+      }
+      .class-status {
+        width: 100%;
+        height: 100%;
+        font-size: 21px;
+        font-weight: 600;
+        color: #176b87;
+        > span {
+          display: inline-block;
+          &:nth-of-type(3) {
+            margin-right: 0;
+          }
+        }
+        .student-num {
+          font-weight: 600;
+          margin-left: 10px;
+          color: #64ccc5;
+          text-decoration: underline;
         }
       }
-      .student-num {
-        font-weight: 600;
-        margin-left: 10px;
-        color: #64ccc5;
-        text-decoration: underline;
+    }
+    .notice-wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      h3 {
+        width: 12%;
+        font-size: 21px;
+        border-right: 1px solid #ccc;
+        margin-right: 15px;
+        margin-bottom: 0;
+        padding-right: 15px;
       }
     }
   }
