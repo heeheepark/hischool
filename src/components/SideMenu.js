@@ -81,6 +81,18 @@ const SideMenu = () => {
                   </li>
                 </NavLink>
                 <NavLink
+                  to={`/${user}/notice`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <span>공지사항</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
                   to={`/${user}/schoolrecord`}
                   className={({ isActive }) =>
                     "nav-link" + (isActive ? "-active" : "")
@@ -116,13 +128,6 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>
-                <NavLink className="nav-link disabled">
-                  <li>
-                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
-                    <span>커뮤니티</span>
-                    <FontAwesomeIcon icon={faLock} className="arrow" />
-                  </li>
-                </NavLink>
                 <NavLink
                   to={`${user}/about`}
                   className={({ isActive }) =>
@@ -151,6 +156,18 @@ const SideMenu = () => {
                   </li>
                 </NavLink>
                 <NavLink
+                  to={`/${user}/notice`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <span>공지사항</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
                   to={`/${user}/record`}
                   className={({ isActive }) =>
                     "nav-link" + (isActive ? "-active" : "")
@@ -172,13 +189,6 @@ const SideMenu = () => {
                     <FontAwesomeIcon icon={faFileInvoice} className="icon" />
                     <span>학생 관리</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-                  </li>
-                </NavLink>
-                <NavLink className="nav-link disabled">
-                  <li>
-                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
-                    <span>커뮤니티</span>
-                    <FontAwesomeIcon icon={faLock} className="arrow" />
                   </li>
                 </NavLink>
                 <NavLink

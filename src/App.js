@@ -19,6 +19,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import EditSchoolRecord from "./pages/teacher/EditSchoolRecord";
 import EditMockRecord from "./pages/teacher/EditMockRecord";
+import Notice from "./pages/Notice";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           {/* 학생 */}
           <Route path="/student/home" element={<StudentHome />} />
           <Route path="/student/mypage" element={<Mypage />} />
+          <Route path="/student/notice" element={<Notice />} />
           <Route path="/student/schoolrecord" element={<SchoolRecord />} />
           <Route path="/student/mockrecord" element={<MockRecord />} />
           <Route path="/student/foodmenu" element={<FoodMenu />} />
@@ -38,6 +40,7 @@ function App() {
           {/* 선생님 */}
           <Route path="/teacher/home" element={<TeacherHome />} />
           <Route path="/teacher/mypage" element={<Mypage />} />
+          <Route path="/teacher/notice" element={<Notice />} />
           <Route path="/teacher/studentlist" element={<StudentList />} />
           <Route path="/teacher/signlist" element={<SignList />} />
           <Route path="/teacher/record" element={<StudentRecord />} />
@@ -45,7 +48,10 @@ function App() {
             path="/teacher/inputschoolrecord"
             element={<InputSchoolRecord />}
           />
-          <Route path="/teacher/editschoolrecord" element={<EditSchoolRecord />} />
+          <Route
+            path="/teacher/editschoolrecord"
+            element={<EditSchoolRecord />}
+          />
           <Route path="/teacher/inputsubject" element={<InputSubject />} />
           <Route
             path="/teacher/inputmockrecord"

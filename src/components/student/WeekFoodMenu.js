@@ -85,28 +85,6 @@ const WeekFoodMenu = () => {
             })}
           </ul>
         </li>
-        <li className="dinner-menu-list">
-          <ul>
-            {newMenuList.map((item, index) => {
-              if (item.lunchOrDinner === "석식") {
-                return (
-                  <li className="menu" key={item.date}>
-                    <span className="menu-type">석식</span>
-                    <p>
-                      <span>-</span>
-                    </p>
-                  </li>
-                );
-              } else {
-                return (
-                  <li className="menu" key={index}>
-                    <p>-</p>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        </li>
       </ul>
     </WeekFoodMenuDiv>
   );

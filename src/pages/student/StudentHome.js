@@ -42,15 +42,25 @@ const StudentHome = () => {
             <TimeTable />
           </div>
         </div>
-        <div className="food-menu">
-          <Link to="/student/foodmenu" className="food-menu-title">
-            <h3>
-              주간 급식표
-              <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
-            </h3>
-          </Link>
-          <div>
-            <WeekFoodMenu />
+        <div className="bottom-right-wrap">
+          <div className="notice-wrap">
+            <Link to="/student/foodmenu" className="food-menu-title">
+              <h3>
+                공지사항
+                <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
+              </h3>
+            </Link>
+          </div>
+          <div className="food-menu">
+            <Link to="/student/foodmenu" className="food-menu-title">
+              <h3>
+                주간 급식표
+                <FontAwesomeIcon icon={faChevronRight} className="icon-arrow" />
+              </h3>
+            </Link>
+            <div>
+              <WeekFoodMenu />
+            </div>
           </div>
         </div>
       </div>

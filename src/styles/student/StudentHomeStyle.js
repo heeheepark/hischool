@@ -43,19 +43,31 @@ const StudentHomeDiv = styled.div`
       padding: 15px;
       box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
     }
-    .food-menu {
-      width: 100%;
-      height: 100%;
-      background: #f7f7f7;
-      padding: 15px;
-      box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
-      .food-menu-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .icon-arrow {
-          font-size: 18px;
-          margin-left: 5px;
+    .bottom-right-wrap {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 15px;
+      .notice-wrap {
+        width: 100%;
+        height: 100%;
+        background: #f7f7f7;
+        padding: 15px;
+        box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+      }
+      .food-menu {
+        width: 100%;
+        height: 100%;
+        background: #f7f7f7;
+        padding: 15px;
+        box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+        .food-menu-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .icon-arrow {
+            font-size: 18px;
+            margin-left: 5px;
+          }
         }
       }
     }
@@ -203,7 +215,7 @@ const WeekFoodMenuDiv = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3.75vh 15vh 15vh;
+    grid-template-rows: 3.75vh 15vh;
     > li {
       :first-of-type {
         background: #176b87;
