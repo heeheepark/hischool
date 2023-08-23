@@ -83,7 +83,7 @@ const StudentHome = () => {
                     <div>
                       <span className="notice-important">중요</span>
                       <span className="notice-title">
-                        시스템 점검 안내(2023.08.24.(목))
+                        8월 시스템 점검 안내(2023.08.24.(목))
                       </span>
                     </div>
                     <span className="notice-date">2023-08-21</span>
@@ -121,7 +121,7 @@ const StudentHome = () => {
                     <div>
                       <span className="notice-important ">중요</span>
                       <span className="notice-title">
-                        6월 시스템 점검일 안내(2023.06.21.(수))
+                        6월 시스템 점검 안내(2023.06.21.(수))
                       </span>
                     </div>
                     <span className="notice-date">2023-06-16</span>

@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 import EditSchoolRecord from "./pages/teacher/EditSchoolRecord";
 import EditMockRecord from "./pages/teacher/EditMockRecord";
 import Notice from "./pages/Notice";
+import LifeRecord from "./pages/student/LifeRecord";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/student/notice" element={<Notice />} />
           <Route path="/student/schoolrecord" element={<SchoolRecord />} />
           <Route path="/student/mockrecord" element={<MockRecord />} />
+          <Route path="/student/liferecord" element={<LifeRecord />} />
           <Route path="/student/foodmenu" element={<FoodMenu />} />
           <Route path="/student/about" element={<About />} />
           {/* 선생님 */}

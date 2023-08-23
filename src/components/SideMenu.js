@@ -2,23 +2,16 @@ import { SideMenuWrap } from "../styles/main/SideMenuStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
-  faFileInvoice,
   faCalendarDays,
   faCommentDots,
-  faLock,
-  faListUl,
-  faClipboardList,
-  faRectangleList,
   faUserGraduate,
-  // faCommentDots,
-  faFileLines,
-  faTableList,
-  faNewspaper,
   faSquarePollVertical,
   faRightFromBracket,
   faCircleInfo,
   faHouseChimney,
+  faFilePen,
   faUser,
+  faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -128,6 +121,21 @@ const SideMenu = () => {
                       className="icon"
                     />
                     <span>모의고사 점수</span>
+                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={`/${user}/liferecord`}
+                  className={({ isActive }) =>
+                    "nav-link" + (isActive ? "-active" : "")
+                  }
+                >
+                  <li>
+                    <FontAwesomeIcon
+                      icon={faAddressBook}
+                      className="icon-record"
+                    />
+                    <span>생활기록부</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
                 </NavLink>

@@ -97,6 +97,9 @@ const SideMenuWrap = styled.div`
             .icon {
               margin-right: 20px;
             }
+            .icon-record {
+              margin-right: 15px;
+            }
             .arrow {
               position: absolute;
               right: 20px;
@@ -121,6 +124,9 @@ const SideMenuWrap = styled.div`
             cursor: pointer;
             .icon {
               margin-right: 20px;
+            }
+            .icon-record {
+              margin-right: 15px;
             }
             .arrow {
               position: absolute;
