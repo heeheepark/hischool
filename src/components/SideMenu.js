@@ -6,6 +6,15 @@ import {
   faCalendarDays,
   faCommentDots,
   faLock,
+  faListUl,
+  faClipboardList,
+  faRectangleList,
+  faUserGraduate,
+  // faCommentDots,
+  faFileLines,
+  faTableList,
+  faNewspaper,
+  faSquarePollVertical,
   faRightFromBracket,
   faCircleInfo,
   faHouseChimney,
@@ -87,7 +96,7 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
                     <span>공지사항</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
@@ -99,7 +108,10 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <FontAwesomeIcon
+                      icon={faSquarePollVertical}
+                      className="icon"
+                    />
                     <span>내신 점수</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
@@ -111,7 +123,10 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <FontAwesomeIcon
+                      icon={faSquarePollVertical}
+                      className="icon"
+                    />
                     <span>모의고사 점수</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
@@ -162,7 +177,7 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faHouseChimney} className="icon" />
+                    <FontAwesomeIcon icon={faCommentDots} className="icon" />
                     <span>공지사항</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
@@ -174,7 +189,10 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <FontAwesomeIcon
+                      icon={faSquarePollVertical}
+                      className="icon"
+                    />
                     <span>성적 관리</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>
@@ -186,7 +204,7 @@ const SideMenu = () => {
                   }
                 >
                   <li>
-                    <FontAwesomeIcon icon={faFileInvoice} className="icon" />
+                    <FontAwesomeIcon icon={faUserGraduate} className="icon" />
                     <span>학생 관리</span>
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                   </li>

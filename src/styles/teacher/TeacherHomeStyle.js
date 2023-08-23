@@ -57,12 +57,47 @@ const TeacherHomeDiv = styled.div`
       display: flex;
       align-items: center;
       h3 {
-        width: 12%;
+        width: 100%;
         font-size: 21px;
         border-right: 1px solid #ccc;
         margin-right: 15px;
         margin-bottom: 0;
-        padding-right: 15px;
+      }
+      .notice-swiper {
+        width: 100%;
+        height: 100%;
+        line-height: 35px;
+        margin-left: 15px;
+        .notice-title-wrap {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20% 0 0;
+          font-size: 16px;
+          font-weight: 600;
+          > div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            .notice-important {
+              display: inline-block;
+              background: #ffe7ea;
+              font-size: 13px;
+              font-weight: 900;
+              height: 20px;
+              line-height: 20px;
+              color: #ff5e5e;
+              border-radius: 3px;
+              padding: 0 4px;
+            }
+            .notice-title {
+              :hover {
+                text-decoration: underline;
+                cursor: pointer;
+              }
+            }
+          }
+        }
       }
     }
   }

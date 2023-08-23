@@ -49,10 +49,61 @@ const StudentHomeDiv = styled.div`
       gap: 15px;
       .notice-wrap {
         width: 100%;
-        height: 100%;
+        height: 120px;
         background: #f7f7f7;
         padding: 15px;
         box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+        display: flex;
+        gap: 15px;
+        .notice-wrap-title {
+          width: 13%;
+        }
+        .notice-swiper {
+          width: 100%;
+          height: 100%;
+          line-height: 35px;
+          .mySwiper {
+            height: 100%;
+          }
+          .notice-title-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2% 0 0;
+            font-size: 16px;
+            font-weight: 600;
+            height: 100%;
+            > div {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              .notice-important {
+                display: inline-block;
+                background: #ffe7ea;
+                font-size: 13px;
+                font-weight: 900;
+                height: 20px;
+                line-height: 20px;
+                color: #ff5e5e;
+                border-radius: 3px;
+                padding: 0 4px;
+                width: 30px;
+              }
+              .disabled {
+                background: transparent;
+              }
+              .notice-title {
+                :hover {
+                  text-decoration: underline;
+                  cursor: pointer;
+                }
+              }
+            }
+            .notice-date {
+              display: inline-block;
+            }
+          }
+        }
       }
       .food-menu {
         width: 100%;
@@ -107,7 +158,7 @@ const RecordDiv = styled.div`
         font-size: 22px;
       }
       .exam-title {
-        font-size: 27px;
+        font-size: 25px;
         font-weight: 900;
         color: #176b87;
       }

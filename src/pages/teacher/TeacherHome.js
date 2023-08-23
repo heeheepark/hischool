@@ -3,10 +3,9 @@ import {
   FullCalendarDiv,
   TeacherHomeDiv,
 } from "../../styles/teacher/TeacherHomeStyle";
-import TimeTable from "../../components/student/TimeTable";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
 import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/ClassMockRecord";
@@ -15,6 +14,10 @@ import {
   getUnSignCount,
 } from "../../api/teacher/teacherHomeAxios";
 import { getSchedule } from "../../api/teacher/teacherHomeAxios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay } from "swiper/modules";
 
 const TeacherHome = () => {
   const [studentCount, setStudentCount] = useState(null);
@@ -86,8 +89,81 @@ const TeacherHome = () => {
           </div>
         </div>
         <div className="notice-wrap">
-          <h3>공지사항</h3>
-          <div className=""></div>
+          <NavLink to="/teacher/notice" className="notice-wrap-title">
+            <h3>공지사항</h3>
+          </NavLink>
+          <div className="notice-swiper">
+            <Swiper
+              style={{ height: "100%" }}
+              direction={"vertical"}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Autoplay]}
+              className="mySwiper"
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              loop={true}
+              slidesPerView={1}
+            >
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-important">중요</span>
+                    <span className="notice-title">
+                      성적입력기간 및 성적확인기간 안내
+                    </span>
+                  </div>
+                  <span className="notice-date">2023-08-21</span>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-important">중요</span>
+                    <span className="notice-title">
+                      8월 시스템 점검 안내(2023.08.24.(목))
+                    </span>
+                  </div>
+                  <span className="notice-date">2023-08-21</span>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-title">2학기 개학 안내</span>
+                  </div>
+                  <span className="notice-date">2023-08-08</span>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-title">여름방학기간 안내</span>
+                  </div>
+                  <span className="notice-date">2023-07-17</span>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-title">기말고사기간 안내</span>
+                  </div>
+                  <span className="notice-date">2023-07-01</span>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="notice-title-wrap">
+                  <div>
+                    <span className="notice-important">중요</span>
+                    <span className="notice-title">
+                      6월 시스템 점검일 안내(2023.06.21.(수))
+                    </span>
+                  </div>
+                  <span className="notice-date">2023-06-16</span>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
         </div>
       </div>
       <div className="teacher-home-bottom">

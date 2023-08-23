@@ -52,6 +52,7 @@ const RecapSchoolRecord = () => {
           <div className="chart">
             {allSchoolRecordData ? (
               <ResponsiveLine
+                width={770}
                 data={newSchoolRecordData}
                 margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
                 xScale={{ type: "point" }}
