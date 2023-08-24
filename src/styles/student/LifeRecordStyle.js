@@ -76,7 +76,7 @@ export const CareerStatusDiv = styled.div`
         margin-bottom: 15px;
         span {
           display: inline-block;
-          width: 50px;
+          width: 60px;
           margin-bottom: 6px;
         }
         input {
@@ -166,6 +166,7 @@ export const HopeCareerTable = styled.div`
       }
     }
     .career-list {
+      background: #fff;
       :last-of-type {
         > ul {
           > li {

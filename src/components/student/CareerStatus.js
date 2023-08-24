@@ -23,7 +23,7 @@ const CareerStatus = () => {
             <input type="text" value={"경북대학교"} readOnly />
           </label>
           <label htmlFor="" className="label-nm">
-            <span>학과</span>
+            <span>학부(과)</span>
             <input type="text" value={"신문방송학과"} readOnly />
           </label>
         </div>
