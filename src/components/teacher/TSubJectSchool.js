@@ -12,21 +12,24 @@ import {
 const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [initSubCate, setInitSubCate] = useState(null);
   const [initDetailSub, setInitDetailSub] = useState(null);
+  const [selectedSubCate, setSelectedSubCate] = useState(null);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
 
   const getAllData = async () => {
-    await getSchoolMainSubData(setInitSubCate);
-    await getSchoolSubData(setInitDetailSub);
     await getSchoolclassData(setClassCount);
     await getSchoolData(setWholeCount);
-  }
+  };
 
   useEffect(() => {
+    getSchoolMainSubData(setInitSubCate);
+    getSchoolSubData(selectedSubCate, setInitDetailSub);
     getAllData();
-  }, []);
+  }, [selectedSubCate]);
 
-  const handleSubCate = e => {};
+  const handleSubCate = e => {
+    setSelectedSubCate(e.target.value);
+  };
 
   const handleDetailSub = e => {
     const submitList = studentsData.map(item => {
@@ -77,23 +80,23 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     });
     setStudentsData(submitList);
   };
-  
+
   return (
     <>
       <div>
         <ISRinput>
           <select name="subject" onChange={handleSubCate}>
             <option value="">과목 계열 선택</option>
-            {initSubCate?.map(mainSubject => (
-              <option key={mainSubject.subjectid} value={mainSubject.subjectid}>
+            {initSubCate?.map((mainSubject, index) => (
+              <option key={index} value={mainSubject.categoryid}>
                 {mainSubject.nm}
               </option>
             ))}
           </select>
           <select name="subjectid" onChange={handleDetailSub}>
             <option value="">세부 과목 선택</option>
-            {initDetailSub?.map(item => (
-              <option key={item.subjectid} value={item.subjectid}>
+            {initDetailSub?.map((item, index) => (
+              <option key={index} value={item.subjectid}>
                 {item.nm}
               </option>
             ))}
