@@ -109,7 +109,7 @@ const TSubJectEditSchool = ({
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   }, [selectedSubCate]);
-  console.log("initSubCate",  initSubCate);
+  console.log("initSubCate", initSubCate);
   return (
     <>
       <div>
@@ -142,9 +142,8 @@ const TSubJectEditSchool = ({
             value={defaultDetailSub}
             onChange={handleDetailSubject}
           >
-            <option value="">세부 과목 선택</option>
-            {initDetailSub?.map((subSubject, index) => (
-              <option key={index} value={subSubject.subjectid}>
+            {initDetailSub?.map(subSubject => (
+              <option key={subSubject.subjectid} value={subSubject.subjectid}>
                 {subSubject.nm}
               </option>
             ))}
