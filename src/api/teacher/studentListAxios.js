@@ -32,7 +32,7 @@ export const getSignListData = async setStudentListData => {
 export const patchSignAccept = async userId => {
   try {
     const res = await client.patch(
-      `/api/teacher/accept-student?userId=${userId}`,
+      `/api/teacher/acpt-student?userId=${userId}`,
     );
     const result = res.data;
   } catch (err) {
@@ -43,7 +43,7 @@ export const patchSignAccept = async userId => {
 // 학생 승인 취소
 export const patchSignCancel = async userId => {
   try {
-    const res = await client.patch(`/api/teacher/cancel-std?userId=${userId}`);
+    const res = await client.patch(`/api/teacher/can-std?userId=${userId}`);
     const result = res.data;
   } catch (err) {
     console.log(err);
