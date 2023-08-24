@@ -14,7 +14,7 @@ export const postMockData = async dataToSend => {
 // 모의고사 수정 내용 전송
 export const patchMockData = async dataToSend => {
   try {
-    const res = await client.patch("/api/teacher/update-mock", dataToSend);
+    const res = await client.patch("/api/teacher/mock", dataToSend);
     const result = res.data;
   } catch (error) {
     console.error("데이터 전송 오류:", error);

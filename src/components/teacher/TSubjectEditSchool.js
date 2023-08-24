@@ -14,10 +14,9 @@ const TSubJectEditSchool = ({
   setStudentsData,
 }) => {
   const [initSubCate, setInitSubCate] = useState(null);
-  const [selectedSubCate, setSelectedSubCate] = useState(scoreList.subjectId);
+  const [selectedSubCate, setSelectedSubCate] = useState(scoreList.categoryId);
   const [initDetailSub, setInitDetailSub] = useState(null);
-  const [subDetailSubList, setSubInitDetailSubList] = useState(null);
-  const [defaultSubject, setDefaultSubject] = useState(scoreList.subjectId);
+  const [defaultSubject, setDefaultSubject] = useState(scoreList.categoryId);
   const [defaultDetailSub, setDefaultDetailSub] = useState(scoreList.subjectId);
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
@@ -32,22 +31,10 @@ const TSubJectEditSchool = ({
     setDefaultDetailSub(e.target.value);
     setStudentsData(submitList);
   };
-  
-  const handleSubject = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.subjectId = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
 
+  const handleSubject = e => {
     setSelectedSubCate(e.target.value);
     setDefaultSubject(e.target.value);
-    const arr = initDetailSub.filter(
-      item => item.subjectid === parseInt(e.target.value),
-    );
-    setSubInitDetailSubList(arr);
   };
 
   // 학기 변경
@@ -116,21 +103,13 @@ const TSubJectEditSchool = ({
     setStudentsData(submitList);
   };
 
-  const getAllData = async () => {
-    await getSchoolMainSubData(setInitSubCate);
-    if (selectedSubCate) {
-      const res = await getSchoolSubData(setInitDetailSub);
-      const arr = res.filter(item => item.subjectid === selectedSubCate);
-      setSubInitDetailSubList(arr);
-    }
+  useEffect(() => {
+    getSchoolMainSubData(setInitSubCate);
+    if (selectedSubCate) getSchoolSubData(selectedSubCate, setInitDetailSub);
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
-  };
-  
-  useEffect(() => {
-    getAllData();
-  }, []);
-
+  }, [selectedSubCate]);
+  console.log("initSubCate",  initSubCate);
   return (
     <>
       <div>
@@ -145,13 +124,14 @@ const TSubJectEditSchool = ({
             <option value={2}>기말고사</option>
           </select>
           <select
-            name="subject"
+            name="categoryId"
             value={defaultSubject}
             onChange={handleSubject}
           >
+            <option value="">과목 계열 선택</option>
             {initSubCate?.map((item, index) => {
               return (
-                <option key={index} value={item.subjectid}>
+                <option key={index} value={item.categoryid}>
                   {item.nm}
                 </option>
               );
@@ -162,7 +142,8 @@ const TSubJectEditSchool = ({
             value={defaultDetailSub}
             onChange={handleDetailSubject}
           >
-            {subDetailSubList?.map((subSubject, index) => (
+            <option value="">세부 과목 선택</option>
+            {initDetailSub?.map((subSubject, index) => (
               <option key={index} value={subSubject.subjectid}>
                 {subSubject.nm}
               </option>

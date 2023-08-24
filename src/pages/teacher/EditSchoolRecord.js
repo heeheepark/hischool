@@ -54,10 +54,7 @@ const EditSchoolRecord = () => {
           item[0].id = state[1][index];
           newDataItems.push(item[0])
         });
-
-
         setStudentsData(newDataItems);
-
       })
       .catch(err => {
         console.log(err);
