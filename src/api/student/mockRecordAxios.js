@@ -3,7 +3,7 @@ import { client } from "../client";
 // 최고 모의고사 성적
 export const getHighestMockRecord = async setHighestMockRecord => {
   try {
-    const res = await client.get(`/api/student/mock-highrating`);
+    const res = await client.get(`/api/student/mock-highest`);
     const result = res.data;
     setHighestMockRecord(result);
   } catch (err) {
@@ -14,7 +14,7 @@ export const getHighestMockRecord = async setHighestMockRecord => {
 // 최근 모의고사 성적
 export const getCurrentMockRecord = async setCurrentMockRecord => {
   try {
-    const res = await client.get(`/api/student/mock-currentrating`);
+    const res = await client.get(`/api/student/mock-latest`);
     const result = res.data.list;
     setCurrentMockRecord(result);
   } catch (err) {

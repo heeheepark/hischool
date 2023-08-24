@@ -12,21 +12,21 @@ export const getStudentSchoolRecord = async (
   try {
     let axiosUrl;
     if (year && semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}&midFinal=${testType}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&year=${year}&semester=${semester}&midFinal=${testType}`;
     } else if (year && semester && !testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&semester=${semester}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&year=${year}&semester=${semester}`;
     } else if (year && !semester && !testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&year=${year}`;
     } else if (!year && semester && !testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&semester=${semester}`;
     } else if (!year && !semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&midFinal=${testType}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&midFinal=${testType}`;
     } else if (!year && semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&semester=${semester}&midFinal=${testType}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&semester=${semester}&midFinal=${testType}`;
     } else if (year && !semester && testType) {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}&year=${year}&midFinal=${testType}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}&year=${year}&midFinal=${testType}`;
     } else {
-      axiosUrl = `/api/teacher/acaresult?userId=${studentId}`;
+      axiosUrl = `/api/teacher/aca-result?userId=${studentId}`;
       const res = await client.get(axiosUrl);
       const result = res.data;
       if (result.length !== 0) setDefaultSchoolRecord(result);
@@ -50,13 +50,13 @@ export const getStudentMockRecord = async (
   try {
     let axiosUrl;
     if (year && month) {
-      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&year=${year}&mon=${month}`;
+      axiosUrl = `/api/teacher/mock-result?userId=${studentId}&year=${year}&mon=${month}`;
     } else if (year && !month) {
-      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&year=${year}`;
+      axiosUrl = `/api/teacher/mock-result?userId=${studentId}&year=${year}`;
     } else if (!year && month) {
-      axiosUrl = `/api/teacher/mockresult?userId=${studentId}&mon=${month}`;
+      axiosUrl = `/api/teacher/mock-result?userId=${studentId}&mon=${month}`;
     } else {
-      axiosUrl = `/api/teacher/mockresult?userId=${studentId}`;
+      axiosUrl = `/api/teacher/mock-result?userId=${studentId}`;
       const res = await client.get(axiosUrl);
       const result = res.data;
       if (result.length !== 0) setDefaultMockRecord(result);
@@ -72,9 +72,7 @@ export const getStudentMockRecord = async (
 // 내신 성적 삭제
 export const deleteStudentSchoolRecord = async resultId => {
   try {
-    const res = await client.delete(
-      `/api/teacher/eli-aca?resultId=${resultId}`,
-    );
+    const res = await client.delete(`/api/teacher/aca?resultId=${resultId}`);
   } catch (err) {
     console.log(err);
   }
@@ -83,9 +81,7 @@ export const deleteStudentSchoolRecord = async resultId => {
 // 모의고사 성적 삭제
 export const deleteStudentMockRecord = async resultId => {
   try {
-    const res = await client.delete(
-      `/api/teacher/eli-mock?resultId=${resultId}`,
-    );
+    const res = await client.delete(`/api/teacher/mock?resultId=${resultId}`);
   } catch (err) {
     console.log(err);
   }

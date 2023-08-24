@@ -49,7 +49,7 @@ const getRecentMockRecord = async (
   setRecentTestTitle,
 ) => {
   try {
-    const res = await client.get(`/api/student/mock-currentrating`);
+    const res = await client.get(`/api/student/mock-latest`);
     const result = res.data;
     if (result.length !== 0) {
       setRecentMockRecordData(result.list);
