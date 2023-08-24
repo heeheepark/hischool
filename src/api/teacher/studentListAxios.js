@@ -31,9 +31,7 @@ export const getSignListData = async setStudentListData => {
 // 학생 가입 승인
 export const patchSignAccept = async userId => {
   try {
-    const res = await client.patch(
-      `/api/teacher/acpt-student?userId=${userId}`,
-    );
+    const res = await client.patch(`/api/teacher/acpt-std?userId=${userId}`);
     const result = res.data;
   } catch (err) {
     console.log(err);
