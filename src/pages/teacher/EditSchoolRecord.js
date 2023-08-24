@@ -26,7 +26,7 @@ const EditSchoolRecord = () => {
         const postDataList = {
           resultId: state[1][index],
           subjectId: item.subjectId,
-          year: "2023",
+          year: 2023,
           semester: item.semester,
           mf: item.midfinal,
           score: item.score,
@@ -52,7 +52,7 @@ const EditSchoolRecord = () => {
         const newDataItems = [];
         newData.forEach((item, index) => {
           item[0].id = state[1][index];
-          newDataItems.push(item[0])
+          newDataItems.push(item[0]);
         });
         setStudentsData(newDataItems);
       })
