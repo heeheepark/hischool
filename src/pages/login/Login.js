@@ -32,8 +32,7 @@ const Login = () => {
     setIsLoginDisabled(!isValid);
   };
 
-
-  // // 유저 선택 및 로그인 버튼 함수
+  // 유저 선택 및 로그인 버튼 함수
   const handleSubmit = async e => {
     e.preventDefault();
     if (!isLoginDisabled) {
@@ -42,8 +41,8 @@ const Login = () => {
         navigate("/teacher/home");
       } else if (role === "ROLE_STD") {
         navigate("/student/home");
-      }else{
-        setErrConfirm(true)
+      } else {
+        setErrConfirm(true);
       }
     }
   };
@@ -82,7 +81,9 @@ const Login = () => {
               onBlur={checkPass}
             />
             {errPassword && <p className="err-message">{errPassword}</p>}
-          {errConfirm && <p className="err-message">이메일과 비밀번호를 확인 해주세요.</p>}
+            {errConfirm && (
+              <p className="err-message">이메일과 비밀번호를 확인 해주세요.</p>
+            )}
           </div>
           <div className="link-button">
             <Link to="#">Email/PW 찾기</Link>
