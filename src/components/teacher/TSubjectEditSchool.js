@@ -21,22 +21,6 @@ const TSubJectEditSchool = ({
   const [classCount, setClassCount] = useState(null);
   const [wholeCount, setWholeCount] = useState(null);
 
-  const handleDetailSubject = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.subjectId = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setDefaultDetailSub(e.target.value);
-    setStudentsData(submitList);
-  };
-
-  const handleSubject = e => {
-    setSelectedSubCate(e.target.value);
-    setDefaultSubject(e.target.value);
-  };
-
   // 학기 변경
   const handleSemester = e => {
     const submitList = studentsData.map(item => {
@@ -58,6 +42,23 @@ const TSubJectEditSchool = ({
     });
     setStudentsData(submitList);
   };
+
+  const handleSubject = e => {
+    setSelectedSubCate(e.target.value);
+    setDefaultSubject(e.target.value);
+  };
+  console.log("studentsData", studentsData);
+  const handleDetailSubject = e => {
+    const submitList = studentsData?.map(item => {
+      if (item.id === id) {
+        item.subjectId = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setDefaultDetailSub(e.target.value);
+    setStudentsData(submitList);
+  };
+  {studentsData.subjectId === initDetailSub.subjectid}
 
   // 점수
   const handleScore = e => {
@@ -109,7 +110,7 @@ const TSubJectEditSchool = ({
     getSchoolclassData(setClassCount);
     getSchoolData(setWholeCount);
   }, [selectedSubCate]);
-  console.log("initSubCate", initSubCate);
+
   return (
     <>
       <div>
@@ -142,9 +143,10 @@ const TSubJectEditSchool = ({
             value={defaultDetailSub}
             onChange={handleDetailSubject}
           >
-            {initDetailSub?.map(subSubject => (
-              <option key={subSubject.subjectid} value={subSubject.subjectid}>
-                {subSubject.nm}
+            <option value={studentsData.subjectId}></option>
+            {initDetailSub?.map((item, index) => (
+              <option key={index} value={item.subjectid}>
+                {item.nm}
               </option>
             ))}
           </select>
