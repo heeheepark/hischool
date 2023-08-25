@@ -3,11 +3,13 @@ import {
   ModalBody,
   ModalCloseBtn,
   StudentRecordModalDiv,
+  FindPasswordModalDiv,
 } from "../styles/ModalStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamation, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { postEmailCodeConFirm } from "../api/signUpAxios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { postEmail } from "../api/findPasswordAxios";
 
 // 회원가입, 마이페이지 모달
 export const Modal = ({ isOpen, onRequestClose, children }) => {
@@ -28,6 +30,73 @@ export const Modal = ({ isOpen, onRequestClose, children }) => {
   );
 };
 
+// 비밀번호 찾기 모달
+export const FindPasswordModal = ({
+  passwordModalOpen,
+  setPasswordModalOpen,
+}) => {
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(true);
+  const [notValidEmail, setNotValidEmail] = useState(false);
+
+  console.log(typeof email);
+  const handleEmail = e => {
+    setEmail(e.target.value);
+  };
+
+  const handleSendPassword = () => {
+    postEmail(email, setValidEmail, setNotValidEmail);
+    setPasswordModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setPasswordModalOpen(false);
+  };
+
+  useEffect(() => {
+    setNotValidEmail(false);
+  }, [notValidEmail]);
+
+  return (
+    <>
+      {notValidEmail &&
+        alert("가입된 정보가 없습니다. 이메일을 다시 확인해주세요.")}
+      {/* {validEmail &&
+        alert(
+          "이메일로 임시 비밀번호를 전송했습니다. 발급 받은 임시 비밀번호로 로그인 해주세요.",
+        )} */}
+      {passwordModalOpen && (
+        <FindPasswordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <span>
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="close-btn"
+                onClick={closeModal}
+              />
+            </span>
+            <div className="header">
+              <h3 className="title">비밀번호 찾기</h3>
+              <span>회원가입 시 등록한 이메일을 입력해주세요.</span>
+            </div>
+            <div className="content">
+              <input
+                type="email"
+                placeholder="ex) example@example.com"
+                onChange={handleEmail}
+              />
+            </div>
+            <div className="btns">
+              <button onClick={handleSendPassword}>임시비밀번호 발급</button>
+            </div>
+          </div>
+        </FindPasswordModalDiv>
+      )}
+    </>
+  );
+};
+
 // 이메일 인증 확인 모달
 export const EmailConFirmModal = ({
   authModal,
@@ -35,7 +104,7 @@ export const EmailConFirmModal = ({
   setEmailCheck,
 }) => {
   const [emailConFirm, setEmailConFirm] = useState("");
-  
+
   const handleCodeConfirm = e => {
     e.preventDefault();
     postEmailCodeConFirm(emailConFirm, setEmailCheck);
@@ -56,7 +125,7 @@ export const EmailConFirmModal = ({
       {authModal && (
         <StudentRecordModalDiv className="modal">
           <div className="dim"></div>
-          <div className="content-wrap" style={{height:"230px"}}>
+          <div className="content-wrap" style={{ height: "230px" }}>
             <div className="header">
               <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
             </div>
@@ -68,7 +137,7 @@ export const EmailConFirmModal = ({
                 name="email-check"
                 value={emailConFirm}
                 onChange={e => handleConfirmInput(e)}
-                style={{width:"100%"}}
+                style={{ width: "100%" }}
               />
             </div>
             <div className="btns">

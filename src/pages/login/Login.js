@@ -7,6 +7,7 @@ import {
 } from "../../styles/login/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../../api/client";
+import { FindPasswordModal } from "../../components/Modal";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const Login = () => {
   const [errPassword, setErrPassword] = useState("");
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const [errConfirm, setErrConfirm] = useState(false);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const checkEmail = () => {
@@ -55,48 +57,64 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const handleFindPassword = () => {
+    setPasswordModalOpen(true);
+  };
+
   return (
-    <LoginWrap>
-      <IntroImage>
-        <img src="../images/intro.png" />
-      </IntroImage>
-      <LoginForm>
-        <LoginContain>
-          <h3>Login</h3>
-          <div>
-            <input
-              className="login-email"
-              onChange={e => handleEmail(e)}
-              type="email"
-              placeholder="Email"
-              onBlur={checkEmail}
-            />
-            {errEmail && <p className="err-message">{errEmail}</p>}
-            <input
-              className="login-password"
-              onChange={e => handlePassWord(e)}
-              type="password"
-              placeholder="Password"
-              autoComplete="on"
-              onBlur={checkPass}
-            />
-            {errPassword && <p className="err-message">{errPassword}</p>}
-            {errConfirm && (
-              <p className="err-message">이메일과 비밀번호를 확인 해주세요.</p>
-            )}
+    <>
+      {passwordModalOpen && (
+        <FindPasswordModal
+          passwordModalOpen={passwordModalOpen}
+          setPasswordModalOpen={setPasswordModalOpen}
+        />
+      )}
+      <LoginWrap>
+        <IntroImage>
+          <img src="../images/intro.png" />
+        </IntroImage>
+        <LoginForm>
+          <LoginContain>
+            <h3>Login</h3>
+            <div>
+              <input
+                className="login-email"
+                onChange={e => handleEmail(e)}
+                type="email"
+                placeholder="Email"
+                onBlur={checkEmail}
+              />
+              {errEmail && <p className="err-message">{errEmail}</p>}
+              <input
+                className="login-password"
+                onChange={e => handlePassWord(e)}
+                type="password"
+                placeholder="Password"
+                autoComplete="on"
+                onBlur={checkPass}
+              />
+              {errPassword && <p className="err-message">{errPassword}</p>}
+              {errConfirm && (
+                <p className="err-message">
+                  이메일과 비밀번호를 확인 해주세요.
+                </p>
+              )}
+            </div>
+            <div className="link-button">
+              <Link to="#" onClick={handleFindPassword}>
+                Email/PW 찾기
+              </Link>
+              <Link to="/signup">회원가입</Link>
+            </div>
+          </LoginContain>
+          <div className="login-button">
+            <button type="submit" onClick={handleSubmit}>
+              Login
+            </button>
           </div>
-          <div className="link-button">
-            <Link to="#">Email/PW 찾기</Link>
-            <Link to="/signup">회원가입</Link>
-          </div>
-        </LoginContain>
-        <div className="login-button">
-          <button type="submit" onClick={handleSubmit}>
-            Login
-          </button>
-        </div>
-      </LoginForm>
-    </LoginWrap>
+        </LoginForm>
+      </LoginWrap>
+    </>
   );
 };
 
