@@ -13,6 +13,7 @@ import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
 import { postSignUp, postEmail } from "../../api/signUpAxios";
 import { EmailConFirmModal, Modal } from "../../components/Modal";
+import AutoSearch from "../../components/AutoSearch";
 
 const SignUp = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -301,7 +302,7 @@ const SignUp = () => {
                     </li>
                     <li className="big-input">
                       <label>학교</label>
-                      <input
+                      {/* <input
                         type="text"
                         placeholder="ex) 함지고등학교"
                         value={payload.schoolNm}
@@ -311,12 +312,16 @@ const SignUp = () => {
                             schoolNm: e.target.value,
                           }));
                         }}
-                      />
+                      /> */}
+                      <AutoSearch />
                     </li>
                     <li className="small-input">
                       <div>
                         <label>학년</label>
-                        <input
+                        <select>
+                          <option value="">학년 선택</option>
+                        </select>
+                        {/* <input
                           type="text"
                           placeholder="ex) 3 "
                           value={payload.grade}
@@ -326,11 +331,14 @@ const SignUp = () => {
                               grade: e.target.value,
                             }));
                           }}
-                        />
+                        /> */}
                       </div>
                       <div>
                         <label>반</label>
-                        <input
+                        <select>
+                          <option value="">반 선택</option>
+                        </select>
+                        {/* <input
                           type="text"
                           placeholder="ex) 1 "
                           value={payload.classNum}
@@ -340,7 +348,7 @@ const SignUp = () => {
                               classNum: e.target.value,
                             }));
                           }}
-                        />
+                        /> */}
                       </div>
                     </li>
                     <li>
