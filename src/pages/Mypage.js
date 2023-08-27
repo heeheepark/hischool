@@ -1,15 +1,38 @@
-import React from "react";
-import MyPage from "../components/MyPage";
+import React, { useState } from "react";
+import MyPageContent from "../components/MyPageContent";
+import MyPageConFirm from "../components/MyPageConFirm";
 import { MypageDiv } from "../styles/MyPageStyle";
+import axios from "axios";
 
 const Mypage = () => {
+  const [passwordConFirm, setPasswordConFirm] = useState(true);
+
+  const handlePasswordConFirm = async password => {
+    try {
+      const res = await axios.post("api/pass", {
+        password: password,
+      });
+      if (res.data.key) {
+        setPasswordConFirm(false);
+      } else {
+        console.log("나도 모르겠슈!");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <>
-      <MypageDiv>
-        <h3>회원 정보 수정</h3>
-        <MyPage />
-      </MypageDiv>
-    </>
+    <div>
+      {passwordConFirm ? (
+        <MyPageConFirm handlePasswordConFirm={handlePasswordConFirm} />
+      ) : (
+        <MypageDiv>
+          <h3>회원 정보 수정</h3>
+          <MyPageContent />
+        </MypageDiv>
+      )}
+    </div>
   );
 };
 
