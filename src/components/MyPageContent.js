@@ -10,7 +10,7 @@ import DaumPost from "./login/DaumPost";
 import { useLocation, useNavigate } from "react-router";
 import { Cookies } from "react-cookie";
 
-const MyPage = () => {
+const MyPageContent = () => {
   const [userData, setUserData] = useState([]);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -111,15 +111,17 @@ const MyPage = () => {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    
-    if (!password && !passwordConfirm){
+
+    if (!password && !passwordConfirm) {
       alert("비밀번호를 입력해주세요.");
       return;
     }
 
     putMyPageData(formData);
 
-    userRole === "teacher" ? navigate("/teacher/home") : navigate("/student/home")
+    userRole === "teacher"
+      ? navigate("/teacher/home")
+      : navigate("/student/home");
   };
 
   // 이미지 미리보기 함수
@@ -189,7 +191,9 @@ const MyPage = () => {
                       autoComplete="on"
                       onBlur={checkPass}
                     />
-                  {errPassword && <p className="err-message">{errPassword}</p>}
+                    {errPassword && (
+                      <p className="err-message">{errPassword}</p>
+                    )}
                   </div>
                 </li>
                 <li>
@@ -327,4 +331,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default MyPageContent;

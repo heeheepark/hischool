@@ -126,7 +126,7 @@ export const SignUpUl = styled.ul`
     div {
       display: flex;
       flex-direction: column;
-      input {
+      select {
         display: block;
         width: 10.4vw;
         height: 35px;
