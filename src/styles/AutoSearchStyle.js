@@ -26,7 +26,7 @@ export const DropDownUl = styled.ul`
   background-color: #fff;
   border: 1px solid #bbb;
   border-top: none;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 5px 5px;
   list-style-type: none;
   z-index: 3;
 `;

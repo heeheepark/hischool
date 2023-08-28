@@ -6,36 +6,27 @@ import {
   Input,
   InputDiv,
 } from "../styles/AutoSearchStyle";
+import { getSchoolName } from "../api/signUpAxios";
 
-const schoolList = [
-  "오성고등학교",
-  "육성고등학교",
-  "칠성고등학교",
-  "성지고등학교",
-  "성니고등학교",
-  "성미고등학교",
-  "함지고등학교",
-  "함비고등학교",
-  "함기고등학교",
-  "함리고등학교",
-  "영진고등학교",
-  "청구고등학교",
-  "운암고등학교",
-  "계성고등학교",
-];
-
-const AutoSearch = () => {
+const AutoSearch = ({ setPayload }) => {
   const [inputValue, setInputValue] = useState("");
   const [isInputValue, setIsInputValue] = useState(false);
-  const [dropDownList, setDropDownList] = useState(schoolList);
+  const [dropDownList, setDropDownList] = useState([]);
   const [dropDownItem, setDropDownItem] = useState(-1);
+  const [schoolList, setSchoolList] = useState([]);
+
+  useEffect(() => {
+    getSchoolName(setSchoolList);
+  }, []);
 
   const showDropDownList = () => {
     if (inputValue === "") {
       setIsInputValue(false);
       setDropDownList([]);
     } else {
-      const selectList = schoolList.filter(item => item.includes(inputValue));
+      const selectList = schoolList.filter(item =>
+        item.nm.includes(inputValue),
+      );
       setDropDownList(selectList);
     }
   };
@@ -43,11 +34,18 @@ const AutoSearch = () => {
   const changeInputValue = e => {
     setInputValue(e.target.value);
     setIsInputValue(true);
+    console.log(inputValue);
   };
 
   const handleClickItem = e => {
-    setInputValue(e);
+    console.log(e);
+    setInputValue(e.nm);
     setIsInputValue(false);
+    setPayload(payload => ({
+      ...payload,
+      schoolNm: e.nm,
+      schoolCode: e.schoolCode,
+    }));
   };
 
   const handleKey = e => {
@@ -90,7 +88,7 @@ const AutoSearch = () => {
                 onMouseOver={() => setDropDownItem(index)}
                 className={dropDownItem === index ? "selected" : ""}
               >
-                {item}
+                {item.nm}
               </DropDownLi>
             );
           })}

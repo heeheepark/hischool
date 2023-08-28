@@ -11,7 +11,14 @@ import {
 import { useNavigate } from "react-router";
 import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
-import { postSignUp, postEmail } from "../../api/signUpAxios";
+import {
+  postSignUp,
+  postEmail,
+  getSchoolClass,
+  getConFirmEmail,
+} from "../../api/signUpAxios";
+import { EmailConFirmModal, Modal } from "../../components/Modal";
+
 import AutoSearch from "../../components/AutoSearch";
 import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
 
@@ -28,11 +35,13 @@ const SignUp = () => {
   const [houseAddress, setHouseAddress] = useState({
     address: "",
   });
+  const [schoolClassList, setSchoolClassList] = useState("");
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     email: "",
     pw: "",
     nm: "",
+    schoolCode: "",
     schoolNm: "",
     grade: "",
     classNum: "",
@@ -112,8 +121,14 @@ const SignUp = () => {
     }
   }, [houseAddress.address]);
 
-  const handleEmailConfirm = () => {
-    setAuthModal(true);
+  const handleEmailConfirm = async () => {
+    const result = await getConFirmEmail(payload.email);
+    console.log(result);
+    if (result === 1) {
+      setAuthModal(true);
+    } else if (result === 0) {
+      alert("이미 가입 된 이메일입니다.");
+    }
     postEmail(payload.email);
   };
 
@@ -200,6 +215,12 @@ const SignUp = () => {
     const realUpload = document.querySelector(".real-upload");
     realUpload.click();
   };
+
+  useEffect(() => {
+    if (payload.schoolCode) {
+      getSchoolClass(payload.schoolCode, payload.grade, setSchoolClassList);
+    }
+  }, [payload.schoolCode, payload.grade]);
 
   return (
     <SignUpWrap>
@@ -302,53 +323,46 @@ const SignUp = () => {
                     </li>
                     <li className="big-input">
                       <label>학교</label>
-                      {/* <input
-                        type="text"
-                        placeholder="ex) 함지고등학교"
-                        value={payload.schoolNm}
-                        onChange={e => {
-                          setPayload(payload => ({
-                            ...payload,
-                            schoolNm: e.target.value,
-                          }));
-                        }}
-                      /> */}
-                      <AutoSearch />
+                      <AutoSearch
+                        // setSchoolCode={setSchoolCode}
+                        setPayload={setPayload}
+                      />
                     </li>
                     <li className="small-input">
                       <div>
                         <label>학년</label>
-                        <select>
-                          <option value="">학년 선택</option>
-                        </select>
-                        {/* <input
-                          type="text"
-                          placeholder="ex) 3 "
-                          value={payload.grade}
+                        <select
                           onChange={e => {
                             setPayload(payload => ({
                               ...payload,
                               grade: e.target.value,
                             }));
                           }}
-                        /> */}
+                        >
+                          <option value={""}>학년 선택</option>
+                          <option value={"1"}>1학년</option>
+                          <option value={"2"}>2학년</option>
+                          <option value={"3"}>3학년</option>
+                        </select>
                       </div>
                       <div>
                         <label>반</label>
-                        <select>
-                          <option value="">반 선택</option>
-                        </select>
-                        {/* <input
-                          type="text"
-                          placeholder="ex) 1 "
-                          value={payload.classNum}
+                        <select
                           onChange={e => {
                             setPayload(payload => ({
                               ...payload,
                               classNum: e.target.value,
                             }));
                           }}
-                        /> */}
+                        >
+                          <option value={""}>반 선택</option>
+                          {schoolClassList.length > 0 &&
+                            schoolClassList.map((item, index) => (
+                              <option value={item} key={index}>
+                                {item}반
+                              </option>
+                            ))}
+                        </select>
                       </div>
                     </li>
                     <li>
