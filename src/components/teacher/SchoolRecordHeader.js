@@ -148,7 +148,7 @@ const SchoolRecordHeader = ({
             >
               <option value="">전체 연도</option>
               {yearList(defaultSchoolRecord).map((item, index) => (
-                <option value={item} key={index}>
+                <option value={item} key={item}>
                   {`${item}년`}
                 </option>
               ))}
@@ -160,7 +160,7 @@ const SchoolRecordHeader = ({
             >
               <option value="">전체 학기</option>
               {semesterList(defaultSchoolRecord).map((item, index) => (
-                <option value={item} key={index}>
+                <option value={item} key={item}>
                   {`${item}학기`}
                 </option>
               ))}

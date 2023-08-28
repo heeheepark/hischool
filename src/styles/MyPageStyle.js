@@ -169,7 +169,9 @@ export const MyPageConFirmDiv = styled.div`
       width: 210px;
       height: 36px;
       border: 1px solid #bbb;
+      padding-left: 10px;
       margin-right: 10px;
+      font-size: 18px;
     }
     button {
       font-size: 18px;

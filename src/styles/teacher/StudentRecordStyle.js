@@ -160,10 +160,9 @@ const StudentListDiv = styled.div`
     }
   }
   .list-wrap {
-    height: 50%;
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     > li {
       border-bottom: 1px solid #ccc;
       cursor: pointer;

@@ -68,8 +68,8 @@ const MockRecordList = ({
       </ul>
       <ul className="record-data">
         {studentMockRecordList?.length > 0 ? (
-          studentMockRecordList.map(item => (
-            <li className="data-table" key={item.userId}>
+          studentMockRecordList.map((item, index) => (
+            <li className="data-table" key={index}>
               <ul>
                 <li>
                   {item.year === todayYear ? (

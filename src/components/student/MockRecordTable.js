@@ -33,14 +33,14 @@ const MockRecordTable = () => {
     const years = new Set();
     defaultMockRecord?.forEach(item => years.add(item.year));
     const newYears = Array.from(years);
-    return newYears.sort();
+    return newYears.sort((a, b) => b - a);
   };
 
   const monthList = defaultMockRecord => {
     const months = new Set();
     defaultMockRecord?.forEach(item => months.add(item.mon));
     const newMonths = Array.from(months);
-    return newMonths.sort();
+    return newMonths.sort((a, b) => b - a);
   };
 
   useEffect(() => {

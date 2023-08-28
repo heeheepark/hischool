@@ -14,8 +14,6 @@ const Mypage = () => {
       });
       if (res.data.key) {
         setPasswordConFirm(false);
-      } else {
-        console.log("나도 모르겠슈!");
       }
     } catch (err) {
       console.log(err);

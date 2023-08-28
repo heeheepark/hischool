@@ -1,4 +1,5 @@
 import { client } from "../client";
+
 // 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async SdataToSend => {
   try {
@@ -9,6 +10,7 @@ export const postSchoolData = async SdataToSend => {
     console.error("데이터 전송 오류:", error);
   }
 };
+
 export const patchSchoolData = async dataToSend => {
   try {
     const res = await client.patch("/api/teacher/aca", dataToSend);
@@ -17,6 +19,7 @@ export const patchSchoolData = async dataToSend => {
     console.error("데이터 전송 오류:", error);
   }
 };
+
 // 내신 등록 후 과목 계열
 export const getSchoolMainSubData = async setInitSubCate => {
   try {
@@ -28,6 +31,7 @@ export const getSchoolMainSubData = async setInitSubCate => {
     return [];
   }
 };
+
 // 내신 등록 후 세부 과목
 export const getSchoolSubData = async (categoryid, setInitDetailSub) => {
   try {
@@ -41,6 +45,7 @@ export const getSchoolSubData = async (categoryid, setInitDetailSub) => {
     return [];
   }
 };
+
 export const getSchoolEditData = async resultId => {
   try {
     const res = await client.get(
@@ -52,6 +57,7 @@ export const getSchoolEditData = async resultId => {
     return [];
   }
 };
+
 // 학교 전체 학생 인원 데이터
 export const getSchoolData = async setWholeCount => {
   try {
@@ -63,6 +69,7 @@ export const getSchoolData = async setWholeCount => {
     return [];
   }
 };
+
 // 반 학생 인원 데이터
 export const getSchoolclassData = async setClassCount => {
   try {
