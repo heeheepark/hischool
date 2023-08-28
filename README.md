@@ -8,7 +8,7 @@
 <!-- Screenshots -->
 
 <div align="center"> 
-  <img src="assets/1.시안.png" alt="screenshot" />
+[![Video Label](http://img.youtube.com/vi/R0n2SBrBQeA/0.jpg)](https://youtu.be/R0n2SBrBQeA)
 </div>
 
 <br><br>
