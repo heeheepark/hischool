@@ -10,8 +10,9 @@
 
 ![ezgif com-video-to-gif](https://github.com/heeheepark/hischool/assets/101806077/de0c8023-fce7-479d-95b3-1b347f87760a)
 
-
 <h4>
+  <a href="https://www.youtube.com/watch?v=R0n2SBrBQeA">시연 영상</a>
+  <span> · </span>
     <a href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4">Notion</a>
   <span> · </span>
     <a href="https://www.canva.com/design/DAFq6ul3FIQ/FWsmdrQ-RLDoM2DY87YasA/view?utm_content=DAFq6ul3FIQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">발표자료</a>
