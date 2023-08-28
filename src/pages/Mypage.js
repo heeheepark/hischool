@@ -23,16 +23,16 @@ const Mypage = () => {
   };
 
   return (
-    <div>
+    <MypageDiv>
       {passwordConFirm ? (
         <MyPageConFirm handlePasswordConFirm={handlePasswordConFirm} />
       ) : (
-        <MypageDiv>
+        <div className="mypage-wrap">
           <h3>회원 정보 수정</h3>
           <MyPageContent />
-        </MypageDiv>
+        </div>
       )}
-    </div>
+    </MypageDiv>
   );
 };
 

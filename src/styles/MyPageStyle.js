@@ -9,9 +9,12 @@ export const MypageDiv = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: start;
-  h3 {
-    font-size: 30px;
-    margin-bottom: 30px;
+  position: relative;
+  .mypage-wrap {
+    h3 {
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
   }
 `;
 
@@ -140,6 +143,42 @@ export const TcButtons = styled.div`
         color: #000;
         background: #fff;
       }
+    }
+  }
+`;
+
+export const MyPageConFirmDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      width: 210px;
+      height: 36px;
+      border: 1px solid #bbb;
+      margin-right: 10px;
+    }
+    button {
+      font-size: 18px;
+      color: #fff;
+      border: 0;
+      background: #176b87;
+      width: 50px;
+      height: 36px;
+      border-radius: 3px;
     }
   }
 `;

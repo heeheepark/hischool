@@ -5,6 +5,7 @@ const getMonthFood = async (setFoodMenuList, setDate) => {
   try {
     const res = await client.get(`/api/meal`);
     const result = res.data;
+    console.log(result);
     const foodMenuList = result.list;
     const newFoodMenuList = foodMenuList.map(item => {
       const newList = {
@@ -16,7 +17,7 @@ const getMonthFood = async (setFoodMenuList, setDate) => {
       return newList;
     });
     setFoodMenuList(newFoodMenuList);
-    setDate(result.strYearMonth)
+    setDate(result.strYearMonth);
   } catch (err) {
     console.log(err);
   }
