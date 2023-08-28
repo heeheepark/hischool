@@ -11,8 +11,6 @@
 ![ezgif com-video-to-gif](https://github.com/heeheepark/hischool/assets/101806077/de0c8023-fce7-479d-95b3-1b347f87760a)
 
 
-<br><br>
-
 <h4>
     <a href="https://heeheepark.notion.site/team_c-c0c5b2a4fe2b4ddab7acde1638bc4e67?pvs=4">Notion</a>
   <span> · </span>
