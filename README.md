@@ -7,9 +7,9 @@
 <!-- Badges -->
 <!-- Screenshots -->
 
-<div align="center"> 
-[![Video Label](http://img.youtube.com/vi/R0n2SBrBQeA/0.jpg)](https://youtu.be/R0n2SBrBQeA)
-</div>
+
+![ezgif com-video-to-gif](https://github.com/heeheepark/hischool/assets/101806077/de0c8023-fce7-479d-95b3-1b347f87760a)
+
 
 <br><br>
 
