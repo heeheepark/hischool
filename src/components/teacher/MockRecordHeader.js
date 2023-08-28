@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { DeleteErrorModal, EditErrorModal, MockRecordModal } from "../Modal";
+
 import {
   deleteStudentMockRecord,
   getStudentMockRecord,
 } from "../../api/teacher/studentRecordAxios";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
+import {
+  DeleteErrorModal,
+  EditErrorModal,
+  MockRecordModal,
+} from "../modal/teacherModal";
 
 const MockRecordHeader = ({
   defaultMockRecord,

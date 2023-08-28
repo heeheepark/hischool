@@ -59,7 +59,7 @@ export const getMockData = async setMockData => {
 export const getSchedule = async (setScheduleData, startDate, endDate) => {
   try {
     const res = await client.get(
-      `/api/schedule?sdSchulCode=${7240273}&aaFromYmd=${startDate}&aaToYmd=${endDate}`,
+      `/api/schedule?aaFromYmd=${startDate}&aaToYmd=${endDate}`,
     );
     const scheduleList = res.data.infoList;
     const newScheduleList = scheduleList.map(item => {

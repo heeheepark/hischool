@@ -9,7 +9,7 @@ import {
   getSignListData,
   patchSignAccept,
 } from "../../api/teacher/studentListAxios";
-import { StudentAcceptModal } from "../../components/Modal";
+import { StudentAcceptModal } from "../../components/modal/teacherModal";
 
 const SignList = () => {
   const [studentListData, setStudentListData] = useState([]);
@@ -64,7 +64,7 @@ const SignList = () => {
     document
       .querySelectorAll(".school-checkbox")
       .forEach(item => (item.checked = false));
-      setSaveCheckBox([]);
+    setSaveCheckBox([]);
   }, [studentListData]);
 
   const handleOk = () => {

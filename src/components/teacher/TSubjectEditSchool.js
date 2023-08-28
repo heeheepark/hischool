@@ -47,7 +47,6 @@ const TSubJectEditSchool = ({
     setSelectedSubCate(e.target.value);
     setDefaultSubject(e.target.value);
   };
-  console.log("studentsData", studentsData);
   const handleDetailSubject = e => {
     const submitList = studentsData?.map(item => {
       if (item.id === id) {
@@ -58,7 +57,9 @@ const TSubJectEditSchool = ({
     setDefaultDetailSub(e.target.value);
     setStudentsData(submitList);
   };
-  {studentsData.subjectId === initDetailSub.subjectid}
+  {
+    studentsData.subjectId === initDetailSub.subjectid;
+  }
 
   // 점수
   const handleScore = e => {

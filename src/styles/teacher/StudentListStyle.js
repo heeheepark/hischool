@@ -12,7 +12,7 @@ export const StudentListTitle = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  padding: 0 0 0.5% 0 ;
+  padding: 0 0 0.5% 0;
   h3 {
     font-size: 30px;
   }
@@ -55,7 +55,7 @@ export const TimeTableDiv = styled.div`
     }
   }
   .data-list {
-    height: 100%;
+    /* height: 100%; */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(42px);

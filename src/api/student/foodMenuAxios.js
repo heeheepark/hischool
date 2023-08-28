@@ -16,7 +16,7 @@ const getMonthFood = async (setFoodMenuList, setDate) => {
       return newList;
     });
     setFoodMenuList(newFoodMenuList);
-    setDate(result.strYearMonth)
+    setDate(result.strYearMonth);
   } catch (err) {
     console.log(err);
   }

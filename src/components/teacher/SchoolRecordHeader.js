@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { useNavigate } from "react-router";
-import { DeleteErrorModal, EditErrorModal, SchoolRecordModal } from "../Modal";
 import {
   deleteStudentSchoolRecord,
   getStudentSchoolRecord,
 } from "../../api/teacher/studentRecordAxios";
+import {
+  DeleteErrorModal,
+  EditErrorModal,
+  SchoolRecordModal,
+} from "../modal/teacherModal";
 
 const SchoolRecordHeader = ({
   defaultSchoolRecord,
@@ -144,7 +148,7 @@ const SchoolRecordHeader = ({
             >
               <option value="">전체 연도</option>
               {yearList(defaultSchoolRecord).map((item, index) => (
-                <option value={item} key={index}>
+                <option value={item} key={item}>
                   {`${item}년`}
                 </option>
               ))}
@@ -156,7 +160,7 @@ const SchoolRecordHeader = ({
             >
               <option value="">전체 학기</option>
               {semesterList(defaultSchoolRecord).map((item, index) => (
-                <option value={item} key={index}>
+                <option value={item} key={item}>
                   {`${item}학기`}
                 </option>
               ))}

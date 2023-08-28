@@ -10,7 +10,7 @@ import {
   getStudentData,
   patchSignCancel,
 } from "../../api/teacher/studentListAxios";
-import { StudentCancelModal } from "../../components/Modal";
+import { StudentCancelModal } from "../../components/modal/teacherModal";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);

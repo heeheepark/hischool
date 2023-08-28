@@ -161,14 +161,6 @@ export const FindPasswordModalDiv = styled.div`
       > span {
         font-size: 15px;
       }
-      /* .warning-icon {
-        color: #ff5e5e;
-        background: #ffe7ea;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        padding: 5px;
-      } */
     }
     .content {
       margin-bottom: 10px;
@@ -180,15 +172,6 @@ export const FindPasswordModalDiv = styled.div`
         padding-left: 10px;
         border-radius: 3px;
       }
-      /* line-height: 1.6;
-      margin-bottom: 12px;
-      span {
-        display: block;
-        font-size: 16px;
-        :first-of-type {
-          font-weight: 600;
-        }
-      } */
     }
     .btns {
       button {
