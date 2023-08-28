@@ -7,7 +7,7 @@ import {
 } from "../../styles/login/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../../api/client";
-import { FindPasswordModal } from "../../components/Modal";
+import { FindPasswordModal } from "../../components/modal/Modal";
 
 const Login = () => {
   const [email, setEmail] = useState("");

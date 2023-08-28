@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { SchoolRecordFilterDiv } from "../../styles/student/FilterStyle";
 import { useNavigate } from "react-router";
-import { DeleteErrorModal, EditErrorModal, SchoolRecordModal } from "../Modal";
 import {
   deleteStudentSchoolRecord,
   getStudentSchoolRecord,
 } from "../../api/teacher/studentRecordAxios";
+import {
+  DeleteErrorModal,
+  EditErrorModal,
+  SchoolRecordModal,
+} from "../modal/teacherModal";
 
 const SchoolRecordHeader = ({
   defaultSchoolRecord,

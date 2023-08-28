@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 import DaumPost from "../../components/login/DaumPost";
 import { useEffect } from "react";
 import { postSignUp, postEmail } from "../../api/signUpAxios";
-import { EmailConFirmModal, Modal } from "../../components/Modal";
 import AutoSearch from "../../components/AutoSearch";
+import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
 
 const SignUp = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");

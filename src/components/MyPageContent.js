@@ -5,10 +5,11 @@ import {
   TcMyPageWrap,
 } from "../styles/MyPageStyle";
 import { deleteUser, getUserData, putMyPageData } from "../api/myPageAxios";
-import { DeleteUserModal, Modal } from "./Modal";
 import DaumPost from "./login/DaumPost";
 import { useLocation, useNavigate } from "react-router";
 import { Cookies } from "react-cookie";
+import { Modal } from "./modal/Modal";
+import { DeleteUserModal } from "./modal/studentModal";
 
 const MyPageContent = () => {
   const [userData, setUserData] = useState([]);
