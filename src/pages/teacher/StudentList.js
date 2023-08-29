@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   StudentListTitle,
   StudentListWrap,
-  TimeTableDiv,
+  StudentListContent,
 } from "../../styles/teacher/StudentListStyle";
 import { useNavigate } from "react-router";
 import {
@@ -11,7 +11,6 @@ import {
   patchSignCancel,
 } from "../../api/teacher/studentListAxios";
 import { StudentCancelModal } from "../../components/modal/teacherModal";
-import { Link } from "react-router-dom";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);
@@ -58,7 +57,7 @@ const StudentList = () => {
           <button onClick={handleSginClick}>가입대기 명단</button>
         </div>
       </StudentListTitle>
-      <TimeTableDiv>
+      <StudentListContent>
         <ul className="list-title">
           <li className="list-title-th">순번</li>
           <li className="list-title-th">이름</li>
@@ -72,8 +71,15 @@ const StudentList = () => {
             <li className="class" key={index}>
               <ul>
                 <li>{index + 1}</li>
-                <li>
-                  <Link to="/teacher/studentliferecord">{item.snm}</Link>
+                <li
+                  className="student-name"
+                  onClick={() => {
+                    navigate("/teacher/studentliferecord", {
+                      state: item.userId,
+                    });
+                  }}
+                >
+                  {item.snm}
                 </li>
                 <li>{item.birth}</li>
                 <li>{item.phone}</li>
@@ -90,7 +96,7 @@ const StudentList = () => {
             </li>
           ))}
         </ul>
-      </TimeTableDiv>
+      </StudentListContent>
     </StudentListWrap>
   );
 };
