@@ -188,6 +188,14 @@ export const HopeCareerTable = styled.div`
           }
         }
       }
+      input {
+        width: 90%;
+        height: 24px;
+        font-size: 15px;
+        font-family: "Pretendard";
+        text-align: center;
+        border: 1px solid #ccc;
+      }
     }
   }
 `;

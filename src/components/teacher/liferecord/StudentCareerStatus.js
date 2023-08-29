@@ -91,9 +91,15 @@ const StudentCareerStatus = () => {
                 <li className="career-list" key={item}>
                   <ul>
                     <li>{item.grade}학년</li>
-                    <li>{item.interest}</li>
-                    <li>{item.stdHope}</li>
-                    <li>{item.parentHope}</li>
+                    <li>
+                      <input type="text" value={item.interest} />
+                    </li>
+                    <li>
+                      <input type="text" value={item.stdHope} />
+                    </li>
+                    <li>
+                      <input type="text" value={item.parentHope} />
+                    </li>
                   </ul>
                 </li>
               ))}
