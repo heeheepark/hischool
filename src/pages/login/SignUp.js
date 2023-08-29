@@ -17,7 +17,6 @@ import {
   getSchoolClass,
   getConFirmEmail,
 } from "../../api/signUpAxios";
-import { EmailConFirmModal, Modal } from "../../components/Modal";
 
 import AutoSearch from "../../components/AutoSearch";
 import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
