@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { IntroImage } from "../../styles/login/LoginStyle";
 import {
   LeftForm,
@@ -322,7 +322,6 @@ const SignUp = () => {
                     <li className="big-input">
                       <label>학교</label>
                       <AutoSearch
-                        // setSchoolCode={setSchoolCode}
                         setPayload={setPayload}
                       />
                     </li>
