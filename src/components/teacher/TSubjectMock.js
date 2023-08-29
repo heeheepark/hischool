@@ -10,6 +10,8 @@ const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
   const [selectedSubCate, setSelectedSubCate] = useState(null);
   const [initDetailSub, setInitDetailSub] = useState(null);
 
+  console.log(selectedSubCate);
+
   useEffect(() => {
     getMockMainSubData(setInitSubCate);
     if (selectedSubCate) {

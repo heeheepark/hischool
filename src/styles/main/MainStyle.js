@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 const MainDiv = styled.div`
   position: relative;
+  overflow: hidden;
   .wrap {
     display: flex;
     .main-right {

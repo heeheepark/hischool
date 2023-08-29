@@ -7,11 +7,10 @@ export const AttendStatusDiv = styled.div`
   border-radius: 5px;
   padding: 20px 45px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
- 
   h4 {
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
+    font-size: 21px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const AttendTable = styled.div`
@@ -138,6 +137,17 @@ export const AttendTable = styled.div`
             border-right: 0;
           }
         }
+      }
+      input {
+        width: 50px;
+        height: 27px;
+        font-size: 15px;
+        font-family: "Pretendard";
+        text-align: center;
+        /* padding-left: 5px; */
+      }
+      .etc-text {
+        width: 90%;
       }
     }
   }

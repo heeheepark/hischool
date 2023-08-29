@@ -45,6 +45,7 @@ export const CareerStatusDiv = styled.div`
   border-radius: 5px;
   padding: 20px 45px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
   > div {
     :not(:last-of-type) {
       margin-bottom: 20px;
@@ -188,5 +189,66 @@ export const HopeCareerTable = styled.div`
         }
       }
     }
+  }
+`;
+
+export const RecordStatusDiv = styled.div`
+  width: 100%;
+  height: 730px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px 45px;
+  box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  h4 {
+    font-size: 21px;
+    margin-bottom: 10px;
+  }
+  .record-chart {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+    .school-record-wrap {
+      width: 100%;
+      span {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+    }
+    .mock-record-wrap {
+      width: 100%;
+      span {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .record-table {
+    .school-record-wrap {
+      margin-bottom: 20px;
+    }
+    .mock-record-wrap {
+    }
+  }
+`;
+
+export const LifeRecordTableWrap = styled.div`
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 5px;
+    h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+  }
+  .record-table {
+    height: 28vh;
   }
 `;

@@ -36,6 +36,7 @@ export const getMockMainSubData = async setInitSubCate => {
 // 모의고사 세부 과목 가져오기
 export const getMockSubData = async (categoryid, setInitDetailSub) => {
   try {
+    console.log(categoryid);
     const res = await client.get(
       `/api/teacher/subject/mocksmall-list?categoryid=${categoryid}`,
     );
