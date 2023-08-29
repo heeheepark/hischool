@@ -22,6 +22,7 @@ import EditMockRecord from "./pages/teacher/EditMockRecord";
 import Notice from "./pages/Notice";
 import LifeRecord from "./pages/student/LifeRecord";
 import StudentLifeRecord from "./pages/teacher/StudentLifeRecord";
+import NoticeDetail from "./pages/NoticeDetail";
 
 function App() {
   return (
@@ -65,6 +66,8 @@ function App() {
             element={<InputMockRecord />}
           />
           <Route path="/teacher/editmockrecord" element={<EditMockRecord />} />
+          {/* 공지사항 */}
+          <Route path="/noticedetail/:noticeId" element={<NoticeDetail />} />
           <Route path="/teacher/about" element={<About />} />
         </Route>
       </Routes>

@@ -5,12 +5,15 @@ import RecordStatus from "../../components/student/RecordStatus";
 import CareerStatus from "../../components/student/CareerStatus";
 import { useState } from "react";
 import { useEffect } from "react";
+import { getStudentInfo } from "../../api/student/attendAxios";
 
 const LifeRecord = () => {
   const [categoryLi, setCategoryLi] = useState(null);
   const [activeCateName, setActiveCateName] = useState("grade");
+  const [studentInfo, setStudentInfo] = useState({});
 
   useEffect(() => {
+    getStudentInfo(setStudentInfo);
     setCategoryLi(document.querySelectorAll(".category-wrap li"));
   }, []);
 
@@ -22,7 +25,10 @@ const LifeRecord = () => {
 
   return (
     <LifeRecordDiv>
-      <h3>학생 생활기록부{" - 김수현(2005-12-25)"}</h3>
+      <h3>
+        학생 생활기록부
+        {` - ${studentInfo.studentName}(${studentInfo.studentBirth})`}
+      </h3>
       <ul className="category-wrap">
         <li className="grade active" onClick={handleCategory}>
           성적현황

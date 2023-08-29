@@ -8,13 +8,19 @@ import { useEffect } from "react";
 import StudentRecordStatus from "../../components/teacher/liferecord/StudentRecordStatus";
 import StudentAttendStatus from "../../components/teacher/liferecord/StudentAttendStatus";
 import StudentCareerStatus from "../../components/teacher/liferecord/StudentCareerStatus";
+import { useLocation } from "react-router";
+import { getGrade } from "../../api/teacher/studentLifeRecordAxios";
 
 const StudentLifeRecord = () => {
+  const { state } = useLocation();
+  console.log("userId", state);
   const [categoryLi, setCategoryLi] = useState(null);
   const [activeCateName, setActiveCateName] = useState("grade");
+  const [grade, setGrade] = useState("");
 
   useEffect(() => {
     setCategoryLi(document.querySelectorAll(".category-wrap li"));
+    getGrade(setGrade);
   }, []);
 
   const handleCategory = e => {
@@ -38,9 +44,15 @@ const StudentLifeRecord = () => {
         </li>
       </ul>
       <div className="content-wrap">
-        {activeCateName === "grade" && <StudentRecordStatus />}
-        {activeCateName === "attendance" && <StudentAttendStatus />}
-        {activeCateName === "career" && <StudentCareerStatus />}
+        {activeCateName === "grade" && (
+          <StudentRecordStatus userId={state} grade={grade} />
+        )}
+        {activeCateName === "attendance" && (
+          <StudentAttendStatus userId={state} grade={grade} />
+        )}
+        {activeCateName === "career" && (
+          <StudentCareerStatus userId={state} grade={grade} />
+        )}
       </div>
     </LifeRecordDiv>
   );

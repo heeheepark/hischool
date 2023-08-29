@@ -45,19 +45,28 @@ export const CareerStatusDiv = styled.div`
   border-radius: 5px;
   padding: 20px 45px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
-  overflow-y: scroll;
   > div {
-    :not(:last-of-type) {
-      margin-bottom: 20px;
-    }
     h4 {
       font-size: 21px;
       margin-bottom: 10px;
     }
   }
   .top-wrap {
+    text-align: end;
+    button {
+      font-size: 15px;
+      border: 0;
+      border-radius: 2px;
+      color: #fff;
+      background: #176b87;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+  }
+  .mid-wrap {
     display: flex;
     gap: 30px;
+    margin-bottom: 20px;
     .hope-univ-wrap {
       display: flex;
       flex-flow: column;
@@ -103,7 +112,9 @@ export const CareerStatusDiv = styled.div`
         gap: 30px;
         font-size: 16px;
         padding-left: 15px;
-        margin-bottom: 20px;
+        :not(:last-of-type) {
+          margin-bottom: 20px;
+        }
         span {
           width: 5%;
         }
@@ -113,6 +124,11 @@ export const CareerStatusDiv = styled.div`
           resize: none;
           border: 1px solid #ccc;
           font-family: "Pretendard", sans-serif;
+          :read-only {
+            background: #f9f9f9;
+            color: #bbb;
+            cursor: default;
+          }
         }
       }
     }
@@ -187,6 +203,14 @@ export const HopeCareerTable = styled.div`
             border-right: 0;
           }
         }
+      }
+      input {
+        width: 90%;
+        height: 24px;
+        font-size: 15px;
+        font-family: "Pretendard";
+        text-align: center;
+        border: 1px solid #ccc;
       }
     }
   }

@@ -28,7 +28,7 @@ export const StudentListTitle = styled.div`
   }
 `;
 
-export const TimeTableDiv = styled.div`
+export const StudentListContent = styled.div`
   position: relative;
   height: 81.4vh;
   text-align: center;

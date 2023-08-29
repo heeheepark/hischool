@@ -144,7 +144,7 @@ export const AttendTable = styled.div`
         font-size: 15px;
         font-family: "Pretendard";
         text-align: center;
-        /* padding-left: 5px; */
+        border: 1px solid #ccc;
       }
       .etc-text {
         width: 90%;
