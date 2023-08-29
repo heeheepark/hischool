@@ -18,7 +18,7 @@ const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
       getMockSubData(selectedSubCate, setInitDetailSub);
     }
   }, [selectedSubCate]);
-
+  
   const handleSubCate = e => {
     setSelectedSubCate(e.target.value);
   };
