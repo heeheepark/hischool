@@ -21,6 +21,7 @@ import EditSchoolRecord from "./pages/teacher/EditSchoolRecord";
 import EditMockRecord from "./pages/teacher/EditMockRecord";
 import Notice from "./pages/Notice";
 import LifeRecord from "./pages/student/LifeRecord";
+import StudentLifeRecord from "./pages/teacher/StudentLifeRecord";
 
 function App() {
   return (
@@ -46,6 +47,10 @@ function App() {
           <Route path="/teacher/studentlist" element={<StudentList />} />
           <Route path="/teacher/signlist" element={<SignList />} />
           <Route path="/teacher/record" element={<StudentRecord />} />
+          <Route
+            path="/teacher/studentliferecord"
+            element={<StudentLifeRecord />}
+          />
           <Route
             path="/teacher/inputschoolrecord"
             element={<InputSchoolRecord />}
