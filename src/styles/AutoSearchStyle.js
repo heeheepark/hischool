@@ -21,6 +21,7 @@ export const DeleteButton = styled.div`
 
 export const DropDownUl = styled.ul`
   width: 21vw;
+  height: 74px;
   display: block;
   padding: 10px 0;
   background-color: #fff;
@@ -28,7 +29,7 @@ export const DropDownUl = styled.ul`
   border-top: none;
   border-radius: 0 0 5px 5px;
   list-style-type: none;
-  z-index: 3;
+  overflow-y: scroll;
 `;
 
 export const DropDownLi = styled.li`

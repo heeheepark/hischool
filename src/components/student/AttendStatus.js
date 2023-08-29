@@ -1,7 +1,13 @@
 import React from "react";
 import { AttendStatusDiv, AttendTable } from "../../styles/student/AttendStyle";
+import { useState } from "react";
 
 const AttendStatus = () => {
+  const [attendData, setAttendData] = useState([]);
+
+  const handleChangeValue = e => {
+    console.log(e.target.value);
+  };
   return (
     <AttendStatusDiv>
       <div className="hope-career-wrap">

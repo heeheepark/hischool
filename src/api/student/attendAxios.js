@@ -1,10 +1,11 @@
+
 import { client } from "../client";
 
-// export const getAttendList = async() => {
-//   const res = await client.get(`/api/attendance?userId=${}`)
-//   const result = res.data;
-//   console.log(result)
-// }
+export const getAttendList = async() => {
+  const res = await client.get(`/api/attendance?userId=${}`)
+  const result = res.data;
+  console.log(result)
+}
 
 // 학생 정보
 export const getStudentInfo = async setStudentInfo => {
