@@ -11,6 +11,7 @@ import {
   patchSignCancel,
 } from "../../api/teacher/studentListAxios";
 import { StudentCancelModal } from "../../components/modal/teacherModal";
+import { Link } from "react-router-dom";
 
 const StudentList = () => {
   const [studentListData, setStudentListData] = useState([]);
@@ -71,7 +72,9 @@ const StudentList = () => {
             <li className="class" key={index}>
               <ul>
                 <li>{index + 1}</li>
-                <li>{item.snm}</li>
+                <li>
+                  <Link to="/teacher/studentliferecord">{item.snm}</Link>
+                </li>
                 <li>{item.birth}</li>
                 <li>{item.phone}</li>
                 <li>{item.email}</li>

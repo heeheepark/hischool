@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { IntroImage } from "../../styles/login/LoginStyle";
 import {
   LeftForm,
@@ -17,8 +17,6 @@ import {
   getSchoolClass,
   getConFirmEmail,
 } from "../../api/signUpAxios";
-import { EmailConFirmModal, Modal } from "../../components/Modal";
-
 import AutoSearch from "../../components/AutoSearch";
 import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
 
@@ -324,7 +322,6 @@ const SignUp = () => {
                     <li className="big-input">
                       <label>학교</label>
                       <AutoSearch
-                        // setSchoolCode={setSchoolCode}
                         setPayload={setPayload}
                       />
                     </li>
