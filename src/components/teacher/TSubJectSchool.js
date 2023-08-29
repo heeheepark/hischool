@@ -23,7 +23,7 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
 
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
-    getSchoolSubData(selectedSubCate, setInitDetailSub);
+    if (selectedSubCate) getSchoolSubData(selectedSubCate, setInitDetailSub);
     getAllData();
   }, [selectedSubCate]);
 
