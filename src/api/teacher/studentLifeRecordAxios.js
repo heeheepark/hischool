@@ -34,3 +34,14 @@ export const getStudentCareerList = async (userId, setCareerList) => {
     console.log(err);
   }
 };
+
+// 진로지도 POST
+export const postSutdentCareerList = async payload => {
+  try {
+    console.log("Post 시도");
+    console.log(payload);
+    // const res = await client.post(`/api/career/clear`, payload);
+  } catch (err) {
+    console.log(err);
+  }
+};

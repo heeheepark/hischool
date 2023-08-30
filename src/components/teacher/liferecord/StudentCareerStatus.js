@@ -7,39 +7,37 @@ import { useState } from "react";
 import {
   getHopeUniversity,
   getStudentCareerList,
+  postSutdentCareerList,
 } from "../../../api/teacher/studentLifeRecordAxios";
 
 const StudentCareerStatus = ({ userId, grade }) => {
   const [careerList, setCareerList] = useState("");
   const [hopeUniv, setHopeUniv] = useState("");
   const [hopeDept, setHopeDept] = useState("");
-  const [payload, setPayload] = useState({
-    userId: userId,
-    grade: grade,
-    interest: careerList.interest,
-    stdHope: careerList.stdHope,
-    parentHope: careerList.parentHope,
-    hopeUniv: hopeUniv,
-    hopeDept: hopeDept,
-    specialNote: careerList.specialNote,
-  });
+  const [payload, setPayload] = useState("");
 
-  console.log(payload);
-
-  const handleSave = () => {};
+  const handleSave = () => {
+    postSutdentCareerList(payload);
+  };
 
   useEffect(() => {
-    getHopeUniversity(userId, setHopeUniv, setHopeDept, setPayload);
+    getHopeUniversity(userId, setHopeUniv, setHopeDept);
     getStudentCareerList(userId, setCareerList);
   }, []);
 
   useEffect(() => {
-    setPayload({
-      ...payload,
-      hopeUniv: hopeUniv,
-      hopeDept: hopeDept,
-    });
-  }, [hopeUniv, hopeDept]);
+    if (careerList)
+      setPayload({
+        userId: userId,
+        grade: grade,
+        interest: careerList[grade - 1].interest,
+        stdHope: careerList[grade - 1].stdHope,
+        parentHope: careerList[grade - 1].parentHope,
+        hopeUniv: hopeUniv,
+        hopeDept: hopeDept,
+        specialNote: careerList[grade - 1].specialNote,
+      });
+  }, [careerList]);
 
   return (
     <CareerStatusDiv>
@@ -53,16 +51,20 @@ const StudentCareerStatus = ({ userId, grade }) => {
             <span>대학명</span>
             <input
               type="text"
-              value={hopeUniv}
-              onChange={e => setHopeUniv(e.target.value)}
+              value={payload?.hopeUniv}
+              onChange={e =>
+                setPayload({ ...payload, hopeUniv: e.target.value })
+              }
             />
           </label>
           <label htmlFor="" className="label-nm">
             <span>학부(과)</span>
             <input
               type="text"
-              value={hopeDept}
-              onChange={e => setHopeDept(e.target.value)}
+              value={payload?.hopeDept}
+              onChange={e =>
+                setPayload({ ...payload, hopeDept: e.target.value })
+              }
             />
           </label>
         </div>
@@ -88,7 +90,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload.interest || item.interest}
+                            value={payload?.interest}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -104,7 +106,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload.stdHope || item.stdHope}
+                            value={payload?.stdHope}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -120,7 +122,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload.parentHope || item.parentHope}
+                            value={payload?.parentHope}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -150,7 +152,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                   <textarea
                     cols="30"
                     rows="6"
-                    value={payload.specialNote || item.specialNote}
+                    value={payload?.specialNote}
                     onChange={e =>
                       setPayload({
                         ...payload,
