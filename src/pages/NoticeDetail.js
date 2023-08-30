@@ -7,7 +7,7 @@ import {
   NoticeDetailInformation,
   NoticeWrap,
 } from "../styles/notice/NoticeStyle";
-import { getNoticeData } from "../api/notice/noticeAxios";
+import { getNoticeData, patchNoticeHit } from "../api/notice/noticeAxios";
 
 const NoticeDetail = () => {
   const { noticeId } = useParams();
