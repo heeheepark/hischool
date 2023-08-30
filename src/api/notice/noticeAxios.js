@@ -23,3 +23,14 @@ export const getNoticeData = async noticeId => {
     return null;
   }
 };
+
+export const patchNoticeHit = async noticeId => {
+  try {
+    const response = await client.patch(
+      `/api/notice/hits?noticeId=${noticeId}`,
+    );
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
+};
