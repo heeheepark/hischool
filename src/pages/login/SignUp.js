@@ -21,6 +21,8 @@ import AutoSearch from "../../components/AutoSearch";
 import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
 
 const SignUp = () => {
+  const [inputValue, setInputValue] = useState("");
+
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [userPic, setUserPic] = useState("");
   const [aprPic, setAprPic] = useState("");
@@ -110,14 +112,6 @@ const SignUp = () => {
   const handlePassWord = e => {
     setPayload({ ...payload, pw: e.target.value });
   };
-
-  useEffect(() => {
-    const addressInput = document.getElementById("address-input");
-    if (addressInput) {
-      addressInput.value = houseAddress.address;
-      setPayload({ ...payload, address: houseAddress.address });
-    }
-  }, [houseAddress.address]);
 
   const handleEmailConfirm = async () => {
     const result = await getConFirmEmail(payload.email);
@@ -215,9 +209,15 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (payload.schoolCode) {
-      getSchoolClass(payload.schoolCode, payload.grade, setSchoolClassList);
+    const addressInput = document.getElementById("address-input");
+    if (addressInput) {
+      addressInput.value = houseAddress.address;
+      setPayload({ ...payload, address: houseAddress.address });
     }
+  }, [houseAddress.address]);
+
+  useEffect(() => {
+    getSchoolClass(payload.schoolCode, payload.grade, setSchoolClassList);
   }, [payload.schoolCode, payload.grade]);
 
   return (
@@ -323,12 +323,16 @@ const SignUp = () => {
                       <label>학교</label>
                       <AutoSearch
                         setPayload={setPayload}
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
+                        setSchoolClassList={setSchoolClassList}
                       />
                     </li>
                     <li className="small-input">
                       <div>
                         <label>학년</label>
                         <select
+                          value={payload.grade ? payload.grade : ""}
                           onChange={e => {
                             setPayload(payload => ({
                               ...payload,

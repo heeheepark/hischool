@@ -46,12 +46,12 @@ export const getSchoolName = async setSchoolList => {
 
 export const getSchoolClass = async (schoolCode, grade, setSchoolClassList) => {
   try {
+    console.log(schoolCode, grade);
     if (schoolCode && grade) {
       const res = await client.get(
         `/api/class-list?schoolCode=${schoolCode}&grade=${grade}`,
       );
       const result = res.data;
-      console.log(result);
       setSchoolClassList(result);
     }
   } catch (err) {
