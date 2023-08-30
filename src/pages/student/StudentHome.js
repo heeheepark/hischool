@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RecapSchoolRecord from "../../components/student/RecapSchoolRecord";
 import RecapMockRecord from "../../components/student/RecapMockRecord";
 import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
@@ -11,8 +11,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
+import { getMainNotice } from "../../api/student/studentHomeAxios";
 
 const StudentHome = () => {
+  const [mainNotice, setMainNotice] = useState("");
+
+  useEffect(() => {
+    getMainNotice(setMainNotice);
+  }, []);
+
   return (
     <StudentHomeDiv>
       <div className="record">
@@ -67,66 +74,27 @@ const StudentHome = () => {
                 loop={true}
                 slidesPerView={3}
               >
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important">중요</span>
-                      <span className="notice-title">
-                        성적입력기간 및 성적확인기간 안내
-                      </span>
+                {mainNotice.imptList?.map(item => (
+                  <SwiperSlide key={item.noticeId}>
+                    <div className="notice-title-wrap">
+                      <div>
+                        <span className="notice-important">중요</span>
+                        <span className="notice-title">{item.title}</span>
+                      </div>
+                      <span className="notice-date">{item.createdAt}</span>
                     </div>
-                    <span className="notice-date">2023-08-21</span>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important">중요</span>
-                      <span className="notice-title">
-                        8월 시스템 점검 안내(2023.08.24.(목))
-                      </span>
+                  </SwiperSlide>
+                ))}
+                {mainNotice.normalList?.map(item => (
+                  <SwiperSlide key={item.noticeId}>
+                    <div className="notice-title-wrap">
+                      <div>
+                        <span className="notice-title">{item.title}</span>
+                      </div>
+                      <span className="notice-date">{item.createdAt}</span>
                     </div>
-                    <span className="notice-date">2023-08-21</span>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important disabled"></span>
-                      <span className="notice-title">2학기 개학 안내</span>
-                    </div>
-                    <span className="notice-date">2023-08-08</span>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important disabled"></span>
-                      <span className="notice-title">여름방학기간 안내</span>
-                    </div>
-                    <span className="notice-date">2023-07-17</span>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important disabled"></span>
-                      <span className="notice-title">기말고사기간 안내</span>
-                    </div>
-                    <span className="notice-date">2023-07-01</span>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="notice-title-wrap">
-                    <div>
-                      <span className="notice-important ">중요</span>
-                      <span className="notice-title">
-                        6월 시스템 점검 안내(2023.06.21.(수))
-                      </span>
-                    </div>
-                    <span className="notice-date">2023-06-16</span>
-                  </div>
-                </SwiperSlide>
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
           </div>

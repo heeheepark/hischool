@@ -25,10 +25,7 @@ const LifeRecord = () => {
 
   return (
     <LifeRecordDiv>
-      <h3>
-        학생 생활기록부
-        {` - ${studentInfo.studentName}(${studentInfo.studentBirth})`}
-      </h3>
+      <h3>생활기록부</h3>
       <ul className="category-wrap">
         <li className="grade active" onClick={handleCategory}>
           성적현황

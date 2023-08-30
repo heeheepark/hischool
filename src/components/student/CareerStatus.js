@@ -16,7 +16,7 @@ const CareerStatus = () => {
 
   return (
     <CareerStatusDiv>
-      <div className="top-wrap">
+      <div className="mid-wrap">
         <div className="hope-univ-wrap">
           <h4>희망 대학</h4>
           <label htmlFor="" className="label-nm">
@@ -55,7 +55,7 @@ const CareerStatus = () => {
           </HopeCareerTable>
         </div>
       </div>
-      <div className="significant">
+      <div className="st-significant">
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
           {careerList.map((item, index) => (

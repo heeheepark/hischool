@@ -12,6 +12,32 @@ export const getGrade = async setGrade => {
   }
 };
 
+// 내신 그래프
+export const getSchoolRecordChart = async (userId, setAllSchoolRecordData) => {
+  try {
+    const res = await client.get(`/api/teacher/aca-graph/${userId}`);
+    const result = res.data;
+    if (result.length !== 0) {
+      setAllSchoolRecordData(result);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 모의고사 그래프
+export const getMockRecordChart = async (userId, setAllMockRecordData) => {
+  try {
+    const res = await client.get(`/api/teacher/mock-graph/${userId}`);
+    const result = res.data;
+    if (result.length !== 0) {
+      setAllMockRecordData(result);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // 희망 대학, 학과
 export const getHopeUniversity = async (userId, setHopeUniv, setHopeDept) => {
   try {
@@ -30,6 +56,17 @@ export const getStudentCareerList = async (userId, setCareerList) => {
     const res = await client.get(`/api/career/by?userId=${parseInt(userId)}`);
     const result = res.data;
     setCareerList(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 진로지도 POST
+export const postSutdentCareerList = async payload => {
+  try {
+    console.log("Post 시도");
+    console.log(payload);
+    // const res = await client.post(`/api/career/clear`, payload);
   } catch (err) {
     console.log(err);
   }

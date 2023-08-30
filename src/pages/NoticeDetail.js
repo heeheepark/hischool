@@ -15,6 +15,7 @@ const NoticeDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    patchNoticeHit(noticeId);
     async function fetchNotice() {
       try {
         const fetchedNotice = await getNoticeData(noticeId); // 공지사항 데이터 가져오기
@@ -46,7 +47,7 @@ const NoticeDetail = () => {
         <p>{notice.title}</p>
       </NoticeDetailITitle>
       <NoticeDetailInformation>
-        <div>관리자</div>
+        <div>관리자{notice.userId}</div>
         <div>
           <p>{notice.hits}</p>
           <p>{notice.createdAt.split("T", 1)}</p>

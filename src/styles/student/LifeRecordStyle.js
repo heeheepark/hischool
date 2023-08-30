@@ -95,11 +95,43 @@ export const CareerStatusDiv = styled.div`
           font-size: 16px;
           border: 1px solid #ccc;
           padding-left: 5px;
+          :read-only {
+            cursor: default;
+          }
         }
       }
     }
     .hope-career-wrap {
       width: 100%;
+    }
+  }
+  .st-significant {
+    .detail-significant {
+      display: flex;
+      flex-flow: column;
+      .label-nm {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        font-size: 16px;
+        padding-left: 15px;
+        :not(:last-of-type) {
+          margin-bottom: 20px;
+        }
+        span {
+          width: 5%;
+        }
+        textarea {
+          font-size: 15px;
+          width: 100%;
+          resize: none;
+          border: 1px solid #ccc;
+          font-family: "Pretendard", sans-serif;
+          :read-only {
+            cursor: default;
+          }
+        }
+      }
     }
   }
   .significant {

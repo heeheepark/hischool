@@ -8,16 +8,16 @@ import {
 } from "../styles/AutoSearchStyle";
 import { getSchoolName } from "../api/signUpAxios";
 
-const AutoSearch = ({ setPayload }) => {
-  const [inputValue, setInputValue] = useState("");
+const AutoSearch = ({
+  setPayload,
+  inputValue,
+  setInputValue,
+  setSchoolClassList,
+}) => {
   const [isInputValue, setIsInputValue] = useState(false);
   const [dropDownList, setDropDownList] = useState([]);
   const [dropDownItem, setDropDownItem] = useState(-1);
   const [schoolList, setSchoolList] = useState([]);
-
-  useEffect(() => {
-    getSchoolName(setSchoolList);
-  }, []);
 
   const showDropDownList = () => {
     if (inputValue === "") {
@@ -34,7 +34,12 @@ const AutoSearch = ({ setPayload }) => {
   const changeInputValue = e => {
     setInputValue(e.target.value);
     setIsInputValue(true);
-    console.log(inputValue);
+    setSchoolClassList("");
+    setPayload(payload => ({
+      ...payload,
+      schoolCode: "",
+      grade: "",
+    }));
   };
 
   const handleClickItem = e => {
@@ -62,6 +67,20 @@ const AutoSearch = ({ setPayload }) => {
     }
   };
 
+  const handleRemoveBtn = () => {
+    setInputValue("");
+    setSchoolClassList("");
+    setPayload(payload => ({
+      ...payload,
+      schoolCode: "",
+      grade: "",
+    }));
+  };
+
+  useEffect(() => {
+    getSchoolName(setSchoolList);
+  }, []);
+
   useEffect(showDropDownList, [inputValue]);
 
   return (
@@ -73,7 +92,7 @@ const AutoSearch = ({ setPayload }) => {
           onChange={changeInputValue}
           onKeyUp={handleKey}
         />
-        <DeleteButton onClick={() => setInputValue("")}>&times;</DeleteButton>
+        <DeleteButton onClick={handleRemoveBtn}>&times;</DeleteButton>
       </InputDiv>
       {isInputValue && (
         <DropDownUl>

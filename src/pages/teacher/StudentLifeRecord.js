@@ -13,7 +13,7 @@ import { getGrade } from "../../api/teacher/studentLifeRecordAxios";
 
 const StudentLifeRecord = () => {
   const { state } = useLocation();
-  console.log("userId", state);
+  console.log("userId", state.userId);
   const [categoryLi, setCategoryLi] = useState(null);
   const [activeCateName, setActiveCateName] = useState("grade");
   const [grade, setGrade] = useState("");
@@ -31,7 +31,7 @@ const StudentLifeRecord = () => {
 
   return (
     <LifeRecordDiv>
-      <h3>학생 생활기록부{" - 김수현(2005-12-25)"}</h3>
+      <h3>학생 생활기록부{` - ${state.studentName}(${state.studentBirth})`}</h3>
       <ul className="category-wrap">
         <li className="grade active" onClick={handleCategory}>
           성적현황
@@ -45,13 +45,13 @@ const StudentLifeRecord = () => {
       </ul>
       <div className="content-wrap">
         {activeCateName === "grade" && (
-          <StudentRecordStatus userId={state} grade={grade} />
+          <StudentRecordStatus userId={state.userId} grade={grade} />
         )}
         {activeCateName === "attendance" && (
-          <StudentAttendStatus userId={state} grade={grade} />
+          <StudentAttendStatus userId={state.userId} grade={grade} />
         )}
         {activeCateName === "career" && (
-          <StudentCareerStatus userId={state} grade={grade} />
+          <StudentCareerStatus userId={state.userId} grade={"2"} />
         )}
       </div>
     </LifeRecordDiv>

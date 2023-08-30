@@ -13,29 +13,29 @@ import TMockRecordChart from "./TMockRecordChart";
 import TSchoolRecordTable from "./TSchoolRecordTable";
 import TMockRecordTable from "./TMockRecordTable";
 
-const StudentRecordStatus = () => {
+const StudentRecordStatus = ({ userId }) => {
   return (
     <RecordStatusDiv>
       <h4>성적 현황</h4>
       <div className="record-chart">
         <div className="school-record-wrap">
           <span>내신 그래프</span>
-          <TSchoolRecordChart />
+          <TSchoolRecordChart userId={userId} />
         </div>
         <div className="mock-record-wrap">
           <span>모의고사 그래프</span>
-          <TMockRecordChart />
+          <TMockRecordChart userId={userId} />
         </div>
       </div>
       <div className="record-table">
         <div className="school-record-wrap">
           <LifeRecordTableWrap>
-            <TSchoolRecordTable />
+            <TSchoolRecordTable userId={userId} />
           </LifeRecordTableWrap>
         </div>
         <div className="mock-record-wrap">
           <LifeRecordTableWrap>
-            <TMockRecordTable />
+            <TMockRecordTable userId={userId} />
           </LifeRecordTableWrap>
         </div>
       </div>
