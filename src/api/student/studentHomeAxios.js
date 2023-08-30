@@ -1,7 +1,7 @@
 import { client } from "../client";
 
 // 내신 그래프
-const getAllSchoolRecord = async setAllSchoolRecordData => {
+export const getAllSchoolRecord = async setAllSchoolRecordData => {
   try {
     const res = await client.get(`/api/student/aca-graph`);
     const result = res.data;
@@ -14,7 +14,7 @@ const getAllSchoolRecord = async setAllSchoolRecordData => {
 };
 
 // 최근 내신 성적
-const getRecentSchoolRecord = async (
+export const getRecentSchoolRecord = async (
   setRecentSchoolRecordData,
   setRecentTestTitle,
 ) => {
@@ -31,7 +31,7 @@ const getRecentSchoolRecord = async (
 };
 
 // 모의고사 그래프
-const getAllMockRecord = async setAllMockRecordData => {
+export const getAllMockRecord = async setAllMockRecordData => {
   try {
     const res = await client.get(`/api/student/mock-graph`);
     const result = res.data;
@@ -44,7 +44,7 @@ const getAllMockRecord = async setAllMockRecordData => {
 };
 
 // 최근 모의고사 성적
-const getRecentMockRecord = async (
+export const getRecentMockRecord = async (
   setRecentMockRecordData,
   setRecentTestTitle,
 ) => {
@@ -61,7 +61,7 @@ const getRecentMockRecord = async (
 };
 
 // 주간 급식표
-const getWeekFood = async setWeekMenuData => {
+export const getWeekFood = async setWeekMenuData => {
   try {
     const res = await client.get(`/api/meal/main`);
     const result = res.data.list;
@@ -76,7 +76,7 @@ const getWeekFood = async setWeekMenuData => {
 };
 
 // 시간표
-const getTimeTable = async setTimeTable => {
+export const getTimeTable = async setTimeTable => {
   try {
     const res = await client.get(`/api/timetable`);
     const result = res.data.list;
@@ -86,11 +86,13 @@ const getTimeTable = async setTimeTable => {
   }
 };
 
-export {
-  getAllSchoolRecord,
-  getRecentSchoolRecord,
-  getAllMockRecord,
-  getRecentMockRecord,
-  getWeekFood,
-  getTimeTable,
+// 메인 공지사항
+export const getMainNotice = async setMainNotice => {
+  try {
+    const res = await client.get(`/api/student/notice`);
+    const result = res.data;
+    setMainNotice(result);
+  } catch (err) {
+    console.log(err);
+  }
 };

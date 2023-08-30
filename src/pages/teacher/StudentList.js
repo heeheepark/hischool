@@ -75,7 +75,11 @@ const StudentList = () => {
                   className="student-name"
                   onClick={() => {
                     navigate("/teacher/studentliferecord", {
-                      state: item.userId,
+                      state: {
+                        userId: item.userId,
+                        studentName: item.snm,
+                        studentBirth: item.birth,
+                      },
                     });
                   }}
                 >

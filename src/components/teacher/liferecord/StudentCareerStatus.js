@@ -16,6 +16,10 @@ const StudentCareerStatus = ({ userId, grade }) => {
   const [hopeDept, setHopeDept] = useState("");
   const [payload, setPayload] = useState("");
 
+  console.log(careerList);
+  console.log(payload);
+  console.log(payload.length);
+
   const handleSave = () => {
     postSutdentCareerList(payload);
   };
@@ -30,12 +34,18 @@ const StudentCareerStatus = ({ userId, grade }) => {
       setPayload({
         userId: userId,
         grade: grade,
-        interest: careerList[grade - 1].interest,
-        stdHope: careerList[grade - 1].stdHope,
-        parentHope: careerList[grade - 1].parentHope,
+        interest:
+          careerList.length > grade - 1 ? careerList[grade - 1].interest : "",
+        stdHope:
+          careerList.length > grade - 1 ? careerList[grade - 1].stdHope : "",
+        parentHope:
+          careerList.length > grade - 1 ? careerList[grade - 1].parentHope : "",
         hopeUniv: hopeUniv,
         hopeDept: hopeDept,
-        specialNote: careerList[grade - 1].specialNote,
+        specialNote:
+          careerList.length > grade - 1
+            ? careerList[grade - 1].specialNote
+            : "",
       });
   }, [careerList]);
 
@@ -81,7 +91,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                   <li className="category-detail">학부모</li>
                 </ul>
               </li>
-              {careerList.length > 0 &&
+              {careerList.length > grade - 1 ? (
                 careerList.map((item, index) => (
                   <li className="career-list" key={index}>
                     <ul>
@@ -90,7 +100,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload?.interest}
+                            value={payload.interest}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -106,7 +116,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload?.stdHope}
+                            value={payload.stdHope}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -122,7 +132,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <li>
                           <input
                             type="text"
-                            value={payload?.parentHope}
+                            value={payload.parentHope}
                             onChange={e =>
                               setPayload({
                                 ...payload,
@@ -136,7 +146,50 @@ const StudentCareerStatus = ({ userId, grade }) => {
                       )}
                     </ul>
                   </li>
-                ))}
+                ))
+              ) : (
+                <li className="career-list">
+                  <ul>
+                    <li>{grade}학년</li>
+                    <li>
+                      <input
+                        type="text"
+                        value={payload.interest}
+                        onChange={e =>
+                          setPayload({
+                            ...payload,
+                            interest: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="text"
+                        value={payload.stdHope}
+                        onChange={e =>
+                          setPayload({
+                            ...payload,
+                            stdHope: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                    <li>
+                      <input
+                        type="text"
+                        value={payload.parentHope}
+                        onChange={e =>
+                          setPayload({
+                            ...payload,
+                            parentHope: e.target.value,
+                          })
+                        }
+                      />
+                    </li>
+                  </ul>
+                </li>
+              )}
             </ul>
           </HopeCareerTable>
         </div>
@@ -144,15 +197,39 @@ const StudentCareerStatus = ({ userId, grade }) => {
       <div className="significant">
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
-          {careerList.length > 0 &&
-            careerList.map((item, index) => (
-              <label htmlFor="" className="label-nm" key={index}>
-                <span>{item.grade}학년</span>
-                {grade == index + 1 ? (
+          {careerList.length > grade - 1
+            ? careerList.map((item, index) => (
+                <label htmlFor="" className="label-nm" key={index}>
+                  <span>{item.grade}학년</span>
+                  {grade == index + 1 ? (
+                    <textarea
+                      cols="30"
+                      rows="6"
+                      value={payload.length > 0 && payload.specialNote}
+                      onChange={e =>
+                        setPayload({
+                          ...payload,
+                          specialNote: e.target.value,
+                        })
+                      }
+                    ></textarea>
+                  ) : (
+                    <textarea
+                      cols="30"
+                      rows="6"
+                      value={item.specialNote}
+                      readOnly
+                    ></textarea>
+                  )}
+                </label>
+              ))
+            : careerList.map((item, index) => (
+                <label htmlFor="" className="label-nm" key={index}>
+                  <span>{item.grade}학년</span>
                   <textarea
                     cols="30"
                     rows="6"
-                    value={payload?.specialNote}
+                    value={payload.specialNote}
                     onChange={e =>
                       setPayload({
                         ...payload,
@@ -160,16 +237,8 @@ const StudentCareerStatus = ({ userId, grade }) => {
                       })
                     }
                   ></textarea>
-                ) : (
-                  <textarea
-                    cols="30"
-                    rows="6"
-                    value={item.specialNote}
-                    readOnly
-                  ></textarea>
-                )}
-              </label>
-            ))}
+                </label>
+              ))}
         </div>
       </div>
     </CareerStatusDiv>

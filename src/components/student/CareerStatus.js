@@ -16,7 +16,7 @@ const CareerStatus = () => {
 
   return (
     <CareerStatusDiv>
-      <div className="top-wrap">
+      <div className="mid-wrap">
         <div className="hope-univ-wrap">
           <h4>희망 대학</h4>
           <label htmlFor="" className="label-nm">

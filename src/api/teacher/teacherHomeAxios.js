@@ -74,3 +74,14 @@ export const getSchedule = async (setScheduleData, startDate, endDate) => {
     console.log(err);
   }
 };
+
+// 메인 공지사항
+export const getMainNotice = async setMainNotice => {
+  try {
+    const res = await client.get(`/api/teacher/notice`);
+    const result = res.data;
+    setMainNotice(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
