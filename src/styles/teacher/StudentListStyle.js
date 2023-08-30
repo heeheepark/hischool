@@ -83,6 +83,10 @@ export const StudentListContent = styled.div`
             color: #fff;
           }
         }
+        .student-name {
+          cursor: pointer;
+          text-decoration: underline;
+        }
       }
     }
   }

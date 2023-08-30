@@ -5,7 +5,7 @@ import RecordStatus from "../../components/student/RecordStatus";
 import CareerStatus from "../../components/student/CareerStatus";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getStudentInfo } from "../../api/student/attendAxios";
+import { getStudentInfo } from "../../api/student/lifeRecordAxios";
 
 const LifeRecord = () => {
   const [categoryLi, setCategoryLi] = useState(null);

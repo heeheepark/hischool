@@ -5,7 +5,7 @@ import {
 } from "../../styles/student/LifeRecordStyle";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getCareerData } from "../../api/student/attendAxios";
+import { getCareerData } from "../../api/student/lifeRecordAxios";
 
 const CareerStatus = () => {
   const [careerList, setCareerList] = useState([]);
