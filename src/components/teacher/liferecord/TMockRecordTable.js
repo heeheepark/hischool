@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getAllMockRecord } from "../../../api/student/mockRecordAxios";
 import { SchoolRecordFilterDiv } from "../../../styles/student/FilterStyle";
+import { getStudentMockRecord } from "../../../api/teacher/studentRecordAxios";
 
-const TMockRecordTable = () => {
+const TMockRecordTable = ({ userId }) => {
   const cateList = [
     "연도",
     "월",
@@ -44,7 +45,17 @@ const TMockRecordTable = () => {
   };
 
   useEffect(() => {
-    getAllMockRecord(setDefaultMockRecord, setAllMockRecord, year, month);
+    if (!year && !month) {
+      getStudentMockRecord(userId, setDefaultMockRecord, setAllMockRecord);
+    } else {
+      getStudentMockRecord(
+        userId,
+        setDefaultMockRecord,
+        setAllMockRecord,
+        year,
+        month,
+      );
+    }
   }, [year, month]);
 
   return (

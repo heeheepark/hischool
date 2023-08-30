@@ -5,8 +5,9 @@ import {
   getAllMockRecord,
   getRecentMockRecord,
 } from "../../../api/student/studentHomeAxios";
+import { getMockRecordChart } from "../../../api/teacher/studentLifeRecordAxios";
 
-const TMockRecordChart = () => {
+const TMockRecordChart = ({ userId }) => {
   const colorData = ["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"];
   const [allMockRecordData, setAllMockRecordData] = useState(null);
 
@@ -32,7 +33,7 @@ const TMockRecordChart = () => {
     });
 
   useState(() => {
-    getAllMockRecord(setAllMockRecordData);
+    getMockRecordChart(userId, setAllMockRecordData);
   }, []);
 
   return (

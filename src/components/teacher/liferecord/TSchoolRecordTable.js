@@ -6,8 +6,9 @@ import {
   getAllStudentCount,
   getStudentCount,
 } from "../../../api/teacher/teacherHomeAxios";
+import { getStudentSchoolRecord } from "../../../api/teacher/studentRecordAxios";
 
-const TSchoolRecordTable = () => {
+const TSchoolRecordTable = ({ userId }) => {
   const cateList = [
     "연도",
     "학기",
@@ -64,13 +65,22 @@ const TSchoolRecordTable = () => {
   };
 
   useEffect(() => {
-    getAllSchoolRecord(
-      setDefaultSchoolRecord,
-      setAllSchoolRecord,
-      year,
-      semester,
-      testType,
-    );
+    if (!year && !semester && !testType) {
+      getStudentSchoolRecord(
+        userId,
+        setDefaultSchoolRecord,
+        setAllSchoolRecord,
+      );
+    } else {
+      getStudentSchoolRecord(
+        userId,
+        setDefaultSchoolRecord,
+        setAllSchoolRecord,
+        year,
+        semester,
+        testType,
+      );
+    }
     getStudentCount(setStudentCount);
     getAllStudentCount(setAllStudentCount);
   }, [year, semester, testType]);

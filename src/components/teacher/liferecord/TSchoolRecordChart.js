@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { RecordDiv } from "../../../styles/student/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
 import { getAllSchoolRecord } from "../../../api/student/studentHomeAxios";
+import { getSchoolRecordChart } from "../../../api/teacher/studentLifeRecordAxios";
 
-const TSchoolRecordChart = () => {
+const TSchoolRecordChart = ({ userId }) => {
   const colorData = ["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"];
   const [allSchoolRecordData, setAllSchoolRecordData] = useState(null);
 
@@ -29,7 +30,7 @@ const TSchoolRecordChart = () => {
     });
 
   useState(() => {
-    getAllSchoolRecord(setAllSchoolRecordData);
+    getSchoolRecordChart(userId, setAllSchoolRecordData);
   }, []);
 
   return (
