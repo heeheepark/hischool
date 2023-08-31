@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NoticePaging from "../components/NoticePaging";
 import { getNoticeList } from "../api/notice/noticeAxios";
 import {
@@ -10,6 +10,8 @@ import {
 } from "../styles/notice/NoticeStyle";
 
 const Notice = () => {
+  const location = useLocation();
+  const user = location.pathname.split("/")[1];
   const [noticeData, setNoticeData] = useState([]);
   // 현재 페이지 상태를 관리하는 상태 변수
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,7 +85,7 @@ const Notice = () => {
                 <span>중요</span>
               </li>
               <li>
-                <Link to={`/noticedetail/${notice.noticeId}`}>
+                <Link to={`/${user}/notice/${notice.noticeId}`}>
                   {notice.title}
                 </Link>
               </li>
@@ -99,7 +101,7 @@ const Notice = () => {
                   (index + itemsPerPage * (currentPage - 1))}
               </li>
               <li>
-                <Link to={`/noticedetail/${notice.noticeId}`}>
+                <Link to={`/${user}/notice/${notice.noticeId}`}>
                   {notice.title}
                 </Link>
               </li>

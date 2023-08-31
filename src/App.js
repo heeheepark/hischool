@@ -36,6 +36,7 @@ function App() {
           <Route path="/student/home" element={<StudentHome />} />
           <Route path="/student/mypage" element={<Mypage />} />
           <Route path="/student/notice" element={<Notice />} />
+          <Route path="/student/notice/:noticeId" element={<NoticeDetail />} />
           <Route path="/student/schoolrecord" element={<SchoolRecord />} />
           <Route path="/student/mockrecord" element={<MockRecord />} />
           <Route path="/student/liferecord" element={<LifeRecord />} />
@@ -45,6 +46,7 @@ function App() {
           <Route path="/teacher/home" element={<TeacherHome />} />
           <Route path="/teacher/mypage" element={<Mypage />} />
           <Route path="/teacher/notice" element={<Notice />} />
+          <Route path="/teacher/notice/:noticeId" element={<NoticeDetail />} />
           <Route path="/teacher/studentlist" element={<StudentList />} />
           <Route path="/teacher/signlist" element={<SignList />} />
           <Route path="/teacher/record" element={<StudentRecord />} />
@@ -66,8 +68,6 @@ function App() {
             element={<InputMockRecord />}
           />
           <Route path="/teacher/editmockrecord" element={<EditMockRecord />} />
-          {/* 공지사항 */}
-          <Route path="/noticedetail/:noticeId" element={<NoticeDetail />} />
           <Route path="/teacher/about" element={<About />} />
         </Route>
       </Routes>

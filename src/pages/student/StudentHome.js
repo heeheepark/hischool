@@ -62,40 +62,42 @@ const StudentHome = () => {
               </h3>
             </Link>
             <div className="notice-swiper">
-              <Swiper
-                style={{ height: "100%" }}
-                direction={"vertical"}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Autoplay]}
-                className="mySwiper"
-                autoplay={{ delay: 2000, disableOnInteraction: false }}
-                loop={true}
-                slidesPerView={3}
-              >
-                {mainNotice.imptList?.map(item => (
-                  <SwiperSlide key={item.noticeId}>
-                    <div className="notice-title-wrap">
-                      <div>
-                        <span className="notice-important">중요</span>
-                        <span className="notice-title">{item.title}</span>
+              {mainNotice && (
+                <Swiper
+                  style={{ height: "100%" }}
+                  direction={"vertical"}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Autoplay]}
+                  className="mySwiper"
+                  autoplay={{ delay: 2000, disableOnInteraction: false }}
+                  loop={true}
+                  slidesPerView={3}
+                >
+                  {mainNotice.imptList?.map(item => (
+                    <SwiperSlide key={item.noticeId}>
+                      <div className="notice-title-wrap">
+                        <div>
+                          <span className="notice-important">중요</span>
+                          <span className="notice-title">{item.title}</span>
+                        </div>
+                        <span className="notice-date">{item.createdAt}</span>
                       </div>
-                      <span className="notice-date">{item.createdAt}</span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-                {mainNotice.normalList?.map(item => (
-                  <SwiperSlide key={item.noticeId}>
-                    <div className="notice-title-wrap">
-                      <div>
-                        <span className="notice-title">{item.title}</span>
+                    </SwiperSlide>
+                  ))}
+                  {mainNotice.normalList?.map(item => (
+                    <SwiperSlide key={item.noticeId}>
+                      <div className="notice-title-wrap">
+                        <div>
+                          <span className="notice-title">{item.title}</span>
+                        </div>
+                        <span className="notice-date">{item.createdAt}</span>
                       </div>
-                      <span className="notice-date">{item.createdAt}</span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
             </div>
           </div>
           <div className="food-menu">
