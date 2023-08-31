@@ -7,7 +7,7 @@ import {
   NoticeDetailInformation,
   NoticeWrap,
 } from "../styles/notice/NoticeStyle";
-import { getNoticeData } from "../api/notice/noticeAxios";
+import { getNoticeData, patchNoticeHit } from "../api/notice/noticeAxios";
 
 const NoticeDetail = () => {
   const { noticeId } = useParams();
@@ -47,7 +47,7 @@ const NoticeDetail = () => {
         <p>{notice.title}</p>
       </NoticeDetailITitle>
       <NoticeDetailInformation>
-        <div>관리자{notice.userId}</div>
+        <div>관리자</div>
         <div>
           <p>{notice.hits}</p>
           <p>{notice.createdAt.split("T", 1)}</p>

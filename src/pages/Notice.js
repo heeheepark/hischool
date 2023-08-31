@@ -103,7 +103,7 @@ const Notice = () => {
                   {notice.title}
                 </Link>
               </li>
-              <li>관리자{notice.userId}</li>
+              <li>관리자</li>
               <li>{notice.createdAt.split("T", 1)}</li>
               <li>{notice.hits}</li>
             </ul>
