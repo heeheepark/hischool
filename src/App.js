@@ -48,10 +48,10 @@ function App() {
           <Route path="/teacher/notice" element={<Notice />} />
           <Route path="/teacher/notice/:noticeId" element={<NoticeDetail />} />
           <Route path="/teacher/studentlist" element={<StudentList />} />
-          <Route path="/teacher/signlist" element={<SignList />} />
+          <Route path="/teacher/studentlist/signlist" element={<SignList />} />
           <Route path="/teacher/record" element={<StudentRecord />} />
           <Route
-            path="/teacher/studentliferecord"
+            path="/teacher/studentlist/studentliferecord/:studentId"
             element={<StudentLifeRecord />}
           />
           <Route

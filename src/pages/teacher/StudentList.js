@@ -30,7 +30,7 @@ const StudentList = () => {
   }, [cancelOk]);
 
   const handleSginClick = () => {
-    navigate("/teacher/signlist");
+    navigate("/teacher/studentlist/signlist");
   };
 
   // 승인 취소
@@ -74,13 +74,16 @@ const StudentList = () => {
                 <li
                   className="student-name"
                   onClick={() => {
-                    navigate("/teacher/studentliferecord", {
-                      state: {
-                        userId: item.userId,
-                        studentName: item.snm,
-                        studentBirth: item.birth,
+                    navigate(
+                      `/teacher/studentlist/studentliferecord/${item.userId}`,
+                      {
+                        state: {
+                          userId: item.userId,
+                          studentName: item.snm,
+                          studentBirth: item.birth,
+                        },
                       },
-                    });
+                    );
                   }}
                 >
                   {item.snm}

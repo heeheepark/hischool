@@ -10,6 +10,27 @@ export const LifeRecordDiv = styled.div`
     font-size: 27px;
     margin-bottom: 18px;
   }
+  .life-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      font-size: 27px;
+      margin-bottom: 18px;
+    }
+    button {
+      font-size: 15px;
+      border: 0;
+      border-radius: 3px;
+
+      background: #176b87;
+      padding: 3px 6px;
+      cursor: pointer;
+      > a {
+        color: #fff;
+      }
+    }
+  }
   .category-wrap {
     display: flex;
     font-size: 18px;

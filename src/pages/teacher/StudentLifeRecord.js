@@ -10,6 +10,7 @@ import StudentAttendStatus from "../../components/teacher/liferecord/StudentAtte
 import StudentCareerStatus from "../../components/teacher/liferecord/StudentCareerStatus";
 import { useLocation } from "react-router";
 import { getGrade } from "../../api/teacher/studentLifeRecordAxios";
+import { Link } from "react-router-dom";
 
 const StudentLifeRecord = () => {
   const { state } = useLocation();
@@ -31,7 +32,14 @@ const StudentLifeRecord = () => {
 
   return (
     <LifeRecordDiv>
-      <h3>학생 생활기록부{` - ${state.studentName}(${state.studentBirth})`}</h3>
+      <div className="life-record-header">
+        <h3>
+          학생 생활기록부{` - ${state.studentName}(${state.studentBirth})`}
+        </h3>
+        <button>
+          <Link to="/teacher/studentlist">학생 목록</Link>
+        </button>
+      </div>
       <ul className="category-wrap">
         <li className="grade active" onClick={handleCategory}>
           성적현황

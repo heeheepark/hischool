@@ -16,10 +16,6 @@ const StudentCareerStatus = ({ userId, grade }) => {
   const [hopeDept, setHopeDept] = useState("");
   const [payload, setPayload] = useState("");
 
-  console.log(careerList);
-  console.log(payload);
-  console.log(payload.length);
-
   const handleSave = () => {
     postSutdentCareerList(payload);
   };
@@ -92,7 +88,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                 </ul>
               </li>
               {careerList.length > grade - 1 ? (
-                careerList.map((item, index) => (
+                careerList?.map((item, index) => (
                   <li className="career-list" key={index}>
                     <ul>
                       <li>{item.grade}학년</li>
@@ -198,7 +194,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
           {careerList.length > grade - 1
-            ? careerList.map((item, index) => (
+            ? careerList?.map((item, index) => (
                 <label htmlFor="" className="label-nm" key={index}>
                   <span>{item.grade}학년</span>
                   {grade == index + 1 ? (
@@ -223,7 +219,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                   )}
                 </label>
               ))
-            : careerList.map((item, index) => (
+            : careerList?.map((item, index) => (
                 <label htmlFor="" className="label-nm" key={index}>
                   <span>{item.grade}학년</span>
                   <textarea

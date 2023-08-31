@@ -80,7 +80,11 @@ const StudentHome = () => {
                       <div className="notice-title-wrap">
                         <div>
                           <span className="notice-important">중요</span>
-                          <span className="notice-title">{item.title}</span>
+                          <span className="notice-title">
+                            <Link to={`/student/notice/${item.noticeId}`}>
+                              {item.title}
+                            </Link>
+                          </span>
                         </div>
                         <span className="notice-date">{item.createdAt}</span>
                       </div>
@@ -90,7 +94,9 @@ const StudentHome = () => {
                     <SwiperSlide key={item.noticeId}>
                       <div className="notice-title-wrap">
                         <div>
-                          <span className="notice-title">{item.title}</span>
+                          <Link to={`/student/notice/${item.noticeId}`}>
+                            {item.title}
+                          </Link>
                         </div>
                         <span className="notice-date">{item.createdAt}</span>
                       </div>
