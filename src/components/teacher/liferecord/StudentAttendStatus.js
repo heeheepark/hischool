@@ -1,66 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AttendStatusDiv,
   AttendTable,
 } from "../../../styles/student/AttendStyle";
+import { getAttendData } from "../../../api/teacher/tcAttendAxios";
 
-const StudentAttendStatus = () => {
-  const init = [
-    {
-      classDay: 190,
-      selfAbsent: 0,
-      sickAbsent: 3,
-      etcAbsent: 0,
-      selfTardy: 0,
-      sickTardy: 0,
-      etcTardy: 0,
-      selfLeave: 0,
-      sickLeave: 0,
-      etcLeave: 0,
-      selfAttend: 0,
-      sickeAttend: 0,
-      etcAttend: 0,
-      significant: "3일 해외여행",
-    },
-    {
-      classDay: 191,
-      selfAbsent: 0,
-      sickAbsent: 0,
-      etcAbsent: 0,
-      selfTardy: 0,
-      sickTardy: 0,
-      etcTardy: 0,
-      selfLeave: 0,
-      sickLeave: 0,
-      etcLeave: 0,
-      selfAttend: 0,
-      sickeAttend: 0,
-      etcAttend: 0,
-      significant: "개근",
-    },
-    {
-      classDay: 190,
-      selfAbsent: 0,
-      sickAbsent: 0,
-      etcAbsent: 0,
-      selfTardy: 0,
-      sickTardy: 0,
-      etcTardy: 0,
-      selfLeave: 0,
-      sickLeave: 0,
-      etcLeave: 0,
-      selfAttend: 0,
-      sickeAttend: 0,
-      etcAttend: 0,
-      significant: "개근",
-    },
-  ];
-  const [attendValues, setAttendValues] = useState(init);
+const StudentAttendStatus = ({ userId }) => {
+  // const init = [
+  //   {
+  //     classDay: 190,
+  //     selfAbsent: 0,
+  //     sickAbsent: 3,
+  //     etcAbsent: 0,
+  //     selfTardy: 0,
+  //     sickTardy: 0,
+  //     etcTardy: 0,
+  //     selfLeave: 0,
+  //     sickLeave: 0,
+  //     etcLeave: 0,
+  //     selfAttend: 0,
+  //     sickeAttend: 0,
+  //     etcAttend: 0,
+  //     significant: "3일 해외여행",
+  //   },
+  //   {
+  //     classDay: 191,
+  //     selfAbsent: 0,
+  //     sickAbsent: 0,
+  //     etcAbsent: 0,
+  //     selfTardy: 0,
+  //     sickTardy: 0,
+  //     etcTardy: 0,
+  //     selfLeave: 0,
+  //     sickLeave: 0,
+  //     etcLeave: 0,
+  //     selfAttend: 0,
+  //     sickeAttend: 0,
+  //     etcAttend: 0,
+  //     significant: "개근",
+  //   },
+  //   {
+  //     classDay: 190,
+  //     selfAbsent: 0,
+  //     sickAbsent: 0,
+  //     etcAbsent: 0,
+  //     selfTardy: 0,
+  //     sickTardy: 0,
+  //     etcTardy: 0,
+  //     selfLeave: 0,
+  //     sickLeave: 0,
+  //     etcLeave: 0,
+  //     selfAttend: 0,
+  //     sickeAttend: 0,
+  //     etcAttend: 0,
+  //     significant: "개근",
+  //   },
+  // ];
+  // const [attendValues, setAttendValues] = useState(init);
+  const [attendList, setAttendList] = useState([]);
 
   const handleAttendValues = e => {
     console.log(e.target.value);
+    setAttendList;
   };
 
+  useEffect(() => {
+    getAttendData(userId, setAttendList);
+  }, []);
+
+  console.log(attendList);
   return (
     <AttendStatusDiv>
       <div className="hope-career-wrap">
@@ -90,71 +98,219 @@ const StudentAttendStatus = () => {
                 <li className="category-nm">특이사항</li>
               </ul>
             </li>
-            <li className="attend-list">
-              <ul>
-                <li>1학년</li>
-                {Object.keys(attendValues[0]).map(item => (
-                  <li key={item}>
-                    <input
-                      type={
-                        typeof attendValues[0][item] === "number"
-                          ? "number"
-                          : "text"
-                      }
-                      value={attendValues[0][item]}
-                      onChange={handleAttendValues}
-                      className={
-                        typeof attendValues[0][item] === "string" && "etc-text"
-                      }
-                    />
+            {attendList && attendList.length > 0
+              ? attendList.map(item => (
+                  <li className="attend-list" key={item.attendId}>
+                    <ul>
+                      <li>{item.grade}학년</li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.lessonNum}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          className="etc-text"
+                          value={item.specialNote}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                    </ul>
+                  </li>
+                ))
+              : attendList.map(item => (
+                  <li className="attend-list" key={item.attendId}>
+                    <ul>
+                      <li>{item.grade}학년</li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.lessonNum}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcAbsence}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcLate}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcEarly}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.unauthOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.diseaseOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          value={item.etcOut}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                      <li>
+                        <input
+                          type="text"
+                          className="etc-text"
+                          value={item.specialNote}
+                          onChange={handleAttendValues}
+                        />
+                      </li>
+                    </ul>
                   </li>
                 ))}
-              </ul>
-            </li>
-            <li className="attend-list">
-              <ul>
-                <li>2학년</li>
-                {Object.keys(attendValues[1]).map(item => (
-                  <li key={item}>
-                    <input
-                      type={
-                        typeof attendValues[1][item] === "number"
-                          ? "number"
-                          : "text"
-                      }
-                      value={attendValues[1][item]}
-                      onChange={handleAttendValues}
-                      className={
-                        typeof attendValues[1][item] === "string" && "etc-text"
-                      }
-                    />
-                  </li>
-                ))}
-              </ul>
-            </li>
-            <li className="attend-list">
-              <ul>
-                <li>
-                  <a href="#">3학년</a>
-                </li>
-                {Object.keys(attendValues[2]).map(item => (
-                  <li key={item}>
-                    <input
-                      type={
-                        typeof attendValues[2][item] === "number"
-                          ? "number"
-                          : "text"
-                      }
-                      value={attendValues[2][item]}
-                      onChange={handleAttendValues}
-                      className={
-                        typeof attendValues[2][item] === "string" && "etc-text"
-                      }
-                    />
-                  </li>
-                ))}
-              </ul>
-            </li>
           </ul>
         </AttendTable>
       </div>
