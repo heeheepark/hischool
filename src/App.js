@@ -13,7 +13,6 @@ import StudentList from "./pages/teacher/StudentList";
 import SignList from "./pages/teacher/SignList";
 import StudentRecord from "./pages/teacher/StudentRecord";
 import InputSchoolRecord from "./pages/teacher/InputSchoolRecord";
-import InputSubject from "./pages/teacher/InputSubject";
 import InputMockRecord from "./pages/teacher/InputMockRecord";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -62,7 +61,6 @@ function App() {
             path="/teacher/editschoolrecord"
             element={<EditSchoolRecord />}
           />
-          <Route path="/teacher/inputsubject" element={<InputSubject />} />
           <Route
             path="/teacher/inputmockrecord"
             element={<InputMockRecord />}

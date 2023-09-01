@@ -30,9 +30,6 @@ const EditSchoolRecord = () => {
           semester: item.semester,
           mf: item.midfinal,
           score: item.score,
-          rating: item.rating,
-          classRank: item.classRank,
-          wholeRank: item.wholeRank,
         };
         patchSchoolData(postDataList);
       });
@@ -80,9 +77,6 @@ const EditSchoolRecord = () => {
         <p>과목 계열</p>
         <p>세부 과목</p>
         <strong>점수</strong>
-        <strong>등급</strong>
-        <strong>반 석차</strong>
-        <strong>전교 석차</strong>
       </ISTitle>
       <div>
         {studentsData.map((item, index) => (

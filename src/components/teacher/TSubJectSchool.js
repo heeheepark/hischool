@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { ISRinput } from "../../styles/teacher/InputSchoolRecordStyle";
 import {
-  ISRinput,
-  ISainput,
-} from "../../styles/teacher/InputSchoolRecordStyle";
-import {
-  getSchoolData,
   getSchoolMainSubData,
   getSchoolSubData,
-  getSchoolclassData,
 } from "../../api/teacher/inputSchoolRecordAxios";
 const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [initSubCate, setInitSubCate] = useState(null);
   const [initDetailSub, setInitDetailSub] = useState(null);
   const [selectedSubCate, setSelectedSubCate] = useState(null);
-  const [classCount, setClassCount] = useState(null);
-  const [wholeCount, setWholeCount] = useState(null);
-
-  const getAllData = async () => {
-    await getSchoolclassData(setClassCount);
-    await getSchoolData(setWholeCount);
-  };
 
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
-    if (selectedSubCate) getSchoolSubData(selectedSubCate, setInitDetailSub);
-    getAllData();
+    if (selectedSubCate) {
+      getSchoolSubData(selectedSubCate, setInitDetailSub);
+    }
   }, [selectedSubCate]);
 
   const handleSubCate = e => {
@@ -45,36 +34,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
         item.score = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
-  const handleRating = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.rating = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
-  const handleClassRank = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.classrank = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
-  const handleWholeRank = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.wholerank = parseInt(e.target.value);
       }
       return item;
     });
@@ -109,33 +68,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
             min={0}
             max={100}
           />
-          <input
-            type="number"
-            name="rating"
-            onChange={handleRating}
-            placeholder="등급"
-            max={9}
-          />
-          <ISainput>
-            <input
-              type="number"
-              name="classrank"
-              onChange={handleClassRank}
-              placeholder="반 석차"
-              min={1}
-            />
-            <span> / {classCount}</span>
-          </ISainput>
-          <ISainput>
-            <input
-              type="number"
-              name="wholerank"
-              onChange={handleWholeRank}
-              placeholder="전교 석차"
-              min={1}
-            />
-            <span> / {wholeCount}</span>
-          </ISainput>
         </ISRinput>
       </div>
     </>

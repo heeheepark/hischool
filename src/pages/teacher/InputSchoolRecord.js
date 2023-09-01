@@ -8,7 +8,7 @@ import {
 } from "../../styles/teacher/InputSchoolRecordStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TSubJectSchool from "../../components/teacher/TSubJectSchool";
 import { postSchoolData } from "../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../api/teacher/inputMockRecordAxios";
@@ -92,9 +92,6 @@ const InputSchoolRecord = () => {
         </select>
       </ISRHeader>
       <ISRButton>
-        <Link to={`/teacher/inputsubject`}>
-          <button>과목 정보 입력</button>
-        </Link>
         <button onClick={handleSaveButtonClick}>저장</button>
         <button onClick={() => navigate(-1)}>취소</button>
       </ISRButton>
@@ -102,9 +99,6 @@ const InputSchoolRecord = () => {
         <p>과목 계열</p>
         <p>세부 과목</p>
         <strong>점수</strong>
-        <strong>등급</strong>
-        <strong>반 석차</strong>
-        <strong>전교 석차</strong>
       </ISRTitle>
       <div>
         {studentsData.map((item, index) => (
