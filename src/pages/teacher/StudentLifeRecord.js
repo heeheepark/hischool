@@ -56,7 +56,7 @@ const StudentLifeRecord = () => {
           <StudentAttendStatus userId={state.userId} grade={grade} />
         )}
         {activeCateName === "career" && (
-          <StudentCareerStatus userId={state.userId} grade={"2"} />
+          <StudentCareerStatus userId={state.userId} grade={"3"} />
         )}
       </div>
     </LifeRecordDiv>

@@ -52,31 +52,43 @@ export const getHopeUniversity = async (userId, setHopeUniv, setHopeDept) => {
 
 // 진로 희망사항
 export const getStudentCareerList = async (
+  grade,
   userId,
   setCareerList,
   setExistCareerId,
+  setComfirmPost,
 ) => {
   try {
     const res = await client.get(`/api/career/by?userId=${parseInt(userId)}`);
     const result = res.data;
-    console.log(result);
-    if (result.length > 0) {
+    if (result.length == grade) {
       setExistCareerId(true);
       setCareerList(result);
+      setComfirmPost(false);
+    } else {
+      setCareerList(result);
+      setComfirmPost(true);
     }
   } catch (err) {
     console.log(err);
   }
 };
 
-// 진로지도 Patch
-export const patchSutdentCareerList = async payload => {
+// 진로지도 post
+export const postStudentCareerList = async payload => {
   try {
-    console.log("Post 시도");
-    console.log(payload);
+    const res = await client.post(`/api/career/text`, payload);
+    const result = res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 진로지도 Patch
+export const patchStudentCareerList = async payload => {
+  try {
     const res = await client.patch(`/api/career/clear`, payload);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }
