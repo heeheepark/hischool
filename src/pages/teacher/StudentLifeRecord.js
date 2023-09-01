@@ -1,8 +1,5 @@
 import React from "react";
 import { LifeRecordDiv } from "../../styles/student/LifeRecordStyle";
-import AttendStatus from "../../components/student/AttendStatus";
-import RecordStatus from "../../components/student/RecordStatus";
-import CareerStatus from "../../components/student/CareerStatus";
 import { useState } from "react";
 import { useEffect } from "react";
 import StudentRecordStatus from "../../components/teacher/liferecord/StudentRecordStatus";

@@ -139,7 +139,7 @@ export const AttendTable = styled.div`
         }
       }
       input {
-        width: 50px;
+        width: 35px;
         height: 27px;
         font-size: 15px;
         font-family: "Pretendard";
