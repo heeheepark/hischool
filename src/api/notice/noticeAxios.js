@@ -6,7 +6,6 @@ export const getNoticeList = async setNoticeData => {
     const res = await client.get(`/api/notice`, { timeout: 1000 });
     const result = res.data;
     setNoticeData(result);
-    console.log(result);
   } catch (err) {
     console.error(err);
   }

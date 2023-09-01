@@ -18,8 +18,6 @@ const TSubJectEditSchool = ({
   const [initDetailSub, setInitDetailSub] = useState(null);
   const [defaultSubject, setDefaultSubject] = useState(scoreList.categoryId);
   const [defaultDetailSub, setDefaultDetailSub] = useState(scoreList.subjectId);
-  const [classCount, setClassCount] = useState(null);
-  const [wholeCount, setWholeCount] = useState(null);
 
   // 학기 변경
   const handleSemester = e => {
@@ -72,44 +70,9 @@ const TSubJectEditSchool = ({
     setStudentsData(submitList);
   };
 
-  // 등급
-  const handleRating = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.rating = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
-  // 반 등수
-  const handleClassRank = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.classRank = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
-  // 전교등수
-  const handleWholeRank = e => {
-    const submitList = studentsData.map(item => {
-      if (item.id === id) {
-        item.wholeRank = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setStudentsData(submitList);
-  };
-
   useEffect(() => {
     getSchoolMainSubData(setInitSubCate);
     if (selectedSubCate) getSchoolSubData(selectedSubCate, setInitDetailSub);
-    getSchoolclassData(setClassCount);
-    getSchoolData(setWholeCount);
   }, [selectedSubCate]);
 
   return (
@@ -159,34 +122,6 @@ const TSubJectEditSchool = ({
             placeholder="점수"
             max={100}
           />
-          <input
-            type="number"
-            name="rating"
-            defaultValue={scoreList.rating}
-            onChange={handleRating}
-            placeholder="등급"
-            max={9}
-          />
-          <ISainput>
-            <input
-              type="number"
-              name="classrank"
-              defaultValue={scoreList.classRank}
-              onChange={handleClassRank}
-              placeholder="반 석차"
-            />
-            <span> / {classCount}</span>
-          </ISainput>
-          <ISainput>
-            <input
-              type="number"
-              name="wholerank"
-              defaultValue={scoreList.wholeRank}
-              onChange={handleWholeRank}
-              placeholder="전교 석차"
-            />
-            <span> / {wholeCount}</span>
-          </ISainput>
         </ISinput>
       </div>
     </>

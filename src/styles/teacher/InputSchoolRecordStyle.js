@@ -74,7 +74,7 @@ const ISRTitle = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   font-size: 18px;
   color: #fff;
   justify-content: space-between;
@@ -96,7 +96,7 @@ const ISTitle = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   font-size: 18px;
   color: #fff;
   justify-content: space-between;
@@ -117,7 +117,7 @@ const ISTitle = styled.div`
 
 const ISRinput = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -138,7 +138,7 @@ const ISRinput = styled.div`
   > input {
     margin: 0 auto;
     text-align: center;
-    width: 77px;
+    width: 7vw;
     border: 1px solid #bbb;
     border-radius: 3px;
     height: 25px;
@@ -147,7 +147,7 @@ const ISRinput = styled.div`
 `;
 const ISinput = styled.div`
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -168,7 +168,7 @@ const ISinput = styled.div`
   > input {
     margin: 0 auto;
     text-align: center;
-    width: 77px;
+    width: 7vw;
     border: 1px solid #bbb;
     border-radius: 3px;
     height: 25px;
