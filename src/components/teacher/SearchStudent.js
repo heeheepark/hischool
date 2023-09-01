@@ -46,7 +46,6 @@ const SearchStudent = ({
                 key={item.userId}
               >
                 <ul>
-                  {/* <li>{index + 1}</li> */}
                   <li>{item.snm}</li>
                   <li>{item.birth}</li>
                 </ul>

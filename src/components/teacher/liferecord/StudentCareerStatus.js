@@ -191,7 +191,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         ))}
                       <li className="career-list">
                         <ul>
-                          <li>{`${careerList.length + 1}학년`}</li>
+                          <li>{`${grade}학년`}</li>
                           <li>
                             <input
                               type="text"

@@ -65,6 +65,7 @@ export const getMockEditData = async resultId => {
 // 학생 이름 가져오기
 export const getStudentsNameData = async (studentId, setStudentNameData) => {
   try {
+    console.log(studentId);
     const res = await client.get(
       `/api/teacher/subject/stulist?userid=${studentId}`,
     );

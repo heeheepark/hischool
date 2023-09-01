@@ -10,8 +10,10 @@ import SchoolRecordList from "../../components/teacher/SchoolRecordList";
 import SearchStudent from "../../components/teacher/SearchStudent";
 import SchoolRecordHeader from "../../components/teacher/SchoolRecordHeader";
 import MockRecordHeader from "../../components/teacher/MockRecordHeader";
+import { useLocation } from "react-router";
 
 const StudentRecord = () => {
+  const { state } = useLocation();
   const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
@@ -25,6 +27,8 @@ const StudentRecord = () => {
   const [month, setMonth] = useState(null);
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
+
+  console.log(state);
 
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
@@ -74,7 +78,10 @@ const StudentRecord = () => {
   useEffect(() => {
     if (studentListData) {
       const defaultSelectedId = document.querySelector("li.active");
-      const studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
+      let studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
+      if (state) {
+        studentId = state;
+      }
       setSelectedId(studentId);
       handleStudentRecordData(
         studentId,
