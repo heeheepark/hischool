@@ -103,7 +103,7 @@ const SideMenuWrap = styled.div`
             .arrow {
               position: absolute;
               right: 20px;
-              top: calc(50% - 9px);
+              top: calc(50% - 7px);
               font-size: 15px;
             }
           }
@@ -131,7 +131,7 @@ const SideMenuWrap = styled.div`
             .arrow {
               position: absolute;
               right: 20px;
-              top: calc(50% - 9px);
+              top: calc(50% - 7px);
               font-size: 15px;
             }
           }

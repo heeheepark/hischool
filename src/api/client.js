@@ -3,8 +3,6 @@ import { getCookie, setCookie } from "./cookie";
 
 // axios 인스턴스 생성
 export const client = axios.create({
-  // baseURL: "http://192.168.0.144:5003/",
-  baseURL: "http://localhost:3000/",
   headers: {
     "Content-Type": "application/json",
   },

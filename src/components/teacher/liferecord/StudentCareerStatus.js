@@ -7,7 +7,7 @@ import { useState } from "react";
 import {
   getHopeUniversity,
   getStudentCareerList,
-  postSutdentCareerList,
+  patchSutdentCareerList,
 } from "../../../api/teacher/studentLifeRecordAxios";
 
 const StudentCareerStatus = ({ userId, grade }) => {
@@ -15,20 +15,25 @@ const StudentCareerStatus = ({ userId, grade }) => {
   const [hopeUniv, setHopeUniv] = useState("");
   const [hopeDept, setHopeDept] = useState("");
   const [payload, setPayload] = useState("");
+  const [existCareerId, setExistCareerId] = useState(false);
+
+  console.log(careerList);
+  console.log(payload);
 
   const handleSave = () => {
-    postSutdentCareerList(payload);
+    patchSutdentCareerList(payload);
   };
 
   useEffect(() => {
     getHopeUniversity(userId, setHopeUniv, setHopeDept);
-    getStudentCareerList(userId, setCareerList);
+    getStudentCareerList(userId, setCareerList, setExistCareerId);
   }, []);
 
   useEffect(() => {
-    if (careerList)
+    if (careerList && existCareerId) {
       setPayload({
-        userId: userId,
+        careerId:
+          careerList.length > grade - 1 && careerList[grade - 1].careerId,
         grade: grade,
         interest:
           careerList.length > grade - 1 ? careerList[grade - 1].interest : "",
@@ -36,13 +41,25 @@ const StudentCareerStatus = ({ userId, grade }) => {
           careerList.length > grade - 1 ? careerList[grade - 1].stdHope : "",
         parentHope:
           careerList.length > grade - 1 ? careerList[grade - 1].parentHope : "",
-        hopeUniv: hopeUniv,
-        hopeDept: hopeDept,
+        hopeUniv: hopeUniv || "",
+        hopeDept: hopeDept || "",
         specialNote:
           careerList.length > grade - 1
             ? careerList[grade - 1].specialNote
             : "",
       });
+    } else {
+      setPayload({
+        userId: userId,
+        grade: grade,
+        interest: "",
+        stdHope: "",
+        parentHope: "",
+        hopeUniv: "",
+        hopeDept: "",
+        specialNote: "",
+      });
+    }
   }, [careerList]);
 
   return (
@@ -87,62 +104,65 @@ const StudentCareerStatus = ({ userId, grade }) => {
                   <li className="category-detail">학부모</li>
                 </ul>
               </li>
-              {careerList.length > grade - 1 ? (
-                careerList?.map((item, index) => (
-                  <li className="career-list" key={index}>
-                    <ul>
-                      <li>{item.grade}학년</li>
-                      {grade == index + 1 ? (
-                        <li>
-                          <input
-                            type="text"
-                            value={payload.interest}
-                            onChange={e =>
-                              setPayload({
-                                ...payload,
-                                interest: e.target.value,
-                              })
-                            }
-                          />
-                        </li>
-                      ) : (
-                        <li>{item.interest}</li>
-                      )}
-                      {grade == index + 1 ? (
-                        <li>
-                          <input
-                            type="text"
-                            value={payload.stdHope}
-                            onChange={e =>
-                              setPayload({
-                                ...payload,
-                                stdHope: e.target.value,
-                              })
-                            }
-                          />
-                        </li>
-                      ) : (
-                        <li>{item.stdHope}</li>
-                      )}
-                      {grade == index + 1 ? (
-                        <li>
-                          <input
-                            type="text"
-                            value={payload.parentHope}
-                            onChange={e =>
-                              setPayload({
-                                ...payload,
-                                parentHope: e.target.value,
-                              })
-                            }
-                          />
-                        </li>
-                      ) : (
-                        <li>{item.parentHope}</li>
-                      )}
-                    </ul>
-                  </li>
-                ))
+              {careerList ? (
+                careerList.map(
+                  (item, index) =>
+                    parseInt(item.grade) === index + 1 && (
+                      <li className="career-list" key={index}>
+                        <ul>
+                          <li>{item.grade}학년</li>
+                          {grade == index + 1 ? (
+                            <li>
+                              <input
+                                type="text"
+                                value={payload.interest}
+                                onChange={e =>
+                                  setPayload({
+                                    ...payload,
+                                    interest: e.target.value,
+                                  })
+                                }
+                              />
+                            </li>
+                          ) : (
+                            <li>{item.interest}</li>
+                          )}
+                          {grade == index + 1 ? (
+                            <li>
+                              <input
+                                type="text"
+                                value={payload.stdHope}
+                                onChange={e =>
+                                  setPayload({
+                                    ...payload,
+                                    stdHope: e.target.value,
+                                  })
+                                }
+                              />
+                            </li>
+                          ) : (
+                            <li>{item.stdHope}</li>
+                          )}
+                          {grade == index + 1 ? (
+                            <li>
+                              <input
+                                type="text"
+                                value={payload.parentHope}
+                                onChange={e =>
+                                  setPayload({
+                                    ...payload,
+                                    parentHope: e.target.value,
+                                  })
+                                }
+                              />
+                            </li>
+                          ) : (
+                            <li>{item.parentHope}</li>
+                          )}
+                        </ul>
+                      </li>
+                    ),
+                )
               ) : (
                 <li className="career-list">
                   <ul>
@@ -159,6 +179,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         }
                       />
                     </li>
+
                     <li>
                       <input
                         type="text"
@@ -171,6 +192,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         }
                       />
                     </li>
+
                     <li>
                       <input
                         type="text"
@@ -193,35 +215,11 @@ const StudentCareerStatus = ({ userId, grade }) => {
       <div className="significant">
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
-          {careerList.length > grade - 1
-            ? careerList?.map((item, index) => (
-                <label htmlFor="" className="label-nm" key={index}>
-                  <span>{item.grade}학년</span>
-                  {grade == index + 1 ? (
-                    <textarea
-                      cols="30"
-                      rows="6"
-                      value={payload.length > 0 && payload.specialNote}
-                      onChange={e =>
-                        setPayload({
-                          ...payload,
-                          specialNote: e.target.value,
-                        })
-                      }
-                    ></textarea>
-                  ) : (
-                    <textarea
-                      cols="30"
-                      rows="6"
-                      value={item.specialNote}
-                      readOnly
-                    ></textarea>
-                  )}
-                </label>
-              ))
-            : careerList?.map((item, index) => (
-                <label htmlFor="" className="label-nm" key={index}>
-                  <span>{item.grade}학년</span>
+          {careerList ? (
+            careerList.map((item, index) => (
+              <label htmlFor="" className="label-nm" key={index}>
+                <span>{item.grade}학년</span>
+                {grade == index + 1 ? (
                   <textarea
                     cols="30"
                     rows="6"
@@ -233,8 +231,32 @@ const StudentCareerStatus = ({ userId, grade }) => {
                       })
                     }
                   ></textarea>
-                </label>
-              ))}
+                ) : (
+                  <textarea
+                    cols="30"
+                    rows="6"
+                    value={item.specialNote}
+                    readOnly
+                  ></textarea>
+                )}
+              </label>
+            ))
+          ) : (
+            <label htmlFor="" className="label-nm">
+              <span>{grade}학년</span>
+              <textarea
+                cols="30"
+                rows="6"
+                value={payload.specialNote}
+                onChange={e =>
+                  setPayload({
+                    ...payload,
+                    specialNote: e.target.value,
+                  })
+                }
+              ></textarea>
+            </label>
+          )}
         </div>
       </div>
     </CareerStatusDiv>
