@@ -7,6 +7,24 @@ import { getAttendData } from "../../../api/teacher/tcAttendAxios";
 
 const StudentAttendStatus = ({ userId }) => {
   const [attendList, setAttendList] = useState([]);
+  const [payload, setPayload] = useState({
+    attendId: "",
+    attendId: "",
+    lessonNum: "",
+    diseaseAbsence: "",
+    unauthAbsence: "",
+    etcAbsence: "",
+    diseaseLate: "",
+    unauthLate: "",
+    etcLate: "",
+    diseaseEarly: "",
+    unauthEarly: "",
+    etcEarly: "",
+    diseaseOut: "",
+    unauthOut: "",
+    etcOut: "",
+    specialNote: "",
+  });
 
   const handleAttendValues = e => {
     console.log(e.target.value);
