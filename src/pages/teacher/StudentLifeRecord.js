@@ -5,16 +5,16 @@ import { useEffect } from "react";
 import StudentRecordStatus from "../../components/teacher/liferecord/StudentRecordStatus";
 import StudentAttendStatus from "../../components/teacher/liferecord/StudentAttendStatus";
 import StudentCareerStatus from "../../components/teacher/liferecord/StudentCareerStatus";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { getGrade } from "../../api/teacher/studentLifeRecordAxios";
 import { Link } from "react-router-dom";
 
 const StudentLifeRecord = () => {
   const { state } = useLocation();
-  console.log("userId", state.userId);
   const [categoryLi, setCategoryLi] = useState(null);
   const [activeCateName, setActiveCateName] = useState("grade");
   const [grade, setGrade] = useState("");
+  const [userInfo, setUserInfo] = useState(state);
 
   useEffect(() => {
     setCategoryLi(document.querySelectorAll(".category-wrap li"));
@@ -31,7 +31,8 @@ const StudentLifeRecord = () => {
     <LifeRecordDiv>
       <div className="life-record-header">
         <h3>
-          학생 생활기록부{` - ${state.studentName}(${state.studentBirth})`}
+          학생 생활기록부
+          {state ? ` - ${state.studentName}(${state.studentBirth})` : ""}
         </h3>
         <button>
           <Link to="/teacher/studentlist">학생 목록</Link>
@@ -50,13 +51,13 @@ const StudentLifeRecord = () => {
       </ul>
       <div className="content-wrap">
         {activeCateName === "grade" && (
-          <StudentRecordStatus userId={state.userId} grade={grade} />
+          <StudentRecordStatus userId={userInfo.userId} grade={grade} />
         )}
         {activeCateName === "attendance" && (
-          <StudentAttendStatus userId={state.userId} grade={grade} />
+          <StudentAttendStatus userId={userInfo.userId} grade={grade} />
         )}
         {activeCateName === "career" && (
-          <StudentCareerStatus userId={state.userId} grade={grade} />
+          <StudentCareerStatus userId={userInfo.userId} grade={grade} />
         )}
       </div>
     </LifeRecordDiv>

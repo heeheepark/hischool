@@ -39,6 +39,8 @@ const InputMockRecord = () => {
     studentsData.map(item => (item.mon = parseInt(e.target.value)));
   };
 
+  console.log(state);
+
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     studentsData?.map(item => {
@@ -77,11 +79,7 @@ const InputMockRecord = () => {
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>저장</button>
-        <button
-          onClick={() =>
-            navigate("/teacher/record", { state: studentsData.userid })
-          }
-        >
+        <button onClick={() => navigate("/teacher/record", { state: state })}>
           취소
         </button>
       </ISRButton>

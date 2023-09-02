@@ -98,6 +98,7 @@ const StudentRecord = () => {
         <h3>학생 성적 관리</h3>
         <div className="wrap">
           <SearchStudent
+            selectId={state}
             studentListData={studentListData}
             setSelectedId={setSelectedId}
             handleStudentRecordData={handleStudentRecordData}

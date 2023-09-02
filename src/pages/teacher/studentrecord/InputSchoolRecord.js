@@ -93,7 +93,9 @@ const InputSchoolRecord = () => {
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>저장</button>
-        <button onClick={() => navigate(-1)}>취소</button>
+        <button onClick={() => navigate("/teacher/record", { state: state })}>
+          취소
+        </button>
       </ISRButton>
       <ISRTitle>
         <p>과목 계열</p>

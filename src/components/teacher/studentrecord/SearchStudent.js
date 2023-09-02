@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StudentListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
 
 const SearchStudent = ({
+  selectId,
   studentListData,
   setSelectedId,
   handleStudentRecordData,
@@ -18,6 +19,18 @@ const SearchStudent = ({
     setSelectedId(studentId);
     handleStudentRecordData(studentId);
   };
+
+  // 성적 수정 후, 기존에 선택된 학생의 데이터 출력
+  useEffect(() => {
+    const allStudentList = document.querySelectorAll(".student-detail-list");
+    if (selectId && allStudentList.length > 0) {
+      allStudentList.forEach(item => item.classList.remove("active"));
+      const selectStudent = Array.from(allStudentList).filter(item => {
+        return parseInt(item.classList[0].slice(10)) === selectId;
+      });
+      selectStudent[0].classList.add("active");
+    }
+  }, [studentListData]);
 
   return (
     <div className="student-list-wrap">
@@ -38,7 +51,9 @@ const SearchStudent = ({
             {studentListData?.map((item, index) => (
               <li
                 className={
-                  index === 0
+                  selectId
+                    ? `studentNum${item.userId} student-detail-list`
+                    : index === 0
                     ? `studentNum${item.userId} student-detail-list active`
                     : `studentNum${item.userId} student-detail-list`
                 }

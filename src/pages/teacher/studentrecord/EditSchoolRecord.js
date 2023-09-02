@@ -69,7 +69,11 @@ const EditSchoolRecord = () => {
       </ISRHeader>
       <ISRButton>
         <button onClick={handleSaveButtonClick}>수정</button>
-        <button onClick={() => navigate(-1)}>취소</button>
+        <button
+          onClick={() => navigate("/teacher/record", { state: state[0] })}
+        >
+          취소
+        </button>
       </ISRButton>
       <ISTitle>
         <p>학기</p>
