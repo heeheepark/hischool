@@ -1,19 +1,18 @@
 import React from "react";
-import {
-  RecordTableWrap,
-  ChartWrap,
-  SchoolRecordDiv,
-} from "../../styles/student/SchoolRecordStyle";
 import { ResponsiveLine } from "@nivo/line";
-import SchoolRecordTable from "../../components/student/SchoolRecordTable";
-import { useEffect } from "react";
-import { useState } from "react";
-import { getUserInfo } from "../../api/userInfoAxios";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../../api/login/userInfoAxios";
+import {
+  ChartWrap,
+  RecordTableWrap,
+  SchoolRecordDiv,
+} from "../../styles/student/record/SchoolRecordStyle";
 import {
   getCurrentSchoolRecord,
   getHighestSchoolRecord,
 } from "../../api/student/schoolRecordAxios";
 import { getAllSchoolRecord } from "../../api/student/studentHomeAxios";
+import SchoolRecordTable from "../../components/student/record/SchoolRecordTable";
 
 const SchoolRecord = () => {
   const [userName, setUserName] = useState(null);

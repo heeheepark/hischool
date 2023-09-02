@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 서버로 datatoMock 데이터를 전송하는 함수
 export const postMockData = async dataToSend => {
@@ -15,7 +15,6 @@ export const postMockData = async dataToSend => {
 export const patchMockData = async dataToSend => {
   try {
     const res = await client.patch("/api/teacher/mock", dataToSend);
-    const result = res.data;
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }
@@ -36,7 +35,6 @@ export const getMockMainSubData = async setInitSubCate => {
 // 모의고사 세부 과목 가져오기
 export const getMockSubData = async (categoryid, setInitDetailSub) => {
   try {
-    console.log(categoryid);
     const res = await client.get(
       `/api/teacher/subject/mocksmall-list?categoryid=${categoryid}`,
     );
@@ -65,7 +63,6 @@ export const getMockEditData = async resultId => {
 // 학생 이름 가져오기
 export const getStudentsNameData = async (studentId, setStudentNameData) => {
   try {
-    console.log(studentId);
     const res = await client.get(
       `/api/teacher/subject/stulist?userid=${studentId}`,
     );

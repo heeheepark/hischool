@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 최고 모의고사 성적
 export const getHighestMockRecord = async setHighestMockRecord => {

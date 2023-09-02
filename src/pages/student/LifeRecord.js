@@ -1,11 +1,11 @@
 import React from "react";
-import { LifeRecordDiv } from "../../styles/student/LifeRecordStyle";
-import AttendStatus from "../../components/student/AttendStatus";
-import RecordStatus from "../../components/student/RecordStatus";
-import CareerStatus from "../../components/student/CareerStatus";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getStudentInfo } from "../../api/student/lifeRecordAxios";
+import { LifeRecordDiv } from "../../styles/student/liferecord/LifeRecordStyle";
+import RecordStatus from "../../components/student/liferecord/RecordStatus";
+import AttendStatus from "../../components/student/liferecord/AttendStatus";
+import CareerStatus from "../../components/student/liferecord/CareerStatus";
 
 const LifeRecord = () => {
   const [categoryLi, setCategoryLi] = useState(null);

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const MainDiv = styled.div`
+export const MainDiv = styled.div`
   position: relative;
   overflow: hidden;
   .wrap {
@@ -11,7 +11,7 @@ const MainDiv = styled.div`
   }
 `;
 
-const Header = styled.div`
+export const Header = styled.div`
   width: 100%;
   height: 60px;
   background: linear-gradient(
@@ -55,12 +55,12 @@ const Header = styled.div`
   }
 `;
 
-const Aside = styled.div`
+export const Aside = styled.div`
   width: 300px;
   height: 100vh;
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   width: 100%;
   padding: 15px;
   height: calc(100vh - 60px);
@@ -69,5 +69,3 @@ const Content = styled.div`
     border-radius: 5px;
   }
 `;
-
-export { MainDiv, Header, Aside, Content };

@@ -2,12 +2,7 @@ import React from "react";
 import {
   LifeRecordTableWrap,
   RecordStatusDiv,
-} from "../../../styles/student/LifeRecordStyle";
-import SchoolRecordChart from "./TSchoolRecordChart";
-import MockRecordChart from "./TMockRecordChart";
-import SchoolRecordTable from "./TSchoolRecordTable";
-import MockRecordTable from "./TMockRecordTable";
-import { RecordTableWrap } from "../../../styles/student/SchoolRecordStyle";
+} from "../../../styles/student/liferecord/LifeRecordStyle";
 import TSchoolRecordChart from "./TSchoolRecordChart";
 import TMockRecordChart from "./TMockRecordChart";
 import TSchoolRecordTable from "./TSchoolRecordTable";

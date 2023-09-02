@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 export const getAttendData = async (userId, setAttendList) => {
   try {

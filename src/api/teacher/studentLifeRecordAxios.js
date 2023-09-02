@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 학년
 export const getGrade = async setGrade => {
@@ -78,7 +78,6 @@ export const getStudentCareerList = async (
 export const postStudentCareerList = async payload => {
   try {
     const res = await client.post(`/api/career/text`, payload);
-    const result = res.data;
   } catch (err) {
     console.log(err);
   }
@@ -88,7 +87,6 @@ export const postStudentCareerList = async payload => {
 export const patchStudentCareerList = async payload => {
   try {
     const res = await client.patch(`/api/career/clear`, payload);
-    const result = res.data;
   } catch (err) {
     console.log(err);
   }

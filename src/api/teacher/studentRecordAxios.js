@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 전체 내신 성적
 export const getStudentSchoolRecord = async (

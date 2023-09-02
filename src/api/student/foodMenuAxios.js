@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 급식표
 const getMonthFood = async (setFoodMenuList, setDate) => {

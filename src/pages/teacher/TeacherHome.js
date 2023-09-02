@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  FullCalendarDiv,
-  TeacherHomeDiv,
-} from "../../styles/teacher/TeacherHomeStyle";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { Link, NavLink } from "react-router-dom";
-import TeacherTimeTable from "../../components/teacher/TeacherTimeTable";
-import ClassSchoolRecord from "../../components/teacher/ClassSchoolRecord";
-import ClassMockRecord from "../../components/teacher/ClassMockRecord";
-import {
-  getMainNotice,
-  getStudentCount,
-  getUnSignCount,
-} from "../../api/teacher/teacherHomeAxios";
-import { getSchedule } from "../../api/teacher/teacherHomeAxios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
+import {
+  getMainNotice,
+  getSchedule,
+  getStudentCount,
+  getUnSignCount,
+} from "../../api/teacher/teacherHomeAxios";
+import {
+  FullCalendarDiv,
+  TeacherHomeDiv,
+} from "../../styles/teacher/teacherhome/TeacherHomeStyle";
+import ClassSchoolRecord from "../../components/teacher/teacherhome/ClassSchoolRecord";
+import ClassMockRecord from "../../components/teacher/teacherhome/ClassMockRecord";
+import TeacherTimeTable from "../../components/teacher/teacherhome/TeacherTimeTable";
 
 const TeacherHome = () => {
   const [mainNotice, setMainNotice] = useState("");
@@ -85,7 +85,7 @@ const TeacherHome = () => {
             </Link>
             <span>명</span>
             <span>(가입 대기 인원:</span>
-            <Link to="/teacher/signlist">
+            <Link to="/teacher/studentlist/signlist">
               <span className="student-num">{unSignCount}</span>
             </Link>
             <span>명)</span>

@@ -1,19 +1,18 @@
 import React from "react";
+import { ResponsiveLine } from "@nivo/line";
+import { useState, useEffect } from "react";
+import { getUserInfo } from "../../api/login/userInfoAxios";
+import { MockRecordDiv } from "../../styles/student/record/MockRecordStyle";
 import {
   ChartWrap,
   RecordTableWrap,
-} from "../../styles/student/SchoolRecordStyle";
-import { ResponsiveLine } from "@nivo/line";
-import { MockRecordDiv } from "../../styles/student/MockRecordStyle";
-import MockRecordTable from "../../components/student/MockRecordTable";
-import { useState } from "react";
-import { useEffect } from "react";
-import { getUserInfo } from "../../api/userInfoAxios";
+} from "../../styles/student/record/SchoolRecordStyle";
 import {
   getCurrentMockRecord,
   getHighestMockRecord,
 } from "../../api/student/mockRecordAxios";
 import { getAllMockRecord } from "../../api/student/studentHomeAxios";
+import MockRecordTable from "../../components/student/record/MockRecordTable";
 
 const MockRecord = () => {
   const [userName, setUserName] = useState(null);

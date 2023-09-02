@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const SideMenuWrap = styled.div`
+export const SideMenuWrap = styled.div`
   background: linear-gradient(
     to bottom,
     rgba(0, 28, 48, 1) 0%,
@@ -168,5 +168,3 @@ const SideMenuWrap = styled.div`
     }
   }
 `;
-
-export { SideMenuWrap };

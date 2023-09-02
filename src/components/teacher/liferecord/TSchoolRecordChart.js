@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { RecordDiv } from "../../../styles/student/StudentHomeStyle";
+import { RecordDiv } from "../../../styles/student/studenthome/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
-import { getAllSchoolRecord } from "../../../api/student/studentHomeAxios";
 import { getSchoolRecordChart } from "../../../api/teacher/studentLifeRecordAxios";
 
 const TSchoolRecordChart = ({ userId }) => {
@@ -40,7 +39,6 @@ const TSchoolRecordChart = ({ userId }) => {
           <div className="chart">
             {allSchoolRecordData ? (
               <ResponsiveLine
-                // width={770}
                 data={newSchoolRecordData}
                 margin={{ top: 30, right: 60, bottom: 70, left: 60 }}
                 xScale={{ type: "point" }}

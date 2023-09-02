@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import RecapSchoolRecord from "../../components/student/RecapSchoolRecord";
-import RecapMockRecord from "../../components/student/RecapMockRecord";
-import { StudentHomeDiv } from "../../styles/student/StudentHomeStyle";
-import TimeTable from "../../components/student/TimeTable";
-import WeekFoodMenu from "../../components/student/WeekFoodMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -11,7 +6,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
+import { StudentHomeDiv } from "../../styles/student/studenthome/StudentHomeStyle";
 import { getMainNotice } from "../../api/student/studentHomeAxios";
+import TimeTable from "../../components/student/studenthome/TimeTable";
+import WeekFoodMenu from "../../components/student/studenthome/WeekFoodMenu";
+import RecapSchoolRecord from "../../components/student/studenthome/RecapSchoolRecord";
+import RecapMockRecord from "../../components/student/studenthome/RecapMockRecord";
 
 const StudentHome = () => {
   const [mainNotice, setMainNotice] = useState("");

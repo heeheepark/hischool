@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 전교 학생 인원
 export const getAllStudentCount = async setAllStudentCount => {

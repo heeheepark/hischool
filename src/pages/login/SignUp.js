@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { IntroImage } from "../../styles/login/LoginStyle";
+import { useNavigate } from "react-router";
+import DaumPost from "../../components/login/DaumPost";
+import { useEffect } from "react";
+import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
+import {
+  getConFirmEmail,
+  getSchoolClass,
+  postEmail,
+  postSignUp,
+} from "../../api/login/signUpAxios";
 import {
   LeftForm,
   RightForm,
@@ -8,21 +17,11 @@ import {
   SignUpUl,
   SignUpWrap,
 } from "../../styles/login/SignUpStyle";
-import { useNavigate } from "react-router";
-import DaumPost from "../../components/login/DaumPost";
-import { useEffect } from "react";
-import {
-  postSignUp,
-  postEmail,
-  getSchoolClass,
-  getConFirmEmail,
-} from "../../api/signUpAxios";
-import AutoSearch from "../../components/AutoSearch";
-import { EmailConFirmModal, Modal } from "../../components/modal/Modal";
+import { IntroImage } from "../../styles/login/LoginStyle";
+import AutoSearch from "../../components/login/AutoSearch";
 
 const SignUp = () => {
   const [inputValue, setInputValue] = useState("");
-
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [userPic, setUserPic] = useState("");
   const [aprPic, setAprPic] = useState("");

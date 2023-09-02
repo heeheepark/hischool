@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 공지사항 리스트
 export const getNoticeList = async setNoticeData => {

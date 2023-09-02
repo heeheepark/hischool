@@ -1,9 +1,8 @@
-import { MockRecordTableDiv } from "../../../styles/student/MockRecordStyle";
+import { MockRecordTableDiv } from "../../../styles/student/record/MockRecordStyle";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getAllMockRecord } from "../../../api/student/mockRecordAxios";
-import { SchoolRecordFilterDiv } from "../../../styles/student/FilterStyle";
 import { getStudentMockRecord } from "../../../api/teacher/studentRecordAxios";
+import { SchoolRecordFilterDiv } from "../../../styles/student/record/SchoolRecordStyle";
 
 const TMockRecordTable = ({ userId }) => {
   const cateList = [

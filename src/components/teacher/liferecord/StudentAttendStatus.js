@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   AttendStatusDiv,
   AttendTable,
-} from "../../../styles/student/AttendStyle";
+} from "../../../styles/student/liferecord/AttendStyle";
 import { getAttendData } from "../../../api/teacher/tcAttendAxios";
 
 const StudentAttendStatus = ({ userId }) => {

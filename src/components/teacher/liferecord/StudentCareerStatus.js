@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   CareerStatusDiv,
   HopeCareerTable,
-} from "../../../styles/student/LifeRecordStyle";
+} from "../../../styles/student/liferecord/LifeRecordStyle";
 import { useState } from "react";
 import {
   getHopeUniversity,

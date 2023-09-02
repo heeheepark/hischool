@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async SdataToSend => {
@@ -14,7 +14,6 @@ export const postSchoolData = async SdataToSend => {
 export const patchSchoolData = async dataToSend => {
   try {
     const res = await client.patch("/api/teacher/aca", dataToSend);
-    const result = res.data;
   } catch (error) {
     console.error("데이터 전송 오류:", error);
   }

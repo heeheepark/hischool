@@ -69,5 +69,6 @@ export const LoginForm = styled.form`
   .link-button {
     display: flex;
     justify-content: space-around;
+    margin-top: 10px;
   }
 `;

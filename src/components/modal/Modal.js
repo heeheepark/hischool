@@ -7,9 +7,9 @@ import {
 } from "../../styles/ModalStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamation, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { postEmailCodeConFirm } from "../../api/signUpAxios";
 import { useState } from "react";
-import { postEmail } from "../../api/findPasswordAxios";
+import { postEmailCodeConFirm } from "../../api/login/signUpAxios";
+import { postEmail } from "../../api/login/findPasswordAxios";
 
 // 회원가입, 마이페이지 모달
 export const Modal = ({ isOpen, onRequestClose, children }) => {

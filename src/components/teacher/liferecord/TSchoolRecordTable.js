@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { SchoolRecordTableDiv } from "../../../styles/student/SchoolRecordStyle";
-import { SchoolRecordFilterDiv } from "../../../styles/student/FilterStyle";
-import { getAllSchoolRecord } from "../../../api/student/schoolRecordAxios";
+import {
+  SchoolRecordFilterDiv,
+  SchoolRecordTableDiv,
+} from "../../../styles/student/record/SchoolRecordStyle";
 import {
   getAllStudentCount,
   getStudentCount,

@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 내신 그래프
 export const getAllSchoolRecord = async setAllSchoolRecordData => {

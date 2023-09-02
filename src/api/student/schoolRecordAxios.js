@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 최고 내신 등급
 export const getHighestSchoolRecord = async setHighestSchoolRecord => {
@@ -46,8 +46,7 @@ export const getAllSchoolRecord = async (
       axiosUrl = `/api/student/aca-table?semester=${semester}&midFinal=${testType}`;
     } else if (year && !semester && testType) {
       axiosUrl = `/api/student/aca-table?year=${year}&midFinal=${testType}`;
-    } 
-    else {
+    } else {
       axiosUrl = `/api/student/aca-table`;
       const res = await client.get(axiosUrl);
       const result = res.data;

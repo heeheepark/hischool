@@ -6,7 +6,7 @@ import {
   LoginWrap,
 } from "../../styles/login/LoginStyle";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchLogin } from "../../api/client";
+import { fetchLogin } from "../../api/login/client";
 import { FindPasswordModal } from "../../components/modal/Modal";
 
 const Login = () => {
@@ -102,7 +102,7 @@ const Login = () => {
             </div>
             <div className="link-button">
               <Link to="#" onClick={handleFindPassword}>
-                Email/PW 찾기
+                비밀번호 찾기
               </Link>
               <Link to="/signup">회원가입</Link>
             </div>

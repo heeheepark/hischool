@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { FoodMenuDiv } from "../../styles/student/FoodMenuStyle";
+import { FoodMenuDiv } from "../../styles/student/studenthome/FoodMenuStyle";
 import { getMonthFood } from "../../api/student/foodMenuAxios";
 
 const FoodMenu = () => {
   const [foodMenuList, setFoodMenuList] = useState(null);
   const [date, setDate] = useState(null);
-  const year = date?.slice(0,4)
-  const month = date?.slice(4, 5) === "0" ? date?.slice(5) : date?.slice(4)
+  const year = date?.slice(0, 4);
+  const month = date?.slice(4, 5) === "0" ? date?.slice(5) : date?.slice(4);
   const eventData = foodMenuList;
 
   useEffect(() => {

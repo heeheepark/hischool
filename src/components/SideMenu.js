@@ -9,14 +9,13 @@ import {
   faRightFromBracket,
   faCircleInfo,
   faHouseChimney,
-  faFilePen,
   faUser,
   faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Cookies from "universal-cookie";
-import { getUserInfo } from "../api/userInfoAxios";
+import { getUserInfo } from "../api/login/userInfoAxios";
 import { useState } from "react";
 
 const SideMenu = () => {

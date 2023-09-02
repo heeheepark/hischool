@@ -1,4 +1,4 @@
-import { client } from "../client";
+import { client } from "../login/client";
 
 // 학생관리 리스트
 export const getStudentData = async setStudentListData => {
@@ -32,7 +32,6 @@ export const getSignListData = async setStudentListData => {
 export const patchSignAccept = async userId => {
   try {
     const res = await client.patch(`/api/teacher/acpt-std?userId=${userId}`);
-    const result = res.data;
   } catch (err) {
     console.log(err);
   }
@@ -42,7 +41,6 @@ export const patchSignAccept = async userId => {
 export const patchSignCancel = async userId => {
   try {
     const res = await client.patch(`/api/teacher/can-std?userId=${userId}`);
-    const result = res.data;
   } catch (err) {
     console.log(err);
   }

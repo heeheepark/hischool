@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { RecordDiv } from "../../../styles/student/StudentHomeStyle";
+import { RecordDiv } from "../../../styles/student/studenthome/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
-import {
-  getAllMockRecord,
-  getRecentMockRecord,
-} from "../../../api/student/studentHomeAxios";
 import { getMockRecordChart } from "../../../api/teacher/studentLifeRecordAxios";
 
 const TMockRecordChart = ({ userId }) => {
