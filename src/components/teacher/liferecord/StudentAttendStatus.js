@@ -6,57 +6,6 @@ import {
 import { getAttendData } from "../../../api/teacher/tcAttendAxios";
 
 const StudentAttendStatus = ({ userId }) => {
-  // const init = [
-  //   {
-  //     classDay: 190,
-  //     selfAbsent: 0,
-  //     sickAbsent: 3,
-  //     etcAbsent: 0,
-  //     selfTardy: 0,
-  //     sickTardy: 0,
-  //     etcTardy: 0,
-  //     selfLeave: 0,
-  //     sickLeave: 0,
-  //     etcLeave: 0,
-  //     selfAttend: 0,
-  //     sickeAttend: 0,
-  //     etcAttend: 0,
-  //     significant: "3일 해외여행",
-  //   },
-  //   {
-  //     classDay: 191,
-  //     selfAbsent: 0,
-  //     sickAbsent: 0,
-  //     etcAbsent: 0,
-  //     selfTardy: 0,
-  //     sickTardy: 0,
-  //     etcTardy: 0,
-  //     selfLeave: 0,
-  //     sickLeave: 0,
-  //     etcLeave: 0,
-  //     selfAttend: 0,
-  //     sickeAttend: 0,
-  //     etcAttend: 0,
-  //     significant: "개근",
-  //   },
-  //   {
-  //     classDay: 190,
-  //     selfAbsent: 0,
-  //     sickAbsent: 0,
-  //     etcAbsent: 0,
-  //     selfTardy: 0,
-  //     sickTardy: 0,
-  //     etcTardy: 0,
-  //     selfLeave: 0,
-  //     sickLeave: 0,
-  //     etcLeave: 0,
-  //     selfAttend: 0,
-  //     sickeAttend: 0,
-  //     etcAttend: 0,
-  //     significant: "개근",
-  //   },
-  // ];
-  // const [attendValues, setAttendValues] = useState(init);
   const [attendList, setAttendList] = useState([]);
 
   const handleAttendValues = e => {

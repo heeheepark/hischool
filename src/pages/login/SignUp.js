@@ -115,11 +115,10 @@ const SignUp = () => {
 
   const handleEmailConfirm = async () => {
     const result = await getConFirmEmail(payload.email);
-    console.log(result);
-    if (result === 1) {
+    if (errEmail || !payload.email) {
+      setAuthModal(false);
+    } else if (result === 1) {
       setAuthModal(true);
-    } else if (result === 0) {
-      alert("이미 가입 된 이메일입니다.");
     }
     postEmail(payload.email);
   };
