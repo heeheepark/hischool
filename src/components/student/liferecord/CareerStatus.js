@@ -70,13 +70,17 @@ const CareerStatus = () => {
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
           {careerList.map((item, index) => (
-            <label htmlFor="special-note" className="label-nm" key={index}>
+            <label
+              htmlFor={`special-note${index}`}
+              className="label-nm"
+              key={index}
+            >
               <span>{item.grade}학년</span>
               <textarea
                 cols="30"
                 rows="6"
                 defaultValue={item.specialNote}
-                id="special-note"
+                id={`special-note${index}`}
                 readOnly
               ></textarea>
             </label>

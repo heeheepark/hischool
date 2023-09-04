@@ -144,6 +144,7 @@ export const FindPasswordModal = ({
             <div className="content">
               <input
                 type="email"
+                name="user-email"
                 placeholder="ex) example@example.com"
                 onChange={handleEmail}
               />
