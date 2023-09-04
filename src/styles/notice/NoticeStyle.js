@@ -168,12 +168,12 @@ const NoticeDetailInformation = styled.div`
     gap: 1vh;
     align-items: center;
     > p {
-      :nth-child(2) {
+      :nth-of-type(2) {
         position: relative;
         margin-left: 2px;
         padding-left: 10px;
       }
-      :nth-child(2)::after {
+      :nth-of-type(2)::after {
         position: absolute;
         left: 0;
         top: 3px;
