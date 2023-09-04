@@ -4,7 +4,6 @@ export const getAttendData = async (userId, setAttendList) => {
   try {
     const res = await client.get(`/api/attendance?userId=${userId}`);
     const result = res.data;
-    console.log(result);
     setAttendList(result);
   } catch (err) {
     console.log(err);

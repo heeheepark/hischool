@@ -34,7 +34,6 @@ const StudentAttendStatus = ({ userId }) => {
     getAttendData(userId, setAttendList);
   }, []);
 
-  console.log(attendList);
   return (
     <AttendStatusDiv>
       <div className="hope-career-wrap">

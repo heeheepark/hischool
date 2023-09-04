@@ -43,7 +43,6 @@ const AutoSearch = ({
   };
 
   const handleClickItem = e => {
-    console.log(e);
     setInputValue(e.nm);
     setIsInputValue(false);
     setPayload(payload => ({
