@@ -77,7 +77,11 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
     <>
       <div>
         <IMREdit>
-          <select defaultValue={scoreList.mon} onChange={handleMonth}>
+          <select
+            defaultValue={scoreList.mon}
+            onChange={handleMonth}
+            name="month"
+          >
             <option value="">월 선택</option>
             <option value={3}>3월</option>
             <option value={6}>6월</option>

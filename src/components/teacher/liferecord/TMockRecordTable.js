@@ -62,7 +62,7 @@ const TMockRecordTable = ({ userId }) => {
       <div className="title">
         <h4>모의고사 성적 목록</h4>
         <SchoolRecordFilterDiv className="filter-wrap">
-          <select name="year" id="year" onChange={e => handleYearList(e)}>
+          <select name="year" id="mock-year" onChange={e => handleYearList(e)}>
             <option value={""}>전체 연도</option>
             {yearList(defaultMockRecord).map((item, index) => (
               <option value={item} key={index}>
@@ -70,11 +70,7 @@ const TMockRecordTable = ({ userId }) => {
               </option>
             ))}
           </select>
-          <select
-            name="semester"
-            id="semester"
-            onChange={e => handleMonthList(e)}
-          >
+          <select name="month" id="month" onChange={e => handleMonthList(e)}>
             <option value={""}>전체 월</option>
             {monthList(defaultMockRecord).map((item, index) => (
               <option value={item} key={index}>

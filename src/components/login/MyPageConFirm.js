@@ -20,7 +20,12 @@ const MyPageConFirm = ({ handlePasswordConFirm }) => {
         입력해주세요.
       </p>
       <div>
-        <input type="password" value={pass} onChange={handlePasswordChange} />
+        <input
+          type="password"
+          id="password"
+          value={pass}
+          onChange={handlePasswordChange}
+        />
         <button onClick={handlePasswordSubmit}>확인</button>
       </div>
     </MyPageConFirmDiv>

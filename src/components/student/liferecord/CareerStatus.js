@@ -19,13 +19,24 @@ const CareerStatus = () => {
       <div className="mid-wrap">
         <div className="hope-univ-wrap">
           <h4>희망 대학</h4>
-          <label htmlFor="" className="label-nm">
+          <label htmlFor="hope-univ" className="label-nm">
             <span>대학명</span>
-            <input type="text" value={"경북대학교"} readOnly />
+            <input
+              type="text"
+              value={"경북대학교"}
+              id="hope-univ"
+              name="hope-univ"
+              readOnly
+            />
           </label>
-          <label htmlFor="" className="label-nm">
+          <label htmlFor="hope-depart" className="label-nm">
             <span>학부(과)</span>
-            <input type="text" value={"신문방송학과"} readOnly />
+            <input
+              type="text"
+              value={"신문방송학과"}
+              id="hope-depart"
+              readOnly
+            />
           </label>
         </div>
         <div className="hope-career-wrap">
@@ -59,12 +70,13 @@ const CareerStatus = () => {
         <h4>행동 특성 및 종합 의견</h4>
         <div className="detail-significant">
           {careerList.map((item, index) => (
-            <label htmlFor="" className="label-nm" key={index}>
+            <label htmlFor="special-note" className="label-nm" key={index}>
               <span>{item.grade}학년</span>
               <textarea
                 cols="30"
                 rows="6"
                 defaultValue={item.specialNote}
+                id="special-note"
                 readOnly
               ></textarea>
             </label>

@@ -77,12 +77,20 @@ const TSubJectEditSchool = ({
     <>
       <div>
         <ISinput>
-          <select defaultValue={scoreList.semester} onChange={handleSemester}>
+          <select
+            defaultValue={scoreList.semester}
+            onChange={handleSemester}
+            name="semester"
+          >
             <option value={scoreList.semester}>{scoreList.semester}학기</option>
             <option value="1학기">1학기</option>
             <option value="2학기">2학기</option>
           </select>
-          <select defaultValue={scoreList.midfinal} onChange={handleDropTest}>
+          <select
+            defaultValue={scoreList.midfinal}
+            onChange={handleDropTest}
+            name="test-type"
+          >
             <option value={1}>중간고사</option>
             <option value={2}>기말고사</option>
           </select>

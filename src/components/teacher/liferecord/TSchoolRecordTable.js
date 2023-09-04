@@ -91,7 +91,11 @@ const TSchoolRecordTable = ({ userId }) => {
       <div className="title">
         <h4>내신 성적 목록</h4>
         <SchoolRecordFilterDiv>
-          <select name="year" id="year" onChange={e => handleYearList(e)}>
+          <select
+            name="year"
+            id="school-year"
+            onChange={e => handleYearList(e)}
+          >
             <option value="">전체 연도</option>
             {yearList(defaultSchoolRecord).map((item, index) => (
               <option value={item} key={index}>

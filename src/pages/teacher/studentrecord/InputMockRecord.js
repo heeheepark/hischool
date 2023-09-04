@@ -39,8 +39,6 @@ const InputMockRecord = () => {
     studentsData.map(item => (item.mon = parseInt(e.target.value)));
   };
 
-  console.log(state);
-
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     studentsData?.map(item => {
@@ -70,7 +68,7 @@ const InputMockRecord = () => {
     <InputMockRecordWrap>
       <ISRHeader>
         <h3>{`${currentYear} 모의고사 성적 입력( ${studentNameData?.nm} )`}</h3>
-        <select value={dropMonth} onChange={handleMonth}>
+        <select value={dropMonth} onChange={handleMonth} name="month">
           <option value="">월 선택</option>
           <option value={3}>3월</option>
           <option value={6}>6월</option>

@@ -154,6 +154,11 @@ const MyPageContent = () => {
     const realUpload = document.querySelector(".real-upload");
     realUpload.click();
   };
+
+  const handleAdrressModal = () => {
+    setAddressModal(true);
+  };
+
   return (
     <TcMyPageWrap onSubmit={handleSubmit}>
       <div className="mypage-top">
@@ -166,6 +171,7 @@ const MyPageContent = () => {
               <input
                 className="real-upload"
                 type="file"
+                id="user-pic"
                 accept="image/jpg, image/png, image/gif, image/jpeg"
                 required
                 multiple
@@ -176,20 +182,20 @@ const MyPageContent = () => {
             <div className="school-info">
               <TcMyPageUserInfo>
                 <li>
-                  <label>이메일</label>
+                  <label htmlFor="user-email">이메일</label>
                   <input
                     type="email"
-                    name="email"
-                    value={userData.email}
+                    id="user-email"
+                    defaultValue={userData.email}
                     readOnly
                   />
                 </li>
                 <li>
                   <div>
-                    <label>비밀번호</label>
+                    <label htmlFor="password">비밀번호</label>
                     <input
                       type="password"
-                      name="password"
+                      id="password"
                       defaultValue={userData.password}
                       onChange={handleChangePass}
                       autoComplete="on"
@@ -201,10 +207,10 @@ const MyPageContent = () => {
                   </div>
                 </li>
                 <li>
-                  <label>비밀번호 확인</label>
+                  <label htmlFor="password-confirm">비밀번호 확인</label>
                   <input
                     type="password"
-                    name="confirmPassword"
+                    id="password-confirm"
                     defaultValue={userData.confirmPassword}
                     onChange={handleChangeConfPass}
                     autoComplete="on"
@@ -213,34 +219,34 @@ const MyPageContent = () => {
                 </li>
 
                 <li>
-                  <label>이름</label>
+                  <label htmlFor="user-name">이름</label>
                   <input
                     type="text"
-                    name="tnm"
+                    id="user-name"
                     defaultValue={userData.unm}
                     readOnly
                   />
                 </li>
                 <li>
-                  <label>생년월일</label>
+                  <label htmlFor="birth">생년월일</label>
                   <input
                     type="text"
-                    name="birth"
+                    id="birth"
                     defaultValue={userData.birth}
                     readOnly
                   />
                 </li>
                 <li>
-                  <label>연락처</label>
+                  <label htmlFor="user-phone">연락처</label>
                   <input
                     type="text"
-                    name="phone"
+                    id="user-phone"
                     defaultValue={userData.phone}
                     onChange={handleChangePhone}
                   />
                 </li>
                 <li>
-                  <label>주소</label>
+                  <label htmlFor="address-input">주소</label>
                   <div className="address-wrap">
                     <div>
                       <input
@@ -248,10 +254,9 @@ const MyPageContent = () => {
                         id="address-input"
                         type="text"
                         required={true}
-                        name="address"
                         onChange={handleChangeAddress}
-                        onClick={() => setAddressModal(true)}
-                        value={houseAddress.address || userData.address}
+                        onClick={handleAdrressModal}
+                        defaultValue={houseAddress.address || userData.address}
                       />
                       {addressModal && (
                         <Modal
@@ -278,11 +283,11 @@ const MyPageContent = () => {
                   </div>
                 </li>
                 <li>
-                  <label>소속 학교</label>
+                  <label htmlFor="school">소속 학교</label>
                   <div>
                     <input
                       type="text"
-                      name="snm"
+                      id="school"
                       defaultValue={userData.schnm}
                       readOnly
                     />

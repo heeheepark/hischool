@@ -81,6 +81,7 @@ const Login = () => {
                 className="login-email"
                 onChange={e => handleEmail(e)}
                 type="email"
+                id="login-email"
                 placeholder="Email"
                 onBlur={checkEmail}
               />
@@ -88,6 +89,7 @@ const Login = () => {
               <input
                 className="login-password"
                 onChange={e => handlePassWord(e)}
+                id="login-password"
                 type="password"
                 placeholder="Password"
                 autoComplete="on"

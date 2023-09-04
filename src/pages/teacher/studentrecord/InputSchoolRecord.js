@@ -80,12 +80,12 @@ const InputSchoolRecord = () => {
     <InputSchoolRecordWrap>
       <ISRHeader>
         <h3>{`${currentYear} 내신 성적 입력( ${studentNameData?.nm} )`}</h3>
-        <select value={dropSemester} onChange={handleSemester}>
+        <select value={dropSemester} onChange={handleSemester} name="semester">
           <option value="">학기 선택</option>
           <option value="1">1학기</option>
           <option value="2">2학기</option>
         </select>
-        <select value={dropTest} onChange={handleDropTest}>
+        <select value={dropTest} onChange={handleDropTest} name="test-type">
           <option value="">시험 구분</option>
           <option value="1">중간고사</option>
           <option value="2">기말고사</option>

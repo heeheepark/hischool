@@ -54,6 +54,7 @@ const MockRecordList = ({
         <li className="category-th">
           <input
             type="checkbox"
+            id="mock-all-checkbox"
             onClick={e => handleAllCheck(e)}
             className="mock-all-checkbox-btn"
           />
@@ -75,6 +76,7 @@ const MockRecordList = ({
                   {item.year === todayYear ? (
                     <input
                       type="checkbox"
+                      id={item.resultId}
                       defaultChecked={false}
                       className={`mock-checkbox resultId0${item.resultId}`}
                       onClick={e => handleCheckBox(e)}

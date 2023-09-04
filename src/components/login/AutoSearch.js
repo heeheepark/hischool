@@ -88,6 +88,7 @@ const AutoSearch = ({
       <InputDiv isInputValue={isInputValue}>
         <Input
           type="text"
+          id="school"
           value={inputValue}
           onChange={changeInputValue}
           onKeyUp={handleKey}

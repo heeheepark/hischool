@@ -261,6 +261,7 @@ const SignUp = () => {
                     className="real-upload"
                     type="file"
                     accept="image/*"
+                    name="user-pic"
                     required
                     multiple
                     onChange={handleChangeFile}
@@ -272,12 +273,13 @@ const SignUp = () => {
                   <ul>
                     <li className="big-input">
                       <div>
-                        <label>이메일</label>
+                        <label htmlFor="user-email">이메일</label>
                         {errEmail && <p className="err-message">{errEmail}</p>}
                       </div>
                       <input
                         className="confirm-input"
                         type="email"
+                        id="user-email"
                         placeholder="ex) aaa@gmail.com"
                         value={payload.email}
                         onChange={e => handleEmail(e)}
@@ -294,13 +296,14 @@ const SignUp = () => {
                     </li>
                     <li className="big-input">
                       <div>
-                        <label>비밀번호</label>
+                        <label htmlFor="password">비밀번호</label>
                         {errPassword && (
                           <p className="err-message">{errPassword}</p>
                         )}
                       </div>
                       <input
                         type="password"
+                        id="password"
                         placeholder="영문, 숫자, 특수문자 포함 8~16자리"
                         value={payload.pw}
                         onChange={e => handlePassWord(e)}
@@ -309,16 +312,22 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="big-input">
-                      <label>비밀번호 확인</label>
+                      <label
+                        htmlFor="password-confirm"
+                        className="password-confirm"
+                      >
+                        비밀번호 확인
+                      </label>
                       <input
                         type="password"
+                        id="password-confirm"
                         onChange={e => setPasswordConfirm(e.target.value)}
                         autoComplete="on"
                         onBlur={checkPass}
                       />
                     </li>
                     <li className="big-input">
-                      <label>학교</label>
+                      <label htmlFor="school">학교</label>
                       <AutoSearch
                         setPayload={setPayload}
                         inputValue={inputValue}
@@ -328,8 +337,9 @@ const SignUp = () => {
                     </li>
                     <li className="small-input">
                       <div>
-                        <label>학년</label>
+                        <label htmlFor="grade">학년</label>
                         <select
+                          id="grade"
                           value={payload.grade ? payload.grade : ""}
                           onChange={e => {
                             setPayload(payload => ({
@@ -345,8 +355,9 @@ const SignUp = () => {
                         </select>
                       </div>
                       <div>
-                        <label>반</label>
+                        <label htmlFor="class">반</label>
                         <select
+                          id="class"
                           onChange={e => {
                             setPayload(payload => ({
                               ...payload,
@@ -371,6 +382,7 @@ const SignUp = () => {
                           <div className="apr-input">
                             <input
                               className="upload-name"
+                              name="teacher-auth"
                               value={aprPic}
                               placeholder="첨부파일"
                               readOnly
@@ -390,10 +402,11 @@ const SignUp = () => {
                 <RightForm>
                   <ul>
                     <li className="big-input">
-                      <label>이름</label>
+                      <label htmlFor="user-name">이름</label>
                       <input
                         type="text"
                         value={payload.nm}
+                        id="user-name"
                         onChange={e => {
                           setPayload(payload => ({
                             ...payload,
@@ -403,9 +416,10 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="big-input">
-                      <label>생년월일</label>
+                      <label htmlFor="birth">생년월일</label>
                       <input
                         type="text"
+                        id="birth"
                         value={formattedBirth}
                         onChange={e => {
                           setPayload(payload => ({
@@ -416,9 +430,10 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="big-input">
-                      <label>연락처</label>
+                      <label htmlFor="phone-num">연락처</label>
                       <input
                         type="text"
+                        id="phone-num"
                         value={formattedPhone}
                         onChange={e => {
                           setPayload(payload => ({
@@ -429,13 +444,12 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="big-input">
-                      <label>주소</label>
+                      <label htmlFor="user-address">주소</label>
                       <input
                         className="user_enroll_text"
-                        id="address-input"
                         type="text"
                         required={true}
-                        name="address"
+                        id="user-address"
                         onChange={handleInput}
                         onClick={() => setAddressModal(true)}
                         value={houseAddress.address}
@@ -456,9 +470,10 @@ const SignUp = () => {
                       )}
                     </li>
                     <li className="big-input">
-                      <label>상세주소</label>
+                      <label htmlFor="detail-address">상세주소</label>
                       <input
                         type="text"
+                        id="detail-address"
                         value={payload.detailAddress}
                         onChange={e => {
                           setPayload(payload => ({

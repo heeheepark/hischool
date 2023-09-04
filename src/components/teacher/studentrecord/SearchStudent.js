@@ -35,7 +35,11 @@ const SearchStudent = ({
   return (
     <div className="student-list-wrap">
       <form action="">
-        <input type="text" placeholder="학생 이름을 입력하세요." />
+        <input
+          type="text"
+          id="student-name"
+          placeholder="학생 이름을 입력하세요."
+        />
         <button>검색</button>
       </form>
       <div className="student-list">

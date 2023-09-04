@@ -28,11 +28,11 @@ const ConFirm = ({ setAuthModal }) => {
     <ConFirmWrap>
       <ConFirmInput>
         <div>
-          <label>이메일 인증번호</label>
+          <label htmlFor="email-check">이메일 인증번호</label>
           <input
             type="text"
             placeholder="인증번호 6자리를 입력해주세요"
-            name="email-check"
+            id="email-check"
             value={emailConFirm}
             onChange={e => handleConfirmInput(e)}
           />

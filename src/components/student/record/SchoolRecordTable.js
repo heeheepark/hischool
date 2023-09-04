@@ -82,7 +82,7 @@ const SchoolRecordTable = () => {
       <div className="title">
         <h4>내신 성적 목록</h4>
         <SchoolRecordFilterDiv>
-          <select name="year" id="year" onChange={e => handleYearList(e)}>
+          <select id="school-year" onChange={e => handleYearList(e)}>
             <option value="">전체 연도</option>
             {yearList(defaultSchoolRecord).map((item, index) => (
               <option value={item} key={index}>
@@ -91,8 +91,8 @@ const SchoolRecordTable = () => {
             ))}
           </select>
           <select
-            name="semester"
-            id="semester"
+            name="school-semester"
+            id="school-semester"
             onChange={e => handleSemesterList(e)}
           >
             <option value="">전체 학기</option>

@@ -9,7 +9,6 @@ const StudentAttendStatus = ({ userId }) => {
   const [attendList, setAttendList] = useState([]);
   const [payload, setPayload] = useState({
     attendId: "",
-    attendId: "",
     lessonNum: "",
     diseaseAbsence: "",
     unauthAbsence: "",
