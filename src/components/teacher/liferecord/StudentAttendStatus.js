@@ -71,6 +71,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="lessonNum"
                           value={item.lessonNum}
                           onChange={handleAttendValues}
                         />
@@ -78,6 +79,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthAbsence"
                           value={item.unauthAbsence}
                           onChange={handleAttendValues}
                         />
@@ -85,6 +87,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseAbsence"
                           value={item.diseaseAbsence}
                           onChange={handleAttendValues}
                         />
@@ -92,6 +95,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcAbsence"
                           value={item.etcAbsence}
                           onChange={handleAttendValues}
                         />
@@ -99,6 +103,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthLate"
                           value={item.unauthLate}
                           onChange={handleAttendValues}
                         />
@@ -106,6 +111,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseLate"
                           value={item.diseaseLate}
                           onChange={handleAttendValues}
                         />
@@ -113,6 +119,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcLate"
                           value={item.etcLate}
                           onChange={handleAttendValues}
                         />
@@ -120,6 +127,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthEarly"
                           value={item.unauthEarly}
                           onChange={handleAttendValues}
                         />
@@ -127,6 +135,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseEarly"
                           value={item.diseaseEarly}
                           onChange={handleAttendValues}
                         />
@@ -134,6 +143,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcEarly"
                           value={item.etcEarly}
                           onChange={handleAttendValues}
                         />
@@ -141,6 +151,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthOut"
                           value={item.unauthOut}
                           onChange={handleAttendValues}
                         />
@@ -148,6 +159,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseOut"
                           value={item.diseaseOut}
                           onChange={handleAttendValues}
                         />
@@ -155,6 +167,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcOut"
                           value={item.etcOut}
                           onChange={handleAttendValues}
                         />
@@ -162,6 +175,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="specialNote"
                           className="etc-text"
                           value={item.specialNote}
                           onChange={handleAttendValues}
@@ -177,6 +191,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="lessonNum"
                           value={item.lessonNum}
                           onChange={handleAttendValues}
                         />
@@ -184,6 +199,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthAbsence"
                           value={item.unauthAbsence}
                           onChange={handleAttendValues}
                         />
@@ -191,6 +207,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseAbsence"
                           value={item.diseaseAbsence}
                           onChange={handleAttendValues}
                         />
@@ -198,6 +215,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcAbsence"
                           value={item.etcAbsence}
                           onChange={handleAttendValues}
                         />
@@ -205,6 +223,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthLate"
                           value={item.unauthLate}
                           onChange={handleAttendValues}
                         />
@@ -212,6 +231,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseLate"
                           value={item.diseaseLate}
                           onChange={handleAttendValues}
                         />
@@ -219,6 +239,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcLate"
                           value={item.etcLate}
                           onChange={handleAttendValues}
                         />
@@ -226,6 +247,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthEarly"
                           value={item.unauthEarly}
                           onChange={handleAttendValues}
                         />
@@ -233,6 +255,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseEarly"
                           value={item.diseaseEarly}
                           onChange={handleAttendValues}
                         />
@@ -240,6 +263,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcEarly"
                           value={item.etcEarly}
                           onChange={handleAttendValues}
                         />
@@ -247,6 +271,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="unauthOut"
                           value={item.unauthOut}
                           onChange={handleAttendValues}
                         />
@@ -254,6 +279,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="diseaseOut"
                           value={item.diseaseOut}
                           onChange={handleAttendValues}
                         />
@@ -261,6 +287,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="etcOut"
                           value={item.etcOut}
                           onChange={handleAttendValues}
                         />
@@ -268,6 +295,7 @@ const StudentAttendStatus = ({ userId }) => {
                       <li>
                         <input
                           type="text"
+                          name="specialNote"
                           className="etc-text"
                           value={item.specialNote}
                           onChange={handleAttendValues}
