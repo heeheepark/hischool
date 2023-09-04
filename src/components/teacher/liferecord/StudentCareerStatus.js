@@ -10,6 +10,7 @@ import {
   patchStudentCareerList,
   postStudentCareerList,
 } from "../../../api/teacher/studentLifeRecordAxios";
+import { CareerRecordSaveModal } from "../../modal/teacherModal";
 
 const StudentCareerStatus = ({ userId, grade }) => {
   const [careerList, setCareerList] = useState("");
@@ -18,8 +19,14 @@ const StudentCareerStatus = ({ userId, grade }) => {
   const [payload, setPayload] = useState("");
   const [existCareerId, setExistCareerId] = useState(false);
   const [confirmPost, setComfirmPost] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [acceptOk, setAcceptOk] = useState(false);
 
   const handleSave = () => {
+    setModalOpen(true);
+  };
+
+  const saveConfirm = () => {
     if (confirmPost) {
       postStudentCareerList(payload);
     } else {
@@ -28,16 +35,20 @@ const StudentCareerStatus = ({ userId, grade }) => {
   };
 
   useEffect(() => {
-    getHopeUniversity(userId, setHopeUniv, setHopeDept);
-    getStudentCareerList(
-      grade,
-      userId,
-      setCareerList,
-      setExistCareerId,
-      setComfirmPost,
-    );
-    setComfirmPost(false);
-  }, []);
+    if (acceptOk) {
+      saveConfirm();
+    } else {
+      getHopeUniversity(userId, setHopeUniv, setHopeDept);
+      getStudentCareerList(
+        grade,
+        userId,
+        setCareerList,
+        setExistCareerId,
+        setComfirmPost,
+      );
+      setComfirmPost(false);
+    }
+  }, [acceptOk]);
 
   useEffect(() => {
     if (careerList && existCareerId) {
@@ -74,6 +85,13 @@ const StudentCareerStatus = ({ userId, grade }) => {
 
   return (
     <CareerStatusDiv>
+      {modalOpen && (
+        <CareerRecordSaveModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setAcceptOk={setAcceptOk}
+        />
+      )}
       <div className="top-wrap">
         <button onClick={handleSave}>저장</button>
       </div>
@@ -252,14 +270,14 @@ const StudentCareerStatus = ({ userId, grade }) => {
                 (item, index) =>
                   parseInt(item.grade) === index + 1 && (
                     <label
-                      htmlFor={`special-note${grade}`}
+                      htmlFor={`special-note${index}`}
                       className="label-nm"
                       key={index}
                     >
                       <span>{item.grade}학년</span>
                       {grade == index + 1 ? (
                         <textarea
-                          id={`special-note${grade}`}
+                          id={`special-note${index}`}
                           cols="30"
                           rows="6"
                           value={payload.specialNote}
@@ -274,7 +292,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
                         <textarea
                           cols="30"
                           rows="6"
-                          id={`special-note${grade}`}
+                          id={`special-note${index}`}
                           value={item.specialNote}
                           readOnly
                         ></textarea>
@@ -284,7 +302,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
               )
             : careerList && (
                 <>
-                  {careerList.map((item, index) => (
+                  {careerList?.map((item, index) => (
                     <label
                       htmlFor={`special-note${index}`}
                       className="label-nm"

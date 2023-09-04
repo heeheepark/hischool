@@ -218,3 +218,42 @@ export const StudentCancelModal = ({
     </>
   );
 };
+
+// 생활기록부(진로지도) 저장
+export const CareerRecordSaveModal = ({
+  modalOpen,
+  setModalOpen,
+  setAcceptOk,
+}) => {
+  const handleOk = () => {
+    setAcceptOk(true);
+    setModalOpen(false);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  return (
+    <>
+      {modalOpen && (
+        <StudentRecordModalDiv className="modal">
+          <div className="dim"></div>
+          <div className="content-wrap">
+            <div className="header">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              <span></span>
+            </div>
+            <div className="content">
+              <span>저장 하시겠습니까?</span>
+            </div>
+            <div className="btns">
+              <button onClick={handleOk}>확인</button>
+              <button onClick={closeModal}>취소</button>
+            </div>
+          </div>
+        </StudentRecordModalDiv>
+      )}
+    </>
+  );
+};
