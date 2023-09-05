@@ -11,6 +11,7 @@ import SchoolRecordHeader from "../../../components/teacher/studentrecord/School
 import SchoolRecordList from "../../../components/teacher/studentrecord/SchoolRecordList";
 import MockRecordHeader from "../../../components/teacher/studentrecord/MockRecordHeader";
 import MockRecordList from "../../../components/teacher/studentrecord/MockRecordList";
+import { RecordConfirmModal } from "../../../components/modal/teacherModal";
 
 const StudentRecord = () => {
   const { state } = useLocation();
@@ -27,7 +28,9 @@ const StudentRecord = () => {
   const [month, setMonth] = useState(null);
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
+  const [confirmModal, setConfirmModal] = useState(false);
 
+  console.log(confirmModal);
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
     studentId,
@@ -95,7 +98,13 @@ const StudentRecord = () => {
   return (
     <>
       <StudentRecordDiv>
-        <h3>학생 성적 관리</h3>
+        {confirmModal && (
+          <RecordConfirmModal setConfirmModal={setConfirmModal} />
+        )}
+        <div className="student-record-header">
+          <h3>학생 성적 관리</h3>
+          <button onClick={() => setConfirmModal(true)}>성적 확정</button>
+        </div>
         <div className="wrap">
           <SearchStudent
             selectId={state}

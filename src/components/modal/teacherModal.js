@@ -1,6 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StudentRecordModalDiv } from "../../styles/ModalStyle";
+import {
+  RecordConfirmModalDiv,
+  StudentRecordModalDiv,
+} from "../../styles/ModalStyle";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 // 내신 성적 삭제 모달
 export const SchoolRecordModal = ({
@@ -254,6 +258,75 @@ export const CareerRecordSaveModal = ({
           </div>
         </StudentRecordModalDiv>
       )}
+    </>
+  );
+};
+
+// 성적확정 처리 모달
+export const RecordConfirmModal = ({ setConfirmModal }) => {
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  // const [classList, setClassList] = useState("");
+  const [payload, setPayload] = useState({
+    year: todayYear,
+    semester: 0,
+    testType: "",
+  });
+
+  console.log(payload);
+
+  const handleOk = () => {
+    setConfirmModal(false);
+  };
+
+  const closeModal = () => {
+    setConfirmModal(false);
+  };
+
+  const handleSemester = e => {
+    setPayload({ ...payload, semester: parseInt(e.target.value) });
+  };
+
+  const handleTestType = e => {
+    setPayload({ ...payload, testType: e.target.value });
+  };
+
+  return (
+    <>
+      <RecordConfirmModalDiv className="modal">
+        <div className="dim"></div>
+        <div className="content-wrap">
+          <div className="header">
+            <span className="title">
+              <FontAwesomeIcon icon={faExclamation} className="warning-icon" />
+              성적 확정 처리
+            </span>
+            <span className="description">
+              성적확정 처리할 시험을 선택해주세요.
+            </span>
+          </div>
+          <div className="content">
+            <label htmlFor="semester">
+              <select id="semester" onChange={e => handleSemester(e)}>
+                <option value="">학기</option>
+                <option value="1">1학기</option>
+                <option value="2">2학기</option>
+              </select>
+            </label>
+            <label htmlFor="test-type">
+              <select id="test-type" onChange={e => handleTestType(e)}>
+                <option value="">시험 유형</option>
+                <option value="mid">중간고사</option>
+                <option value="final">기말고사</option>
+              </select>
+            </label>
+          </div>
+          <div className="btns">
+            <button onClick={handleOk}>확정</button>
+            <button onClick={closeModal}>취소</button>
+          </div>
+        </div>
+      </RecordConfirmModalDiv>
     </>
   );
 };

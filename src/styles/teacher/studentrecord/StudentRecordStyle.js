@@ -8,10 +8,24 @@ export const StudentRecordDiv = styled.div`
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: column;
-
-  h3 {
-    font-size: 27px;
-    margin-bottom: 0.5%;
+  .student-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      font-size: 27px;
+      margin-bottom: 0.5%;
+    }
+    button {
+      border: 0;
+      background: #176b87;
+      color: #fff;
+      width: 80px;
+      height: 27px;
+      border-radius: 3px;
+      line-height: 27px;
+      cursor: pointer;
+    }
   }
   .wrap {
     height: 100%;
