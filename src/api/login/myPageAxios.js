@@ -27,3 +27,4 @@ export const deleteUser = async () => {
     console.log(err);
   }
 };
+

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { MypageDiv } from "../../styles/login/MyPageStyle";
 import MyPageConFirm from "../../components/login/MyPageConFirm";
 import MyPageContent from "../../components/login/MyPageContent";
+import { client } from "../../api/login/client";
 
 const Mypage = () => {
   const [passwordConFirm, setPasswordConFirm] = useState(true);
 
   const handlePasswordConFirm = async password => {
     try {
-      const res = await axios.post("api/pass", {
-        password: password,
+      const res = await client.post(`/api/mypage/pw-check`, {
+        pw: password,
       });
-      if (res.data.key) {
+      if (res.data === 1) {
         setPasswordConFirm(false);
       }
     } catch (err) {

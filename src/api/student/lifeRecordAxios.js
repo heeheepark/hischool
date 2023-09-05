@@ -22,3 +22,14 @@ export const getCareerData = async setCareerList => {
     console.log(err);
   }
 };
+
+// 출결 현황
+export const getAttenData = async setAttendData => {
+  try {
+    const res = await client.get(`/api/attendance`);
+    const result = res.data;
+    setAttendData(result);
+  } catch (err) {
+    console.log(err);
+  }
+};

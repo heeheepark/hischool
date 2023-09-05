@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AttendStatusDiv,
   AttendTable,
 } from "../../../styles/student/liferecord/AttendStyle";
 import { useState } from "react";
+import { getAttenData } from "../../../api/student/lifeRecordAxios";
 
 const AttendStatus = () => {
   const [attendData, setAttendData] = useState([]);
 
-  const handleChangeValue = e => {
-    console.log(e.target.value);
-  };
+  useEffect(() => {
+    getAttenData(setAttendData);
+  }, []);
+
   return (
     <AttendStatusDiv>
       <div className="hope-career-wrap">
@@ -40,65 +42,27 @@ const AttendStatus = () => {
                 <li className="category-nm">특이사항</li>
               </ul>
             </li>
-            <li className="attend-list">
-              <ul>
-                <li>1학년</li>
-                <li>190</li>
-                <li>0</li>
-                <li>0</li>
-                <li>3</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>해외여행 3일</li>
-              </ul>
-            </li>
-            <li className="attend-list">
-              <ul>
-                <li>2학년</li>
-                <li>191</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>개근</li>
-              </ul>
-            </li>
-            <li className="attend-list">
-              <ul>
-                <li>
-                  <a href="#">3학년</a>
-                </li>
-                <li>190</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>0</li>
-                <li>개근</li>
-              </ul>
-            </li>
+            {attendData.map((item, index) => (
+              <li className="attend-list" key={index}>
+                <ul>
+                  <li>{item.grade}학년</li>
+                  <li>{item.lessonNum}</li>
+                  <li>{item.unauthAbsence}</li>
+                  <li>{item.diseaseAbsence}</li>
+                  <li>{item.etcAbsence}</li>
+                  <li>{item.unauthLate}</li>
+                  <li>{item.diseaseLate}</li>
+                  <li>{item.etcLate}</li>
+                  <li>{item.unauthEarly}</li>
+                  <li>{item.diseaseEarly}</li>
+                  <li>{item.etcEarly}</li>
+                  <li>{item.unauthOut}</li>
+                  <li>{item.diseaseOut}</li>
+                  <li>{item.etcOut}</li>
+                  <li>{item.specialNote}</li>
+                </ul>
+              </li>
+            ))}
           </ul>
         </AttendTable>
       </div>
