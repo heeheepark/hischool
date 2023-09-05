@@ -235,6 +235,7 @@ export const SchoolRecordListDiv = styled.div`
     }
   }
   .record-data {
+    position: relative;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
@@ -294,6 +295,7 @@ export const MockRecordListDiv = styled.div`
     }
   }
   .record-data {
+    position: relative;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;

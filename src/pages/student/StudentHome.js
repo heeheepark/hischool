@@ -12,6 +12,7 @@ import TimeTable from "../../components/student/studenthome/TimeTable";
 import WeekFoodMenu from "../../components/student/studenthome/WeekFoodMenu";
 import RecapSchoolRecord from "../../components/student/studenthome/RecapSchoolRecord";
 import RecapMockRecord from "../../components/student/studenthome/RecapMockRecord";
+import Loading from "../../components/Loading";
 
 const StudentHome = () => {
   const [mainNotice, setMainNotice] = useState("");

@@ -8,8 +8,12 @@ import {
   getStudentCount,
 } from "../../../api/teacher/teacherHomeAxios";
 import { getStudentSchoolRecord } from "../../../api/teacher/studentRecordAxios";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import { useDispatch } from "react-redux";
 
 const TSchoolRecordTable = ({ userId }) => {
+  const dispatch = useDispatch();
   const cateList = [
     "연도",
     "학기",
@@ -84,6 +88,16 @@ const TSchoolRecordTable = ({ userId }) => {
     }
     getStudentCount(setStudentCount);
     getAllStudentCount(setAllStudentCount);
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
   }, [year, semester, testType]);
 
   return (

@@ -56,6 +56,11 @@ export const LifeRecordDiv = styled.div`
       font-weight: 600;
     }
   }
+  .content-wrap {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 export const CareerStatusDiv = styled.div`

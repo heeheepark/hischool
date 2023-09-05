@@ -10,8 +10,14 @@ import {
   StudentListTitle,
   StudentListWrap,
 } from "../../../styles/teacher/studentlist/StudentListStyle";
+import Loading from "../../../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
 
 const StudentList = () => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const [studentListData, setStudentListData] = useState([]);
   const [cancelOk, setCancelOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,6 +32,16 @@ const StudentList = () => {
       setCancelOk(false);
     }
     getStudentData(setStudentListData);
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
   }, [cancelOk]);
 
   const handleSginClick = () => {
@@ -66,6 +82,7 @@ const StudentList = () => {
           <li className="list-title-th">승인취소</li>
         </ul>
         <ul className="data-list">
+          {loading ? <Loading /> : null}
           {studentListData?.map((item, index) => (
             <li className="class" key={index}>
               <ul>

@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import { MockRecordListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import Loading from "../../Loading";
 
 const MockRecordList = ({
   studentMockRecordList,
   setMockResultIdList,
   mockResultIdList,
 }) => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const today = new Date();
   const todayYear = today.getFullYear().toString();
   let resultIdArray = mockResultIdList;
@@ -45,6 +51,16 @@ const MockRecordList = ({
     document
       .querySelectorAll(".mock-checkbox")
       .forEach(item => (item.checked = false));
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     setMockResultIdList([]);
   }, [studentMockRecordList]);
 
@@ -68,6 +84,7 @@ const MockRecordList = ({
         <li className="category-th">백분위</li>
       </ul>
       <ul className="record-data">
+        {loading ? <Loading /> : null}
         {studentMockRecordList?.length > 0 ? (
           studentMockRecordList.map((item, index) => (
             <li className="data-table" key={index}>

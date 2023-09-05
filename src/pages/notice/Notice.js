@@ -8,8 +8,14 @@ import {
 } from "../../styles/notice/NoticeStyle";
 import NoticePaging from "../../components/notice/NoticePaging";
 import { getNoticeList } from "../../api/notice/noticeAxios";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../../api/login/client";
+import { finishLoading, startLoading } from "../../reducers/loadingSlice";
+import Loading from "../../components/Loading";
 
 const Notice = () => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
   const [noticeData, setNoticeData] = useState([]);
@@ -49,6 +55,16 @@ const Notice = () => {
   );
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     async function fetchData() {
       try {
         await getNoticeList(setNoticeData);
@@ -79,6 +95,7 @@ const Notice = () => {
           <li className="table-views">조회수</li>
         </ul>
         <div className="notice-list">
+          {loading ? <Loading /> : null}
           {last4ImportantNotices.map(notice => (
             <ul key={notice.noticeId} className="important-notice">
               <li>

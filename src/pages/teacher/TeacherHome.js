@@ -19,8 +19,14 @@ import {
 import ClassSchoolRecord from "../../components/teacher/teacherhome/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/teacherhome/ClassMockRecord";
 import TeacherTimeTable from "../../components/teacher/teacherhome/TeacherTimeTable";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../../api/login/client";
+import { finishLoading, startLoading } from "../../reducers/loadingSlice";
+import Loading from "../../components/Loading";
 
 const TeacherHome = () => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const [mainNotice, setMainNotice] = useState("");
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
@@ -63,6 +69,16 @@ const TeacherHome = () => {
   };
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     getStudentCount(setStudentCount);
     getUnSignCount(setUnSignCount);
     getSchedule(setScheduleData, startDate, endDate);
@@ -74,117 +90,120 @@ const TeacherHome = () => {
   }, [startDate, endDate]);
 
   return (
-    <TeacherHomeDiv>
-      <div className="student-count">
-        <div className="class-status-wrap">
-          <h3>학급 현황</h3>
-          <div className="class-status">
-            <span>총 인원:</span>
-            <Link to="/teacher/studentlist">
-              <span className="student-num">{studentCount}</span>
-            </Link>
-            <span>명</span>
-            <span>(가입 대기 인원:</span>
-            <Link to="/teacher/studentlist/signlist">
-              <span className="student-num">{unSignCount}</span>
-            </Link>
-            <span>명)</span>
-          </div>
-        </div>
-        <div className="notice-wrap">
-          <NavLink to="/teacher/notice" className="notice-wrap-title">
-            <h3>공지사항</h3>
-          </NavLink>
-          <div className="notice-swiper">
-            {mainNotice && (
-              <Swiper
-                style={{ height: "100%" }}
-                direction={"vertical"}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Autoplay]}
-                className="mySwiper"
-                autoplay={{ delay: 2000, disableOnInteraction: false }}
-                loop={true}
-                slidesPerView={1}
-              >
-                {mainNotice.imptList?.map(item => (
-                  <SwiperSlide key={item.noticeId}>
-                    <div className="notice-title-wrap">
-                      <div>
-                        <span className="notice-important">중요</span>
-                        <Link to={`/teacher/notice/${item.noticeId}`}>
-                          {item.title}
-                        </Link>
-                      </div>
-                      <span className="notice-date">{item.createdAt}</span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-                {mainNotice.normalList?.map(item => (
-                  <SwiperSlide key={item.noticeId}>
-                    <div className="notice-title-wrap">
-                      <div>
-                        <Link to={`/teacher/notice/${item.noticeId}`}>
-                          {item.title}
-                        </Link>
-                      </div>
-                      <span className="notice-date">{item.createdAt}</span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="teacher-home-bottom">
-        <div className="teacher-home-left">
-          <div className="class-school-record">
-            <h3>학급 내신 현황</h3>
-            <ClassSchoolRecord />
-          </div>
-          <div className="class-mock-record">
-            <h3>학급 모의고사 현황</h3>
-            <ClassMockRecord />
-          </div>
-        </div>
-        <div className="teacher-home-right">
-          <div className="time-table">
-            <h3>학급 시간표</h3>
-            <div>
-              <TeacherTimeTable />
+    <>
+      {loading ? <Loading /> : null}
+      <TeacherHomeDiv>
+        <div className="student-count">
+          <div className="class-status-wrap">
+            <h3>학급 현황</h3>
+            <div className="class-status">
+              <span>총 인원:</span>
+              <Link to="/teacher/studentlist">
+                <span className="student-num">{studentCount}</span>
+              </Link>
+              <span>명</span>
+              <span>(가입 대기 인원:</span>
+              <Link to="/teacher/studentlist/signlist">
+                <span className="student-num">{unSignCount}</span>
+              </Link>
+              <span>명)</span>
             </div>
           </div>
-          <div className="calendar">
-            <FullCalendarDiv>
-              <FullCalendar
-                ref={calRef}
-                height="46.4vh"
-                plugins={[dayGridPlugin]}
-                initialView="dayGridMonth"
-                locale="ko"
-                dayCellContent={day => day.dayNumberText.replace("일", "")}
-                events={scheduleData}
-                eventColor="transparent"
-                eventTextColor="#555"
-                dayMaxEvents={true}
-                datesSet={handleDatesSet}
-                moreLinkContent={args => {
-                  return <span>{"+" + args.num}</span>;
-                }}
-                headerToolbar={{
-                  start: "prev",
-                  center: "title",
-                  end: "next today",
-                }}
-              />
-            </FullCalendarDiv>
+          <div className="notice-wrap">
+            <NavLink to="/teacher/notice" className="notice-wrap-title">
+              <h3>공지사항</h3>
+            </NavLink>
+            <div className="notice-swiper">
+              {mainNotice && (
+                <Swiper
+                  style={{ height: "100%" }}
+                  direction={"vertical"}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Autoplay]}
+                  className="mySwiper"
+                  autoplay={{ delay: 2000, disableOnInteraction: false }}
+                  loop={true}
+                  slidesPerView={1}
+                >
+                  {mainNotice.imptList?.map(item => (
+                    <SwiperSlide key={item.noticeId}>
+                      <div className="notice-title-wrap">
+                        <div>
+                          <span className="notice-important">중요</span>
+                          <Link to={`/teacher/notice/${item.noticeId}`}>
+                            {item.title}
+                          </Link>
+                        </div>
+                        <span className="notice-date">{item.createdAt}</span>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                  {mainNotice.normalList?.map(item => (
+                    <SwiperSlide key={item.noticeId}>
+                      <div className="notice-title-wrap">
+                        <div>
+                          <Link to={`/teacher/notice/${item.noticeId}`}>
+                            {item.title}
+                          </Link>
+                        </div>
+                        <span className="notice-date">{item.createdAt}</span>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </TeacherHomeDiv>
+        <div className="teacher-home-bottom">
+          <div className="teacher-home-left">
+            <div className="class-school-record">
+              <h3>학급 내신 현황</h3>
+              <ClassSchoolRecord />
+            </div>
+            <div className="class-mock-record">
+              <h3>학급 모의고사 현황</h3>
+              <ClassMockRecord />
+            </div>
+          </div>
+          <div className="teacher-home-right">
+            <div className="time-table">
+              <h3>학급 시간표</h3>
+              <div>
+                <TeacherTimeTable />
+              </div>
+            </div>
+            <div className="calendar">
+              <FullCalendarDiv>
+                <FullCalendar
+                  ref={calRef}
+                  height="46.4vh"
+                  plugins={[dayGridPlugin]}
+                  initialView="dayGridMonth"
+                  locale="ko"
+                  dayCellContent={day => day.dayNumberText.replace("일", "")}
+                  events={scheduleData}
+                  eventColor="transparent"
+                  eventTextColor="#555"
+                  dayMaxEvents={true}
+                  datesSet={handleDatesSet}
+                  moreLinkContent={args => {
+                    return <span>{"+" + args.num}</span>;
+                  }}
+                  headerToolbar={{
+                    start: "prev",
+                    center: "title",
+                    end: "next today",
+                  }}
+                />
+              </FullCalendarDiv>
+            </div>
+          </div>
+        </div>
+      </TeacherHomeDiv>
+    </>
   );
 };
 

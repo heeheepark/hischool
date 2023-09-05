@@ -4,12 +4,18 @@ import {
   getAllStudentCount,
   getStudentCount,
 } from "../../../api/teacher/teacherHomeAxios";
+import { useDispatch, useSelector } from "react-redux";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import Loading from "../../Loading";
 
 const SchoolRecordList = ({
   studentSchoolRecordList,
   setSchoolResultIdList,
   schoolResultIdList,
 }) => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const today = new Date();
   const todayYear = today.getFullYear().toString();
   let resultIdArray = schoolResultIdList;
@@ -58,6 +64,16 @@ const SchoolRecordList = ({
     document
       .querySelectorAll(".school-checkbox")
       .forEach(item => (item.checked = false));
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     setSchoolResultIdList([]);
   }, [studentSchoolRecordList]);
 
@@ -83,6 +99,7 @@ const SchoolRecordList = ({
         <li className="category-th">전교석차</li>
       </ul>
       <ul className="record-data">
+        {loading ? <Loading /> : null}
         {studentSchoolRecordList?.length > 0 ? (
           studentSchoolRecordList.map(item => (
             <li className="data-table" key={item.resultId}>

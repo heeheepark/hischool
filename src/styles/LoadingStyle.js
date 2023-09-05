@@ -2,10 +2,12 @@ import styled from "@emotion/styled";
 
 export const LoadingWrap = styled.div`
   position: absolute;
-  width: calc(100vw - 300px);
-  height: calc(100vh - 100px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: #fff;
-  z-index: 9;
+  z-index: 99;
   > div {
     position: absolute;
     top: 50%;

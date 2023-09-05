@@ -12,8 +12,14 @@ import SchoolRecordList from "../../../components/teacher/studentrecord/SchoolRe
 import MockRecordHeader from "../../../components/teacher/studentrecord/MockRecordHeader";
 import MockRecordList from "../../../components/teacher/studentrecord/MockRecordList";
 import { RecordConfirmModal } from "../../../components/modal/teacherModal";
+import Loading from "../../../components/Loading";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const StudentRecord = () => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const { state } = useLocation();
   const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);
@@ -30,7 +36,6 @@ const StudentRecord = () => {
   const [testType, setTestType] = useState(null);
   const [confirmModal, setConfirmModal] = useState(false);
 
-  console.log(confirmModal);
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
     studentId,
@@ -78,6 +83,16 @@ const StudentRecord = () => {
   // 갱신 시 학생 데이터 불러오기
   useEffect(() => {
     if (studentListData) {
+      // 로딩 호출
+      client.interceptors.request.use(function (config) {
+        dispatch(startLoading({}));
+        return config;
+      });
+      // 로딩 완료
+      client.interceptors.response.use(config => {
+        dispatch(finishLoading({}));
+        return config;
+      });
       const defaultSelectedId = document.querySelector("li.active");
       let studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
       if (state) {
@@ -97,6 +112,7 @@ const StudentRecord = () => {
 
   return (
     <>
+      {/* {loading ? <Loading /> : null} */}
       <StudentRecordDiv>
         {confirmModal && (
           <RecordConfirmModal setConfirmModal={setConfirmModal} />

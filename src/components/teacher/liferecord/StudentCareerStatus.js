@@ -11,8 +11,14 @@ import {
   postStudentCareerList,
 } from "../../../api/teacher/studentLifeRecordAxios";
 import { CareerRecordSaveModal } from "../../modal/teacherModal";
+import Loading from "../../Loading";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const StudentCareerStatus = ({ userId, grade }) => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const [careerList, setCareerList] = useState("");
   const [hopeUniv, setHopeUniv] = useState("");
   const [hopeDept, setHopeDept] = useState("");
@@ -48,6 +54,16 @@ const StudentCareerStatus = ({ userId, grade }) => {
       );
       setComfirmPost(false);
     }
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
   }, [acceptOk]);
 
   useEffect(() => {
@@ -85,6 +101,7 @@ const StudentCareerStatus = ({ userId, grade }) => {
 
   return (
     <CareerStatusDiv>
+      {loading ? <Loading /> : null}
       {modalOpen && (
         <CareerRecordSaveModal
           modalOpen={modalOpen}

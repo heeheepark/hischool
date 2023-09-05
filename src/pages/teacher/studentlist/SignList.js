@@ -10,8 +10,14 @@ import {
   StudentListWrap,
   TimeTableDiv,
 } from "../../../styles/teacher/studentlist/SignListStyle";
+import { client } from "../../../api/login/client";
+import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../../components/Loading";
 
 const SignList = () => {
+  const { loading } = useSelector(state => state.loading);
+  const dispatch = useDispatch();
   const [studentListData, setStudentListData] = useState([]);
   const [acceptOk, setAcceptOk] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,6 +70,16 @@ const SignList = () => {
     document
       .querySelectorAll(".school-checkbox")
       .forEach(item => (item.checked = false));
+    // 로딩 호출
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     setSaveCheckBox([]);
   }, [studentListData]);
 
@@ -115,6 +131,7 @@ const SignList = () => {
               <li className="time-table-th">이메일</li>
             </ul>
           </li>
+          {loading ? <Loading /> : null}
           {studentListData.map((item, index) => (
             <li className="class" key={index}>
               <ul>

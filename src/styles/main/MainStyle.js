@@ -61,6 +61,7 @@ export const Aside = styled.div`
 `;
 
 export const Content = styled.div`
+  position: relative;
   width: 100%;
   padding: 15px;
   height: calc(100vh - 60px);
