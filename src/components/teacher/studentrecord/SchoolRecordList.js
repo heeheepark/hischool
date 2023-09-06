@@ -64,16 +64,6 @@ const SchoolRecordList = ({
     document
       .querySelectorAll(".school-checkbox")
       .forEach(item => (item.checked = false));
-    // 로딩 호출
-    client.interceptors.request.use(function (config) {
-      dispatch(startLoading({}));
-      return config;
-    });
-    // 로딩 완료
-    client.interceptors.response.use(config => {
-      dispatch(finishLoading({}));
-      return config;
-    });
     setSchoolResultIdList([]);
   }, [studentSchoolRecordList]);
 
@@ -99,7 +89,7 @@ const SchoolRecordList = ({
         <li className="category-th">전교석차</li>
       </ul>
       <ul className="record-data">
-        {loading ? <Loading /> : null}
+        {/* {loading ? <Loading /> : null} */}
         {studentSchoolRecordList?.length > 0 ? (
           studentSchoolRecordList.map(item => (
             <li className="data-table" key={item.resultId}>

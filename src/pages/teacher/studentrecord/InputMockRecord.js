@@ -52,7 +52,7 @@ const InputMockRecord = () => {
       };
       postMockData(postDataList);
     });
-    navigate(-1);
+    navigate("/teacher/record", { state: state });
   };
 
   // 항목 추가 버튼

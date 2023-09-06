@@ -50,7 +50,7 @@ export const StudentRecordModalDiv = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    z-index: 9;
+    z-index: 99;
     backdrop-filter: blur(2px);
   }
   .content-wrap {
@@ -123,7 +123,7 @@ export const FindPasswordModalDiv = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    z-index: 9;
+    z-index: 99;
     backdrop-filter: blur(2px);
   }
   .content-wrap {
@@ -205,7 +205,7 @@ export const RecordConfirmModalDiv = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    z-index: 9;
+    z-index: 99;
     backdrop-filter: blur(2px);
   }
   .content-wrap {

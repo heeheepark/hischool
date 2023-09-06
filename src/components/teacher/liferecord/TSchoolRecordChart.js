@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RecordDiv } from "../../../styles/student/studenthome/StudentHomeStyle";
 import { ResponsiveLine } from "@nivo/line";
 import { getSchoolRecordChart } from "../../../api/teacher/studentLifeRecordAxios";
@@ -28,10 +28,6 @@ const TSchoolRecordChart = ({ userId }) => {
       return { id: subject[index], data };
     });
 
-  useState(() => {
-    getSchoolRecordChart(userId, setAllSchoolRecordData);
-  }, []);
-
   if (allSchoolRecordData) {
     const text = document.querySelectorAll("text");
     text.forEach(item => {
@@ -44,6 +40,10 @@ const TSchoolRecordChart = ({ userId }) => {
       return item.innerHTML;
     });
   }
+
+  useEffect(() => {
+    getSchoolRecordChart(userId, setAllSchoolRecordData);
+  }, []);
 
   return (
     <RecordDiv>

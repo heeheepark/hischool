@@ -52,9 +52,9 @@ const InputSchoolRecord = () => {
     if (studentsData) {
       const firstStudent = studentsData[0];
       const postDataList = {
-        userId: parseInt(firstStudent.userid), 
-        semester: parseInt(firstStudent.semester), 
-        midFinal: parseInt(firstStudent.midfinal), 
+        userId: parseInt(firstStudent.userid),
+        semester: parseInt(firstStudent.semester),
+        midFinal: parseInt(firstStudent.midfinal),
         list: studentsData.map(item => ({
           subjectId: parseInt(item.subjectid),
           score: parseInt(item.score),
@@ -62,7 +62,7 @@ const InputSchoolRecord = () => {
       };
       console.log("postDataList", postDataList);
       postSchoolData(postDataList);
-      navigate(-1);
+      navigate("/teacher/record", { state: state });
     }
   };
 

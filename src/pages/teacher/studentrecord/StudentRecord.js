@@ -36,6 +36,8 @@ const StudentRecord = () => {
   const [testType, setTestType] = useState(null);
   const [confirmModal, setConfirmModal] = useState(false);
 
+  console.log();
+
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
     studentId,
@@ -83,16 +85,6 @@ const StudentRecord = () => {
   // 갱신 시 학생 데이터 불러오기
   useEffect(() => {
     if (studentListData) {
-      // 로딩 호출
-      client.interceptors.request.use(function (config) {
-        dispatch(startLoading({}));
-        return config;
-      });
-      // 로딩 완료
-      client.interceptors.response.use(config => {
-        dispatch(finishLoading({}));
-        return config;
-      });
       const defaultSelectedId = document.querySelector("li.active");
       let studentId = parseInt(defaultSelectedId?.classList[0].slice(10));
       if (state) {
@@ -108,7 +100,15 @@ const StudentRecord = () => {
         month,
       );
     }
-  }, [studentListData, schoolYear, semester, testType, mockYear, month]);
+  }, [
+    studentListData,
+    schoolYear,
+    semester,
+    testType,
+    mockYear,
+    month,
+    confirmModal,
+  ]);
 
   return (
     <>

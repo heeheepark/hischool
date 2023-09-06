@@ -86,3 +86,13 @@ export const deleteStudentMockRecord = async resultId => {
     console.log(err);
   }
 };
+
+// 성적 확정
+export const patchRecordConfirm = async payload => {
+  try {
+    const res = await client.patch(`/api/teacher/rank`, payload);
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};

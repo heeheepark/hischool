@@ -5,6 +5,7 @@ import {
 } from "../../styles/ModalStyle";
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { patchRecordConfirm } from "../../api/teacher/studentRecordAxios";
 
 // 내신 성적 삭제 모달
 export const SchoolRecordModal = ({
@@ -268,14 +269,12 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
   const todayYear = today.getFullYear();
   // const [classList, setClassList] = useState("");
   const [payload, setPayload] = useState({
-    year: todayYear,
     semester: 0,
-    testType: "",
+    midFinal: 0,
   });
 
-  console.log(payload);
-
   const handleOk = () => {
+    patchRecordConfirm(payload);
     setConfirmModal(false);
   };
 
@@ -288,7 +287,7 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
   };
 
   const handleTestType = e => {
-    setPayload({ ...payload, testType: e.target.value });
+    setPayload({ ...payload, midFinal: parseInt(e.target.value) });
   };
 
   return (
@@ -306,8 +305,8 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
             </span>
           </div>
           <div className="content">
-            <label htmlFor="semester">
-              <select id="semester" onChange={e => handleSemester(e)}>
+            <label htmlFor="confirm-semester">
+              <select id="confirm-semester" onChange={e => handleSemester(e)}>
                 <option value="">학기</option>
                 <option value="1">1학기</option>
                 <option value="2">2학기</option>
@@ -316,8 +315,8 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
             <label htmlFor="test-type">
               <select id="test-type" onChange={e => handleTestType(e)}>
                 <option value="">시험 유형</option>
-                <option value="mid">중간고사</option>
-                <option value="final">기말고사</option>
+                <option value="1">중간고사</option>
+                <option value="2">기말고사</option>
               </select>
             </label>
           </div>
