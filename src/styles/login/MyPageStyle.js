@@ -181,6 +181,7 @@ export const MyPageConFirmDiv = styled.div`
       width: 50px;
       height: 36px;
       border-radius: 3px;
+      cursor: pointer;
     }
   }
 `;

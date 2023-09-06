@@ -49,6 +49,7 @@ const TimeTableDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(17, 42px);
+    z-index: 9;
     > li {
       line-height: 42px;
       border-top: 1px solid #ccc;

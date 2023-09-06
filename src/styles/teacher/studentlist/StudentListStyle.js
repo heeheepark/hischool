@@ -45,6 +45,7 @@ export const StudentListContent = styled.div`
     display: grid;
     grid-template-columns: 0.5fr repeat(3, 1fr) 1.8fr 0.4fr;
     grid-template-rows: 1fr;
+    z-index: 9;
     li {
       line-height: 42px;
       background: #176b87;

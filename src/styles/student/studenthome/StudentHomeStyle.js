@@ -126,6 +126,10 @@ export const StudentHomeDiv = styled.div`
 `;
 
 export const RecordDiv = styled.div`
+  text {
+    width: 10px;
+    /* white-space: pre-wrap; */
+  }
   height: 100%;
   .err-message {
     position: absolute;

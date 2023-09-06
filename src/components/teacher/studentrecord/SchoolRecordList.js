@@ -83,7 +83,7 @@ const SchoolRecordList = ({
         <li className="category-th">
           <input
             type="checkbox"
-            id="schoop-all-checkbox"
+            name="schoop-all-checkbox"
             onClick={e => handleAllCheck(e)}
             className="school-all-checkbox-btn"
           />
@@ -108,7 +108,7 @@ const SchoolRecordList = ({
                   {item.year === todayYear ? (
                     <input
                       type="checkbox"
-                      id={item.resultId}
+                      name={item.resultId}
                       defaultChecked={false}
                       className={`school-checkbox resultId${item.resultId} year${item.year}`}
                       onClick={e => handleCheckBox(e)}

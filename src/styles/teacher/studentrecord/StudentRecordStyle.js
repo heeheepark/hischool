@@ -222,7 +222,7 @@ export const SchoolRecordListDiv = styled.div`
     display: grid;
     grid-template-columns: 0.03fr repeat(3, 0.1fr) 0.17fr 0.2fr repeat(4, 0.1fr);
     grid-template-rows: 1fr;
-
+    z-index: 9;
     li {
       input {
         cursor: pointer;
@@ -286,6 +286,7 @@ export const MockRecordListDiv = styled.div`
     display: grid;
     grid-template-columns: 0.1fr repeat(7, 0.5fr);
     grid-template-rows: 1fr;
+    z-index: 9;
     li {
       background: #176b87;
       color: #fff;

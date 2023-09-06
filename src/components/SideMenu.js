@@ -28,11 +28,11 @@ const SideMenu = () => {
   const cookies = new Cookies();
 
   const handleDeleteCookie = () => {
-    setTimeout(() => {
-      navigate("/");
-    }, 0);
     cookies.remove("accessToken");
     cookies.remove("refreshToken");
+    setTimeout(() => {
+      navigate("/");
+    }, 300);
   };
 
   useEffect(() => {
