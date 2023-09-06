@@ -20,11 +20,10 @@ export const patchSchoolData = async dataToSend => {
 };
 
 // 내신 등록 후 과목 계열
-export const getSchoolMainSubData = async setInitSubCate => {
+export const getSchoolMainSubData = async () => {
   try {
     const res = await client.get("/api/teacher/subject/category/big");
-    const result = res.data;
-    setInitSubCate(result);
+    return res.data;
   } catch (err) {
     console.log(err);
     return [];
@@ -32,13 +31,12 @@ export const getSchoolMainSubData = async setInitSubCate => {
 };
 
 // 내신 등록 후 세부 과목
-export const getSchoolSubData = async (categoryid, setInitDetailSub) => {
+export const getSchoolSubData = async (categoryid) => {
   try {
     const res = await client.get(
       `/api/teacher/subject/category/small?categoryId=${categoryid}`,
     );
-    const result = res.data;
-    setInitDetailSub(result);
+    return res.data;
   } catch (err) {
     console.log(err);
     return [];
