@@ -71,13 +71,13 @@ const TSubJectEditSchool = ({
   };
 
   const handleSubChange = e => {
+    setSubject(e.target.value);
     const submitList = studentsData.map(item => {
       if (item.id === id) {
         item.subjectId = parseInt(e.target.value);
       }
       return item;
     });
-    setSubject(e.target.value);
     setStudentsData(submitList);
   };
 
@@ -106,6 +106,7 @@ const TSubJectEditSchool = ({
             value={mainSubject || ""}
             onChange={handleMainSubChange}
           >
+            <option value="">과목 계열 선택</option>
             {mainSubjects.map(mainSubject => (
               <option
                 key={mainSubject.categoryId}
@@ -120,6 +121,7 @@ const TSubJectEditSchool = ({
             value={subject || ""}
             onChange={handleSubChange}
           >
+            <option value="">세부 과목 선택</option>
             {subSubjects.map(subSubject => (
               <option key={subSubject.subjectId} value={subSubject.subjectId}>
                 {subSubject.nm}

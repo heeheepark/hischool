@@ -3,7 +3,9 @@ import { client } from "../login/client";
 // 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async postDataList => {
   try {
+    console.log("postDataList", postDataList);
     const response = await client.post("/api/teacher/aca-result", postDataList);
+    console.log("response", response);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
     console.log(postDataList);
