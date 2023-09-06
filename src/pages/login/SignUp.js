@@ -444,12 +444,12 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="big-input">
-                      <label htmlFor="user-address">주소</label>
+                      <label htmlFor="address-input">주소</label>
                       <input
                         className="user_enroll_text"
                         type="text"
                         required={true}
-                        id="user-address"
+                        id="address-input"
                         onChange={handleInput}
                         onClick={() => setAddressModal(true)}
                         value={houseAddress.address}
