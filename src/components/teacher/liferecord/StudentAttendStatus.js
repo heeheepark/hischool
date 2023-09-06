@@ -3,40 +3,47 @@ import {
   AttendStatusDiv,
   AttendTable,
 } from "../../../styles/student/liferecord/AttendStyle";
-import { getAttendData } from "../../../api/teacher/tcAttendAxios";
+import {
+  getAttendData,
+  putAttendData,
+} from "../../../api/teacher/tcAttendAxios";
 import { client } from "../../../api/login/client";
 import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading";
+import { AttendSaveModal } from "../../modal/teacherModal";
 
 const StudentAttendStatus = ({ userId }) => {
   const { loading } = useSelector(state => state.loading);
   const dispatch = useDispatch();
   const [attendList, setAttendList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [acceptOk, setAcceptOk] = useState(false);
   const [payload, setPayload] = useState({
-    attendId: "",
-    lessonNum: "",
-    diseaseAbsence: "",
-    unauthAbsence: "",
-    etcAbsence: "",
-    diseaseLate: "",
-    unauthLate: "",
-    etcLate: "",
-    diseaseEarly: "",
-    unauthEarly: "",
-    etcEarly: "",
-    diseaseOut: "",
-    unauthOut: "",
-    etcOut: "",
+    attendId: 0,
+    lessonNum: 0,
+    diseaseAbsence: 0,
+    unauthAbsence: 0,
+    etcAbsence: 0,
+    diseaseLate: 0,
+    unauthLate: 0,
+    etcLate: 0,
+    diseaseEarly: 0,
+    unauthEarly: 0,
+    etcEarly: 0,
+    diseaseOut: 0,
+    unauthOut: 0,
+    etcOut: 0,
     specialNote: "",
   });
 
-  const handleAttendValues = e => {
-    console.log(e.target.value);
-    setAttendList;
-  };
-
   useEffect(() => {
+    if (acceptOk) {
+      setModalOpen(false);
+      putAttendData(payload);
+      setAcceptOk(false);
+    }
+    getAttendData(userId, setAttendList);
     // 로딩 호출
     client.interceptors.request.use(function (config) {
       dispatch(startLoading({}));
@@ -47,15 +54,33 @@ const StudentAttendStatus = ({ userId }) => {
       dispatch(finishLoading({}));
       return config;
     });
-    getAttendData(userId, setAttendList);
-  }, []);
+  }, [acceptOk]);
+
+  const handleAttendValues = e => {
+    console.log(e.target.value);
+    setAttendList;
+  };
+
+  const handleSaveBt = () => {
+    setModalOpen(true);
+  };
 
   return (
     <>
       {loading ? <Loading /> : null}
+      {modalOpen && (
+        <AttendSaveModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          setAcceptOk={setAcceptOk}
+        />
+      )}
       <AttendStatusDiv>
-        <div className="hope-career-wrap">
-          <h4>출결 현황</h4>
+        <div>
+          <div className="attend-top-bt">
+            <h4>출결 현황</h4>
+            <button onClick={handleSaveBt}>저장</button>
+          </div>
           <AttendTable>
             <ul>
               <li className="cate-list">
