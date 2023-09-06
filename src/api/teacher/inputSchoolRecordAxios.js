@@ -1,13 +1,12 @@
 import { client } from "../login/client";
 
 // 서버로 postSchoolData 데이터 전송
-export const postSchoolData = async SdataToSend => {
+export const postSchoolData = async postDataList => {
   try {
-    const response = await client.post("/api/teacher/subject/aca-ins", {
-      list: [SdataToSend],
-    });
+    const response = await client.post("/api/teacher/aca-result", postDataList);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
+    console.log(postDataList);
   }
 };
 
@@ -16,6 +15,7 @@ export const patchSchoolData = async dataToSend => {
     const res = await client.patch("/api/teacher/aca", dataToSend);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
+    console.log(dataToSend);
   }
 };
 
@@ -31,7 +31,7 @@ export const getSchoolMainSubData = async () => {
 };
 
 // 내신 등록 후 세부 과목
-export const getSchoolSubData = async (categoryid) => {
+export const getSchoolSubData = async categoryid => {
   try {
     const res = await client.get(
       `/api/teacher/subject/category/small?categoryId=${categoryid}`,
