@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DaumPost from "./DaumPost";
 import { useLocation, useNavigate } from "react-router";
-import { Cookies } from "react-cookie";
 import {
   deleteUser,
   getUserData,
@@ -13,7 +12,6 @@ import {
   TcMyPageWrap,
 } from "../../styles/login/MyPageStyle";
 import { Modal } from "../modal/Modal";
-import { DeleteUserModal } from "../modal/studentModal";
 
 const MyPageContent = () => {
   const [userData, setUserData] = useState([]);
@@ -41,15 +39,6 @@ const MyPageContent = () => {
     setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
   };
 
-  const cookies = new Cookies();
-
-  const handleDeleteCookie = () => {
-    cookies.remove("accessToken");
-    cookies.remove("refreshToken");
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
-  };
 
   const userRole = location.pathname.split("/")[1];
   // get axios 담는 함수
@@ -140,15 +129,8 @@ const MyPageContent = () => {
     if (cancelOk === true) {
       setModalOpen(false);
       setCancelOk(false);
-      handleDeleteCookie();
-      deleteUser();
     }
   }, [cancelOk]);
-
-  // 유저 삭제 모달 오픈 함수
-  const handleDeleteModalOpen = () => {
-    setModalOpen(true);
-  };
 
   const handleImageUploadClick = () => {
     const realUpload = document.querySelector(".real-upload");
@@ -314,18 +296,6 @@ const MyPageContent = () => {
       </div>
       <div className="mypage-bottom">
         <TcButtons>
-          {modalOpen && (
-            <DeleteUserModal
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-              setCancelOk={setCancelOk}
-            />
-          )}
-          {userRole === "student" && (
-            <button className="withdraw-btn" onClick={handleDeleteModalOpen}>
-              회원탈퇴
-            </button>
-          )}
           <div>
             <button type="submit" onClick={handlePatch}>
               수정

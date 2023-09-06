@@ -20,11 +20,3 @@ export const putMyPageData = async formData => {
   }
 };
 
-export const deleteUser = async () => {
-  try {
-    const res = await client.delete(`/api/mypage`);
-  } catch (err) {
-    console.log(err);
-  }
-};
-

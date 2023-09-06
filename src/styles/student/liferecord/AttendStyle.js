@@ -7,9 +7,20 @@ export const AttendStatusDiv = styled.div`
   border-radius: 5px;
   padding: 20px 45px;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
-  h4 {
+  .attend-top-bt {
+    display: flex;
+    justify-content: space-between;
     font-size: 21px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    button {
+      font-size: 15px;
+      border: 0;
+      border-radius: 3px;
+      background: #176b87;
+      padding: 3px 6px;
+      color: #fff;
+      cursor: pointer;
+    }
   }
 `;
 
