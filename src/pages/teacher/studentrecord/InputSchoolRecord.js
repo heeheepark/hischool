@@ -50,16 +50,15 @@ const InputSchoolRecord = () => {
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
-      studentsData?.map(item => {
+      studentsData?.map(studentItem => {
         const postDataList = {
-          userid: item.userid,
-          subjectid: item.subjectid,
-          semester: item.semester,
-          midfinal: item.midfinal,
-          score: item.score,
-          rating: item.rating,
-          classrank: item.classrank,
-          wholerank: item.wholerank,
+          userId: parseInt(studentItem.userid),
+          semester: parseInt(studentItem.semester),
+          midFinal: parseInt(studentItem.midfinal),
+          list: studentsData.map(subjectItem => ({
+            subjectId: parseInt(subjectItem.subjectid),
+            score: parseInt(subjectItem.score),
+          })),
         };
         postSchoolData(postDataList);
       });
@@ -80,12 +79,20 @@ const InputSchoolRecord = () => {
     <InputSchoolRecordWrap>
       <ISRHeader>
         <h3>{`${currentYear} 내신 성적 입력( ${studentNameData?.nm} )`}</h3>
-        <select value={dropSemester} onChange={handleSemester} name="semester">
+        <select
+          value={dropSemester ? dropSemester : ""}
+          onChange={handleSemester}
+          name="semester"
+        >
           <option value="">학기 선택</option>
           <option value="1">1학기</option>
           <option value="2">2학기</option>
         </select>
-        <select value={dropTest} onChange={handleDropTest} name="test-type">
+        <select
+          value={dropTest ? dropTest : ""}
+          onChange={handleDropTest}
+          name="test-type"
+        >
           <option value="">시험 구분</option>
           <option value="1">중간고사</option>
           <option value="2">기말고사</option>

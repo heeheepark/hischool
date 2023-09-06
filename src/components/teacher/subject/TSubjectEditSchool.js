@@ -73,7 +73,7 @@ const TSubJectEditSchool = ({
   const handleSubChange = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
-        item.semester = parseInt(e.target.value);
+        item.subjectId = parseInt(e.target.value);
       }
       return item;
     });

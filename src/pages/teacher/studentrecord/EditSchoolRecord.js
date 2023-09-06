@@ -25,7 +25,7 @@ const EditSchoolRecord = () => {
       studentsData.map((item, index) => {
         const postDataList = {
           resultId: state[1][index],
-          subjectId: item.subjectId,
+          subjectId: parseInt(item.subjectId),
           year: 2023,
           semester: item.semester,
           mf: item.midfinal,
