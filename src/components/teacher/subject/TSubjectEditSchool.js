@@ -11,11 +11,25 @@ const TSubJectEditSchool = ({
   studentsData,
   setStudentsData,
 }) => {
-  const [initSubCate, setInitSubCate] = useState(null);
-  const [selectedSubCate, setSelectedSubCate] = useState(scoreList.categoryId);
-  const [initDetailSub, setInitDetailSub] = useState(null);
-  const [defaultSubject, setDefaultSubject] = useState(scoreList.categoryId);
-  const [defaultDetailSub, setDefaultDetailSub] = useState(scoreList.subjectId);
+  const [mainSubjects, setMainSubjects] = useState([]);
+  const [subSubjects, setSubSubjects] = useState([]);
+  const [mainSubject, setMainSubject] = useState(scoreList.categoryId);
+  const [subject, setSubject] = useState(scoreList.subjectId);
+  const [semester, setSemester] = useState(scoreList.semester);
+  const [midfinal, setMidfinal] = useState(scoreList.midfinal);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const mainSubjectData = await getSchoolMainSubData();
+      setMainSubjects(mainSubjectData);
+
+      if (mainSubject) {
+        const subSubjectData = await getSchoolSubData(mainSubject);
+        setSubSubjects(subSubjectData);
+      }
+    };
+    fetchData();
+  }, [mainSubject]);
 
   // 학기 변경
   const handleSemester = e => {
@@ -25,6 +39,7 @@ const TSubJectEditSchool = ({
       }
       return item;
     });
+    setSemester(e.target.value);
     setStudentsData(submitList);
   };
 
@@ -36,26 +51,9 @@ const TSubJectEditSchool = ({
       }
       return item;
     });
+    setMidfinal(e.target.value);
     setStudentsData(submitList);
   };
-
-  const handleSubject = e => {
-    setSelectedSubCate(e.target.value);
-    setDefaultSubject(e.target.value);
-  };
-  const handleDetailSubject = e => {
-    const submitList = studentsData?.map(item => {
-      if (item.id === id) {
-        item.subjectId = parseInt(e.target.value);
-      }
-      return item;
-    });
-    setDefaultDetailSub(e.target.value);
-    setStudentsData(submitList);
-  };
-  {
-    studentsData.subjectId === initDetailSub.subjectid;
-  }
 
   // 점수
   const handleScore = e => {
@@ -68,26 +66,35 @@ const TSubJectEditSchool = ({
     setStudentsData(submitList);
   };
 
-  useEffect(() => {
-    getSchoolMainSubData(setInitSubCate);
-    if (selectedSubCate) getSchoolSubData(selectedSubCate, setInitDetailSub);
-  }, [selectedSubCate]);
+  const handleMainSubChange = e => {
+    setMainSubject(e.target.value);
+  };
+
+  const handleSubChange = e => {
+    const submitList = studentsData.map(item => {
+      if (item.id === id) {
+        item.semester = parseInt(e.target.value);
+      }
+      return item;
+    });
+    setSubject(e.target.value);
+    setStudentsData(submitList);
+  };
 
   return (
     <>
       <div>
         <ISinput>
           <select
-            defaultValue={scoreList.semester}
+            value={semester || ""}
             onChange={handleSemester}
             name="semester"
           >
-            <option value={scoreList.semester}>{scoreList.semester}학기</option>
-            <option value="1학기">1학기</option>
-            <option value="2학기">2학기</option>
+            <option value={1}>1학기</option>
+            <option value={2}>2학기</option>
           </select>
           <select
-            defaultValue={scoreList.midfinal}
+            value={midfinal || ""}
             onChange={handleDropTest}
             name="test-type"
           >
@@ -95,28 +102,27 @@ const TSubJectEditSchool = ({
             <option value={2}>기말고사</option>
           </select>
           <select
-            name="categoryId"
-            value={defaultSubject}
-            onChange={handleSubject}
+            name="mainSubject"
+            value={mainSubject || ""}
+            onChange={handleMainSubChange}
           >
-            <option value="">과목 계열 선택</option>
-            {initSubCate?.map((item, index) => {
-              return (
-                <option key={index} value={item.categoryid}>
-                  {item.nm}
-                </option>
-              );
-            })}
+            {mainSubjects.map(mainSubject => (
+              <option
+                key={mainSubject.categoryId}
+                value={mainSubject.categoryId}
+              >
+                {mainSubject.nm}
+              </option>
+            ))}
           </select>
           <select
-            name="subjectid"
-            value={defaultDetailSub}
-            onChange={handleDetailSubject}
+            name="subSubject"
+            value={subject || ""}
+            onChange={handleSubChange}
           >
-            <option value={studentsData.subjectId}></option>
-            {initDetailSub?.map((item, index) => (
-              <option key={index} value={item.subjectid}>
-                {item.nm}
+            {subSubjects.map(subSubject => (
+              <option key={subSubject.subjectId} value={subSubject.subjectId}>
+                {subSubject.nm}
               </option>
             ))}
           </select>
