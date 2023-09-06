@@ -50,18 +50,18 @@ const InputSchoolRecord = () => {
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
     if (studentsData) {
-      studentsData?.map(studentItem => {
-        const postDataList = {
-          userId: parseInt(studentItem.userid),
-          semester: parseInt(studentItem.semester),
-          midFinal: parseInt(studentItem.midfinal),
-          list: studentsData.map(subjectItem => ({
-            subjectId: parseInt(subjectItem.subjectid),
-            score: parseInt(subjectItem.score),
-          })),
-        };
-        postSchoolData(postDataList);
-      });
+      const firstStudent = studentsData[0];
+      const postDataList = {
+        userId: parseInt(firstStudent.userid), 
+        semester: parseInt(firstStudent.semester), 
+        midFinal: parseInt(firstStudent.midfinal), 
+        list: studentsData.map(item => ({
+          subjectId: parseInt(item.subjectid),
+          score: parseInt(item.score),
+        })),
+      };
+      console.log("postDataList", postDataList);
+      postSchoolData(postDataList);
       navigate(-1);
     }
   };
