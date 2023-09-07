@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { postSchoolData } from "../../../api/teacher/inputSchoolRecordAxios";
 import { getStudentsNameData } from "../../../api/teacher/inputMockRecordAxios";
 import {
+  ISBoard,
   ISRButton,
   ISRButtonWrapper,
   ISRHeader,
@@ -35,20 +36,25 @@ const InputSchoolRecord = () => {
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
 
-  // 학기 변경
   const handleSemester = e => {
     setDropSemester(e.target.value);
     studentsData.map(item => (item.semester = parseInt(e.target.value)));
   };
 
-  // 시험유형(중간/기말) 변경
   const handleDropTest = e => {
     setDropTest(e.target.value);
     studentsData.map(item => (item.midfinal = parseInt(e.target.value)));
   };
 
-  // "저장" > 서버전송
   const handleSaveButtonClick = () => {
+    if (!dropSemester) {
+      window.alert("학기를 선택하세요.");
+      return;
+    }
+    if (!dropTest) {
+      window.alert("고사를 선택하세요.");
+      return;
+    }
     if (studentsData) {
       const firstStudent = studentsData[0];
       const postDataList = {
@@ -66,7 +72,6 @@ const InputSchoolRecord = () => {
     }
   };
 
-  // 항목 추가 버튼
   const handleAddButtonClick = () => {
     setStudentsData([...studentsData, initialRecord]);
   };
@@ -109,7 +114,7 @@ const InputSchoolRecord = () => {
         <p>세부 과목</p>
         <strong>점수</strong>
       </ISRTitle>
-      <div>
+      <ISBoard>
         {studentsData.map((item, index) => (
           <TSubJectSchool
             key={index}
@@ -118,7 +123,7 @@ const InputSchoolRecord = () => {
             setStudentsData={setStudentsData}
           />
         ))}
-      </div>
+      </ISBoard>
       <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>
           항목 추가

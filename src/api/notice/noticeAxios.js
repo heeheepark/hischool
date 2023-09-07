@@ -1,17 +1,40 @@
 import { client } from "../login/client";
 
-// 공지사항 리스트
-export const getNoticeList = async setNoticeData => {
+export const getNoticeList = async (setNotices, setTotalCount, currentPage) => {
   try {
-    const res = await client.get(`/api/notice`, { timeout: 1000 });
-    const result = res.data;
-    setNoticeData(result);
+    const res = await client.get(`/api/notice?page=${currentPage}`, {
+      timeout: 1000,
+    });
+    const result = res.data.list;
+    setNotices(result);
+    const totalCount = res.data.total;
+    setTotalCount(totalCount);
   } catch (err) {
     console.error(err);
   }
 };
 
-// 게시판 글 가져오기
+export const searchNotice = async (
+  search,
+  currentPage,
+  setSearchedNotice,
+  setSearchTotal,
+) => {
+  try {
+    let endpoint = `/api/notice/search?`;
+    if (search) {
+      endpoint += `search=${encodeURIComponent(search)}&`;
+    }
+    endpoint += `page=${currentPage}`;
+    const res = await client.get(endpoint);
+    setSearchedNotice(search ? res.data.list : []);
+    setSearchTotal(search ? res.data.searchTotal : []);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getNoticeData = async noticeId => {
   try {
     const res = await client.get(`/api/notice/bynotice?noticeId=${noticeId}`);

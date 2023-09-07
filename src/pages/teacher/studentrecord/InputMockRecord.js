@@ -8,6 +8,7 @@ import {
 } from "../../../api/teacher/inputMockRecordAxios";
 import {
   IMRTitle,
+  ISBoard,
   ISRButton,
   ISRButtonWrapper,
   ISRHeader,
@@ -33,14 +34,16 @@ const InputMockRecord = () => {
   const [studentNameData, setStudentNameData] = useState([]);
   const navigate = useNavigate();
 
-  // 월 선택
   const handleMonth = e => {
     setDropMonth(e.target.value);
     studentsData.map(item => (item.mon = parseInt(e.target.value)));
   };
 
-  // "저장" > 서버전송
   const handleSaveButtonClick = () => {
+    if (!dropMonth) {
+      window.alert("월을 선택하세요.");
+      return;
+    }
     studentsData?.map(item => {
       const postDataList = {
         userid: item.userid,
@@ -55,7 +58,6 @@ const InputMockRecord = () => {
     navigate("/teacher/record", { state: state });
   };
 
-  // 항목 추가 버튼
   const handleAddButtonClick = () => {
     setStudentsData([...studentsData, initialRecord]);
   };
@@ -88,7 +90,7 @@ const InputMockRecord = () => {
         <strong>등급</strong>
         <strong>백분위</strong>
       </IMRTitle>
-      <div>
+      <ISBoard>
         {studentsData.map((item, index) => {
           return (
             <TSubJectMock
@@ -100,7 +102,7 @@ const InputMockRecord = () => {
             />
           );
         })}
-      </div>
+      </ISBoard>
       <ISRButtonWrapper>
         <button onClick={handleAddButtonClick}>
           항목 추가
