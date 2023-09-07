@@ -4,22 +4,7 @@ import { getTimeTable } from "../../../api/student/studentHomeAxios";
 
 const TimeTable = () => {
   const [timeTable, setTimeTable] = useState(null);
-
-  {
-    Array(5)
-      .fill()
-      .map((_, index) => {
-        return (
-          <li key={index}>
-            {
-              timeTable
-                ?.filter(item => item.period === "1")
-                .find(item => item.dayMonToSun == index).class_contents
-            }
-          </li>
-        );
-      });
-  }
+  console.log(timeTable);
 
   useEffect(() => {
     getTimeTable(setTimeTable);
@@ -49,14 +34,12 @@ const TimeTable = () => {
                   .map((_, index) => {
                     return (
                       <li key={index}>
-                        {
-                          timeTable
-                            ?.filter(
-                              item => item.period === (period + 1).toString(),
-                            )
-                            .find(item => item.dayMonToSun === index)
-                            ?.class_contents
-                        }
+                        {timeTable
+                          ?.filter(
+                            item => item.period === (period + 1).toString(),
+                          )
+                          .find(item => item.dayMonToSun === index)
+                          ?.class_contents || "-"}
                       </li>
                     );
                   })}
@@ -80,14 +63,12 @@ const TimeTable = () => {
                   .map((_, index) => {
                     return (
                       <li key={index + 5}>
-                        {
-                          timeTable
-                            ?.filter(
-                              item => item.period == (period + 5).toString(),
-                            )
-                            .find(item => item.dayMonToSun === index)
-                            ?.class_contents
-                        }
+                        {timeTable
+                          ?.filter(
+                            item => item.period == (period + 5).toString(),
+                          )
+                          .find(item => item.dayMonToSun === index)
+                          ?.class_contents || "-"}
                       </li>
                     );
                   })}
