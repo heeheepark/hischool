@@ -51,6 +51,7 @@ export const getRecentMockRecord = async (
   try {
     const res = await client.get(`/api/student/mock-latest`);
     const result = res.data;
+    console.log(result);
     if (result.length !== 0) {
       setRecentMockRecordData(result.list);
       setRecentTestTitle(result.date.split("-"));
