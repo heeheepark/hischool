@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   SchoolRecordFilterDiv,
   SchoolRecordTableDiv,
@@ -13,6 +13,7 @@ import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
 import { useDispatch } from "react-redux";
 
 const TSchoolRecordTable = ({ userId }) => {
+  const scrollRef = useRef(null);
   const dispatch = useDispatch();
   const cateList = [
     "연도",
@@ -70,6 +71,9 @@ const TSchoolRecordTable = ({ userId }) => {
   };
 
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
     if (!year && !semester && !testType) {
       getStudentSchoolRecord(
         userId,
@@ -144,7 +148,7 @@ const TSchoolRecordTable = ({ userId }) => {
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">
-        <SchoolRecordTableDiv>
+        <SchoolRecordTableDiv ref={scrollRef}>
           <ul className="category">
             {cateList.map((item, index) => (
               <li className="category-th" key={index}>

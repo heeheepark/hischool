@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { MockRecordListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../../api/login/client";
@@ -10,8 +10,7 @@ const MockRecordList = ({
   setMockResultIdList,
   mockResultIdList,
 }) => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
+  const scrollRef = useRef(null);
   const today = new Date();
   const todayYear = today.getFullYear().toString();
   let resultIdArray = mockResultIdList;
@@ -47,6 +46,9 @@ const MockRecordList = ({
   };
 
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
     document.querySelector(".mock-all-checkbox-btn").checked = false;
     document
       .querySelectorAll(".mock-checkbox")
@@ -55,7 +57,7 @@ const MockRecordList = ({
   }, [studentMockRecordList]);
 
   return (
-    <MockRecordListDiv>
+    <MockRecordListDiv ref={scrollRef}>
       <ul className="category">
         <li className="category-th">
           <input

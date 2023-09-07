@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SchoolRecordListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
 import {
   getAllStudentCount,
   getStudentCount,
 } from "../../../api/teacher/teacherHomeAxios";
-import { useDispatch, useSelector } from "react-redux";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import Loading from "../../Loading";
 
 const SchoolRecordList = ({
   studentSchoolRecordList,
   setSchoolResultIdList,
   schoolResultIdList,
 }) => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
+  const scrollRef = useRef(null);
   const today = new Date();
   const todayYear = today.getFullYear().toString();
   let resultIdArray = schoolResultIdList;
@@ -60,6 +55,9 @@ const SchoolRecordList = ({
 
   // 학생 선택 변경 시
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
     document.querySelector(".school-all-checkbox-btn").checked = false;
     document
       .querySelectorAll(".school-checkbox")
@@ -68,7 +66,7 @@ const SchoolRecordList = ({
   }, [studentSchoolRecordList]);
 
   return (
-    <SchoolRecordListDiv>
+    <SchoolRecordListDiv ref={scrollRef}>
       <ul className="category">
         <li className="category-th">
           <input

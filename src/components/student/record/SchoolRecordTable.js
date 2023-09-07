@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   SchoolRecordFilterDiv,
   SchoolRecordTableDiv,
@@ -10,6 +10,7 @@ import {
 import { getAllSchoolRecord } from "../../../api/student/schoolRecordAxios";
 
 const SchoolRecordTable = () => {
+  const scrollRef = useRef(null);
   const cateList = [
     "연도",
     "학기",
@@ -66,6 +67,9 @@ const SchoolRecordTable = () => {
   };
 
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
     getAllSchoolRecord(
       setDefaultSchoolRecord,
       setAllSchoolRecord,
@@ -117,7 +121,7 @@ const SchoolRecordTable = () => {
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">
-        <SchoolRecordTableDiv>
+        <SchoolRecordTableDiv ref={scrollRef}>
           <ul className="category">
             {cateList.map((item, index) => (
               <li className="category-th" key={index}>

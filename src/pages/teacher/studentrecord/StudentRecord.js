@@ -36,8 +36,6 @@ const StudentRecord = () => {
   const [testType, setTestType] = useState(null);
   const [confirmModal, setConfirmModal] = useState(false);
 
-  console.log();
-
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
     studentId,

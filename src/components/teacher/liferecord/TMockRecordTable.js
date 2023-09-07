@@ -1,10 +1,11 @@
 import { MockRecordTableDiv } from "../../../styles/student/record/MockRecordStyle";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { getStudentMockRecord } from "../../../api/teacher/studentRecordAxios";
 import { SchoolRecordFilterDiv } from "../../../styles/student/record/SchoolRecordStyle";
 
 const TMockRecordTable = ({ userId }) => {
+  const scrollRef = useRef(null);
   const cateList = [
     "연도",
     "월",
@@ -44,6 +45,9 @@ const TMockRecordTable = ({ userId }) => {
   };
 
   useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
     if (!year && !month) {
       getStudentMockRecord(userId, setDefaultMockRecord, setAllMockRecord);
     } else {
@@ -81,7 +85,7 @@ const TMockRecordTable = ({ userId }) => {
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">
-        <MockRecordTableDiv>
+        <MockRecordTableDiv ref={scrollRef}>
           <ul className="category">
             {cateList.map((item, index) => (
               <li className="category-th" key={index}>
