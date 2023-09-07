@@ -7,16 +7,10 @@ import {
   getAttendData,
   putAttendData,
 } from "../../../api/teacher/tcAttendAxios";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../Loading";
 import { AttendSaveModal } from "../../modal/teacherModal";
 
 const StudentAttendStatus = ({ userId }) => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
-  const [attendList, setAttendList] = useState([]);
+  // const [attendList, setAttendList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [acceptOk, setAcceptOk] = useState(false);
   const [payload, setPayload] = useState({
@@ -43,17 +37,7 @@ const StudentAttendStatus = ({ userId }) => {
       putAttendData(payload);
       setAcceptOk(false);
     }
-    getAttendData(userId, setAttendList);
-    // 로딩 호출
-    client.interceptors.request.use(function (config) {
-      dispatch(startLoading({}));
-      return config;
-    });
-    // 로딩 완료
-    client.interceptors.response.use(config => {
-      dispatch(finishLoading({}));
-      return config;
-    });
+    getAttendData(userId, setPayload);
   }, [acceptOk]);
 
   const handleAttendValues = e => {
@@ -65,9 +49,10 @@ const StudentAttendStatus = ({ userId }) => {
     setModalOpen(true);
   };
 
+  console.log(payload);
+
   return (
     <>
-      {loading ? <Loading /> : null}
       {modalOpen && (
         <AttendSaveModal
           modalOpen={modalOpen}

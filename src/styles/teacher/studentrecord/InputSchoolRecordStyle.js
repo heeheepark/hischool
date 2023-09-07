@@ -92,6 +92,13 @@ const ISRTitle = styled.div`
     font-weight: 400;
   }
 `;
+const ISBoard = styled.div`
+  width: 100%;
+  position: relative;
+  height: 65vh;
+  overflow: auto;
+  margin-bottom: 2vh
+`;
 const ISTitle = styled.div`
   width: 100%;
   height: 40px;
@@ -369,4 +376,5 @@ export {
   IMREditTitle,
   ISTitle,
   ISinput,
+  ISBoard,
 };

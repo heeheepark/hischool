@@ -7,8 +7,6 @@ const SchoolRecordChart = () => {
   const colorData = ["#97E3D5", "#E8C1A0", "#F1E15B", "#F47560"];
   const [allSchoolRecordData, setAllSchoolRecordData] = useState(null);
 
-  console.log(allSchoolRecordData);
-
   // 내신 차트 데이터
   const subject = ["한국사", "영어", "수학", "국어"];
   const ratingList = allSchoolRecordData?.map(item => parseInt(item.rating));

@@ -33,14 +33,12 @@ const TeacherTimeTable = () => {
                   .map((_, index) => {
                     return (
                       <li key={index}>
-                        {
-                          timeTable
-                            ?.filter(
-                              item => item.period === (period + 1).toString(),
-                            )
-                            .find(item => item.dayMonToSun === index)
-                            ?.class_contents
-                        }
+                        {timeTable
+                          ?.filter(
+                            item => item.period === (period + 1).toString(),
+                          )
+                          .find(item => item.dayMonToSun === index)
+                          ?.class_contents || "-"}
                       </li>
                     );
                   })}
@@ -64,14 +62,12 @@ const TeacherTimeTable = () => {
                   .map((_, index) => {
                     return (
                       <li key={index + 5}>
-                        {
-                          timeTable
-                            ?.filter(
-                              item => item.period == (period + 5).toString(),
-                            )
-                            .find(item => item.dayMonToSun === index)
-                            ?.class_contents
-                        }
+                        {timeTable
+                          ?.filter(
+                            item => item.period == (period + 5).toString(),
+                          )
+                          .find(item => item.dayMonToSun === index)
+                          ?.class_contents || "-"}
                       </li>
                     );
                   })}
