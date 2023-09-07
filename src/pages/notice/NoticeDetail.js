@@ -20,7 +20,7 @@ const NoticeDetail = () => {
     patchNoticeHit(noticeId);
     async function fetchNotice() {
       try {
-        const fetchedNotice = await getNoticeData(noticeId); // 공지사항 데이터 가져오기
+        const fetchedNotice = await getNoticeData(noticeId); 
         setNotice(fetchedNotice);
       } catch (error) {
         console.error("Error fetching notice:", error);

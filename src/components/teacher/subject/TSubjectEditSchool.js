@@ -31,7 +31,6 @@ const TSubJectEditSchool = ({
     fetchData();
   }, [mainSubject]);
 
-  // 학기 변경
   const handleSemester = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -43,7 +42,6 @@ const TSubJectEditSchool = ({
     setStudentsData(submitList);
   };
 
-  // 시험유형(중간/기말) 변경
   const handleDropTest = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -55,7 +53,6 @@ const TSubJectEditSchool = ({
     setStudentsData(submitList);
   };
 
-  // 점수
   const handleScore = e => {
     const submitList = studentsData.map(item => {
       if (item.id === id) {
@@ -131,7 +128,7 @@ const TSubJectEditSchool = ({
           <input
             type="number"
             name="score"
-            defaultValue={scoreList.score}
+            defaultValue={scoreList.score || ""}
             onChange={handleScore}
             placeholder="점수"
             max={100}

@@ -29,7 +29,7 @@ const NoticeInput = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  > div {
+  > form {
     input {
       border: 1px solid #bbb;
       border-radius: 3px;
@@ -70,7 +70,6 @@ const NoticeBoard = styled.div`
   background: #fff;
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  overflow: auto;
   .title-wrap {
     width: 100%;
     display: grid;

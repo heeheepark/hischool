@@ -7,7 +7,7 @@ import {
   NoticeWrap,
 } from "../../styles/notice/NoticeStyle";
 import NoticePaging from "../../components/notice/NoticePaging";
-import { getNoticeList } from "../../api/notice/noticeAxios";
+import { getNoticeList, searchNotice } from "../../api/notice/noticeAxios";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../api/login/client";
 import { finishLoading, startLoading } from "../../reducers/loadingSlice";
@@ -18,62 +18,68 @@ const Notice = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = location.pathname.split("/")[1];
-  const [noticeData, setNoticeData] = useState([]);
-  // 현재 페이지 상태를 관리하는 상태 변수
+  const [notices, setNotices] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [search, setSearch] = useState("");
+  const [searchedNotice, setSearchedNotice] = useState([]);
+  const [searchTotal, setSearchTotal] = useState("");
 
-  // 페이지당 보여질 일반 공지 개수
-  const itemsPerPage = 10;
+  const important = notices.filter(notice => notice.imptYn === 1);
+  const normal = notices.filter(notice => notice.imptYn === 0);
+  const importantsearch = searchedNotice.filter(notice => notice.imptYn === 1);
+  const normalsearch = searchedNotice.filter(notice => notice.imptYn === 0);
 
-  // 중요한 공지와 일반 공지를 필터링
-  const importantNotices = noticeData.filter(notice => notice.imptYn === 1); //중요공지
-  const normalNotices = noticeData.filter(notice => notice.imptYn === 0); //일반공지
+  const last4Important = important
+    .slice(-4)
+    .sort((a, b) => b.noticeId - a.noticeId);
+  const last4Importantsearch = importantsearch
+    .slice(-4)
+    .sort((a, b) => b.noticeId - a.noticeId);
 
-  // 중요한 공지 중 마지막 4개를 유지, 나머지 중요한 공지는 일반 공지로 처리
-  const last4ImportantNotices = importantNotices
-    .slice(-4) // 항상 마지막 4개 선택
-    .sort((a, b) => b.noticeId - a.noticeId); // id 역순 정렬
-  const otherImportantNotices = importantNotices.slice(0, -4); // 마지막에서 4번째를 제외하고 나머지
+  const otherImportant = important.slice(0, -4);
+  const combinedNotices = [...otherImportant, ...normal];
+  const otherImportantsearch = important.slice(0, -4);
+  const combinedNoticesSearch = [...otherImportantsearch, ...normalsearch];
 
-  // 마지막에서 4번째를 제외하고 중요한 공지와 일반 공지를 합친 배열
-  const combinedNotices = [...otherImportantNotices, ...normalNotices];
-  // 총 개수
-  const totalcombinedNoticeCount = combinedNotices.length;
-  // 역순 배치
-  const sortedcombinedNotices = combinedNotices.sort(
-    (a, b) => b.noticeId - a.noticeId,
-  );
+  const handleChange = e => {
+    setSearch(e.target.value);
+  };
 
-  // 현재 페이지에서 보여줄 공지의 첫 번째와 마지막 인덱스를 계산
-  const indexOfLastItem = currentPage * itemsPerPage; // 현재 보여지는 페이지 갯수
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // 한페이지에서 보여줄 항목의 갯수
+  const handleSearch = async () => {
+    try {
+      await searchNotice(search, 1, setSearchedNotice, setSearchTotal);
+      setCurrentPage(1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  // 현재 페이지 일반 공지 배열
-  const currentNormalItems = sortedcombinedNotices.slice(
-    indexOfFirstItem,
-    indexOfLastItem,
-  );
+  const handleEnterKey = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSearch();
+    }
+  };
 
   useEffect(() => {
-    // 로딩 호출
     client.interceptors.request.use(function (config) {
       dispatch(startLoading({}));
       return config;
     });
-    // 로딩 완료
     client.interceptors.response.use(config => {
       dispatch(finishLoading({}));
       return config;
     });
     async function fetchData() {
       try {
-        await getNoticeList(setNoticeData);
+        await getNoticeList(setNotices, setTotalCount, currentPage);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [setNoticeData]);
+  }, [setNotices, setTotalCount, currentPage]);
 
   return (
     <NoticeWrap>
@@ -81,10 +87,19 @@ const Notice = () => {
         <h3>공지사항</h3>
       </NoticeTitle>
       <NoticeInput>
-        <div>
-          <input type="text" id="search" placeholder="검색어를 입력하세요." />
-          <button>검색</button>
-        </div>
+        <form>
+          <input
+            type="text"
+            placeholder="검색어를 입력하세요."
+            name="search-bar"
+            value={search}
+            onChange={handleChange}
+            onKeyPress={handleEnterKey}
+          />
+          <button type="button" onClick={handleSearch}>
+            검색
+          </button>
+        </form>
       </NoticeInput>
       <NoticeBoard>
         <ul className="title-wrap">
@@ -96,44 +111,75 @@ const Notice = () => {
         </ul>
         <div className="notice-list">
           {loading ? <Loading /> : null}
-          {last4ImportantNotices.map(notice => (
-            <ul key={notice.noticeId} className="important-notice">
-              <li>
-                <span>중요</span>
-              </li>
-              <li>
-                <Link to={`/${user}/notice/${notice.noticeId}`}>
-                  {notice.title}
-                </Link>
-              </li>
-              <li>관리자{notice.userId}</li>
-              <li>{notice.createdAt.split("T", 1)}</li>
-              <li>{notice.hits}</li>
-            </ul>
-          ))}
-          {currentNormalItems.map((notice, index) => (
-            <ul key={notice.noticeId}>
-              <li>
-                {totalcombinedNoticeCount -
-                  (index + itemsPerPage * (currentPage - 1))}
-              </li>
-              <li>
-                <Link to={`/${user}/notice/${notice.noticeId}`}>
-                  {notice.title}
-                </Link>
-              </li>
-              <li>관리자</li>
-              <li>{notice.createdAt.split("T", 1)}</li>
-              <li>{notice.hits}</li>
-            </ul>
-          ))}
+          {searchedNotice.length > 0 ? (
+            <>
+              {last4Importantsearch.map(notice => (
+                <ul key={notice.noticeId} className="important-notice">
+                  <li>
+                    <span>중요</span>
+                  </li>
+                  <li>
+                    <Link to={`/${user}/notice/${notice.noticeId}`}>
+                      {notice.title}
+                    </Link>
+                  </li>
+                  <li>관리자</li>
+                  <li>{notice.createdAt.split("T", 1)}</li>
+                  <li>{notice.hits}</li>
+                </ul>
+              ))}
+              {combinedNoticesSearch.map((notice) => (
+                <ul key={notice.noticeId}>
+                  <li>{notice.noticeId}</li>
+                  <li>
+                    <Link to={`/${user}/notice/${notice.noticeId}`}>
+                      {notice.title}
+                    </Link>
+                  </li>
+                  <li>관리자{notice.userId}</li>
+                  <li>{notice.createdAt.split("T", 1)}</li>
+                  <li>{notice.hits}</li>
+                </ul>
+              ))}
+            </>
+          ) : (
+            <>
+              {last4Important.map(notice => (
+                <ul key={notice.noticeId} className="important-notice">
+                  <li>
+                    <span>중요</span>
+                  </li>
+                  <li>
+                    <Link to={`/${user}/notice/${notice.noticeId}`}>
+                      {notice.title}
+                    </Link>
+                  </li>
+                  <li>관리자</li>
+                  <li>{notice.createdAt.split("T", 1)}</li>
+                  <li>{notice.hits}</li>
+                </ul>
+              ))}
+              {combinedNotices.map((notice) => (
+                <ul key={notice.noticeId}>
+                  <li>{notice.noticeId}</li>
+                  <li>
+                    <Link to={`/${user}/notice/${notice.noticeId}`}>
+                      {notice.title}
+                    </Link>
+                  </li>
+                  <li>관리자{notice.userId}</li>
+                  <li>{notice.createdAt.split("T", 1)}</li>
+                  <li>{notice.hits}</li>
+                </ul>
+              ))}
+            </>
+          )}
         </div>
       </NoticeBoard>
       <NoticePaging
-        page={currentPage}
-        setPage={setCurrentPage}
-        totalpage={totalcombinedNoticeCount}
-        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalCount={searchedNotice.length > 0 ? searchTotal : totalCount}
       />
     </NoticeWrap>
   );

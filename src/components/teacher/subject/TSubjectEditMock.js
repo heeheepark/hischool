@@ -78,7 +78,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
       <div>
         <IMREdit>
           <select
-            defaultValue={scoreList.mon}
+            defaultValue={scoreList.mon || ""}
             onChange={handleMonth}
             name="month"
           >
@@ -116,14 +116,14 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
           <input
             type="number"
             name="standardScore"
-            defaultValue={scoreList.standardScore}
+            defaultValue={scoreList.standardScore || ""}
             onChange={handleStandardScore}
             placeholder="점수"
           />
           <input
             type="number"
             name="rating"
-            value={scoreList.rating}
+            defaultValue={scoreList.rating || ""}
             onChange={handleRating}
             placeholder="등급"
             max={9}
@@ -131,7 +131,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
           <input
             type="number"
             name="percent"
-            value={scoreList.percent}
+            defaultValue={scoreList.percent || ""}
             onChange={handlePercentage}
             placeholder="백분위"
           />

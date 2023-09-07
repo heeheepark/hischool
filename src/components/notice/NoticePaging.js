@@ -2,17 +2,17 @@ import React from "react";
 import Pagination from "react-js-pagination";
 import { PaginationContainer } from "../../styles/notice/NoticeStyle";
 
-const NoticePaging = ({ page, setPage, totalpage, itemsPerPage }) => {
+const NoticePaging = ({ currentPage, setCurrentPage, totalCount }) => {
   return (
     <PaginationContainer>
       <Pagination
-        activePage={page}
-        itemsCountPerPage={itemsPerPage}
-        totalItemsCount={totalpage}
+        activePage={currentPage}
+        itemsCountPerPage={14}
+        totalItemsCount={totalCount}
         pageRangeDisplayed={5}
         prevPageText={"‹"}
         nextPageText={"›"}
-        onChange={setPage}
+        onChange={setCurrentPage}
       />
     </PaginationContainer>
   );
