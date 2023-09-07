@@ -1,12 +1,10 @@
 import { client } from "../login/client";
 
-export const getAttendData = async (userId, setPayload) => {
+export const getAttendData = async (userId, setAttendList) => {
   try {
-    console.log(userId);
     const res = await client.get(`/api/attendance?userId=${userId}`);
     const result = res.data;
-    console.log([result]);
-    setPayload([result]);
+    setAttendList(result);
   } catch (err) {
     console.log(err);
   }
