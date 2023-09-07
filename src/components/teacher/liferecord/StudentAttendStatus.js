@@ -10,7 +10,7 @@ import {
 import { AttendSaveModal } from "../../modal/teacherModal";
 
 const StudentAttendStatus = ({ userId }) => {
-  // const [attendList, setAttendList] = useState([]);
+  const [attendList, setAttendList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [acceptOk, setAcceptOk] = useState(false);
   const [payload, setPayload] = useState({
