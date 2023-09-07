@@ -290,7 +290,7 @@ export const RecordStatusDiv = styled.div`
     gap: 20px;
     margin-bottom: 10px;
     .school-record-wrap {
-      width: 100%;
+      width: 50%;
       span {
         display: block;
         font-size: 18px;
@@ -299,7 +299,7 @@ export const RecordStatusDiv = styled.div`
       }
     }
     .mock-record-wrap {
-      width: 100%;
+      width: 50%;
       span {
         display: block;
         font-size: 18px;

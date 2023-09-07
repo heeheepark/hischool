@@ -81,8 +81,12 @@ const StudentList = () => {
           <li className="list-title-th">이메일</li>
           <li className="list-title-th">승인취소</li>
         </ul>
+        {loading ? (
+          <div className="loading">
+            <Loading />
+          </div>
+        ) : null}
         <ul className="data-list">
-          {loading ? <Loading /> : null}
           {studentListData?.map((item, index) => (
             <li className="class" key={index}>
               <ul>

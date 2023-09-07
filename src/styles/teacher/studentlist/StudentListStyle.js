@@ -8,6 +8,7 @@ export const StudentListWrap = styled.div`
   box-shadow: 0px 0.5px 5px 0px rgba(0, 0, 0, 0.2);
   font-size: 20px;
 `;
+
 export const StudentListTitle = styled.div`
   display: flex;
   gap: 20px;
@@ -55,8 +56,12 @@ export const StudentListContent = styled.div`
       }
     }
   }
-  .data-list {
+  .loading {
     position: relative;
+    width: 100%;
+    height: 90%;
+  }
+  .data-list {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
