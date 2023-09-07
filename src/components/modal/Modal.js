@@ -11,7 +11,7 @@ import { useState } from "react";
 import { postEmailCodeConFirm } from "../../api/login/signUpAxios";
 import { postEmail } from "../../api/login/findPasswordAxios";
 
-// 회원가입, 마이페이지 모달
+// 회원가입, 마이페이지 주소 모달
 export const Modal = ({ isOpen, onRequestClose, children }) => {
   const handleTestClose = () => {
     onRequestClose();
