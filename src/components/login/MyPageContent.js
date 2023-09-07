@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DaumPost from "./DaumPost";
 import { useLocation, useNavigate } from "react-router";
-import {
-  deleteUser,
-  getUserData,
-  putMyPageData,
-} from "../../api/login/myPageAxios";
+import { getUserData, putMyPageData } from "../../api/login/myPageAxios";
 import {
   TcButtons,
   TcMyPageUserInfo,
@@ -39,7 +35,6 @@ const MyPageContent = () => {
     setErrPassword(isValid ? "" : "비밀번호를 확인 해주세요.");
   };
 
-
   const userRole = location.pathname.split("/")[1];
   // get axios 담는 함수
   useEffect(() => {
@@ -56,7 +51,11 @@ const MyPageContent = () => {
   };
 
   const handleChangeAddress = e => {
-    setHouseAddress(e.target.value);
+    const result = e.target.value;
+    setHouseAddress({
+      ...houseAddress,
+      address: result,
+    });
   };
 
   const handleCancel = () => {
@@ -135,10 +134,6 @@ const MyPageContent = () => {
   const handleImageUploadClick = () => {
     const realUpload = document.querySelector(".real-upload");
     realUpload.click();
-  };
-
-  const handleAdrressModal = () => {
-    setAddressModal(true);
   };
 
   return (
@@ -237,8 +232,8 @@ const MyPageContent = () => {
                         type="text"
                         required={true}
                         onChange={handleChangeAddress}
-                        onClick={handleAdrressModal}
-                        defaultValue={houseAddress.address || userData.address}
+                        onClick={() => setAddressModal(true)}
+                        value={houseAddress.address || userData.address}
                       />
                       {addressModal && (
                         <Modal
