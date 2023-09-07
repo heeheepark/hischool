@@ -43,8 +43,10 @@ export const getHopeUniversity = async (userId, setHopeUniv, setHopeDept) => {
   try {
     const res = await client.get(`/api/career/hope?userId=${parseInt(userId)}`);
     const result = res.data[0];
-    setHopeUniv(result.hopeUniv);
-    setHopeDept(result.hopeDept);
+    if (result) {
+      setHopeUniv(result.hopeUniv);
+      setHopeDept(result.hopeDept);
+    }
   } catch (err) {
     console.log(err);
   }

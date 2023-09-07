@@ -126,11 +126,7 @@ export const StudentHomeDiv = styled.div`
 `;
 
 export const RecordDiv = styled.div`
-  text {
-    width: 10px;
-    /* white-space: pre-wrap; */
-  }
-  height: 100%;
+  position: relative;
   .err-message {
     position: absolute;
     top: 50%;
@@ -138,7 +134,7 @@ export const RecordDiv = styled.div`
     transform: translate(-50%, -50%);
   }
   .chart {
-    position: relative;
+    /* position: relative; */
     width: 100%;
     height: 28.8vh;
     background: #fff;

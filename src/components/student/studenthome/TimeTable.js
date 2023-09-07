@@ -4,7 +4,6 @@ import { getTimeTable } from "../../../api/student/studentHomeAxios";
 
 const TimeTable = () => {
   const [timeTable, setTimeTable] = useState(null);
-  console.log(timeTable);
 
   useEffect(() => {
     getTimeTable(setTimeTable);

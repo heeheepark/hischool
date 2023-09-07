@@ -40,19 +40,6 @@ const RecapSchoolRecord = () => {
       return { id: subject[index], data };
     });
 
-  if (allSchoolRecordData) {
-    const text = document.querySelectorAll("text");
-    text.forEach(item => {
-      if (item.innerHTML.length > 6) {
-        const newText = item.innerHTML.split(" ");
-        if (newText.length > 1) {
-          item.innerHTML = `${newText[0].slice(2)} ${newText[1]}`;
-        }
-      }
-      return item.innerHTML;
-    });
-  }
-
   useState(() => {
     getAllSchoolRecord(setAllSchoolRecordData);
     getRecentSchoolRecord(setRecentSchoolRecordData, setRecentTestTitle);
