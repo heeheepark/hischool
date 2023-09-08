@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import {
+  getStudentList,
   getStudentMockRecord,
   getStudentSchoolRecord,
 } from "../../../api/teacher/studentRecordAxios";
@@ -76,7 +77,7 @@ const StudentRecord = () => {
       const allStudentList = document.querySelectorAll(".student-detail-list");
       allStudentList.forEach(item => item.classList.remove("active"));
     }
-    getStudentData(setStudentListData, searchText);
+    getStudentList(setStudentListData, searchText);
   }, [searchText]);
 
   // 갱신 시 학생 데이터 불러오기

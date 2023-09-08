@@ -1,15 +1,12 @@
 import { client } from "../login/client";
 
 // 학생관리 리스트
-export const getStudentData = async (setStudentListData, searchText) => {
+export const getStudentData = async setStudentListData => {
   try {
-    const res = await client.get(
-      `/api/teacher/student-list?name=${searchText}`,
-    );
+    const res = await client.get(`/api/teacher/signed`);
     const result = res.data;
-    console.log(result);
     const listSortData = result.sort((a, b) =>
-      a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1,
+      a.snm.toLowerCase() < b.snm.toLowerCase() ? -1 : 1,
     );
     setStudentListData(listSortData);
   } catch (err) {
