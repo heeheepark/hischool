@@ -85,7 +85,6 @@ const NoticeBoard = styled.div`
   .notice-list {
     position: relative;
     width: 100%;
-    height: 100%;
     > ul {
       width: 100%;
       display: grid;
