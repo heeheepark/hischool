@@ -8,8 +8,14 @@ import {
   NoticeWrap,
 } from "../../styles/notice/NoticeStyle";
 import { getNoticeData, patchNoticeHit } from "../../api/notice/noticeAxios";
+import { client } from "../../api/login/client";
+import { finishLoading, startLoading } from "../../reducers/loadingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../components/Loading";
 
 const NoticeDetail = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.loading);
   const { noticeId } = useParams();
   const [notice, setNotice] = useState(null);
   const navigate = useNavigate();
@@ -18,9 +24,17 @@ const NoticeDetail = () => {
 
   useEffect(() => {
     patchNoticeHit(noticeId);
+    client.interceptors.request.use(function (config) {
+      dispatch(startLoading({}));
+      return config;
+    });
+    client.interceptors.response.use(config => {
+      dispatch(finishLoading({}));
+      return config;
+    });
     async function fetchNotice() {
       try {
-        const fetchedNotice = await getNoticeData(noticeId); 
+        const fetchedNotice = await getNoticeData(noticeId);
         setNotice(fetchedNotice);
       } catch (error) {
         console.error("Error fetching notice:", error);
@@ -31,7 +45,15 @@ const NoticeDetail = () => {
   }, [noticeId]);
 
   if (notice === null) {
-    return <div>로딩 중...</div>;
+    return (
+      <div>
+        {loading ? (
+          <div className="loading">
+            <Loading />
+          </div>
+        ) : null}
+      </div>
+    );
   }
 
   if (!notice) {
