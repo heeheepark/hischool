@@ -32,13 +32,11 @@ client.interceptors.response.use(
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
     if (response.status === 401 && refreshToken) {
-      console.log(response.status);
       try {
         const { data } = await client.post(`/api/refresh-token`, {
           refreshToken,
         });
         const accessToken = data;
-        console.log(accessToken);
 
         setCookie("accessToken", accessToken);
         config.headers.Authorization = `Bearer ${accessToken}`;

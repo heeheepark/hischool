@@ -110,7 +110,6 @@ const StudentRecord = () => {
 
   return (
     <>
-      {/* {loading ? <Loading /> : null} */}
       <StudentRecordDiv>
         {confirmModal && (
           <RecordConfirmModal setConfirmModal={setConfirmModal} />

@@ -91,7 +91,6 @@ export const deleteStudentMockRecord = async resultId => {
 export const patchRecordConfirm = async payload => {
   try {
     const res = await client.patch(`/api/teacher/rank`, payload);
-    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
