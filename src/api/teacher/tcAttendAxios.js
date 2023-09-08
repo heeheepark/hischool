@@ -1,10 +1,12 @@
 import { client } from "../login/client";
 
-export const getAttendData = async (userId, setAttendList) => {
+export const getAttendData = async (userId, setPayload) => {
   try {
+    console.log(userId);
     const res = await client.get(`/api/attendance?userId=${userId}`);
     const result = res.data;
-    setAttendList(result);
+    setPayload(result);
+    console.log(result);
   } catch (err) {
     console.log(err);
   }
@@ -13,6 +15,15 @@ export const getAttendData = async (userId, setAttendList) => {
 export const putAttendData = async payload => {
   try {
     const res = await client.put(`/api/attendance`, payload);
+    console.log(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const postAttendData = async () => {
+  try {
+    const res = await client.post(`/api/attendance`);
     console.log(res.data);
   } catch (err) {
     console.log(err);
