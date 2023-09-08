@@ -29,6 +29,7 @@ const StudentRecord = () => {
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
@@ -71,8 +72,12 @@ const StudentRecord = () => {
 
   // 초기 데이터 불러오기
   useEffect(() => {
-    getStudentData(setStudentListData);
-  }, []);
+    if (searchText) {
+      const allStudentList = document.querySelectorAll(".student-detail-list");
+      allStudentList.forEach(item => item.classList.remove("active"));
+    }
+    getStudentData(setStudentListData, searchText);
+  }, [searchText]);
 
   // 갱신 시 학생 데이터 불러오기
   useEffect(() => {
@@ -118,6 +123,7 @@ const StudentRecord = () => {
             studentListData={studentListData}
             setSelectedId={setSelectedId}
             handleStudentRecordData={handleStudentRecordData}
+            setSearchText={setSearchText}
           />
           <div className="record-wrap">
             <div className="school-record-wrap">
