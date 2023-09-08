@@ -208,7 +208,7 @@ export const SchoolRecordFilterDiv = styled.div`
       margin-right: 5px;
     }
   }
-  button {
+  a {
     width: 30px;
     height: 30px;
     background: transparent;

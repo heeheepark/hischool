@@ -51,14 +51,22 @@ export const getAllMockRecord = async (
   }
 };
 
-// excel 파일 다운로드
-export const getMockExcelFile = async (year, month) => {
-  try {
-    console.log(year, month);
-    const res = await client.get(`/test/mock-result?year=${year}&mon=${month}`);
-    const result = res.data;
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// // excel 파일 다운로드
+// export const getMockExcelFile = async (year, month) => {
+//   try {
+//     console.log(year, month);
+//     const res = await client.get(
+//       `/api/student/mock-download?year=${year}&mon=${month}`,
+//       {
+//         responseType: "blob",
+//       },
+//     );
+//     const blob = new Blob([data], {
+//       type: headers["content-type"],
+//     });
+//     const result = res.data;
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };

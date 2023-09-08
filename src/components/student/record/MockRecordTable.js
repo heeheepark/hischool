@@ -6,6 +6,8 @@ import {
   getMockExcelFile,
 } from "../../../api/student/mockRecordAxios";
 import excelImg from "../../../assets/excel.png";
+import { client } from "../../../api/login/client";
+import { Link } from "react-router-dom";
 
 const MockRecordTable = () => {
   const scrollRef = useRef(null);
@@ -33,9 +35,29 @@ const MockRecordTable = () => {
     setMonth(selectMonth);
   };
 
-  const handleExcel = () => {
-    console.log("누름");
-    getMockExcelFile(year, month);
+  const handleExcel = async () => {
+    let axiosUrl;
+    if (!year && !month) {
+      axiosUrl = `/api/student/mock-download`;
+    } else if (!year && month) {
+      axiosUrl = `/api/student/mock-download?mon=${month}`;
+    } else if (year && !month) {
+      axiosUrl = `/api/student/mock-download?year=${year}`;
+    } else {
+      axiosUrl = `/api/student/mock-download?year=${year}&mon=${month}`;
+    }
+    const { data, headers } = await client.get(axiosUrl, {
+      responseType: "blob",
+    });
+    const blob = new Blob([data], {
+      type: headers["content-type"],
+    });
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = `모의고사 성적 현황`;
+    link.click();
+    URL.revokeObjectURL(blobUrl);
   };
 
   const yearList = defaultMockRecord => {
@@ -84,9 +106,9 @@ const MockRecordTable = () => {
               </option>
             ))}
           </select>
-          <button onClick={handleExcel}>
+          <Link onClick={handleExcel}>
             <img src={excelImg} alt="엑셀이미지" className="excel-icon" />
-          </button>
+          </Link>
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">

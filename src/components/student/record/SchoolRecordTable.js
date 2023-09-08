@@ -12,6 +12,8 @@ import {
   getSchoolExcelFile,
 } from "../../../api/student/schoolRecordAxios";
 import excelImg from "../../../assets/excel.png";
+import { Link } from "react-router-dom";
+import { client } from "../../../api/login/client";
 
 const SchoolRecordTable = () => {
   const scrollRef = useRef(null);
@@ -49,11 +51,34 @@ const SchoolRecordTable = () => {
     setTestType(selectTestType);
   };
 
-  const handleExcel = () => {
-    console.log("누름");
-    getSchoolExcelFile(year, semester, testType);
+  const handleExcel = async () => {
+    let axiosUrl;
+    if (!year && !semester && !testType) {
+      axiosUrl = `/api/student/aca-download`;
+    } else if (!year && !semester && testType) {
+      axiosUrl = `/api/student/aca-download?midFinal=${testType}`;
+    } else if (!year && semester && testType) {
+      axiosUrl = `/api/student/aca-download?semester=${semester}&midFinal=${testType}`;
+    } else if (year && !semester && !testType) {
+      axiosUrl = `/api/student/aca-download?year=${year}`;
+    } else if (year && !semester && testType) {
+      axiosUrl = `/api/student/aca-download?year=${year}&midFinal=${testType}`;
+    } else {
+      axiosUrl = `/api/student/aca-download?year=${year}&semester=${semester}&midFinal=${testType}`;
+    }
+    const { data, headers } = await client.get(axiosUrl, {
+      responseType: "blob",
+    });
+    const blob = new Blob([data], {
+      type: headers["content-type"],
+    });
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = `내신 성적 현황`;
+    link.click();
+    URL.revokeObjectURL(blobUrl);
   };
-
   const yearList = defaultSchoolRecord => {
     const years = new Set();
     defaultSchoolRecord?.forEach(item => years.add(item.year));
@@ -127,9 +152,9 @@ const SchoolRecordTable = () => {
               </option>
             ))}
           </select>
-          <button onClick={handleExcel}>
+          <Link onClick={handleExcel}>
             <img src={excelImg} alt="엑셀이미지" className="excel-icon" />
-          </button>
+          </Link>
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">
