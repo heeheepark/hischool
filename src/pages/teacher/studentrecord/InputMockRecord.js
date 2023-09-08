@@ -44,6 +44,13 @@ const InputMockRecord = () => {
       window.alert("월을 선택하세요.");
       return;
     }
+    const isSubSubjectNotSelected = studentsData.some(
+      item => item.subjectid === 0,
+    );
+    if (isSubSubjectNotSelected) {
+      window.alert("세부 과목을 선택하세요.");
+      return;
+    }
     studentsData?.map(item => {
       const postDataList = {
         userid: item.userid,
