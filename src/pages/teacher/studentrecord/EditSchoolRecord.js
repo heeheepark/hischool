@@ -33,7 +33,7 @@ const EditSchoolRecord = () => {
         };
         patchSchoolData(postDataList);
       });
-      navigate(-1);
+      navigate("/teacher/record", { state: state[0] });
     }
   };
 

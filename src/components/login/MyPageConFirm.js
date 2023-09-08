@@ -5,10 +5,12 @@ const MyPageConFirm = ({ handlePasswordConFirm }) => {
   const [pass, setPass] = useState("");
 
   const handlePasswordChange = event => {
+    event.preventDefault();
     setPass(event.target.value);
   };
 
-  const handlePasswordSubmit = () => {
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
     handlePasswordConFirm(pass);
   };
 
@@ -27,9 +29,10 @@ const MyPageConFirm = ({ handlePasswordConFirm }) => {
             value={pass}
             onChange={handlePasswordChange}
             autoComplete="off"
+            autoFocus
           />
-        </form>
-        <button onClick={handlePasswordSubmit}>확인</button>
+        <button onClick={e => handlePasswordSubmit(e)}>확인</button>
+      </form>
       </div>
     </MyPageConFirmDiv>
   );
