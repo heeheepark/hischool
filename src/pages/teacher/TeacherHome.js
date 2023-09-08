@@ -25,8 +25,6 @@ import { finishLoading, startLoading } from "../../reducers/loadingSlice";
 import Loading from "../../components/Loading";
 
 const TeacherHome = () => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
   const [mainNotice, setMainNotice] = useState("");
   const [studentCount, setStudentCount] = useState(null);
   const [unSignCount, setUnSignCount] = useState(null);
@@ -69,16 +67,6 @@ const TeacherHome = () => {
   };
 
   useEffect(() => {
-    // 로딩 호출
-    client.interceptors.request.use(function (config) {
-      dispatch(startLoading({}));
-      return config;
-    });
-    // 로딩 완료
-    client.interceptors.response.use(config => {
-      dispatch(finishLoading({}));
-      return config;
-    });
     getStudentCount(setStudentCount);
     getUnSignCount(setUnSignCount);
     getSchedule(setScheduleData, startDate, endDate);
@@ -91,7 +79,6 @@ const TeacherHome = () => {
 
   return (
     <>
-      {loading ? <Loading /> : null}
       <TeacherHomeDiv>
         <div className="student-count">
           <div className="class-status-wrap">

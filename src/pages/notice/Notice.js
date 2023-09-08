@@ -109,8 +109,12 @@ const Notice = () => {
           <li className="table-creationdate">등록일</li>
           <li className="table-views">조회수</li>
         </ul>
+        {loading ? (
+          <div className="loading">
+            <Loading />
+          </div>
+        ) : null}
         <div className="notice-list">
-          {loading ? <Loading /> : null}
           {searchedNotice.length > 0 ? (
             <>
               {last4Importantsearch.map(notice => (
@@ -128,7 +132,7 @@ const Notice = () => {
                   <li>{notice.hits}</li>
                 </ul>
               ))}
-              {combinedNoticesSearch.map((notice) => (
+              {combinedNoticesSearch.map(notice => (
                 <ul key={notice.noticeId}>
                   <li>{notice.noticeId}</li>
                   <li>
@@ -159,7 +163,7 @@ const Notice = () => {
                   <li>{notice.hits}</li>
                 </ul>
               ))}
-              {combinedNotices.map((notice) => (
+              {combinedNotices.map(notice => (
                 <ul key={notice.noticeId}>
                   <li>{notice.noticeId}</li>
                   <li>

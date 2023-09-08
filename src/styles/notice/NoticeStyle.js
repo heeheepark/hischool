@@ -82,8 +82,12 @@ const NoticeBoard = styled.div`
     line-height: 4vh;
     padding: 0 20px 0 5px;
   }
-  .notice-list {
+  .loading {
     position: relative;
+    width: 100%;
+    height: 90%;
+  }
+  .notice-list {
     width: 100%;
     > ul {
       width: 100%;
