@@ -7,7 +7,11 @@ import {
   getAllStudentCount,
   getStudentCount,
 } from "../../../api/teacher/teacherHomeAxios";
-import { getAllSchoolRecord } from "../../../api/student/schoolRecordAxios";
+import {
+  getAllSchoolRecord,
+  getSchoolExcelFile,
+} from "../../../api/student/schoolRecordAxios";
+import excelImg from "../../../assets/excel.png";
 
 const SchoolRecordTable = () => {
   const scrollRef = useRef(null);
@@ -43,6 +47,11 @@ const SchoolRecordTable = () => {
   const handleTestTypeList = e => {
     const selectTestType = e.target.value;
     setTestType(selectTestType);
+  };
+
+  const handleExcel = () => {
+    console.log("누름");
+    getSchoolExcelFile(year, semester, testType);
   };
 
   const yearList = defaultSchoolRecord => {
@@ -118,6 +127,9 @@ const SchoolRecordTable = () => {
               </option>
             ))}
           </select>
+          <button onClick={handleExcel}>
+            <img src={excelImg} alt="엑셀이미지" className="excel-icon" />
+          </button>
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">

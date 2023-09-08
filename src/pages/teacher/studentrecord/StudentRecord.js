@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import {
+  getStudentList,
   getStudentMockRecord,
   getStudentSchoolRecord,
 } from "../../../api/teacher/studentRecordAxios";
@@ -12,14 +13,8 @@ import SchoolRecordList from "../../../components/teacher/studentrecord/SchoolRe
 import MockRecordHeader from "../../../components/teacher/studentrecord/MockRecordHeader";
 import MockRecordList from "../../../components/teacher/studentrecord/MockRecordList";
 import { RecordConfirmModal } from "../../../components/modal/teacherModal";
-import Loading from "../../../components/Loading";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const StudentRecord = () => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
   const { state } = useLocation();
   const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);
@@ -35,6 +30,7 @@ const StudentRecord = () => {
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   // 선택한 학생 데이터 불러오기
   const handleStudentRecordData = (
@@ -77,8 +73,12 @@ const StudentRecord = () => {
 
   // 초기 데이터 불러오기
   useEffect(() => {
-    getStudentData(setStudentListData);
-  }, []);
+    if (searchText) {
+      const allStudentList = document.querySelectorAll(".student-detail-list");
+      allStudentList.forEach(item => item.classList.remove("active"));
+    }
+    getStudentList(setStudentListData, searchText);
+  }, [searchText]);
 
   // 갱신 시 학생 데이터 불러오기
   useEffect(() => {
@@ -110,7 +110,6 @@ const StudentRecord = () => {
 
   return (
     <>
-      {/* {loading ? <Loading /> : null} */}
       <StudentRecordDiv>
         {confirmModal && (
           <RecordConfirmModal setConfirmModal={setConfirmModal} />
@@ -125,6 +124,7 @@ const StudentRecord = () => {
             studentListData={studentListData}
             setSelectedId={setSelectedId}
             handleStudentRecordData={handleStudentRecordData}
+            setSearchText={setSearchText}
           />
           <div className="record-wrap">
             <div className="school-record-wrap">

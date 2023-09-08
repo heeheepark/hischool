@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StudentListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
 
 const SearchStudent = ({
@@ -6,8 +6,10 @@ const SearchStudent = ({
   studentListData,
   setSelectedId,
   handleStudentRecordData,
+  setSearchText,
 }) => {
   const category = ["이름", "생년월일"];
+  const [inputName, setInputName] = useState("");
 
   // 학생 선택
   const handleStudentList = e => {
@@ -18,6 +20,11 @@ const SearchStudent = ({
     const studentId = parseInt(clickList.classList[0].slice(10));
     setSelectedId(studentId);
     handleStudentRecordData(studentId);
+  };
+
+  const handleSearchBtn = e => {
+    e.preventDefault();
+    setSearchText(inputName);
   };
 
   // 성적 수정 후, 기존에 선택된 학생의 데이터 출력
@@ -39,8 +46,10 @@ const SearchStudent = ({
           type="text"
           id="student-name"
           placeholder="학생 이름을 입력하세요."
+          value={inputName}
+          onChange={e => setInputName(e.target.value)}
         />
-        <button>검색</button>
+        <button onClick={e => handleSearchBtn(e)}>검색</button>
       </form>
       <div className="student-list">
         <StudentListDiv>
@@ -52,24 +61,31 @@ const SearchStudent = ({
             ))}
           </ul>
           <ul className="list-wrap">
-            {studentListData?.map((item, index) => (
-              <li
-                className={
-                  selectId
-                    ? `studentNum${item.userId} student-detail-list`
-                    : index === 0
-                    ? `studentNum${item.userId} student-detail-list active`
-                    : `studentNum${item.userId} student-detail-list`
-                }
-                onClick={e => handleStudentList(e)}
-                key={item.userId}
-              >
-                <ul>
-                  <li>{item.snm}</li>
-                  <li>{item.birth}</li>
-                </ul>
-              </li>
-            ))}
+            {studentListData?.length > 0 ? (
+              studentListData?.map((item, index) => (
+                <li
+                  className={
+                    selectId
+                      ? `studentNum${item.userId} student-detail-list`
+                      : index === 0
+                      ? `studentNum${item.userId} student-detail-list active`
+                      : `studentNum${item.userId} student-detail-list`
+                  }
+                  onClick={e => handleStudentList(e)}
+                  key={item.userId}
+                >
+                  <ul>
+                    <li>{item.name}</li>
+                    <li>{item.birth}</li>
+                  </ul>
+                </li>
+              ))
+            ) : (
+              <p className="err-message">
+                학생 목록이
+                <br /> 없습니다.
+              </p>
+            )}
           </ul>
         </StudentListDiv>
       </div>

@@ -59,7 +59,7 @@ export const StudentListContent = styled.div`
   .loading {
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 100%;
   }
   .data-list {
     width: 100%;

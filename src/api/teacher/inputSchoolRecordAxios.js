@@ -3,13 +3,13 @@ import { client } from "../login/client";
 // 서버로 postSchoolData 데이터 전송
 export const postSchoolData = async postDataList => {
   try {
-    console.log("postDataList", postDataList);
     const response = await client.post("/api/teacher/aca-result", postDataList);
-    console.log("response", response);
   } catch (error) {
     console.error("데이터 전송 오류:", error);
     if (error.response && error.response.status === 500) {
-      alert("서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.");
+      alert(
+        "서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.",
+      );
     }
   }
 };
@@ -20,7 +20,9 @@ export const patchSchoolData = async dataToSend => {
   } catch (error) {
     console.error("데이터 전송 오류:", error);
     if (error.response && error.response.status === 500) {
-      alert("서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.");
+      alert(
+        "서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.",
+      );
     }
   }
 };

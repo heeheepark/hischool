@@ -194,6 +194,14 @@ export const StudentListDiv = styled.div`
     li.active {
       background: #ddd;
     }
+    .err-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 15px;
+      line-height: 1.5;
+    }
   }
 `;
 

@@ -76,7 +76,6 @@ const MockRecordList = ({
         <li className="category-th">백분위</li>
       </ul>
       <ul className="record-data">
-        {/* {loading ? <Loading /> : null} */}
         {studentMockRecordList?.length > 0 ? (
           studentMockRecordList.map((item, index) => (
             <li className="data-table" key={index}>

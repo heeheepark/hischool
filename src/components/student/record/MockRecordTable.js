@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { SchoolRecordFilterDiv } from "../../../styles/student/record/SchoolRecordStyle";
 import { MockRecordTableDiv } from "../../../styles/student/record/MockRecordStyle";
-import { getAllMockRecord } from "../../../api/student/mockRecordAxios";
+import {
+  getAllMockRecord,
+  getMockExcelFile,
+} from "../../../api/student/mockRecordAxios";
+import excelImg from "../../../assets/excel.png";
 
 const MockRecordTable = () => {
   const scrollRef = useRef(null);
@@ -27,6 +31,11 @@ const MockRecordTable = () => {
   const handleMonthList = e => {
     const selectMonth = e.target.value;
     setMonth(selectMonth);
+  };
+
+  const handleExcel = () => {
+    console.log("누름");
+    getMockExcelFile(year, month);
   };
 
   const yearList = defaultMockRecord => {
@@ -75,6 +84,9 @@ const MockRecordTable = () => {
               </option>
             ))}
           </select>
+          <button onClick={handleExcel}>
+            <img src={excelImg} alt="엑셀이미지" className="excel-icon" />
+          </button>
         </SchoolRecordFilterDiv>
       </div>
       <div className="record-table">

@@ -73,7 +73,6 @@ const InputSchoolRecord = () => {
           score: parseInt(item.score),
         })),
       };
-      console.log("postDataList", postDataList);
       postSchoolData(postDataList);
       navigate("/teacher/record", { state: state });
     }

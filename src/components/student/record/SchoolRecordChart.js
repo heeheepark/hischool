@@ -73,7 +73,6 @@ const SchoolRecordChart = () => {
                     symbolShape: "circle",
                   },
                 ]}
-                // isInteractive={true}
               />
             ) : null}
           </div>

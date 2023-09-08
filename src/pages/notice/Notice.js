@@ -106,8 +106,12 @@ const Notice = () => {
           <li className="table-creationdate">등록일</li>
           <li className="table-views">조회수</li>
         </ul>
+        {loading ? (
+          <div className="loading">
+            <Loading />
+          </div>
+        ) : null}
         <div className="notice-list">
-          {loading ? <Loading /> : null}
           {searchedNotice.length > 0 ? (
             <>
               {lastImportantsearch.map(notice => (

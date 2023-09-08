@@ -265,9 +265,6 @@ export const CareerRecordSaveModal = ({
 
 // 성적확정 처리 모달
 export const RecordConfirmModal = ({ setConfirmModal }) => {
-  const today = new Date();
-  const todayYear = today.getFullYear();
-  // const [classList, setClassList] = useState("");
   const [payload, setPayload] = useState({
     semester: 0,
     midFinal: 0,
@@ -331,11 +328,7 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
 };
 
 // 생활기록부(출결현황) 저장
-export const AttendSaveModal = ({
-  modalOpen,
-  setModalOpen,
-  setAcceptOk,
-}) => {
+export const AttendSaveModal = ({ modalOpen, setModalOpen, setAcceptOk }) => {
   const handleOk = () => {
     setAcceptOk(true);
     setModalOpen(false);
