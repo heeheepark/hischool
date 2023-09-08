@@ -50,3 +50,15 @@ export const getAllMockRecord = async (
     console.log(err);
   }
 };
+
+// excel 파일 다운로드
+export const getMockExcelFile = async (year, month) => {
+  try {
+    console.log(year, month);
+    const res = await client.get(`/test/mock-result?year=${year}&mon=${month}`);
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};

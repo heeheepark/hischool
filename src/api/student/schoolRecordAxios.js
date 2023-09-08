@@ -61,3 +61,15 @@ export const getAllSchoolRecord = async (
     console.log(err);
   }
 };
+
+// excel 파일 다운로드
+export const getSchoolExcelFile = async (year, semester, testType) => {
+  try {
+    console.log(year, semester, testType);
+    const res = await client.get(`/test/aca-result`);
+    const result = res.data;
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};

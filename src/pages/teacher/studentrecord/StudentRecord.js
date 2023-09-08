@@ -12,14 +12,8 @@ import SchoolRecordList from "../../../components/teacher/studentrecord/SchoolRe
 import MockRecordHeader from "../../../components/teacher/studentrecord/MockRecordHeader";
 import MockRecordList from "../../../components/teacher/studentrecord/MockRecordList";
 import { RecordConfirmModal } from "../../../components/modal/teacherModal";
-import Loading from "../../../components/Loading";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 const StudentRecord = () => {
-  const { loading } = useSelector(state => state.loading);
-  const dispatch = useDispatch();
   const { state } = useLocation();
   const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [defaultMockRecord, setDefaultMockRecord] = useState(null);

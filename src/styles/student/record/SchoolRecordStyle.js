@@ -195,7 +195,9 @@ export const SchoolRecordTableDiv = styled.div`
 `;
 
 export const SchoolRecordFilterDiv = styled.div`
-  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   select {
     border: 1px solid #bbb;
     border-radius: 3px;
@@ -204,6 +206,18 @@ export const SchoolRecordFilterDiv = styled.div`
     text-align: center;
     :not(:last-of-type) {
       margin-right: 5px;
+    }
+  }
+  button {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    .excel-icon {
+      width: 100%;
+      height: 100%;
+      margin-left: 5px;
     }
   }
 `;
