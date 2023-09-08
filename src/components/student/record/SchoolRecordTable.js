@@ -4,12 +4,7 @@ import {
   SchoolRecordTableDiv,
 } from "../../../styles/student/record/SchoolRecordStyle";
 import {
-  getAllStudentCount,
-  getStudentCount,
-} from "../../../api/teacher/teacherHomeAxios";
-import {
   getAllSchoolRecord,
-  getSchoolExcelFile,
 } from "../../../api/student/schoolRecordAxios";
 import excelImg from "../../../assets/excel.png";
 import { Link } from "react-router-dom";
@@ -30,8 +25,6 @@ const SchoolRecordTable = () => {
   ];
   const [defaultSchoolRecord, setDefaultSchoolRecord] = useState(null);
   const [allSchoolRecord, setAllSchoolRecord] = useState(null);
-  const [allStudentCount, setAllStudentCount] = useState(null);
-  const [studentCount, setStudentCount] = useState(null);
   const [year, setYear] = useState(null);
   const [semester, setSemester] = useState(null);
   const [testType, setTestType] = useState(null);
@@ -111,8 +104,6 @@ const SchoolRecordTable = () => {
       semester,
       testType,
     );
-    getStudentCount(setStudentCount);
-    getAllStudentCount(setAllStudentCount);
   }, [year, semester, testType]);
 
   return (
@@ -179,9 +170,9 @@ const SchoolRecordTable = () => {
                     <li>{item.score}</li>
                     <li>{item.rating}</li>
                     <li>{`${item.classRank}/${
-                      studentCount ? studentCount : null
+                      item.vanCnt
                     }`}</li>
-                    <li>{`${item.wholeRank}/${allStudentCount}`}</li>
+                    <li>{`${item.wholeRank}/${item.wholeCnt}`}</li>
                   </ul>
                 </li>
               ))

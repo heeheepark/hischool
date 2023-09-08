@@ -3,10 +3,6 @@ import {
   SchoolRecordFilterDiv,
   SchoolRecordTableDiv,
 } from "../../../styles/student/record/SchoolRecordStyle";
-import {
-  getAllStudentCount,
-  getStudentCount,
-} from "../../../api/teacher/teacherHomeAxios";
 import { getStudentSchoolRecord } from "../../../api/teacher/studentRecordAxios";
 import { client } from "../../../api/login/client";
 import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
@@ -90,8 +86,6 @@ const TSchoolRecordTable = ({ userId }) => {
         testType,
       );
     }
-    getStudentCount(setStudentCount);
-    getAllStudentCount(setAllStudentCount);
     // 로딩 호출
     client.interceptors.request.use(function (config) {
       dispatch(startLoading({}));
@@ -169,9 +163,9 @@ const TSchoolRecordTable = ({ userId }) => {
                     <li>{item.score}</li>
                     <li>{item.rating}</li>
                     <li>{`${item.classRank}/${
-                      studentCount ? studentCount : null
+                      item.vanCnt
                     }`}</li>
-                    <li>{`${item.wholeRank}/${allStudentCount}`}</li>
+                    <li>{`${item.wholeRank}/${item.wholeCnt}`}</li>
                   </ul>
                 </li>
               ))

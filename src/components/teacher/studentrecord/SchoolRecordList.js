@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { SchoolRecordListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
-import {
-  getAllStudentCount,
-  getStudentCount,
-} from "../../../api/teacher/teacherHomeAxios";
 
 const SchoolRecordList = ({
   studentSchoolRecordList,
@@ -46,12 +42,6 @@ const SchoolRecordList = ({
     }
     setSchoolResultIdList(resultIdArray);
   };
-
-  // 학급 정원, 전교생 수 불러오기
-  useEffect(() => {
-    getAllStudentCount(setAllStudentCount);
-    getStudentCount(setStudentCount);
-  }, []);
 
   // 학생 선택 변경 시
   useEffect(() => {
@@ -112,10 +102,10 @@ const SchoolRecordList = ({
                 <li>{item.score}</li>
                 <li>{item.rating}</li>
                 <li>
-                  {item.classRank}/{studentCount}
+                  {item.classRank}/{item.vanCnt}
                 </li>
                 <li>
-                  {item.wholeRank}/{allStudentCount}
+                  {item.wholeRank}/{item.wholeCnt}
                 </li>
               </ul>
             </li>

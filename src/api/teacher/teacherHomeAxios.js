@@ -1,16 +1,5 @@
 import { client } from "../login/client";
 
-// 전교 학생 인원
-export const getAllStudentCount = async setAllStudentCount => {
-  try {
-    const res = await client.get(`/api/subject/school-snum`);
-    const result = res.data;
-    setAllStudentCount(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 // 학급 총원
 export const getStudentCount = async setStudentCount => {
   try {
