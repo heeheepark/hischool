@@ -13,8 +13,11 @@ import {
 } from "../../api/student/mockRecordAxios";
 import { getAllMockRecord } from "../../api/student/studentHomeAxios";
 import MockRecordTable from "../../components/student/record/MockRecordTable";
+import { MiniLoading } from "../../components/Loading";
+import { client } from "../../api/login/client";
 
 const MockRecord = () => {
+  const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState(null);
   const [highestMockRecord, setHighestMockRecord] = useState(null);
   const [currentMockRecord, setCurrentMockRecord] = useState(null);
@@ -42,6 +45,18 @@ const MockRecord = () => {
     });
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(config => {
+      if (config.url.includes("mock-graph")) {
+        setLoading(true);
+      }
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      setLoading(false);
+      return config;
+    });
     getUserInfo(null, setUserName, null);
     getHighestMockRecord(setHighestMockRecord);
     getCurrentMockRecord(setCurrentMockRecord);
@@ -54,6 +69,7 @@ const MockRecord = () => {
         <h3>모의고사 성적 관리</h3>
         <ChartWrap>
           <div className="chart">
+            {loading ? <MiniLoading /> : null}
             {allMockRecordData ? (
               <ResponsiveLine
                 data={newMockRecordData}
@@ -96,6 +112,7 @@ const MockRecord = () => {
             )}
           </div>
           <div className="record-text">
+            {loading ? <MiniLoading /> : null}
             <p>
               <span className="user-name">{userName}</span>
               <span>님의</span>

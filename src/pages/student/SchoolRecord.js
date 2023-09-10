@@ -13,8 +13,11 @@ import {
 } from "../../api/student/schoolRecordAxios";
 import { getAllSchoolRecord } from "../../api/student/studentHomeAxios";
 import SchoolRecordTable from "../../components/student/record/SchoolRecordTable";
+import { MiniLoading } from "../../components/Loading";
+import { client } from "../../api/login/client";
 
 const SchoolRecord = () => {
+  const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState(null);
   const [highestSchoolRecord, setHighestSchoolRecord] = useState(null);
   const [currentSchoolRecord, setCurrentSchoolRecord] = useState(null);
@@ -42,6 +45,18 @@ const SchoolRecord = () => {
     });
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(config => {
+      if (config.url.includes("aca-graph")) {
+        setLoading(true);
+      }
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      setLoading(false);
+      return config;
+    });
     getUserInfo(null, setUserName, null);
     getHighestSchoolRecord(setHighestSchoolRecord);
     getCurrentSchoolRecord(setCurrentSchoolRecord);
@@ -53,6 +68,7 @@ const SchoolRecord = () => {
       <h3>내신 성적 관리</h3>
       <ChartWrap>
         <div className="chart">
+          {loading ? <MiniLoading /> : null}
           {allSchoolRecordData ? (
             <ResponsiveLine
               data={newSchoolRecordData}
@@ -95,6 +111,7 @@ const SchoolRecord = () => {
           )}
         </div>
         <div className="record-text">
+          {loading ? <MiniLoading /> : null}
           <p>
             <span className="user-name">{userName}</span>
             <span>님의</span>

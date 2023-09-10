@@ -11,7 +11,7 @@ import {
   postStudentCareerList,
 } from "../../../api/teacher/studentLifeRecordAxios";
 import { CareerRecordSaveModal } from "../../modal/teacherModal";
-import Loading from "../../Loading";
+import { Loading } from "../../Loading";
 import { client } from "../../../api/login/client";
 import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";

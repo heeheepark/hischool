@@ -1,9 +1,5 @@
 import { useEffect, useRef } from "react";
 import { MockRecordListDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
-import { useDispatch, useSelector } from "react-redux";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import Loading from "../../Loading";
 
 const MockRecordList = ({
   studentMockRecordList,

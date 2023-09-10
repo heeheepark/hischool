@@ -11,7 +11,7 @@ import { getNoticeList, searchNotice } from "../../api/notice/noticeAxios";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../api/login/client";
 import { finishLoading, startLoading } from "../../reducers/loadingSlice";
-import Loading from "../../components/Loading";
+import { Loading } from "../../components/Loading";
 
 const Notice = () => {
   const { loading } = useSelector(state => state.loading);
@@ -36,7 +36,7 @@ const Notice = () => {
   const lastImportantsearch = importantsearch
     .slice(-importantsearch.length)
     .sort((a, b) => b.noticeId - a.noticeId);
-  
+
   const totalItemsCount = totalCount - lastImportant.length;
 
   const handleChange = e => {
@@ -106,12 +106,8 @@ const Notice = () => {
           <li className="table-creationdate">등록일</li>
           <li className="table-views">조회수</li>
         </ul>
-        {loading ? (
-          <div className="loading">
-            <Loading />
-          </div>
-        ) : null}
         <div className="notice-list">
+          {loading ? <Loading /> : null}
           {searchedNotice.length > 0 ? (
             <>
               {lastImportantsearch.map(notice => (

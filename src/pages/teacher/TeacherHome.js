@@ -19,10 +19,6 @@ import {
 import ClassSchoolRecord from "../../components/teacher/teacherhome/ClassSchoolRecord";
 import ClassMockRecord from "../../components/teacher/teacherhome/ClassMockRecord";
 import TeacherTimeTable from "../../components/teacher/teacherhome/TeacherTimeTable";
-import { useDispatch, useSelector } from "react-redux";
-import { client } from "../../api/login/client";
-import { finishLoading, startLoading } from "../../reducers/loadingSlice";
-import Loading from "../../components/Loading";
 
 const TeacherHome = () => {
   const [mainNotice, setMainNotice] = useState("");

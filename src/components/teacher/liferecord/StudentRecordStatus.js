@@ -7,7 +7,7 @@ import TSchoolRecordChart from "./TSchoolRecordChart";
 import TMockRecordChart from "./TMockRecordChart";
 import TSchoolRecordTable from "./TSchoolRecordTable";
 import TMockRecordTable from "./TMockRecordTable";
-import Loading from "../../Loading";
+import { Loading } from "../../Loading";
 import { useSelector } from "react-redux";
 
 const StudentRecordStatus = ({ userId }) => {

@@ -62,7 +62,7 @@ const NoticeInput = styled.div`
 `;
 const NoticeBoard = styled.div`
   width: 100%;
-  position: relative;
+  /* position: relative; */
   height: 71vh;
   text-align: center;
   border: 1px solid #ccc;
@@ -82,13 +82,10 @@ const NoticeBoard = styled.div`
     line-height: 4vh;
     padding: 0 20px 0 5px;
   }
-  .loading {
+  .notice-list {
     position: relative;
     width: 100%;
-    height: 90%;
-  }
-  .notice-list {
-    width: 100%;
+    height: calc(100% - 4vh);
     > ul {
       width: 100%;
       display: grid;

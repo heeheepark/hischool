@@ -10,7 +10,7 @@ import {
   StudentListTitle,
   StudentListWrap,
 } from "../../../styles/teacher/studentlist/StudentListStyle";
-import Loading from "../../../components/Loading";
+import { Loading } from "../../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../../api/login/client";
 import { finishLoading, startLoading } from "../../../reducers/loadingSlice";

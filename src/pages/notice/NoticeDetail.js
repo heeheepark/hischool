@@ -11,7 +11,7 @@ import { getNoticeData, patchNoticeHit } from "../../api/notice/noticeAxios";
 import { client } from "../../api/login/client";
 import { finishLoading, startLoading } from "../../reducers/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../components/Loading";
+import { Loading } from "../../components/Loading";
 
 const NoticeDetail = () => {
   const dispatch = useDispatch();

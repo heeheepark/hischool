@@ -15,7 +15,7 @@ import RecapMockRecord from "../../components/student/studenthome/RecapMockRecor
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../api/login/client";
 import { finishLoading, startLoading } from "../../reducers/loadingSlice";
-import Loading from "../../components/Loading";
+import { Loading } from "../../components/Loading";
 
 const StudentHome = () => {
   const { loading } = useSelector(state => state.loading);

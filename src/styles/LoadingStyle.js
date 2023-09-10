@@ -33,3 +33,30 @@ export const LoadingWrap = styled.div`
     }
   }
 `;
+
+export const MiniLoadingWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 99;
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    .text-area {
+      text-align: center;
+      margin-top: 10px;
+      span {
+        display: block;
+        font-size: 12px;
+        color: #555;
+        line-height: 1.6;
+      }
+    }
+  }
+`;

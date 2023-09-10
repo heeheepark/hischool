@@ -1,7 +1,7 @@
-import { FadeLoader } from "react-spinners";
-import { LoadingWrap } from "../styles/LoadingStyle";
+import { BeatLoader, FadeLoader } from "react-spinners";
+import { LoadingWrap, MiniLoadingWrap } from "../styles/LoadingStyle";
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <LoadingWrap>
       <div>
@@ -14,4 +14,16 @@ const Loading = () => {
     </LoadingWrap>
   );
 };
-export default Loading;
+
+export const MiniLoading = () => {
+  return (
+    <MiniLoadingWrap>
+      <div>
+        <BeatLoader color="#36d7b7" margin={2} size={5} className="spinner" />
+        <div className="text-area">
+          <span>정보를 불러오는 중입니다.</span>
+        </div>
+      </div>
+    </MiniLoadingWrap>
+  );
+};

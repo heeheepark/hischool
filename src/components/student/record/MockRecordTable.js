@@ -8,8 +8,10 @@ import {
 import excelImg from "../../../assets/excel.png";
 import { client } from "../../../api/login/client";
 import { Link } from "react-router-dom";
+import { MiniLoading } from "../../Loading";
 
 const MockRecordTable = () => {
+  const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
   const cateList = [
     "연도",
@@ -75,6 +77,18 @@ const MockRecordTable = () => {
   };
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(config => {
+      if (config.url.includes("mock-table")) {
+        setLoading(true);
+      }
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      setLoading(false);
+      return config;
+    });
     if (scrollRef.current) {
       scrollRef.current.scrollTop = 0;
     }
@@ -121,6 +135,7 @@ const MockRecordTable = () => {
             ))}
           </ul>
           <ul className="record-data">
+            {loading ? <MiniLoading /> : null}
             {allMockRecord ? (
               allMockRecord.map((item, index) => (
                 <li className="data-table" key={index}>

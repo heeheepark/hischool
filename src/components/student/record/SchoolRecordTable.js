@@ -3,14 +3,14 @@ import {
   SchoolRecordFilterDiv,
   SchoolRecordTableDiv,
 } from "../../../styles/student/record/SchoolRecordStyle";
-import {
-  getAllSchoolRecord,
-} from "../../../api/student/schoolRecordAxios";
+import { getAllSchoolRecord } from "../../../api/student/schoolRecordAxios";
 import excelImg from "../../../assets/excel.png";
 import { Link } from "react-router-dom";
 import { client } from "../../../api/login/client";
+import { MiniLoading } from "../../Loading";
 
 const SchoolRecordTable = () => {
+  const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
   const cateList = [
     "연도",
@@ -94,6 +94,18 @@ const SchoolRecordTable = () => {
   };
 
   useEffect(() => {
+    // 로딩 호출
+    client.interceptors.request.use(config => {
+      if (config.url.includes("aca-table")) {
+        setLoading(true);
+      }
+      return config;
+    });
+    // 로딩 완료
+    client.interceptors.response.use(config => {
+      setLoading(false);
+      return config;
+    });
     if (scrollRef.current) {
       scrollRef.current.scrollTop = 0;
     }
@@ -158,6 +170,7 @@ const SchoolRecordTable = () => {
             ))}
           </ul>
           <ul className="record-data">
+            {loading ? <MiniLoading /> : null}
             {allSchoolRecord ? (
               allSchoolRecord.map((item, index) => (
                 <li className="data-table" key={index}>
@@ -169,9 +182,7 @@ const SchoolRecordTable = () => {
                     <li>{item.nm}</li>
                     <li>{item.score}</li>
                     <li>{item.rating}</li>
-                    <li>{`${item.classRank}/${
-                      item.vanCnt
-                    }`}</li>
+                    <li>{`${item.classRank}/${item.vanCnt}`}</li>
                     <li>{`${item.wholeRank}/${item.wholeCnt}`}</li>
                   </ul>
                 </li>
