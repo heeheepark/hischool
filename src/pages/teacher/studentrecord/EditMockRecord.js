@@ -20,6 +20,16 @@ const EditMockRecord = () => {
   const navigate = useNavigate();
 
   const handleSaveButtonClick = () => {
+    const isRatingNot = studentsData.some(item => item.rating === 0);
+    if (isRatingNot) {
+      window.alert("등급을 입력하세요.");
+      return;
+    }
+    const isStandardScoreNot = studentsData.some(item => item.percent === 0);
+    if (isStandardScoreNot) {
+      window.alert("퍼센트를 입력하세요.");
+      return;
+    }
     const isSubSubjectNotSelected = studentsData.some(
       item => item.subjectId === "" || item.subjectId === null,
     );
