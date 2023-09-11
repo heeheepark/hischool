@@ -115,7 +115,10 @@ const TeacherHome = () => {
                       <div className="notice-title-wrap">
                         <div>
                           <span className="notice-important">중요</span>
-                          <Link to={`/teacher/notice/${item.noticeId}`}>
+                          <Link
+                            to={`/teacher/notice/${item.noticeId}`}
+                            className="list-title"
+                          >
                             {item.title}
                           </Link>
                         </div>
@@ -127,7 +130,10 @@ const TeacherHome = () => {
                     <SwiperSlide key={item.noticeId}>
                       <div className="notice-title-wrap">
                         <div>
-                          <Link to={`/teacher/notice/${item.noticeId}`}>
+                          <Link
+                            to={`/teacher/notice/${item.noticeId}`}
+                            className="list-title"
+                          >
                             {item.title}
                           </Link>
                         </div>

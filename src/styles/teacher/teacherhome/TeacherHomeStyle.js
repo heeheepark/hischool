@@ -72,7 +72,7 @@ export const TeacherHomeDiv = styled.div`
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0 20% 0 0;
+          padding: 0 10% 0 0;
           font-size: 16px;
           font-weight: 600;
           > div {
@@ -90,12 +90,22 @@ export const TeacherHomeDiv = styled.div`
               border-radius: 3px;
               padding: 0 4px;
             }
+            .list-title {
+              width: 21vw;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
             .notice-title {
               :hover {
                 text-decoration: underline;
                 cursor: pointer;
               }
             }
+          }
+          .notice-data {
+            display: block;
+            width: 200px;
           }
         }
       }

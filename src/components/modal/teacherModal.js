@@ -271,8 +271,12 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
   });
 
   const handleOk = () => {
-    patchRecordConfirm(payload);
-    setConfirmModal(false);
+    if (payload.semester === 0 || payload.midFinal === 0) {
+      alert("학기, 시험유형을 다시 확인해주세요.");
+    } else {
+      patchRecordConfirm(payload);
+      setConfirmModal(false);
+    }
   };
 
   const closeModal = () => {
@@ -304,14 +308,14 @@ export const RecordConfirmModal = ({ setConfirmModal }) => {
           <div className="content">
             <label htmlFor="confirm-semester">
               <select id="confirm-semester" onChange={e => handleSemester(e)}>
-                <option value="">학기</option>
+                <option value="0">학기</option>
                 <option value="1">1학기</option>
                 <option value="2">2학기</option>
               </select>
             </label>
             <label htmlFor="test-type">
               <select id="test-type" onChange={e => handleTestType(e)}>
-                <option value="">시험 유형</option>
+                <option value="0">시험 유형</option>
                 <option value="1">중간고사</option>
                 <option value="2">기말고사</option>
               </select>
