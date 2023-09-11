@@ -22,8 +22,6 @@ const MyPageContent = () => {
   const [codeConFirm, setCodeConFirm] = useState(false);
   const [selectFile, setSelectFile] = useState(null);
   const [userPic, setUserPic] = useState("");
-  const [cancelOk, setCancelOk] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   const [errPassword, setErrPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,7 +34,7 @@ const MyPageContent = () => {
   };
 
   const userRole = location.pathname.split("/")[1];
-  // get axios 담는 함수
+
   useEffect(() => {
     getUserData(setUserData);
   }, []);
@@ -122,14 +120,6 @@ const MyPageContent = () => {
     setSelectFile(file);
     setUserPic(file ? URL.createObjectURL(file) : null);
   };
-
-  // Modal에 확인 버튼 클릭시 유저 삭제
-  useEffect(() => {
-    if (cancelOk === true) {
-      setModalOpen(false);
-      setCancelOk(false);
-    }
-  }, [cancelOk]);
 
   const handleImageUploadClick = () => {
     const realUpload = document.querySelector(".real-upload");

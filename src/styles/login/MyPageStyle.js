@@ -184,4 +184,9 @@ export const MyPageConFirmDiv = styled.div`
       cursor: pointer;
     }
   }
+  .err-message {
+    padding-right: 11%;
+    font-size: 16px;
+    color: crimson;
+  }
 `;

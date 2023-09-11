@@ -7,7 +7,7 @@ import { client } from "../../api/login/client";
 const Mypage = () => {
   const [passwordConFirm, setPasswordConFirm] = useState(true);
 
-  const handlePasswordConFirm = async password => {
+  const handlePasswordConFirm = async (password, setErrMassege) => {
     try {
       const res = await client.post(`/api/mypage/pw-check`, {
         pw: password,
@@ -15,6 +15,7 @@ const Mypage = () => {
       if (res.data === 1) {
         setPasswordConFirm(false);
       }
+      setErrMassege(res.data);
     } catch (err) {
       console.log(err);
     }

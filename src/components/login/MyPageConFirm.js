@@ -3,15 +3,15 @@ import { MyPageConFirmDiv } from "../../styles/login/MyPageStyle";
 
 const MyPageConFirm = ({ handlePasswordConFirm }) => {
   const [pass, setPass] = useState("");
-
+  const [errMassege, setErrMassege] = useState("");
   const handlePasswordChange = event => {
     event.preventDefault();
     setPass(event.target.value);
   };
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = e => {
     e.preventDefault();
-    handlePasswordConFirm(pass);
+    handlePasswordConFirm(pass, setErrMassege);
   };
 
   return (
@@ -31,9 +31,12 @@ const MyPageConFirm = ({ handlePasswordConFirm }) => {
             autoComplete="off"
             autoFocus
           />
-        <button onClick={e => handlePasswordSubmit(e)}>확인</button>
-      </form>
+          <button onClick={e => handlePasswordSubmit(e)}>확인</button>
+        </form>
       </div>
+      {errMassege === 0 && (
+        <span className="err-message">비밀번호를 확인 해주세요.</span>
+      )}
     </MyPageConFirmDiv>
   );
 };

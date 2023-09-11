@@ -5,6 +5,7 @@ import {
 } from "../../../styles/student/liferecord/AttendStyle";
 import {
   getAttendData,
+  postAttendData,
   putAttendData,
 } from "../../../api/teacher/tcAttendAxios";
 import { AttendSaveModal } from "../../modal/teacherModal";
@@ -12,55 +13,101 @@ import { AttendSaveModal } from "../../modal/teacherModal";
 const StudentAttendStatus = ({ userId, grade }) => {
   const [attendList, setAttendList] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [existAttenId, setExistAttenId] = useState("");
+  const [confirmPost, setComfirmPost] = useState(false);
   const [acceptOk, setAcceptOk] = useState(false);
-  const [disabled, setDisabled] = useState({
-    1: true,
-    2: true,
-    3: true,
-  });
-  const [payload, setPayload] = useState([
-    {
-      attendId: 0,
-      grade: "",
-      lessonNum: 0,
-      diseaseAbsence: 0,
-      unauthAbsence: 0,
-      etcAbsence: 0,
-      diseaseLate: 0,
-      unauthLate: 0,
-      etcLate: 0,
-      diseaseEarly: 0,
-      unauthEarly: 0,
-      etcEarly: 0,
-      diseaseOut: 0,
-      unauthOut: 0,
-      etcOut: 0,
-      specialNote: "",
-    },
-  ]);
+  const [payload, setPayload] = useState("");
 
-  useEffect(() => {
-    switch (payload.length) {
-      case 1:
-        setDisabled({ ...disabled, 1: false });
-        break;
-      case 2:
-        setDisabled({ ...disabled, 2: false });
-        break;
-      case 3:
-        setDisabled({ ...disabled, 3: false });
-        break;
+  const saveConfirm = () => {
+    if (confirmPost) {
+      postAttendData(payload);
+    } else {
+      putAttendData(payload);
     }
-  }, [payload]);
+  };
 
   useEffect(() => {
     if (acceptOk) {
-      setModalOpen(false);
-      putAttendData(payload);
-      setAcceptOk(false);
+      saveConfirm();
+    } else {
+      getAttendData(
+        grade,
+        userId,
+        setAttendList,
+        setExistAttenId,
+        setComfirmPost
+      );
     }
-    getAttendData(userId, setPayload);
+    setComfirmPost(false);
   }, [acceptOk]);
+
+  useEffect(() => {
+    if (attendList && existAttenId) {
+      setPayload({
+        attendId:
+          attendList.length > grade - 1 && attendList[grade - 1].attendId,
+        lessonNum:
+          attendList.length > grade - 1 ? attendList[grade - 1].lessonNum : "",
+        diseaseAbsence:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].diseaseAbsence
+            : "",
+        unauthAbsence:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].unauthAbsence
+            : "",
+        etcAbsence:
+          attendList.length > grade - 1 ? attendList[grade - 1].etcAbsence : "",
+        diseaseLate:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].diseaseLate
+            : "",
+        unauthLate:
+          attendList.length > grade - 1 ? attendList[grade - 1].unauthLate : "",
+        etcLate:
+          attendList.length > grade - 1 ? attendList[grade - 1].etcLate : "",
+        diseaseEarly:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].diseaseEarly
+            : "",
+        unauthEarly:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].unauthEarly
+            : "",
+        etcEarly:
+          attendList.length > grade - 1 ? attendList[grade - 1].etcEarly : "",
+        diseaseOut:
+          attendList.length > grade - 1 ? attendList[grade - 1].diseaseOut : "",
+        unauthOut:
+          attendList.length > grade - 1 ? attendList[grade - 1].unauthOut : "",
+        etcOut:
+          attendList.length > grade - 1 ? attendList[grade - 1].etcOut : "",
+        specialNote:
+          attendList.length > grade - 1
+            ? attendList[grade - 1].specialNote
+            : "",
+      });
+    } else {
+      setPayload({
+        userId: userId,
+        grade: grade,
+        lessonNum: "",
+        diseaseAbsence: "",
+        unauthAbsence: "",
+        etcAbsence: "",
+        diseaseLate: "",
+        unauthLate: "",
+        etcLate: "",
+        diseaseEarly: "",
+        unauthEarly: "",
+        etcEarly: "",
+        diseaseOut: "",
+        unauthOut: "",
+        etcOut: "",
+        specialNote: "",
+      });
+    }
+  }, [attendList]);
 
   const handleSaveBt = () => {
     setModalOpen(true);
@@ -106,416 +153,275 @@ const StudentAttendStatus = ({ userId, grade }) => {
                   <li className="category-nm">특이사항</li>
                 </ul>
               </li>
-              {payload && payload.length == grade ? (
-                payload.map(item => (
-                  <li className="attend-list" key={item.attendId}>
+              {attendList && attendList.length == grade ? (
+                attendList.map((item, index) => (
+                  <li className="attend-list" key={index}>
                     <ul>
                       <li>{item.grade}학년</li>
-                      <li>
-                        <input
-                          type="text"
-                          name="lessonNum"
-                          value={item.lessonNum}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              lessonNum: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="unauthAbsence"
-                          value={item.unauthAbsence}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              unauthAbsence: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="diseaseAbsence"
-                          value={item.diseaseAbsence}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              diseaseAbsence: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="etcAbsence"
-                          value={item.etcAbsence}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              etcAbsence: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="unauthLate"
-                          value={item.unauthLate}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              unauthLate: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="diseaseLate"
-                          value={item.diseaseLate}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              diseaseLate: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="etcLate"
-                          value={item.etcLate}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              etcLate: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="unauthEarly"
-                          value={item.unauthEarly}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              unauthEarly: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="diseaseEarly"
-                          value={item.diseaseEarly}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              diseaseEarly: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="etcEarly"
-                          value={item.etcEarly}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              etcEarly: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="unauthOut"
-                          value={item.unauthOut}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              unauthOut: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="diseaseOut"
-                          value={item.diseaseOut}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              diseaseOut: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="etcOut"
-                          value={item.etcOut}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              etcOut: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
-                      <li>
-                        <input
-                          type="text"
-                          name="specialNote"
-                          className="etc-text"
-                          value={item.specialNote}
-                          onChange={e =>
-                            setPayload({
-                              ...payload,
-                              specialNote: e.target.value,
-                            })
-                          }
-                          disabled={disabled[item.grade]}
-                        />
-                      </li>
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="lessonNum"
+                            value={payload.lessonNum}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                lessonNum: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.lessonNum}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="unauthAbsence"
+                            value={payload.unauthAbsence}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                unauthAbsence: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.unauthAbsence}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="diseaseAbsence"
+                            value={payload.diseaseAbsence}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                diseaseAbsence: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.diseaseAbsence}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="etcAbsence"
+                            value={payload.etcAbsence}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                etcAbsence: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.etcAbsence}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="unauthLate"
+                            value={payload.unauthLate}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                unauthLate: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.unauthLate}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="diseaseLate"
+                            value={payload.diseaseLate}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                diseaseLate: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.diseaseLate}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="etcLate"
+                            value={payload.etcLate}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                etcLate: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.etcLate}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="unauthEarly"
+                            value={payload.unauthEarly}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                unauthEarly: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.unauthEarly}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="diseaseEarly"
+                            value={payload.diseaseEarly}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                diseaseEarly: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.diseaseEarly}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="etcEarly"
+                            value={payload.etcEarly}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                etcEarly: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.etcEarly}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="unauthOut"
+                            value={payload.unauthOut}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                unauthOut: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.unauthOut}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="diseaseOut"
+                            value={payload.diseaseOut}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                diseaseOut: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.diseaseOut}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="etcOut"
+                            value={payload.etcOut}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                etcOut: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.etcOut}</li>
+                      )}
+                      {grade == index + 1 ? (
+                        <li>
+                          <input
+                            type="text"
+                            name="specialNote"
+                            className="etc-text"
+                            value={payload.specialNote}
+                            onChange={(e) =>
+                              setPayload({
+                                ...payload,
+                                specialNote: e.target.value,
+                              })
+                            }
+                          />
+                        </li>
+                      ) : (
+                        <li>{item.specialNote}</li>
+                      )}
                     </ul>
                   </li>
                 ))
               ) : (
                 <>
-                  {payload
+                  {attendList
                     .filter((item, index) => parseInt(item.grade) === index + 1)
-                    .map(item => (
-                      <li className="attend-list" key={item.attendId}>
+                    .map((item, index) => (
+                      <li className="attend-list" key={index}>
                         <ul>
-                          <li>{item.grade}학년</li>
-                          <li>
-                            <input
-                              type="text"
-                              name="lessonNum"
-                              value={item.lessonNum}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  lessonNum: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="unauthAbsence"
-                              value={item.unauthAbsence}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  unauthAbsence: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="diseaseAbsence"
-                              value={item.diseaseAbsence}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  diseaseAbsence: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="etcAbsence"
-                              value={item.etcAbsence}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  etcAbsence: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="unauthLate"
-                              value={item.unauthLate}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  unauthLate: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="diseaseLate"
-                              value={item.diseaseLate}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  diseaseLate: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="etcLate"
-                              value={item.etcLate}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  etcLate: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="unauthEarly"
-                              value={item.unauthEarly}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  unauthEarly: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="diseaseEarly"
-                              value={item.diseaseEarly}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  diseaseEarly: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="etcEarly"
-                              value={item.etcEarly}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  etcEarly: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="unauthOut"
-                              value={item.unauthOut}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  unauthOut: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="diseaseOut"
-                              value={item.diseaseOut}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  diseaseOut: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="etcOut"
-                              value={item.etcOut}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  etcOut: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              name="specialNote"
-                              className="etc-text"
-                              value={item.specialNote}
-                              onChange={e =>
-                                setPayload({
-                                  ...payload,
-                                  specialNote: e.target.value,
-                                })
-                              }
-                              disabled={disabled[item.grade]}
-                            />
-                          </li>
+                          <li>{`${index + 1}학년`}</li>
+                          <li>{item.lessonNum}</li>
+                          <li>{item.diseaseAbsence}</li>
+                          <li>{item.unauthAbsence}</li>
+                          <li>{item.etcAbsence}</li>
+                          <li>{item.diseaseLate}</li>
+                          <li>{item.unauthLate}</li>
+                          <li>{item.etcLate}</li>
+                          <li>{item.diseaseEarly}</li>
+                          <li>{item.unauthEarly}</li>
+                          <li>{item.etcEarly}</li>
+                          <li>{item.diseaseOut}</li>
+                          <li>{item.unauthOut}</li>
+                          <li>{item.etcOut}</li>
+                          <li>{item.specialNote}</li>
                         </ul>
                       </li>
                     ))}
@@ -527,13 +433,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="lessonNum"
                           value={payload.lessonNum}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               lessonNum: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -541,13 +446,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="unauthAbsence"
                           value={payload.unauthAbsence}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               unauthAbsence: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -555,13 +459,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="diseaseAbsence"
                           value={payload.diseaseAbsence}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               diseaseAbsence: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -569,13 +472,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="etcAbsence"
                           value={payload.etcAbsence}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               etcAbsence: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -583,13 +485,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="unauthLate"
                           value={payload.unauthLate}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               unauthLate: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -597,13 +498,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="diseaseLate"
                           value={payload.diseaseLate}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               diseaseLate: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -611,13 +511,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="etcLate"
                           value={payload.etcLate}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               etcLate: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -625,13 +524,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="unauthEarly"
                           value={payload.unauthEarly}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               unauthEarly: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -639,13 +537,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="diseaseEarly"
                           value={payload.diseaseEarly}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               diseaseEarly: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -653,13 +550,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="etcEarly"
                           value={payload.etcEarly}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               etcEarly: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -667,13 +563,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="unauthOut"
                           value={payload.unauthOut}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               unauthOut: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -681,13 +576,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="diseaseOut"
                           value={payload.diseaseOut}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               diseaseOut: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -695,13 +589,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           type="text"
                           name="etcOut"
                           value={payload.etcOut}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               etcOut: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                       <li>
@@ -710,13 +603,12 @@ const StudentAttendStatus = ({ userId, grade }) => {
                           name="specialNote"
                           className="etc-text"
                           value={payload.specialNote}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPayload({
                               ...payload,
                               specialNote: e.target.value,
                             })
                           }
-                          disabled={disabled[payload.grade]}
                         />
                       </li>
                     </ul>
