@@ -21,6 +21,13 @@ const EditSchoolRecord = () => {
 
   // "저장" > 서버전송
   const handleSaveButtonClick = () => {
+    const isSubSelect = studentsData.some(
+      item => item.subjectId === "" || item.subjectId === null,
+    );
+    if (isSubSelect) {
+      window.alert("세부 과목을 선택하세요.");
+      return;
+    }
     if (studentsData) {
       studentsData.map((item, index) => {
         const postDataList = {

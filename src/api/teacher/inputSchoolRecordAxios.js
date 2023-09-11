@@ -30,7 +30,7 @@ export const patchSchoolData = async dataToSend => {
 // 내신 등록 후 과목 계열
 export const getSchoolMainSubData = async () => {
   try {
-    const res = await client.get("/api/teacher/subject/category/big");
+    const res = await client.get("/api/teacher/subject/aca-category");
     return res.data;
   } catch (err) {
     console.log(err);
@@ -42,7 +42,7 @@ export const getSchoolMainSubData = async () => {
 export const getSchoolSubData = async categoryid => {
   try {
     const res = await client.get(
-      `/api/teacher/subject/category/small?categoryId=${categoryid}`,
+      `/api/teacher/subject/aca-subject?categoryId=${categoryid}`,
     );
     return res.data;
   } catch (err) {
