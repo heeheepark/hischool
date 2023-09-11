@@ -10,9 +10,9 @@ export const getUserData = async setUserData => {
   }
 };
 
-export const putMyPageData = async formData => {
+export const patchMyPageData = async formData => {
   try {
-    const res = await client.put(`/api/mypage/user-info-update`, formData, {
+    const res = await client.patch(`/api/mypage/user-info`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   } catch (err) {

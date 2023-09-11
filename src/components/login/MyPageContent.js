@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DaumPost from "./DaumPost";
 import { useLocation, useNavigate } from "react-router";
-import { getUserData, putMyPageData } from "../../api/login/myPageAxios";
+import { getUserData, patchMyPageData } from "../../api/login/myPageAxios";
 import {
   TcButtons,
   TcMyPageUserInfo,
@@ -107,7 +107,7 @@ const MyPageContent = () => {
       return;
     }
 
-    putMyPageData(formData);
+    patchMyPageData(formData);
 
     userRole === "teacher"
       ? navigate("/teacher/home")

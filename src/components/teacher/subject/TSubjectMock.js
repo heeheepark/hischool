@@ -39,6 +39,7 @@ const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
       return item;
     });
     setStudentsData(submitList);
+    console.log(submitList)
   };
 
   const handleRating = e => {
