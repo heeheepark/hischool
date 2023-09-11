@@ -71,7 +71,7 @@ const TSubJectEditSchool = ({
     setSubject(e.target.value);
     const submitList = studentsData.map(item => {
       if (item.id === id) {
-        item.subjectId = parseInt(e.target.value);
+        item.subjectId = e.target.value;
       }
       return item;
     });

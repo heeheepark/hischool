@@ -30,7 +30,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
   const handleDetailSubject = e => {
     const submitList = studentsData?.map(item => {
       if (item.id === id) {
-        item.subjectId = parseInt(e.target.value);
+        item.subjectId = e.target.value;
       }
       return item;
     });
@@ -82,7 +82,6 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
             onChange={handleMonth}
             name="month"
           >
-            <option value="">월 선택</option>
             <option value={3}>3월</option>
             <option value={6}>6월</option>
             <option value={9}>9월</option>
@@ -103,7 +102,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
           </select>
           <select
             name="subjectid"
-            value={defaultDetailSub}
+            value={defaultDetailSub || ""}
             onChange={handleDetailSubject}
           >
             <option value="">세부 과목 선택</option>
@@ -126,6 +125,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
             defaultValue={scoreList.rating || ""}
             onChange={handleRating}
             placeholder="등급"
+            min={1}
             max={9}
           />
           <input
@@ -134,6 +134,8 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
             defaultValue={scoreList.percent || ""}
             onChange={handlePercentage}
             placeholder="백분위"
+            min={1}
+            max={100}
           />
         </IMREdit>
       </div>
