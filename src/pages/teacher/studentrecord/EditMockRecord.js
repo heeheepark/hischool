@@ -37,8 +37,6 @@ const EditMockRecord = () => {
     }
   };
 
-  console.log(studentsData);
-  
   useEffect(() => {
     getStudentsNameData(state[0], setStudentNameData);
     Promise.all(
