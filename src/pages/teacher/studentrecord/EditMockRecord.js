@@ -86,7 +86,7 @@ const EditMockRecord = () => {
           return (
             <TSubJectEditMock
               key={index}
-              id={item.id}
+              resultId={item.resultId}
               scoreList={item}
               studentsData={studentsData}
               setStudentsData={setStudentsData}

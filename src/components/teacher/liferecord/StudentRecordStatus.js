@@ -7,15 +7,10 @@ import TSchoolRecordChart from "./TSchoolRecordChart";
 import TMockRecordChart from "./TMockRecordChart";
 import TSchoolRecordTable from "./TSchoolRecordTable";
 import TMockRecordTable from "./TMockRecordTable";
-import { Loading } from "../../Loading";
-import { useSelector } from "react-redux";
 
 const StudentRecordStatus = ({ userId }) => {
-  const { loading } = useSelector(state => state.loading);
-
   return (
     <RecordStatusDiv>
-      {loading ? <Loading /> : null}
       <h4>성적 현황</h4>
       <div className="record-chart">
         <div className="school-record-wrap">

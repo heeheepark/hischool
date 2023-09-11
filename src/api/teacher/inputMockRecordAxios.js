@@ -9,7 +9,9 @@ export const postMockData = async dataToSend => {
   } catch (error) {
     console.error("데이터 전송 오류:", error);
     if (error.response && error.response.status === 500) {
-      alert("서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.");
+      alert(
+        "서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.",
+      );
     }
   }
 };
@@ -21,7 +23,9 @@ export const patchMockData = async dataToSend => {
   } catch (error) {
     console.error("데이터 전송 오류:", error);
     if (error.response && error.response.status === 500) {
-      alert("서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.");
+      alert(
+        "서버 내부 오류가 발생했습니다. 이미 있는 과목 성적이거나, 서버 전송 오류입니다.",
+      );
     }
   }
 };
@@ -58,7 +62,7 @@ export const getMockEditData = async resultId => {
     const res = await client.get(
       `/api/teacher/subject/mock-result?resultId=${resultId}`,
     );
-    const result = { ...res.data[0], id: Date.now(), resultId: resultId };
+    const result = { ...res.data[0], resultId: resultId };
     return result;
   } catch (err) {
     console.log(err);

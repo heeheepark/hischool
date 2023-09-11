@@ -4,13 +4,9 @@ import {
   SchoolRecordTableDiv,
 } from "../../../styles/student/record/SchoolRecordStyle";
 import { getStudentSchoolRecord } from "../../../api/teacher/studentRecordAxios";
-import { client } from "../../../api/login/client";
-import { finishLoading, startLoading } from "../../../reducers/loadingSlice";
-import { useDispatch } from "react-redux";
 
 const TSchoolRecordTable = ({ userId }) => {
   const scrollRef = useRef(null);
-  const dispatch = useDispatch();
   const cateList = [
     "연도",
     "학기",
@@ -86,16 +82,6 @@ const TSchoolRecordTable = ({ userId }) => {
         testType,
       );
     }
-    // 로딩 호출
-    client.interceptors.request.use(function (config) {
-      dispatch(startLoading({}));
-      return config;
-    });
-    // 로딩 완료
-    client.interceptors.response.use(config => {
-      dispatch(finishLoading({}));
-      return config;
-    });
   }, [year, semester, testType]);
 
   return (
@@ -162,9 +148,7 @@ const TSchoolRecordTable = ({ userId }) => {
                     <li>{item.nm}</li>
                     <li>{item.score}</li>
                     <li>{item.rating}</li>
-                    <li>{`${item.classRank}/${
-                      item.vanCnt
-                    }`}</li>
+                    <li>{`${item.classRank}/${item.classCnt}`}</li>
                     <li>{`${item.wholeRank}/${item.wholeCnt}`}</li>
                   </ul>
                 </li>

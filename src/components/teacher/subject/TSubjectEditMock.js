@@ -5,7 +5,12 @@ import {
 } from "../../../api/teacher/inputMockRecordAxios";
 import { IMREdit } from "../../../styles/teacher/studentrecord/InputSchoolRecordStyle";
 
-const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
+const TSubJectEditMock = ({
+  resultId,
+  scoreList,
+  studentsData,
+  setStudentsData,
+}) => {
   const [initSubCate, setInitSubCate] = useState(null);
   const [selectedSubCate, setSelectedSubCate] = useState(scoreList.categoryId);
   const [initDetailSub, setInitDetailSub] = useState(null);
@@ -14,7 +19,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
 
   const handleMonth = e => {
     const submitList = studentsData?.map(item => {
-      if (item.id === id) {
+      if (item.resultId === resultId) {
         item.mon = parseInt(e.target.value);
       }
       return item;
@@ -29,7 +34,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
 
   const handleDetailSubject = e => {
     const submitList = studentsData?.map(item => {
-      if (item.id === id) {
+      if (item.resultId === resultId) {
         item.subjectId = e.target.value;
       }
       return item;
@@ -40,7 +45,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
 
   const handleStandardScore = e => {
     const submitList = studentsData?.map(item => {
-      if (item.id === id) {
+      if (item.resultId === resultId) {
         item.standardScore = parseInt(e.target.value);
       }
       return item;
@@ -50,7 +55,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
 
   const handleRating = e => {
     const submitList = studentsData?.map(item => {
-      if (item.id === id) {
+      if (item.resultId === resultId) {
         item.rating = parseInt(e.target.value);
       }
       return item;
@@ -60,7 +65,7 @@ const TSubJectEditMock = ({ id, scoreList, studentsData, setStudentsData }) => {
 
   const handlePercentage = e => {
     const submitList = studentsData?.map(item => {
-      if (item.id === id) {
+      if (item.resultId === resultId) {
         item.percent = parseInt(e.target.value);
       }
       return item;

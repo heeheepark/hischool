@@ -102,7 +102,7 @@ const SchoolRecordList = ({
                 <li>{item.score}</li>
                 <li>{item.rating}</li>
                 <li>
-                  {item.classRank}/{item.vanCnt}
+                  {item.classRank}/{item.classCnt}
                 </li>
                 <li>
                   {item.wholeRank}/{item.wholeCnt}

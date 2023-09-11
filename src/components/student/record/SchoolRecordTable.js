@@ -182,7 +182,7 @@ const SchoolRecordTable = () => {
                     <li>{item.nm}</li>
                     <li>{item.score}</li>
                     <li>{item.rating}</li>
-                    <li>{`${item.classRank}/${item.vanCnt}`}</li>
+                    <li>{`${item.classRank}/${item.classCnt}`}</li>
                     <li>{`${item.wholeRank}/${item.wholeCnt}`}</li>
                   </ul>
                 </li>
