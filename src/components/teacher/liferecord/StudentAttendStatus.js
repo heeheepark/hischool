@@ -66,8 +66,6 @@ const StudentAttendStatus = ({ userId, grade }) => {
     setModalOpen(true);
   };
 
-  console.log(payload.length == grade);
-
   return (
     <>
       {modalOpen && (

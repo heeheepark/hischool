@@ -67,7 +67,6 @@ export const getSchoolExcelFile = async (year, semester, testType) => {
   try {
     const res = await client.get(`/test/aca-result`);
     const result = res.data;
-    console.log(result);
   } catch (err) {
     console.log(err);
   }
