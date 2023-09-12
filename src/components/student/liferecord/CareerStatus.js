@@ -28,7 +28,11 @@ const CareerStatus = () => {
             <span>대학명</span>
             <input
               type="text"
-              value={careerList && grade && careerList[grade - 1].hopeUniv}
+              value={
+                (careerList.length > 0) & grade
+                  ? careerList[grade - 1].hopeUniv
+                  : ""
+              }
               id="hope-univ"
               name="hope-univ"
               readOnly
@@ -38,7 +42,11 @@ const CareerStatus = () => {
             <span>학부(과)</span>
             <input
               type="text"
-              value={careerList && grade && careerList[grade - 1].hopeDept}
+              value={
+                (careerList.length > 0) & grade
+                  ? careerList[grade - 1].hopeDept
+                  : ""
+              }
               id="hope-depart"
               readOnly
             />
