@@ -28,9 +28,6 @@ const InputSchoolRecord = () => {
     semester: dropSemester,
     midfinal: dropTest,
     score: 0,
-    rating: 0,
-    classrank: 0,
-    wholerank: 0,
   };
   const [studentsData, setStudentsData] = useState([initialRecord]);
   const [studentNameData, setStudentNameData] = useState([]);
@@ -123,7 +120,7 @@ const InputSchoolRecord = () => {
       <ISBoard>
         {studentsData.map((item, index) => (
           <TSubJectSchool
-            key={index}
+            key={item.id}
             id={item.id}
             studentsData={studentsData}
             setStudentsData={setStudentsData}

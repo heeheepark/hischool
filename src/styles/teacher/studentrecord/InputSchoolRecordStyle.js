@@ -74,7 +74,7 @@ const ISRTitle = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.25fr 1.25fr 1.25fr 0.25fr;
   font-size: 18px;
   color: #fff;
   justify-content: space-between;
@@ -97,7 +97,7 @@ const ISBoard = styled.div`
   position: relative;
   height: 65vh;
   overflow: auto;
-  margin-bottom: 2vh
+  margin-bottom: 2vh;
 `;
 const ISTitle = styled.div`
   width: 100%;
@@ -124,7 +124,7 @@ const ISTitle = styled.div`
 
 const ISRinput = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.25fr 1.25fr 1.25fr 0.25fr;
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -150,6 +150,16 @@ const ISRinput = styled.div`
     border-radius: 3px;
     height: 25px;
     text-align: center;
+  }
+  > button {
+    margin: 0 auto;
+    min-width: 20px;
+    border: none;
+    text-align: center;
+    height: 25px;
+    background: #fff;
+    cursor: pointer;
+    width: auto;
   }
 `;
 const ISinput = styled.div`
@@ -244,7 +254,7 @@ const IMRTitle = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1.25fr 1.25fr 1.25fr 1.25fr 1.25fr 0.25fr;
   font-size: 18px;
   color: #fff;
   justify-content: space-between;
@@ -287,7 +297,7 @@ const IMREditTitle = styled.div`
 
 const IMRinput = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1.25fr 1.25fr 1.25fr 1.25fr 1.25fr 0.25fr;
   align-items: center;
   background: #fff;
   border: 1px solid #bbb;
@@ -320,6 +330,16 @@ const IMRinput = styled.div`
     :nth-of-type(4) {
       width: 90px;
     }
+  }
+  > button {
+    margin: 0 auto;
+    min-width: 20px;
+    border: none;
+    text-align: center;
+    height: 25px;
+    background: #fff;
+    cursor: pointer;
+    width: auto;
   }
 `;
 const IMREdit = styled.div`
