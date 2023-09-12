@@ -5,7 +5,6 @@ import {
   getStudentMockRecord,
   getStudentSchoolRecord,
 } from "../../../api/teacher/studentRecordAxios";
-import { getStudentData } from "../../../api/teacher/studentListAxios";
 import { StudentRecordDiv } from "../../../styles/teacher/studentrecord/StudentRecordStyle";
 import SearchStudent from "../../../components/teacher/studentrecord/SearchStudent";
 import SchoolRecordHeader from "../../../components/teacher/studentrecord/SchoolRecordHeader";

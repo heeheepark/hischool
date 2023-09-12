@@ -38,7 +38,6 @@ export const getSchoolInfo = async (setSchoolName, setGrade, setClassNum) => {
     const userSchool = result.nm;
     const userGrade = result.grade;
     const userClass = result.van;
-    console.log(result);
     setSchoolName(userSchool);
     setGrade(userGrade);
     setClassNum(userClass);

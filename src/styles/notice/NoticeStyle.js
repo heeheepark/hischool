@@ -62,7 +62,6 @@ const NoticeInput = styled.div`
 `;
 const NoticeBoard = styled.div`
   width: 100%;
-  /* position: relative; */
   height: 71vh;
   text-align: center;
   border: 1px solid #ccc;

@@ -17,9 +17,9 @@ client.interceptors.request.use(
     }
     return config;
   },
-  error => {
-    console.log(error);
-    return Promise.reject(error);
+  err => {
+    console.log(err);
+    return Promise.reject(err);
   },
 );
 
@@ -44,11 +44,11 @@ client.interceptors.response.use(
         // 토큰 갱신 후 재시도
         const retryResponse = await client(config);
         return retryResponse;
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(err);
   },
 );
 
@@ -74,7 +74,7 @@ export const fetchLogin = async (email, password) => {
       httpOnly: true,
     });
     return role;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
