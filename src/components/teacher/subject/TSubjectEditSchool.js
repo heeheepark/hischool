@@ -128,7 +128,7 @@ const TSubJectEditSchool = ({
           <input
             type="number"
             name="score"
-            defaultValue={scoreList.score || ""}
+            defaultValue={scoreList.score || 0}
             onChange={handleScore}
             placeholder="점수"
             max={100}

@@ -56,6 +56,12 @@ const InputMockRecord = () => {
       window.alert("등급을 입력하세요.");
       return;
     }
+    const isPercentNot = studentsData.some(item => item.percent === 0);
+    if (isPercentNot) {
+      window.alert("퍼센트을 입력하세요.");
+      return;
+    }
+    
     const goData = studentsData?.map(item => {
       const postDataList = {
         userid: item.userid,
@@ -65,12 +71,9 @@ const InputMockRecord = () => {
         rating: item.rating,
         percent: item.percent,
       };
-
       return postDataList;
     });
-
     postMockData(goData);
-
     navigate("/teacher/record", { state: state });
   };
 
