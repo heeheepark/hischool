@@ -6,12 +6,17 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { getCareerData } from "../../../api/student/lifeRecordAxios";
+import { getSchoolInfo } from "../../../api/login/userInfoAxios";
 
 const CareerStatus = () => {
   const [careerList, setCareerList] = useState([]);
+  const [schoolName, setSchoolName] = useState(null);
+  const [grade, setGrade] = useState(null);
+  const [classNum, setClassNum] = useState(null);
 
   useEffect(() => {
     getCareerData(setCareerList);
+    getSchoolInfo(setSchoolName, setGrade, setClassNum);
   }, []);
 
   return (
@@ -23,7 +28,7 @@ const CareerStatus = () => {
             <span>대학명</span>
             <input
               type="text"
-              value={"경북대학교"}
+              value={careerList && grade && careerList[grade - 1].hopeUniv}
               id="hope-univ"
               name="hope-univ"
               readOnly
@@ -33,7 +38,7 @@ const CareerStatus = () => {
             <span>학부(과)</span>
             <input
               type="text"
-              value={"신문방송학과"}
+              value={careerList && grade && careerList[grade - 1].hopeDept}
               id="hope-depart"
               readOnly
             />

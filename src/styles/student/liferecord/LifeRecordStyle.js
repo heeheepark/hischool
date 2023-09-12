@@ -57,7 +57,6 @@ export const LifeRecordDiv = styled.div`
     }
   }
   .content-wrap {
-    position: relative;
     height: 100%;
     width: 100%;
   }
