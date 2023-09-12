@@ -44,6 +44,15 @@ const TSubJectEditMock = ({
   };
 
   const handleStandardScore = e => {
+    const inputValue = parseInt(e.target.value);
+    if (isNaN(inputValue)) {
+      return;
+    }
+    if (inputValue < 0) {
+      e.target.value = "0";
+    } else if (inputValue > 200) {
+      e.target.value = "200";
+    }
     const submitList = studentsData?.map(item => {
       if (item.resultId === resultId) {
         item.standardScore = parseInt(e.target.value);
@@ -54,6 +63,15 @@ const TSubJectEditMock = ({
   };
 
   const handleRating = e => {
+    const inputValue = parseInt(e.target.value);
+    if (isNaN(inputValue)) {
+      return;
+    }
+    if (inputValue < 0) {
+      e.target.value = "0";
+    } else if (inputValue > 9) {
+      e.target.value = "9";
+    }
     const submitList = studentsData?.map(item => {
       if (item.resultId === resultId) {
         item.rating = parseInt(e.target.value);
@@ -64,6 +82,15 @@ const TSubJectEditMock = ({
   };
 
   const handlePercentage = e => {
+    const inputValue = parseInt(e.target.value);
+    if (isNaN(inputValue)) {
+      return;
+    }
+    if (inputValue < 0) {
+      e.target.value = "0";
+    } else if (inputValue > 100) {
+      e.target.value = "100";
+    }
     const submitList = studentsData?.map(item => {
       if (item.resultId === resultId) {
         item.percent = parseInt(e.target.value);
@@ -130,7 +157,7 @@ const TSubJectEditMock = ({
             defaultValue={scoreList.rating || ""}
             onChange={handleRating}
             placeholder="등급"
-            min={1}
+            min={0}
             max={9}
           />
           <input
@@ -139,7 +166,7 @@ const TSubJectEditMock = ({
             defaultValue={scoreList.percent || ""}
             onChange={handlePercentage}
             placeholder="백분위"
-            min={1}
+            min={0}
             max={100}
           />
         </IMREdit>

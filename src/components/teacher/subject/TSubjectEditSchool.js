@@ -54,6 +54,15 @@ const TSubJectEditSchool = ({
   };
 
   const handleScore = e => {
+    const inputValue = parseInt(e.target.value);
+    if (isNaN(inputValue)) {
+      return;
+    }
+    if (inputValue < 0) {
+      e.target.value = "0";
+    } else if (inputValue > 100) {
+      e.target.value = "100";
+    }
     const submitList = studentsData.map(item => {
       if (item.id === id) {
         item.score = parseInt(e.target.value);
@@ -131,6 +140,7 @@ const TSubJectEditSchool = ({
             defaultValue={scoreList.score || ""}
             onChange={handleScore}
             placeholder="점수"
+            min={0}
             max={100}
           />
         </ISinput>

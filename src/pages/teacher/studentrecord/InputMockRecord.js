@@ -58,7 +58,7 @@ const InputMockRecord = () => {
     }
     const isPercentNot = studentsData.some(item => item.percent === 0);
     if (isPercentNot) {
-      window.alert("퍼센트을 입력하세요.");
+      window.alert("퍼센트를 입력하세요.");
       return;
     }
     
@@ -113,7 +113,7 @@ const InputMockRecord = () => {
         {studentsData.map((item, index) => {
           return (
             <TSubJectMock
-              key={index}
+              key={item.id}
               id={item.id}
               dropMonth={dropMonth}
               studentsData={studentsData}
