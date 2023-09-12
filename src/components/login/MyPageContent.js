@@ -131,8 +131,8 @@ const MyPageContent = () => {
       <div className="mypage-top">
         <div className="user-info">
           <div className="user-info-wrap">
-            <div className="user-picture-wrap" onClick={handleImageUploadClick}>
-              <div className="picture-img">
+            <div className="user-picture-wrap">
+              <div className="picture-img" onClick={handleImageUploadClick}>
                 <img src={userPic || userData.pic} alt="pic" />
               </div>
               <input
