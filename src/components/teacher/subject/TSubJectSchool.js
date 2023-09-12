@@ -81,7 +81,6 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
             name="score"
             onChange={handleScore}
             placeholder="점수"
-            defaultValue={0}
             min={0}
             max={100}
           />

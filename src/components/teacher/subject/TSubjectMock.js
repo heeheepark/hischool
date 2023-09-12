@@ -85,7 +85,6 @@ const TSubJectMock = ({ id, studentsData, setStudentsData }) => {
             type="number"
             name="standardscore"
             onChange={e => handleStandardScore(e)}
-            defaultValue={0}
             placeholder="표준 점수"
             min={0}
           />

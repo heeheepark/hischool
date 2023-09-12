@@ -120,7 +120,7 @@ const TSubJectEditMock = ({
           <input
             type="number"
             name="standardScore"
-            defaultValue={scoreList.standardScore || 0}
+            defaultValue={scoreList.standardScore || ""}
             onChange={handleStandardScore}
             placeholder="점수"
           />
