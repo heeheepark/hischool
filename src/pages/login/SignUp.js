@@ -35,6 +35,7 @@ const SignUp = () => {
     address: "",
   });
   const [schoolClassList, setSchoolClassList] = useState("");
+  const [aprPicText, setAprPicText] = useState("");
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     email: "",
@@ -198,7 +199,7 @@ const SignUp = () => {
   const handleChangeApr = e => {
     const file = e.target.files[0];
     setAprPic(file);
-    setAprPic(file?.name || "");
+    setAprPicText(file.name || "");
   };
 
   const handleImageUploadClick = () => {
@@ -383,7 +384,7 @@ const SignUp = () => {
                             <input
                               className="upload-name"
                               name="teacher-auth"
-                              value={aprPic}
+                              value={aprPicText}
                               placeholder="첨부파일"
                               readOnly
                             />
