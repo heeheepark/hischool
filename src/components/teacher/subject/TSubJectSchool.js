@@ -4,6 +4,8 @@ import {
   getSchoolSubData,
 } from "../../../api/teacher/inputSchoolRecordAxios";
 import { ISRinput } from "../../../styles/teacher/studentrecord/InputSchoolRecordStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   const [mainSubjects, setMainSubjects] = useState([]);
@@ -40,12 +42,25 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
   };
 
   const handleScore = e => {
+    const inputValue = parseInt(e.target.value);
+    if (isNaN(inputValue)) {
+      return;
+    }
+    if (inputValue < 0) {
+      e.target.value = "0";
+    } else if (inputValue > 100) {
+      e.target.value = "100";
+    }
     const submitList = studentsData.map(item => {
       if (item.id === id) {
         item.score = parseInt(e.target.value);
       }
       return item;
     });
+    setStudentsData(submitList);
+  };
+  const handleDelete = () => {
+    const submitList = studentsData.filter(item => item.id !== id);
     setStudentsData(submitList);
   };
 
@@ -84,6 +99,9 @@ const TSubJectSchool = ({ id, studentsData, setStudentsData }) => {
             min={0}
             max={100}
           />
+          <button onClick={handleDelete}>
+            <FontAwesomeIcon icon={faCircleXmark} className="icon" />
+          </button>
         </ISRinput>
       </div>
     </>
