@@ -4,7 +4,7 @@ import { client } from "../login/client";
 export const postMockData = async dataToSend => {
   try {
     const response = await client.post("/api/teacher/subject/mock-ins", {
-      list: [dataToSend],
+      list: dataToSend,
     });
   } catch (error) {
     console.error("데이터 전송 오류:", error);
