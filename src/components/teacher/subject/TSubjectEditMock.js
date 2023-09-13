@@ -67,8 +67,8 @@ const TSubJectEditMock = ({
     if (isNaN(inputValue)) {
       return;
     }
-    if (inputValue < 0) {
-      e.target.value = "0";
+    if (inputValue < 1) {
+      e.target.value = "1";
     } else if (inputValue > 9) {
       e.target.value = "9";
     }

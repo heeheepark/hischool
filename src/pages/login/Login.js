@@ -10,9 +10,11 @@ import { fetchLogin } from "../../api/login/client";
 import { FindPasswordModal } from "../../components/modal/Modal";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const defaultEmail = "tc89@naver.com";
+  const defaultPassword = "gkrtod123!";
+  const [email, setEmail] = useState(defaultEmail);
   const [errEmail, setErrEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(defaultPassword);
   const [errPassword, setErrPassword] = useState("");
   const [isLoginDisabled, setIsLoginDisabled] = useState(true);
   const [errConfirm, setErrConfirm] = useState(false);
@@ -37,15 +39,13 @@ const Login = () => {
   // 유저 선택 및 로그인 버튼 함수
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!isLoginDisabled) {
-      const role = await fetchLogin(email, password, setErrConfirm);
-      if (role === "ROLE_TC") {
-        navigate("/teacher/home");
-      } else if (role === "ROLE_STD") {
-        navigate("/student/home");
-      } else {
-        setErrConfirm(true);
-      }
+    const role = await fetchLogin(email, password, setErrConfirm);
+    if (role === "ROLE_TC") {
+      navigate("/teacher/home");
+    } else if (role === "ROLE_STD") {
+      navigate("/student/home");
+    } else {
+      setErrConfirm(true);
     }
   };
 
@@ -82,6 +82,7 @@ const Login = () => {
                 onChange={e => handleEmail(e)}
                 type="email"
                 id="login-email"
+                value={email}
                 placeholder="Email"
                 onBlur={checkEmail}
               />
@@ -91,6 +92,7 @@ const Login = () => {
                 onChange={e => handlePassWord(e)}
                 id="login-password"
                 type="password"
+                value={password}
                 placeholder="Password"
                 autoComplete="on"
                 onBlur={checkPass}

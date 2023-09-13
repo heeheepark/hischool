@@ -41,27 +41,27 @@ const InputMockRecord = () => {
 
   const handleSaveButtonClick = () => {
     if (!dropMonth) {
-      window.alert("월을 선택하세요.");
+      alert("월을 선택하세요.");
       return;
     }
     const isSubSubjectNotSelected = studentsData.some(
       item => item.subjectid === 0,
     );
     if (isSubSubjectNotSelected) {
-      window.alert("세부 과목을 선택하세요.");
+      alert("세부 과목을 선택하세요.");
       return;
     }
     const isRatingNot = studentsData.some(item => item.rating === 0);
     if (isRatingNot) {
-      window.alert("등급을 입력하세요.");
+      alert("등급을 입력하세요.");
       return;
     }
     const isPercentNot = studentsData.some(item => item.percent === 0);
     if (isPercentNot) {
-      window.alert("퍼센트를 입력하세요.");
+      alert("퍼센트를 입력하세요.");
       return;
     }
-    
+
     const goData = studentsData?.map(item => {
       const postDataList = {
         userid: item.userid,

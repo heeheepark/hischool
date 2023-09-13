@@ -45,18 +45,18 @@ const InputSchoolRecord = () => {
 
   const handleSaveButtonClick = () => {
     if (!dropSemester) {
-      window.alert("학기를 선택하세요.");
+      alert("학기를 선택하세요.");
       return;
     }
     if (!dropTest) {
-      window.alert("고사를 선택하세요.");
+      alert("고사를 선택하세요.");
       return;
     }
     const isSubSubjectNotSelected = studentsData.some(
       item => item.subjectid === 0,
     );
     if (isSubSubjectNotSelected) {
-      window.alert("세부 과목을 선택하세요.");
+      alert("세부 과목을 선택하세요.");
       return;
     }
     if (studentsData) {

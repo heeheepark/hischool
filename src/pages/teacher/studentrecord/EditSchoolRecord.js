@@ -25,7 +25,7 @@ const EditSchoolRecord = () => {
       item => item.subjectId === "" || item.subjectId === null,
     );
     if (isSubSelect) {
-      window.alert("세부 과목을 선택하세요.");
+      alert("세부 과목을 선택하세요.");
       return;
     }
     if (studentsData) {
