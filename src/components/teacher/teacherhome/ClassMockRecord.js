@@ -10,6 +10,7 @@ import { getMockData } from "../../../api/teacher/teacherHomeAxios";
 
 const ClassMockRecord = () => {
   const [mockData, setMockData] = useState(null);
+  const recordTitle = mockData && mockData.mocknm;
   const gradeList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const colorData = [
     "#f9f68e",
@@ -62,7 +63,7 @@ const ClassMockRecord = () => {
   return (
     <ClassSchoolRecordDiv>
       <div className="title-wrap">
-        <span>2023년 6월 모의고사</span>
+        <span>{recordTitle}</span>
         <span>주요 과목 등급 분포</span>
       </div>
       <ChartWrap>

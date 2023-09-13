@@ -26,12 +26,6 @@ const StudentList = () => {
 
   // Modal 확인 클릭 시
   useEffect(() => {
-    if (cancelOk) {
-      setModalOpen(false);
-      patchSignCancel(userPk);
-      setCancelOk(false);
-    }
-    getStudentData(setStudentListData);
     // 로딩 호출
     client.interceptors.request.use(function (config) {
       dispatch(startLoading({}));
@@ -42,6 +36,12 @@ const StudentList = () => {
       dispatch(finishLoading({}));
       return config;
     });
+    if (cancelOk) {
+      setModalOpen(false);
+      patchSignCancel(userPk);
+      setCancelOk(false);
+    }
+    getStudentData(setStudentListData);
   }, [cancelOk]);
 
   const handleSginClick = () => {

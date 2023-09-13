@@ -10,6 +10,9 @@ import { getSchoolData } from "../../../api/teacher/teacherHomeAxios";
 
 const ClassSchoolRecord = () => {
   const [schoolData, setSchoolData] = useState(null);
+  const year = schoolData && schoolData.date.split("-")[0];
+  const semester = schoolData && schoolData.date.split("-")[1].split(" ")[0];
+  const testType = schoolData && schoolData.date.split("-")[1].split(" ")[1];
   const gradeList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const colorData = [
     "#f9f68e",
@@ -62,7 +65,9 @@ const ClassSchoolRecord = () => {
   return (
     <ClassSchoolRecordDiv>
       <div className="title-wrap">
-        <span>2023년 1학기 기말고사</span>
+        <span>
+          20{year}년 {semester}학기 {testType}고사
+        </span>
         <span>주요 과목 등급 분포</span>
       </div>
       <ChartWrap>
