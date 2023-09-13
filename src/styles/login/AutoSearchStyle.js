@@ -20,6 +20,7 @@ export const DeleteButton = styled.div`
 `;
 
 export const DropDownUl = styled.ul`
+  position: absolute;
   width: 21vw;
   height: 74px;
   display: block;
