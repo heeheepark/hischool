@@ -42,7 +42,7 @@ const TeacherHome = () => {
   const [startDate, setStartDate] = useState(todayStartDate);
   const [endDate, setEndDate] = useState(todayEndDate);
 
-  // 캘린더 월 변경
+  // 월 변경
   const handleDatesSet = () => {
     if (calRef.current) {
       const calApi = calRef.current.getApi();

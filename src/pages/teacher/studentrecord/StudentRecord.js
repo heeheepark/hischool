@@ -96,6 +96,18 @@ const StudentRecord = () => {
         mockYear,
         month,
       );
+      if (!confirmModal) {
+        setTimeout(() => {
+          handleStudentRecordData(
+            studentId,
+            schoolYear,
+            semester,
+            testType,
+            mockYear,
+            month,
+          );
+        }, 2000);
+      }
     }
   }, [
     studentListData,
