@@ -7,6 +7,8 @@
 <!-- Badges -->
 <!-- Screenshots -->
 <h4>
+  <a href="https://web-hischool-2rrqq2blmprh3lv.sel5.cloudtype.app/">🖥 배포 사이트</a>
+  <span> · </span>
 <a href="https://www.youtube.com/watch?v=R0n2SBrBQeA">🎬 시연 영상 보기</a>
   <span> · </span>
    <a href="https://heeheepark.notion.site/Hi-School-0796937a33334c028dcedd21ef9ccf28?pvs=4">📑 Notion 바로가기</a>
